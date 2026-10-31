@@ -1,0 +1,112 @@
+[
+  {
+    "id": "burgundy-cat-eye-gold-micro-french",
+    "name": "Burgundy Cat-Eye · Gold Micro-French",
+    "technique": "Magnetic cat-eye, gold micro French tip",
+    "system": "gel", "finish": "cat-eye", "color_family": "red",
+    "shape": "Almond", "length": "medium", "price_range": "~$75", "duration_min": 75,
+    "stretch_level": 2, "fit_prior": 0.92, "trend_velocity": 0.85,
+    "trend_sources": ["fall editorial"],
+    "trend_proof": {"text": "↑ Rising · saves +180% this month · all over fall editorial", "is_placeholder": true},
+    "shades": [
+      {"brand": "OPI", "name": "Malaga Wine", "code": "NL L87", "verified": false},
+      {"brand": null, "name": "gold magnetic cat-eye top", "code": null, "verified": false},
+      {"brand": null, "name": "gold chrome powder on a micro tip", "code": null, "verified": false}
+    ],
+    "photo_by_skin_tone": {"light": null, "medium": "/looks/burgundy-cat-eye.jpg", "deep": null},
+    "photo_pos": "center 62%",
+    "photo_alt": "Burgundy cat-eye almond nails with a gold micro-French tip, on a hand wearing thin gold rings",
+    "photo_brief": "Burgundy cat-eye on a warm-toned hand · gold rings, dark satin",
+    "occasions": ["work", "date night", "wedding", "holiday party"],
+    "why": "For you: warm undertone, and you wear gold — the magnetic stripe reads expensive, not loud. Safe enough for work, different enough to feel new. Stretch 2 of 5.",
+    "why_inputs": {"undertone": "warm", "jewelry_metal": "gold", "occasion_fit": "work"}
+  },
+  {
+    "id": "emerald-chrome-silver-star",
+    "name": "Emerald Chrome · Silver Star Accent",
+    "technique": "Chrome over emerald gel, single-nail star decal",
+    "system": "gel", "finish": "chrome", "color_family": "green",
+    "shape": "Squoval", "length": "short", "price_range": "~$70", "duration_min": 60,
+    "stretch_level": 4, "fit_prior": 0.45, "trend_velocity": 0.80,
+    "trend_sources": ["chrome finishes", "short shapes"],
+    "trend_proof": {"text": "↑ Rising · chrome finishes +96% this quarter · short shapes trending up", "is_placeholder": true},
+    "shades": [
+      {"brand": null, "name": "emerald gel base", "code": null, "verified": false},
+      {"brand": null, "name": "silver chrome powder", "code": null, "verified": false},
+      {"brand": null, "name": "silver star decal, ring finger", "code": null, "verified": false}
+    ],
+    "photo_by_skin_tone": {"light": null, "medium": "/looks/emerald-chrome.jpg", "deep": null},
+    "photo_pos": "center 74%",
+    "photo_alt": "Short emerald chrome nails with a silver star accent on one nail, on a hand wearing chunky silver rings",
+    "photo_brief": "Emerald chrome on a warm-toned hand · silver rings, black wool",
+    "occasions": ["work", "holiday party", "date night"],
+    "why": "The dare: green is outside your saved palette — but short chrome keeps it sharp, not costume-y, and it works with both gold and silver jewelry. One nail carries the star; the rest stay clean.",
+    "why_inputs": {"undertone": "warm", "jewelry_metal": "gold", "occasion_fit": "work"}
+  },
+  {
+    "id": "milky-pink-jelly-chrome", "name": "Milky Pink Jelly · Chrome Top", "technique": "Sheer jelly, chrome topcoat",
+    "system": "gel", "finish": "jelly", "color_family": "pink", "shape": "Almond", "length": "short",
+    "price_range": "~$60", "duration_min": 60, "stretch_level": 1, "fit_prior": 0.90, "trend_velocity": 0.55,
+    "photo_brief": "Milky pink jelly on a warm-toned hand · thin gold band", "occasions": ["work", "wedding"]
+  },
+  {
+    "id": "rose-glazed-chrome", "name": "Rose Glazed Chrome", "technique": "Pearl chrome over sheer rose",
+    "system": "gel", "finish": "chrome", "color_family": "pink", "shape": "Oval", "length": "short",
+    "price_range": "~$65", "duration_min": 60, "stretch_level": 1, "fit_prior": 0.85, "trend_velocity": 0.60,
+    "photo_brief": "Rose glazed chrome · soft daylight, cream knit", "occasions": ["work", "wedding", "vacation"]
+  },
+  {
+    "id": "mocha-aura-brown-chrome", "name": "Mocha Aura · Brown Chrome", "technique": "Airbrushed aura, brown chrome",
+    "system": "gel", "finish": "chrome", "color_family": "brown", "shape": "Almond", "length": "short",
+    "price_range": "~$75", "duration_min": 75, "stretch_level": 2, "fit_prior": 0.82, "trend_velocity": 0.70,
+    "photo_brief": "Mocha aura with brown chrome · gold cuff, camel coat", "occasions": ["work", "date night"]
+  },
+  {
+    "id": "cloudy-french-milk-bath", "name": "Cloudy French · Milk Bath Base", "technique": "Sheer coat over white tips",
+    "system": "builder gel", "finish": "french", "color_family": "nude", "shape": "Round", "length": "short",
+    "price_range": "~$65", "duration_min": 70, "stretch_level": 1, "fit_prior": 0.80, "trend_velocity": 0.65,
+    "shades": [
+      {"brand": "OPI", "name": "Bubble Bath", "code": "NL S86", "verified": false},
+      {"brand": "OPI", "name": "Alpine Snow", "code": "NL L00", "verified": false}
+    ],
+    "photo_brief": "Cloudy French · bare hand, white linen", "occasions": ["work", "wedding", "vacation"]
+  },
+  {
+    "id": "built-in-pearl-oat-white", "name": "Built-In Pearl · Oat White", "technique": "Pearl powder over milky white",
+    "system": "gel", "finish": "chrome", "color_family": "white", "shape": "Almond", "length": "medium",
+    "price_range": "~$70", "duration_min": 65, "stretch_level": 2, "fit_prior": 0.79, "trend_velocity": 0.75,
+    "shades": [{"brand": "OPI", "name": "Funny Bunny", "code": "NL H22", "verified": false}],
+    "photo_brief": "Oat-white pearl · pearl earrings, ivory silk", "occasions": ["wedding", "work"]
+  },
+  {
+    "id": "chocolate-suede-matte", "name": "Chocolate Suede · Matte", "technique": "Matte topcoat over deep brown",
+    "system": "gel", "finish": "matte", "color_family": "brown", "shape": "Square", "length": "short",
+    "price_range": "~$60", "duration_min": 60, "stretch_level": 2, "fit_prior": 0.78, "trend_velocity": 0.68,
+    "photo_brief": "Chocolate matte · gold signet ring, suede bag", "occasions": ["work", "date night"]
+  },
+  {
+    "id": "cherry-red-high-gloss", "name": "Cherry Red · High Gloss", "technique": "Classic red, glass topcoat",
+    "system": "gel", "finish": "gloss", "color_family": "red", "shape": "Square", "length": "short",
+    "price_range": "~$55", "duration_min": 50, "stretch_level": 2, "fit_prior": 0.74, "trend_velocity": 0.66,
+    "shades": [{"brand": "OPI", "name": "Big Apple Red", "code": "NL N25", "verified": false}],
+    "photo_brief": "Cherry red gloss · holding a coupe glass", "occasions": ["holiday party", "date night"]
+  },
+  {
+    "id": "tortoiseshell-tips", "name": "Tortoiseshell Tips", "technique": "Hand-painted tortoise on tips",
+    "system": "gel", "finish": "art", "color_family": "brown", "shape": "Almond", "length": "medium",
+    "price_range": "~$85", "duration_min": 90, "stretch_level": 3, "fit_prior": 0.66, "trend_velocity": 0.50,
+    "photo_brief": "Tortoiseshell tips · tortoise sunglasses", "occasions": ["vacation", "date night"]
+  },
+  {
+    "id": "deep-teal-velvet-cat-eye", "name": "Deep Teal Velvet Cat-Eye", "technique": "Velvet magnetic cat-eye",
+    "system": "gel", "finish": "cat-eye", "color_family": "blue", "shape": "Squoval", "length": "short",
+    "price_range": "~$70", "duration_min": 65, "stretch_level": 3, "fit_prior": 0.60, "trend_velocity": 0.78,
+    "photo_brief": "Deep teal velvet · silver rings, navy wool", "occasions": ["holiday party", "date night"]
+  },
+  {
+    "id": "mismatched-jewel-tones", "name": "Mismatched Jewel Tones", "technique": "Different color per nail",
+    "system": "gel", "finish": "gloss", "color_family": "multi", "shape": "Square", "length": "short",
+    "price_range": "~$70", "duration_min": 70, "stretch_level": 5, "fit_prior": 0.30, "trend_velocity": 0.90,
+    "photo_brief": "Mismatched jewel tones · stacked mixed-metal rings", "occasions": ["party", "vacation"]
+  }
+]
