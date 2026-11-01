@@ -61,6 +61,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* Header */
+.wordmark { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--accent); margin-bottom: 18px; }
 .greet { font-size: 13px; color: var(--muted); letter-spacing: 0.02em; }
 .h1 { margin: 6px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
 .h2 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 20px; }

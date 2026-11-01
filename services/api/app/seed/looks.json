@@ -9,7 +9,7 @@
     "trend_sources": ["fall editorial"],
     "trend_proof": {"text": "↑ Rising · saves +180% this month · all over fall editorial", "is_placeholder": true},
     "shades": [
-      {"brand": "OPI", "name": "Malaga Wine", "code": "NL L87", "verified": false},
+      {"brand": "OPI", "name": "Malaga Wine", "code": "GC L87", "verified": true},
       {"brand": null, "name": "gold magnetic cat-eye top", "code": null, "verified": false},
       {"brand": null, "name": "gold chrome powder on a micro tip", "code": null, "verified": false}
     ],
@@ -66,8 +66,8 @@
     "system": "builder gel", "finish": "french", "color_family": "nude", "shape": "Round", "length": "short",
     "price_range": "~$65", "duration_min": 70, "stretch_level": 1, "fit_prior": 0.80, "trend_velocity": 0.65,
     "shades": [
-      {"brand": "OPI", "name": "Bubble Bath", "code": "NL S86", "verified": false},
-      {"brand": "OPI", "name": "Alpine Snow", "code": "NL L00", "verified": false}
+      {"brand": "OPI", "name": "Bubble Bath", "code": "GC S86", "verified": true},
+      {"brand": "OPI", "name": "Alpine Snow", "code": "GC L00", "verified": true}
     ],
     "photo_brief": "Cloudy French · bare hand, white linen", "occasions": ["work", "wedding", "vacation"]
   },
@@ -75,7 +75,7 @@
     "id": "built-in-pearl-oat-white", "name": "Built-In Pearl · Oat White", "technique": "Pearl powder over milky white",
     "system": "gel", "finish": "chrome", "color_family": "white", "shape": "Almond", "length": "medium",
     "price_range": "~$70", "duration_min": 65, "stretch_level": 2, "fit_prior": 0.79, "trend_velocity": 0.75,
-    "shades": [{"brand": "OPI", "name": "Funny Bunny", "code": "NL H22", "verified": false}],
+    "shades": [{"brand": "OPI", "name": "Funny Bunny", "code": "GC H22", "verified": true}],
     "photo_brief": "Oat-white pearl · pearl earrings, ivory silk", "occasions": ["wedding", "work"]
   },
   {
@@ -88,7 +88,7 @@
     "id": "cherry-red-high-gloss", "name": "Cherry Red · High Gloss", "technique": "Classic red, glass topcoat",
     "system": "gel", "finish": "gloss", "color_family": "red", "shape": "Square", "length": "short",
     "price_range": "~$55", "duration_min": 50, "stretch_level": 2, "fit_prior": 0.74, "trend_velocity": 0.66,
-    "shades": [{"brand": "OPI", "name": "Big Apple Red", "code": "NL N25", "verified": false}],
+    "shades": [{"brand": "OPI", "name": "Big Apple Red", "code": "GC N25", "verified": true}],
     "photo_brief": "Cherry red gloss · holding a coupe glass", "occasions": ["holiday party", "date night"]
   },
   {
