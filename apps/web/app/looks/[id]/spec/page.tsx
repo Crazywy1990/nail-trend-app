@@ -61,7 +61,7 @@ export default async function SpecSheet({ params }: Props) {
             ) : null}
           </div>
         </article>
-        <a className="btn btn-primary" href={`/?ref=spec_sheet`}>Find your next look on Nail Trend</a>
+        <a className="btn btn-primary" href={`/?ref=spec_sheet`}>Find your next look on AllTen</a>
       </main>
       <TrackLanding uid={uid} lookId={l.id} />
     </div>

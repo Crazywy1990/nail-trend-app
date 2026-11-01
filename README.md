@@ -1,8 +1,8 @@
-# Nail Trend
+# AllTen
 
 Trending nail looks picked for each client, with the trend evidence, the reason it suits her, the price and time, and a spec sheet her nail tech can work from.
 
-Web first (installable PWA), wrapped as an App Store app once retention is proven.
+Web first (installable PWA) at allten.app (planned), wrapped as an App Store app once retention is proven.
 
 ## Repo layout
 
