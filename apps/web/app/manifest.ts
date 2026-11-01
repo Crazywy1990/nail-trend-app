@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Nail Trend",
-    short_name: "Nail Trend",
+    name: "AllTen",
+    short_name: "AllTen",
     description: "Trending nail looks picked for you, with the specs your nail tech needs.",
     start_url: "/?ref=pwa",
     display: "standalone",

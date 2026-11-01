@@ -4,10 +4,10 @@ import { requestSeason, siteUrl } from "@/lib/request";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: "Nail Trend", template: "%s · Nail Trend" },
+  title: { default: "AllTen", template: "%s · AllTen" },
   description: "Trending nail looks picked for you, with the shades and specs your nail tech needs.",
-  applicationName: "Nail Trend",
-  appleWebApp: { capable: true, title: "Nail Trend", statusBarStyle: "default" },
+  applicationName: "AllTen",
+  appleWebApp: { capable: true, title: "AllTen", statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {
