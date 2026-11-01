@@ -28,7 +28,9 @@ def test_discover_shape():
     assert hero["look"]["trendProof"]["isPlaceholder"] is True
     assert stretch["slot"] == "stretch"
     assert hero["photo"] == "/looks/burgundy-cat-eye.jpg"
-    assert all(s["verified"] is False for s in hero["look"]["shades"])
+    malaga, *generic = hero["look"]["shades"]
+    assert malaga["code"] == "GC L87" and malaga["verified"] is True
+    assert all(s["code"] is None and s["verified"] is False for s in generic)
     assert len(body["also"]) == 6
     assert body["also"][-1]["slot"] == "trending"
 

@@ -40,6 +40,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
     <div className="shell">
       <main className="main">
         <header>
+          <div className="wordmark">AllTen</div>
           <div className="greet">{copy.greet}</div>
           <h1 className="h1">{copy.head}</h1>
         </header>

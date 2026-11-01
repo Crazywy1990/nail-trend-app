@@ -54,3 +54,9 @@ def test_save_raises_affinity():
     p = apply_feedback(DEMO_PROFILE, look, "save")
     assert p.affinity["finish:chrome"] > 0.5
     assert p.affinity["color:brown"] > 0.5
+
+
+def test_only_the_five_checked_codes_are_verified():
+    verified = sorted(s.code for l in all_looks() for s in l.shades if s.verified)
+    assert verified == ["GC H22", "GC L00", "GC L87", "GC N25", "GC S86"]
+    assert all(s.code is None for l in all_looks() for s in l.shades if not s.verified)

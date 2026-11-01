@@ -13,10 +13,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!l) return { title: "Spec sheet not found" };
   const photo = photoFor(l);
   return {
-    title: `Spec sheet: ${l.name}`,
+    title: { absolute: `AllTen — shades for your tech · ${l.name}` },
     description: `Shape, length, shades and timing for ${l.name}.`,
     robots: { index: false },
-    openGraph: { title: `Can you do this set? ${l.name}`, images: photo ? [{ url: photo }] : [] },
+    openGraph: { title: "AllTen — shades for your tech", description: `Can you do this set? ${l.name}`, images: photo ? [{ url: photo }] : [] },
   };
 }
 
@@ -31,7 +31,7 @@ export default async function SpecSheet({ params }: Props) {
     <div className="shell">
       <main className="main">
         <div>
-          <div className="label">Spec sheet for your nail tech</div>
+          <div className="label">AllTen — shades for your tech</div>
           <h1 className="h1" style={{ fontSize: 28 }}>{l.name}</h1>
         </div>
         <article className="card">

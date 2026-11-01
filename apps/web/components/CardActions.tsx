@@ -17,7 +17,7 @@ export function CardActions(p: {
     logEvent({ ...base, type: "share_click" });
     try {
       if (navigator.share) {
-        await navigator.share({ title: p.lookName, text: `Can you do this set? ${p.lookName}`, url });
+        await navigator.share({ title: "AllTen — shades for your tech", text: `Can you do this set? ${p.lookName} (spec sheet from AllTen)`, url });
         return;
       }
       await navigator.clipboard.writeText(url);

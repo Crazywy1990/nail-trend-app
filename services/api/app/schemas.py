@@ -8,9 +8,12 @@ finish   Visual finish: "chrome" | "cat-eye" | "french" | "matte" | "jelly" | "g
 trend_proof.is_placeholder
          True for every look until the trend pipeline exists. The UI shows a
          "Sample data" tag whenever it is true.
+shades[].code
+         The full formula-prefixed code. OPI shares the base code across formulas but
+         the prefix differs: GC = GelColor, NL = Nail Lacquer, ISL = Infinite Shine.
 shades[].verified
-         False until the code is checked against the brand catalog. The UI prints
-         unverified codes as "code to verify".
+         True only for codes checked against the brand catalog. The UI prints any
+         unverified code as "code to verify".
 """
 from __future__ import annotations
 

@@ -48,9 +48,9 @@ Tests: `cd services/api && python -m pytest -q` · `cd apps/web && npm run typec
 
 - `system` (gel, builder gel, Gel-X) and `finish` (chrome, cat-eye, french, matte, jelly, gloss, art) are separate fields. `system` is shown in the meta line; `finish` drives diversity and the Finish chips.
 - `trendProof.isPlaceholder` is `true` for every look until the trend pipeline exists. The UI shows a **Sample data** tag whenever it's true.
-- `shades[].verified` is `false` until the code is checked against the brand catalog.
+- `shades[].code` stores the full formula-prefixed code (OPI: GC = GelColor, NL = Nail Lacquer, ISL = Infinite Shine). `shades[].verified` is `true` only for catalog-checked codes; anything unverified prints as "code to verify".
 
-Codes awaiting catalog verification: OPI Malaga Wine (NL L87), Bubble Bath (NL S86), Alpine Snow (NL L00), Funny Bunny (NL H22), Big Apple Red (NL N25).
+Verified: OPI GelColor Malaga Wine (GC L87), Bubble Bath (GC S86), Alpine Snow (GC L00), Funny Bunny (GC H22), Big Apple Red (GC N25). The remaining shades are generic descriptions with no product code yet.
 
 ## Next slices
 
