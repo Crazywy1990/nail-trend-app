@@ -1,0 +1,19 @@
+# Render Blueprint for the AllTen API. Optional: the same settings can be entered by hand
+# (New → Web Service). Render reads this file via New → Blueprint.
+services:
+  - type: web
+    name: allten-api
+    runtime: python
+    rootDir: services/api
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: WEB_ORIGINS
+        value: https://allten.app
+      - key: DATABASE_URL
+        sync: false   # set in the dashboard; leave empty to use SQLite for now

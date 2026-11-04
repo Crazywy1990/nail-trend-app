@@ -27,6 +27,13 @@ npm install
 npm run dev
 ```
 
+Environment variables are documented in `apps/web/.env.example` (web: `API_URL`, `SITE_URL`) and `services/api/.env.example` (API: `DATABASE_URL`, `WEB_ORIGINS`).
+
+## Deploy
+
+- **API → Render:** root directory `services/api`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, health check `/healthz`. `render.yaml` holds the same settings as a Blueprint.
+- **Web → Vercel:** root directory `apps/web`. Set `API_URL` to the Render service URL (no trailing slash, no `/v1`) and `SITE_URL` to the public site URL, then redeploy.
+
 Add `?theme=base|summer|autumn|halloween|christmas` to any URL to preview a theme (it's remembered in a cookie). Without it, the theme follows the date.
 
 Tests: `cd services/api && python -m pytest -q` · `cd apps/web && npm run typecheck && npm run build`
