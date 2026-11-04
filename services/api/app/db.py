@@ -14,8 +14,12 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sess
 
 from .schemas import CurrentSet, EventIn, Profile
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./dev.db")
-engine = create_engine(DATABASE_URL, future=True)
+# On Vercel the filesystem is read-only except /tmp, so the SQLite fallback lives there
+# (temporary: it resets when the function instance is recycled). Set DATABASE_URL to
+# Supabase Postgres for anything that should persist.
+_DEFAULT_SQLITE = "sqlite:////tmp/allten.db" if os.getenv("VERCEL") else "sqlite:///./dev.db"
+DATABASE_URL = os.getenv("DATABASE_URL") or _DEFAULT_SQLITE
+engine = create_engine(DATABASE_URL, future=True, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 
 

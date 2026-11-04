@@ -14,6 +14,10 @@ from .ranking import RANKING_VERSION, Filters, apply_feedback, select_set
 from .schemas import DiscoverResponse, EventIn, Look, Pick, Profile
 
 
+# Create tables at import as well: serverless hosts (Vercel) may skip lifespan startup.
+db.init_db()
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     db.init_db()

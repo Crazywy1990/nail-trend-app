@@ -31,7 +31,8 @@ Environment variables are documented in `apps/web/.env.example` (web: `API_URL`,
 
 ## Deploy
 
-- **API → Render:** root directory `services/api`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, health check `/healthz`. `render.yaml` holds the same settings as a Blueprint.
+- **API → Vercel (second project, same repo):** Root Directory `services/api`, Framework Preset "Other". `api/index.py` + `vercel.json` route every path to FastAPI. Without `DATABASE_URL` it uses a temporary SQLite file in `/tmp`; set `DATABASE_URL` (Supabase) for persistence.
+- **API → Render (alternative):** root directory `services/api`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, health check `/healthz`. `render.yaml` holds the same settings as a Blueprint.
 - **Web → Vercel:** root directory `apps/web`. Set `API_URL` to the Render service URL (no trailing slash, no `/v1`) and `SITE_URL` to the public site URL, then redeploy.
 
 Add `?theme=base|summer|autumn|halloween|christmas` to any URL to preview a theme (it's remembered in a cookie). Without it, the theme follows the date.
