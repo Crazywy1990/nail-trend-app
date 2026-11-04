@@ -1,11 +1,29 @@
 import type { DiscoverResponse, Look } from "./types";
 
-const API_URL = process.env.API_URL || "http://127.0.0.1:8000";
+/**
+ * FastAPI base URL. Tolerates the common misconfigurations (trailing slash, a trailing /v1)
+ * so a typo in the Vercel setting doesn't take the site down.
+ */
+export const API_URL = (process.env.API_URL || "http://127.0.0.1:8000").replace(/\/+$/, "").replace(/\/v1$/, "");
+
+// Render's free tier sleeps; waking takes up to ~60s. Wait a while, but not forever.
+const TIMEOUT_MS = 45_000;
+
+export class ApiUnavailable extends Error {}
 
 async function get<T>(path: string): Promise<T | null> {
-  const res = await fetch(`${API_URL}${path}`, { cache: "no-store" });
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}${path}`, { cache: "no-store", signal: AbortSignal.timeout(TIMEOUT_MS) });
+  } catch (err) {
+    console.error(`[allten] API unreachable at ${API_URL}${path}:`, err);
+    throw new ApiUnavailable(`API unreachable at ${API_URL}`);
+  }
   if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`API ${res.status} for ${path}`);
+  if (!res.ok) {
+    console.error(`[allten] API ${res.status} for ${API_URL}${path}`);
+    throw new ApiUnavailable(`API ${res.status} for ${path}`);
+  }
   return (await res.json()) as T;
 }
 
@@ -24,7 +42,7 @@ export async function fetchDiscover(p: DiscoverParams): Promise<DiscoverResponse
   (p.finish || []).forEach((v) => qs.append("finish", v));
   (p.length || []).forEach((v) => qs.append("length", v));
   const data = await get<DiscoverResponse>(`/v1/discover?${qs}`);
-  if (!data) throw new Error("Discover returned no data");
+  if (!data) throw new ApiUnavailable("Discover returned no data");
   return data;
 }
 
