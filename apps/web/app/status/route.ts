@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { API_URL, USE_REMOTE_API } from "@/lib/api";
-import { LOOKS, RANKING_VERSION, discover } from "@/lib/engine";
+import { LOOKS, RANKING_VERSION, TRENDS_UPDATED, discover } from "@/lib/engine";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +15,8 @@ export async function GET() {
         dataSource: "built-in engine",
         rankingVersion: RANKING_VERSION,
         looks: LOOKS.length,
+        trendsUpdated: TRENDS_UPDATED,
+        looksWithRealTrendData: LOOKS.filter((l) => !l.trendProof.isPlaceholder).length,
         sampleSet: d.summary,
         ms: Date.now() - started,
       });

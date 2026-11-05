@@ -10,7 +10,7 @@ export function LookCard({ pick, uid, setId, priority }: { pick: Pick; uid: stri
   return (
     <article className="card" aria-labelledby={`t-${l.id}`}>
       <PhotoSlot photo={pick.photo} pos={l.photoPos} alt={l.photoAlt || l.name} brief={l.photoBrief} priority={priority}>
-        <span className="badge badge-trend">↑ Rising</span>
+        <span className="badge badge-trend">{l.trendBadge ?? "↑ Rising"}</span>
         <SaveButton uid={uid} lookId={l.id} setId={setId} slot={pick.slot} position={pick.position} />
         {pick.slot === "stretch" ? <span className="badge badge-slot">{slotLabel(pick.slot, l)}</span> : null}
       </PhotoSlot>

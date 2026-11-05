@@ -11,6 +11,7 @@ apps/web        Next.js 14 (App Router, TypeScript). Discover screen, public loo
                 tech spec sheets, booking message, seasonal themes. Includes a built-in
                 copy of the recommendation engine (lib/engine), so it runs on Vercel alone.
 services/api    FastAPI. Look catalog, set selection (MMR), profiles, event log.
+services/pipeline  Weekly trend pipeline (GitHub Actions). Writes apps/web/lib/engine/trends.json.
 ```
 
 ## Run locally
@@ -39,7 +40,7 @@ Environment variables are documented in `apps/web/.env.example` (web: `API_URL`,
 
 Add `?theme=base|summer|autumn|halloween|christmas` to any URL to preview a theme (it's remembered in a cookie). Without it, the theme follows the date.
 
-Tests: `cd services/api && python -m pytest -q` · `cd apps/web && npm run typecheck && npm run build`
+Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && python -m pytest -q` · `cd apps/web && npm run typecheck && npm run build`
 
 ## What slice 1 includes
 
@@ -57,7 +58,8 @@ Tests: `cd services/api && python -m pytest -q` · `cd apps/web && npm run typec
 ## Data model notes
 
 - `system` (gel, builder gel, Gel-X) and `finish` (chrome, cat-eye, french, matte, jelly, gloss, art) are separate fields. `system` is shown in the meta line; `finish` drives diversity and the Finish chips.
-- `trendProof.isPlaceholder` is `true` for every look until the trend pipeline exists. The UI shows a **Sample data** tag whenever it's true.
+- Trend data comes from `services/pipeline` (workflow `Weekly trends`, Mondays, or run it by hand from the Actions tab). For each term in `trend_terms.json` it counts new US English YouTube uploads in the last 28 days versus the 28 before (YouTube Data API, secret `YOUTUBE_API_KEY`, about 3,600 of the 10,000 daily quota units) and headlines in beauty-magazine RSS feeds. Rising ≥ +25%, Cooling ≤ −25%, otherwise Steady; under 20 videos the growth figure isn't quoted. Each look quotes its first term; its `trendVelocity` blends all its terms.
+- The engine merges `trends.json` over `looks.json` at build time. Looks without a row keep `trendProof.isPlaceholder: true`, and the UI shows a **Sample data** tag only on those. `/status` reports `trendsUpdated` and `looksWithRealTrendData`.
 - `shades[].code` stores the full formula-prefixed code (OPI: GC = GelColor, NL = Nail Lacquer, ISL = Infinite Shine). `shades[].verified` is `true` only for catalog-checked codes; anything unverified prints as "code to verify".
 
 Verified: OPI GelColor Malaga Wine (GC L87), Bubble Bath (GC S86), Alpine Snow (GC L00), Funny Bunny (GC H22), Big Apple Red (GC N25). The remaining shades are generic descriptions with no product code yet.

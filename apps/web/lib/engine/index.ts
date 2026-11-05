@@ -8,6 +8,7 @@
  */
 import type { DiscoverResponse, Look, Pick, Slot } from "../types";
 import raw from "./looks.json";
+import trends from "./trends.json";
 
 export const RANKING_VERSION = "mmr-v1";
 const LAMBDA = 0.7;
@@ -18,7 +19,22 @@ const MAX_PER_FINISH = 3;
 const SAFE_COUNT = 6;
 const OCCASION_BOOST = 0.08;
 
-export const LOOKS = raw as unknown as Look[];
+type TrendRow = { text: string; isPlaceholder: boolean; badge: string; velocity: number; sources: string[] };
+/** Written weekly by services/pipeline. Looks without a row keep their sample trend data. */
+const TRENDS = trends as unknown as { generatedAt: string | null; looks: Record<string, TrendRow> };
+export const TRENDS_UPDATED = TRENDS.generatedAt;
+
+export const LOOKS = (raw as unknown as Look[]).map((l): Look => {
+  const t = TRENDS.looks[l.id];
+  if (!t) return l;
+  return {
+    ...l,
+    trendProof: { text: t.text, isPlaceholder: t.isPlaceholder },
+    trendBadge: t.badge,
+    trendVelocity: t.velocity,
+    trendSources: t.sources,
+  };
+});
 
 export type Profile = {
   userId: string;

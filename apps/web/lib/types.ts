@@ -19,6 +19,8 @@ export type Look = {
   trendVelocity: number;
   trendSources: string[];
   trendProof: TrendProof;
+  /** Card badge from the trend pipeline ("↑ Rising", "→ Steady", "↓ Cooling"); absent on sample data. */
+  trendBadge?: string;
   shades: Shade[];
   photoBySkinTone: Record<string, string | null>;
   photoPos: string;
