@@ -1,12 +1,8 @@
-const API_URL = process.env.API_URL || "http://127.0.0.1:8000";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    // Browser calls /api/v1/* on the same origin; Next proxies to the FastAPI service.
-    return [{ source: "/api/v1/:path*", destination: `${API_URL}/v1/:path*` }];
-  },
+  // Data comes from the built-in engine (lib/engine) by default; events go to
+  // app/api/v1/events. Set USE_REMOTE_API=1 and API_URL to use services/api instead.
 };
 
 export default nextConfig;

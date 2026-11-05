@@ -8,7 +8,8 @@ Web first (installable PWA) at allten.app (planned), wrapped as an App Store app
 
 ```
 apps/web        Next.js 14 (App Router, TypeScript). Discover screen, public look pages,
-                tech spec sheets, booking message, seasonal themes.
+                tech spec sheets, booking message, seasonal themes. Includes a built-in
+                copy of the recommendation engine (lib/engine), so it runs on Vercel alone.
 services/api    FastAPI. Look catalog, set selection (MMR), profiles, event log.
 ```
 
@@ -33,7 +34,8 @@ Environment variables are documented in `apps/web/.env.example` (web: `API_URL`,
 
 - **API → Vercel (second project, same repo):** Root Directory `services/api`, Framework Preset "Other". `api/index.py` + `vercel.json` route every path to FastAPI. Without `DATABASE_URL` it uses a temporary SQLite file in `/tmp`; set `DATABASE_URL` (Supabase) for persistence.
 - **API → Render (alternative):** root directory `services/api`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, health check `/healthz`. `render.yaml` holds the same settings as a Blueprint.
-- **Web → Vercel:** root directory `apps/web`. Set `API_URL` to the Render service URL (no trailing slash, no `/v1`) and `SITE_URL` to the public site URL, then redeploy.
+- **Web → Vercel (all you need today):** root directory `apps/web`, no environment variables required. `/status` confirms the built-in engine is running. Set `SITE_URL` for share links. To use the Python service instead, set `USE_REMOTE_API=1` and `API_URL`.
+- **Web → Vercel (remote API mode):** root directory `apps/web`. Set `API_URL` to the Render service URL (no trailing slash, no `/v1`) and `SITE_URL` to the public site URL, then redeploy.
 
 Add `?theme=base|summer|autumn|halloween|christmas` to any URL to preview a theme (it's remembered in a cookie). Without it, the theme follows the date.
 

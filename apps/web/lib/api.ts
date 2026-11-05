@@ -1,12 +1,13 @@
 import type { DiscoverResponse, Look } from "./types";
+import * as engine from "./engine";
 
 /**
- * FastAPI base URL. Tolerates the common misconfigurations (trailing slash, a trailing /v1)
- * so a typo in the Vercel setting doesn't take the site down.
+ * Data source for the web app.
+ * Default: the built-in engine (lib/engine), so the site runs on Vercel alone.
+ * Set USE_REMOTE_API=1 (plus API_URL) to call the Python service in services/api instead.
  */
+export const USE_REMOTE_API = process.env.USE_REMOTE_API === "1";
 export const API_URL = (process.env.API_URL || "http://127.0.0.1:8000").replace(/\/+$/, "").replace(/\/v1$/, "");
-
-// Render's free tier sleeps; waking takes up to ~60s. Wait a while, but not forever.
 const TIMEOUT_MS = 45_000;
 
 export class ApiUnavailable extends Error {}
@@ -36,6 +37,11 @@ export type DiscoverParams = {
 };
 
 export async function fetchDiscover(p: DiscoverParams): Promise<DiscoverResponse> {
+  if (!USE_REMOTE_API) {
+    return engine.discover(p.userId, p.q || "", {
+      occasion: p.occasion || [], finish: p.finish || [], length: p.length || [],
+    });
+  }
   const qs = new URLSearchParams({ userId: p.userId });
   if (p.q) qs.set("q", p.q);
   (p.occasion || []).forEach((v) => qs.append("occasion", v));
@@ -46,10 +52,12 @@ export async function fetchDiscover(p: DiscoverParams): Promise<DiscoverResponse
   return data;
 }
 
-export function fetchLook(id: string): Promise<Look | null> {
+export async function fetchLook(id: string): Promise<Look | null> {
+  if (!USE_REMOTE_API) return engine.getLook(id);
   return get<Look>(`/v1/looks/${encodeURIComponent(id)}`);
 }
 
-export function fetchLooks(): Promise<Look[] | null> {
+export async function fetchLooks(): Promise<Look[] | null> {
+  if (!USE_REMOTE_API) return engine.LOOKS;
   return get<Look[]>(`/v1/looks`);
 }
