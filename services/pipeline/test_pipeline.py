@@ -23,13 +23,17 @@ CFG = {
         "burgundy": {"label": "burgundy nails", "query": "burgundy nails", "keywords": ["burgundy nails"]},
         "cat-eye": {"label": "cat eye nails", "query": "cat eye nails", "keywords": ["cat eye nails", "cat-eye nails"]},
         "tiny": {"label": "tiny nails", "query": "tiny nails", "keywords": ["tiny nails"]},
+        "huge": {"label": "huge nails", "query": "huge nails", "keywords": ["huge nails"]},
     },
-    "looks": {"a": ["chrome", "burgundy"], "b": ["cat-eye"], "c": ["tiny"], "d": ["missing"]},
+    "looks": {"a": ["chrome", "burgundy"], "b": ["cat-eye"], "c": ["tiny"], "d": ["missing"], "e": ["huge"]},
     "editorialFeeds": ["https://feed/rss", "https://feed/atom", "https://feed/broken"],
 }
 
 # (recent, prior) videos per query
-COUNTS = {"chrome nails": (1640, 1000), "burgundy nails": (500, 500), "cat eye nails": (300, 600), "tiny nails": (6, 2)}
+# Every term is ~40% low in the recent window (YouTube undercounts recent weeks); chrome
+# holds up best, cat eye drops hardest. Measurable ratios: chrome 0.984, burgundy 0.6, cat eye 0.3.
+COUNTS = {"chrome nails": (984, 1000), "burgundy nails": (300, 500), "cat eye nails": (180, 600),
+          "tiny nails": (6, 2), "huge nails": (1_000_000, 1_000_000)}
 
 
 def fake_get(url: str) -> bytes:
@@ -61,10 +65,17 @@ def test_feed_parsing_and_matching():
     assert not p.headline_matches("Chromebook review", ["chrome nails"])
 
 
+def test_baseline_is_median_of_measurable_terms():
+    assert p.baseline({"a": (100, 100), "b": (50, 100), "c": (10, 100), "tiny": (1, 2), "cap": (10**6, 10**6)}) == p.ratio(50, 100)
+    assert p.baseline({}) == 1.0
+
+
 def test_full_run_with_mocked_sources():
     out = p.run("k", now=NOW, get=fake_get, cfg=CFG)
     t = out["terms"]
-    assert t["chrome"]["label"] == "rising" and t["chrome"]["headlines"] == 1  # June story is outside the window
+    assert abs(out["baseline"] - p.ratio(300, 500)) < 1e-3  # median of chrome, burgundy, cat eye
+    assert t["chrome"]["rawGrowth"] < 0  # fewer videos in absolute terms...
+    assert t["chrome"]["label"] == "rising" and t["chrome"]["headlines"] == 1  # ...but a growing share; June story outside window
     assert t["burgundy"]["label"] == "steady" and t["burgundy"]["headlines"] == 1
     assert t["cat-eye"]["label"] == "fading" and t["cat-eye"]["headlines"] == 1  # Atom feed counted
     assert t["tiny"]["enoughData"] is False and t["tiny"]["label"] == "steady"
@@ -72,10 +83,12 @@ def test_full_run_with_mocked_sources():
 
     a = out["looks"]["a"]
     assert a["isPlaceholder"] is False and a["term"] == "chrome" and a["badge"] == "↑ Rising"
-    assert "64% more new “chrome nails” YouTube videos" in a["text"]
+    assert "“chrome nails” share of new nail videos on YouTube up 64%" in a["text"]
     assert "1 beauty-magazine headline this month" in a["text"]
     assert a["velocity"] == round((2 * t["chrome"]["velocity"] + t["burgundy"]["velocity"]) / 3, 3)
-    assert "50% fewer" in out["looks"]["b"]["text"] and out["looks"]["b"]["badge"] == "↓ Cooling"
+    assert "down 50%" in out["looks"]["b"]["text"] and out["looks"]["b"]["badge"] == "↓ Cooling"
+    assert t["huge"]["capped"] and t["huge"]["label"] == "steady"
+    assert "among the most-posted" in out["looks"]["e"]["text"]
     assert out["looks"]["c"]["text"].startswith("6 new “tiny nails” YouTube videos")
     assert "d" not in out["looks"]  # look with no known terms keeps its placeholder
 

@@ -5,6 +5,10 @@ Measures each trend term two ways and writes the result where the web app reads 
   1. YouTube upload volume: how many new videos matched the term in the last 28 days
      versus the 28 days before (YouTube Data API v3, search.list, pageInfo.totalResults).
      Counting new uploads, not views, avoids favoring old videos that kept collecting views.
+     YouTube's counts are estimates and run low for the most recent weeks across the board,
+     so each term's change is measured against the median change of all terms: its share
+     of new nail videos. Counts at YouTube's 1,000,000 ceiling can't show change and are
+     left out of the median.
   2. Editorial mentions: headlines in beauty-magazine RSS feeds from the last 28 days that
      contain one of the term's keywords.
 
@@ -38,6 +42,7 @@ WINDOW_DAYS = 28
 RISING = 0.25    # growth at or above +25% → rising
 FADING = -0.25   # growth at or below −25% → fading
 MIN_VIDEOS = 20  # below this (both windows combined) the growth figure is too noisy to quote
+YT_CAP = 1_000_000  # YouTube reports totalResults no higher than this
 YT_SEARCH = "https://www.googleapis.com/youtube/v3/search"
 UA = "AllTenTrendBot/1.0 (+https://github.com/Crazywy1990)"
 
@@ -120,6 +125,19 @@ def growth(recent: int, prior: int) -> float:
     return (recent - prior) / max(prior, 1)
 
 
+def ratio(recent: int, prior: int) -> float:
+    return (recent + 1) / (prior + 1)
+
+
+def baseline(counts: dict[str, tuple[int, int]]) -> float:
+    """Median recent/prior ratio of the measurable terms (enough videos, under the cap)."""
+    rs = sorted(ratio(r, p) for r, p in counts.values() if r + p >= MIN_VIDEOS and max(r, p) < YT_CAP)
+    if not rs:
+        return 1.0
+    m = len(rs) // 2
+    return rs[m] if len(rs) % 2 else (rs[m - 1] + rs[m]) / 2
+
+
 def label_for(g: float) -> str:
     return "rising" if g >= RISING else "fading" if g <= FADING else "steady"
 
@@ -129,14 +147,16 @@ def velocity(g: float) -> float:
     return round(max(0.0, min(1.0, 0.5 + g / 2)), 3)
 
 
-def term_result(recent: int, prior: int, headlines: int) -> dict:
-    g = growth(recent, prior)
-    enough = recent + prior >= MIN_VIDEOS
+def term_result(recent: int, prior: int, headlines: int, base: float = 1.0) -> dict:
+    raw = growth(recent, prior)
+    rel = ratio(recent, prior) / base - 1  # change in share of new nail videos
+    capped = max(recent, prior) >= YT_CAP
+    enough = recent + prior >= MIN_VIDEOS and not capped
     return {
-        "recent": recent, "prior": prior, "growth": round(g, 3),
-        "label": label_for(g) if enough else "steady",
-        "velocity": velocity(g) if enough else 0.5,
-        "enoughData": enough, "headlines": headlines,
+        "recent": recent, "prior": prior, "rawGrowth": round(raw, 3), "growth": round(rel, 3),
+        "label": label_for(rel) if enough else "steady",
+        "velocity": velocity(rel) if enough else 0.5,
+        "enoughData": enough, "capped": capped, "headlines": headlines,
     }
 
 
@@ -145,13 +165,15 @@ LABEL_TEXT = {"rising": "↑ Rising", "steady": "→ Steady", "fading": "↓ Coo
 
 def proof_text(term_label: str, t: dict) -> str:
     parts: list[str] = []
-    if t["enoughData"]:
+    if t.get("capped"):
+        parts.append(f"“{term_label}” is among the most-posted nail styles on YouTube")
+    elif t["enoughData"]:
         pct = round(t["growth"] * 100)
         if abs(pct) < 5:
-            parts.append(f"about as many new “{term_label}” YouTube videos as the 4 weeks before")
+            parts.append(f"“{term_label}” is holding its share of new nail videos on YouTube")
         else:
-            more = "more" if pct > 0 else "fewer"
-            parts.append(f"{abs(pct)}% {more} new “{term_label}” YouTube videos than the 4 weeks before")
+            verb = "up" if pct > 0 else "down"
+            parts.append(f"“{term_label}” share of new nail videos on YouTube {verb} {abs(pct)}% vs the 4 weeks before")
     else:
         parts.append(f"{t['recent']} new “{term_label}” YouTube videos in the last 4 weeks")
     if t["headlines"]:
@@ -192,17 +214,25 @@ def run(key: str, now: datetime | None = None, get=http_get, cfg: dict | None = 
 
     heads, feeds_ok = editorial_counts(cfg.get("editorialFeeds", []), cfg["terms"], start_recent, get)
 
-    term_res: dict[str, dict] = {}
+    counts: dict[str, tuple[int, int]] = {}
     for tid, t in cfg["terms"].items():
-        recent = youtube_count(t["query"], start_recent, now, key, get)
-        prior = youtube_count(t["query"], start_prior, start_recent, key, get)
-        term_res[tid] = term_result(recent, prior, heads.get(tid, 0))
-        print(f"  {tid:14s} {recent:>7d} vs {prior:>7d}  {term_res[tid]['label']:7s} headlines={heads.get(tid, 0)}")
+        counts[tid] = (
+            youtube_count(t["query"], start_recent, now, key, get),
+            youtube_count(t["query"], start_prior, start_recent, key, get),
+        )
+    base = baseline(counts)
+    print(f"  baseline (median recent/prior ratio): {base:.3f}")
+    term_res: dict[str, dict] = {}
+    for tid, (recent, prior) in counts.items():
+        term_res[tid] = term_result(recent, prior, heads.get(tid, 0), base)
+        r = term_res[tid]
+        print(f"  {tid:14s} {recent:>7d} vs {prior:>7d}  share {r['growth']:+.0%}  {r['label']:7s} headlines={heads.get(tid, 0)}")
 
     return {
         "generatedAt": iso(now),
         "window": {"days": WINDOW_DAYS, "recentFrom": iso(start_recent), "priorFrom": iso(start_prior)},
-        "method": "YouTube new-upload volume, last 28 days vs the 28 before (US, English); beauty-magazine RSS headline matches",
+        "method": "Change in each term's share of new nail videos on YouTube, last 28 days vs the 28 before (US, English), relative to the median of all terms; beauty-magazine RSS headline matches",
+        "baseline": round(base, 4),
         "feedsRead": feeds_ok,
         "terms": term_res,
         "looks": look_results(cfg, term_res),
