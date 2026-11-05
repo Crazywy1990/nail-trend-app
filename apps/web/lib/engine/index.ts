@@ -55,7 +55,12 @@ export const DEMO_PROFILE: Omit<Profile, "userId"> = {
   maxStretch: 5,
 };
 
-export type Filters = { occasion: string[]; finish: string[]; length: string[] };
+export type Filters = {
+  occasion: string[]; finish: string[]; length: string[];
+  color?: string[];
+  /** From "Describe it": "subtle" keeps to stretch ≤ 2, "bold" to stretch ≥ 3. */
+  vibe?: "subtle" | "bold" | null;
+};
 
 const attrKeys = (l: Look) => [
   `color:${l.colorFamily}`, `finish:${l.finish}`, `shape:${l.shape.toLowerCase()}`, `length:${l.length}`,
@@ -120,6 +125,40 @@ export function selectSet(pool: Look[], p: Profile, f: Filters) {
   return { safe, trending, stretch, rel };
 }
 
+/**
+ * Filtered mode: every matching look is shown, ordered by MMR (relevance vs variety).
+ * The stretch card is the best matching look above her comfort zone, if any; the
+ * trending row is the matching look with the highest trend velocity among the rest.
+ */
+export function selectFiltered(pool: Look[], p: Profile, f: Filters) {
+  const rel = new Map(pool.map((l) => [l.id, relevance(l, p, f)]));
+  // A stretch card only when something else can lead the set.
+  const stretch = pool.length < 2 ? null : pool
+    .filter((l) => l.stretchLevel >= 4 && l.stretchLevel <= p.maxStretch)
+    .reduce<Look | null>((b, l) => (!b || rel.get(l.id)! > rel.get(b.id)! ? l : b), null);
+  const rest = pool.filter((l) => l !== stretch);
+  const ordered: Look[] = [];
+  while (ordered.length < rest.length) {
+    // relax the per-color / per-finish caps: with filters on, she asked for this
+    let best: Look | null = null, bestScore = -Infinity;
+    const anchors = ordered.map((x) => [x.colorFamily, x.finish] as const);
+    for (const l of rest) {
+      if (ordered.includes(l)) continue;
+      const maxSim = anchors.reduce((m, [c, fi]) => Math.max(m, sim(l.colorFamily, l.finish, c, fi)), 0);
+      const score = LAMBDA * rel.get(l.id)! - (1 - LAMBDA) * maxSim;
+      if (score > bestScore) { bestScore = score; best = l; }
+    }
+    ordered.push(best!);
+  }
+  const safe = ordered.slice(0, 1 + 6);
+  let trending: Look | null = null;
+  if (safe.length > 2) {
+    trending = safe.slice(1).reduce((b, l) => (l.trendVelocity > b.trendVelocity ? l : b));
+    safe.splice(safe.indexOf(trending), 1);
+  }
+  return { safe, trending, stretch, rel };
+}
+
 // ---- "Describe it" keyword parsing (same rules as the Python service) ----
 const OCCASION_WORDS: Record<string, string> = {
   work: "work", office: "work", meeting: "work", interview: "work",
@@ -128,7 +167,21 @@ const OCCASION_WORDS: Record<string, string> = {
   date: "date night", dinner: "date night",
   party: "holiday party", holiday: "holiday party", christmas: "holiday party",
   "new year": "holiday party", halloween: "party",
+  thanksgiving: "holiday party", friendsgiving: "holiday party", gala: "holiday party",
+  everyday: "work", daily: "work", school: "work", brunch: "date night", honeymoon: "vacation",
 };
+const COLOR_WORDS: Record<string, string> = {
+  red: "red", cherry: "red", burgundy: "red", wine: "red", oxblood: "red", maroon: "red",
+  green: "green", emerald: "green", olive: "green",
+  pink: "pink", rose: "pink", blush: "pink",
+  brown: "brown", chocolate: "brown", mocha: "brown", espresso: "brown", tortoise: "brown", tortoiseshell: "brown",
+  nude: "nude", neutral: "nude", beige: "nude",
+  white: "white", milky: "white", pearl: "white",
+  blue: "blue", teal: "blue", navy: "blue",
+  colorful: "multi", rainbow: "multi", mismatched: "multi",
+};
+const SUBTLE = /\b(not (too |so |very )?(flashy|loud|bold|much)|subtle|minimal|minimalist|understated|clean|classy|natural|simple|quiet|low[- ]key)\b/;
+const BOLD = /\b(bold|statement|loud|fun|flashy|wild|dramatic|eye[- ]catching)\b/;
 const FINISH_WORDS: Record<string, string> = {
   chrome: "chrome", "cat-eye": "cat-eye", "cat eye": "cat-eye", magnetic: "cat-eye",
   french: "french", matte: "matte", jelly: "jelly", glossy: "gloss", gloss: "gloss",
@@ -141,7 +194,36 @@ function found(text: string, table: Record<string, string>): string[] {
   return [...new Set(Object.entries(table).filter(([k]) => new RegExp(`\\b${esc(k)}\\b`).test(t)).map(([, v]) => v))];
 }
 export function parseNeed(text: string): Filters {
-  return { occasion: found(text, OCCASION_WORDS), finish: found(text, FINISH_WORDS), length: found(text, LENGTH_WORDS) };
+  const t = text.toLowerCase();
+  const vibe = SUBTLE.test(t) ? "subtle" : BOLD.test(t) ? "bold" : null;
+  return {
+    occasion: found(text, OCCASION_WORDS), finish: found(text, FINISH_WORDS), length: found(text, LENGTH_WORDS),
+    color: found(text, COLOR_WORDS), vibe,
+  };
+}
+
+/** A look matches when it satisfies every filter group the client set (any value within a group). */
+export function matchesAll(l: Look, f: Filters): boolean {
+  const any = (vals: string[] | undefined, ok: (v: string) => boolean) => !vals?.length || vals.some(ok);
+  return any(f.occasion, (o) => l.occasions.includes(o))
+    && any(f.finish, (v) => l.finish === v)
+    && any(f.length, (v) => l.length === v)
+    && any(f.color, (v) => l.colorFamily === v)
+    && (f.vibe !== "subtle" || l.stretchLevel <= 2)
+    && (f.vibe !== "bold" || l.stretchLevel >= 3);
+}
+
+const hasFilters = (f: Filters) =>
+  !!(f.occasion.length || f.finish.length || f.length.length || f.color?.length || f.vibe);
+
+const LABELS: Record<string, string> = { "date night": "Date night", "holiday party": "Holiday party", "cat-eye": "Cat-eye" };
+const cap = (v: string) => LABELS[v] ?? v.charAt(0).toUpperCase() + v.slice(1);
+export function describeFilters(f: Filters): string[] {
+  return [
+    ...f.occasion.map(cap), ...f.finish.map(cap), ...f.length.map(cap),
+    ...(f.color ?? []).map((c) => (c === "multi" ? "Multicolor" : cap(c))),
+    ...(f.vibe ? [cap(f.vibe)] : []),
+  ];
 }
 
 function whyFor(l: Look, p: Profile, f: Filters): string {
@@ -158,9 +240,17 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
     occasion: uniq([...chips.occasion, ...parsed.occasion]),
     finish: uniq([...chips.finish, ...parsed.finish]),
     length: uniq([...chips.length, ...parsed.length]),
+    color: uniq([...(chips.color ?? []), ...(parsed.color ?? [])]),
+    vibe: chips.vibe ?? parsed.vibe ?? null,
   };
   const p: Profile = { userId, ...DEMO_PROFILE };
-  const r = selectSet(LOOKS, p, f);
+  // With filters set, the set is built only from looks that match all of them.
+  // If nothing matches, fall back to the closest looks and say so.
+  const filtered = hasFilters(f);
+  const matching = filtered ? LOOKS.filter((l) => matchesAll(l, f)) : LOOKS;
+  const exact = matching.length > 0;
+  const pool = exact ? matching : LOOKS;
+  const r = filtered && exact ? selectFiltered(pool, p, f) : selectSet(pool, p, f);
   const pick = (l: Look, slot: Slot, position: number): Pick => ({
     look: l, slot, position,
     relevance: Math.round(r.rel.get(l.id)! * 1000) / 1000,
@@ -168,7 +258,7 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
     why: whyFor(l, p, f),
   });
   const [hero, ...rest] = r.safe;
-  const cards = [pick(hero, "for_you", 0), ...(r.stretch ? [pick(r.stretch, "stretch", 1)] : [])];
+  const cards = hero ? [pick(hero, "for_you", 0), ...(r.stretch ? [pick(r.stretch, "stretch", 1)] : [])] : [];
   const also = rest.map((l, i) => pick(l, "for_you", i + 2));
   if (r.trending) also.push(pick(r.trending, "trending", also.length + 2));
   return {
@@ -177,7 +267,13 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
     filters: f,
     cards,
     also,
-    summary: `${r.safe.length} for you · ${r.trending ? 1 : 0} trending · ${r.stretch ? 1 : 0} stretch`,
+    summary: !filtered
+      ? `${r.safe.length} for you · ${r.trending ? 1 : 0} trending · ${r.stretch ? 1 : 0} stretch`
+      : exact
+        ? `${matching.length} of ${LOOKS.length} looks match`
+        : "No exact match yet · showing the closest looks",
+    understood: describeFilters(f),
+    exactMatch: !filtered || exact,
   };
 }
 

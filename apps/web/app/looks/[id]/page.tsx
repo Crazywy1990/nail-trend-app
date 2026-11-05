@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { ArrowLeft } from "@/components/Icons";
 import { PhotoSlot } from "@/components/PhotoSlot";
+import { isDarkTint, tintFor } from "@/lib/format";
 import { ProofStrip } from "@/components/ProofStrip";
 import { ShareToTech } from "@/components/ShareToTech";
 import { TrackLanding } from "@/components/Track";
@@ -37,7 +38,7 @@ export default async function LookPage({ params }: Props) {
       <main className="main">
         <a className="back" href="/"><ArrowLeft size={20} /> Discover</a>
         <article className="card">
-          <PhotoSlot photo={photoFor(l)} pos={l.photoPos} alt={l.photoAlt || l.name} brief={l.photoBrief} priority />
+          <PhotoSlot photo={photoFor(l)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
           <div className="card-body">
             <ProofStrip proof={l.trendProof} />
             <h1 className="card-title" style={{ fontSize: 26 }}>{l.name}</h1>

@@ -44,10 +44,13 @@ export type Pick = {
 export type DiscoverResponse = {
   setId: string;
   rankingVersion: string;
-  filters: { occasion: string[]; finish: string[]; length: string[] };
+  filters: { occasion: string[]; finish: string[]; length: string[]; color?: string[]; vibe?: "subtle" | "bold" | null };
   cards: Pick[];
   also: Pick[];
   summary: string;
+  /** What the filters and "Describe it" text were read as, e.g. ["Holiday party", "Short", "Subtle"]. */
+  understood?: string[];
+  exactMatch?: boolean;
 };
 
 export type EventType =

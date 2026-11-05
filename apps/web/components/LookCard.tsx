@@ -1,4 +1,4 @@
-import { metaLine, slotLabel, specLine } from "@/lib/format";
+import { isDarkTint, metaLine, slotLabel, specLine, tintFor } from "@/lib/format";
 import type { Pick } from "@/lib/types";
 import { CardActions } from "./CardActions";
 import { PhotoSlot } from "./PhotoSlot";
@@ -9,7 +9,7 @@ export function LookCard({ pick, uid, setId, priority }: { pick: Pick; uid: stri
   const l = pick.look;
   return (
     <article className="card" aria-labelledby={`t-${l.id}`}>
-      <PhotoSlot photo={pick.photo} pos={l.photoPos} alt={l.photoAlt || l.name} brief={l.photoBrief} priority={priority}>
+      <PhotoSlot photo={pick.photo} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority={priority}>
         {l.trendBadge === undefined ? <span className="badge badge-trend">↑ Rising</span> : l.trendBadge ? <span className="badge badge-trend">{l.trendBadge}</span> : null}
         <SaveButton uid={uid} lookId={l.id} setId={setId} slot={pick.slot} position={pick.position} />
         {pick.slot === "stretch" ? <span className="badge badge-slot">{slotLabel(pick.slot, l)}</span> : null}
@@ -35,12 +35,12 @@ export function LookRow({ pick }: { pick: Pick }) {
   const l = pick.look;
   return (
     <a className="row" href={`/looks/${l.id}`}>
-      <div className="thumb">
+      <div className="thumb" style={pick.photo ? undefined : { background: tintFor(l.colorFamily) }}>
         {pick.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={pick.photo} alt="" style={{ objectPosition: l.photoPos }} />
         ) : (
-          <span className="muted" style={{ fontSize: 12 }} aria-hidden="true">4:3</span>
+          <span className="sr-only">Photo coming soon</span>
         )}
       </div>
       <div className="row-text">

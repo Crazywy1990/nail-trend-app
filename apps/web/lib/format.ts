@@ -24,3 +24,15 @@ export function slotLabel(slot: Slot, l: Look): string {
 export function photoFor(l: Look, skinTone = "medium"): string | null {
   return l.photoBySkinTone?.[skinTone] ?? null;
 }
+
+/** Soft background for looks whose photo isn't in yet, keyed by color family. */
+const TINTS: Record<string, [string, string]> = {
+  red: ["#7a1f2b", "#c2525e"], green: ["#1f5a45", "#5f9c84"], pink: ["#e6b7bd", "#f6e1e3"],
+  brown: ["#5b3a2c", "#a77b63"], nude: ["#d9b9a3", "#f2e3d7"], white: ["#e8e1d8", "#faf7f2"],
+  blue: ["#1d4f5c", "#5e95a1"], multi: ["#7a1f2b", "#1f5a45"],
+};
+export function tintFor(colorFamily: string): string {
+  const [a, b] = TINTS[colorFamily] ?? ["#e9d8cc", "#f7efe8"];
+  return `linear-gradient(135deg, ${a} 0%, ${b} 100%)`;
+}
+export const isDarkTint = (colorFamily: string) => ["red", "green", "brown", "blue", "multi"].includes(colorFamily);

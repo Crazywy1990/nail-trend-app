@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PhotoSlot } from "@/components/PhotoSlot";
+import { isDarkTint, tintFor } from "@/lib/format";
 import { TrackLanding } from "@/components/Track";
 import { fetchLook } from "@/lib/api";
 import { photoFor, shadeLabel } from "@/lib/format";
@@ -35,7 +36,7 @@ export default async function SpecSheet({ params }: Props) {
           <h1 className="h1" style={{ fontSize: 28 }}>{l.name}</h1>
         </div>
         <article className="card">
-          <PhotoSlot photo={photoFor(l)} pos={l.photoPos} alt={l.photoAlt || l.name} brief={l.photoBrief} priority />
+          <PhotoSlot photo={photoFor(l)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
           <div className="card-body">
             <dl className="dl">
               <dt>Shape</dt><dd>{l.shape}</dd>

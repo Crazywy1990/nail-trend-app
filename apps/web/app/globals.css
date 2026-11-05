@@ -172,3 +172,8 @@ img { max-width: 100%; display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.understood { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; font-size: 13px; }
+.understood .tag { padding: 3px 10px; border-radius: 12px; background: var(--tint); font-weight: 600; }
+.understood .clear { margin-left: 4px; color: var(--accent); font-weight: 600; }

@@ -74,16 +74,25 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
               <span className="muted">{data.cards.length + data.also.length} looks</span>
             </div>
             <div className="muted">{data.summary}</div>
+            {data.understood?.length ? (
+              <div className="understood">
+                <span className="muted">Showing:</span>
+                {data.understood.map((u) => <span key={u} className="tag">{u}</span>)}
+                <a href="/" className="clear">Clear</a>
+              </div>
+            ) : null}
           </div>
 
           {data.cards.map((p, i) => (
             <LookCard key={p.look.id} pick={p} uid={uid} setId={data.setId} priority={i === 0} />
           ))}
 
-          <div className="rows">
-            <h2 className="h2" style={{ fontSize: 18 }}>Also in this set</h2>
-            {data.also.map((p) => <LookRow key={p.look.id} pick={p} />)}
-          </div>
+          {data.also.length ? (
+            <div className="rows">
+              <h2 className="h2" style={{ fontSize: 18 }}>Also in this set</h2>
+              {data.also.map((p) => <LookRow key={p.look.id} pick={p} />)}
+            </div>
+          ) : null}
         </section>
       </main>
       <BottomNav current="/" />
