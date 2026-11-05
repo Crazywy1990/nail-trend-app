@@ -1,1 +1,310 @@
-{"generatedAt": null, "looks": {}}
+{
+  "generatedAt": "2026-11-05T06:23:55Z",
+  "window": {
+    "days": 28,
+    "recentFrom": "2026-10-08T06:23:55Z",
+    "priorFrom": "2026-09-10T06:23:55Z"
+  },
+  "method": "YouTube new-upload volume, last 28 days vs the 28 before (US, English); beauty-magazine RSS headline matches",
+  "feedsRead": 6,
+  "terms": {
+    "chrome": {
+      "recent": 95391,
+      "prior": 159406,
+      "growth": -0.402,
+      "label": "fading",
+      "velocity": 0.299,
+      "enoughData": true,
+      "headlines": 1
+    },
+    "cat-eye": {
+      "recent": 240162,
+      "prior": 391257,
+      "growth": -0.386,
+      "label": "fading",
+      "velocity": 0.307,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "french": {
+      "recent": 134902,
+      "prior": 169350,
+      "growth": -0.203,
+      "label": "steady",
+      "velocity": 0.398,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "micro-french": {
+      "recent": 1902,
+      "prior": 6702,
+      "growth": -0.716,
+      "label": "fading",
+      "velocity": 0.142,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "matte": {
+      "recent": 81870,
+      "prior": 108183,
+      "growth": -0.243,
+      "label": "steady",
+      "velocity": 0.378,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "jelly": {
+      "recent": 384283,
+      "prior": 727294,
+      "growth": -0.472,
+      "label": "fading",
+      "velocity": 0.264,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "glazed": {
+      "recent": 18067,
+      "prior": 26321,
+      "growth": -0.314,
+      "label": "fading",
+      "velocity": 0.343,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "milky": {
+      "recent": 340748,
+      "prior": 705832,
+      "growth": -0.517,
+      "label": "fading",
+      "velocity": 0.241,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "aura": {
+      "recent": 151890,
+      "prior": 294221,
+      "growth": -0.484,
+      "label": "fading",
+      "velocity": 0.258,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "burgundy": {
+      "recent": 46779,
+      "prior": 50546,
+      "growth": -0.075,
+      "label": "steady",
+      "velocity": 0.463,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "brown": {
+      "recent": 417551,
+      "prior": 799516,
+      "growth": -0.478,
+      "label": "fading",
+      "velocity": 0.261,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "red": {
+      "recent": 606537,
+      "prior": 1000000,
+      "growth": -0.393,
+      "label": "fading",
+      "velocity": 0.303,
+      "enoughData": true,
+      "headlines": 1
+    },
+    "emerald": {
+      "recent": 8774,
+      "prior": 6425,
+      "growth": 0.366,
+      "label": "rising",
+      "velocity": 0.683,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "teal": {
+      "recent": 23346,
+      "prior": 46030,
+      "growth": -0.493,
+      "label": "fading",
+      "velocity": 0.254,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "pink": {
+      "recent": 555083,
+      "prior": 825322,
+      "growth": -0.327,
+      "label": "fading",
+      "velocity": 0.336,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "tortoiseshell": {
+      "recent": 9714,
+      "prior": 14270,
+      "growth": -0.319,
+      "label": "fading",
+      "velocity": 0.34,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "mismatched": {
+      "recent": 99,
+      "prior": 126,
+      "growth": -0.214,
+      "label": "steady",
+      "velocity": 0.393,
+      "enoughData": true,
+      "headlines": 0
+    },
+    "star": {
+      "recent": 517362,
+      "prior": 1000000,
+      "growth": -0.483,
+      "label": "fading",
+      "velocity": 0.259,
+      "enoughData": true,
+      "headlines": 0
+    }
+  },
+  "looks": {
+    "burgundy-cat-eye-gold-micro-french": {
+      "text": "39% fewer new “cat eye nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.305,
+      "term": "cat-eye",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "emerald-chrome-silver-star": {
+      "text": "40% fewer new “chrome nails” YouTube videos than the 4 weeks before · 1 beauty-magazine headline this month",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.385,
+      "term": "chrome",
+      "sources": [
+        "YouTube Data API",
+        "Beauty-magazine RSS"
+      ]
+    },
+    "milky-pink-jelly-chrome": {
+      "text": "47% fewer new “jelly nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.291,
+      "term": "jelly",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "rose-glazed-chrome": {
+      "text": "31% fewer new “glazed donut nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.33,
+      "term": "glazed",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "mocha-aura-brown-chrome": {
+      "text": "48% fewer new “aura nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.269,
+      "term": "aura",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "cloudy-french-milk-bath": {
+      "text": "20% fewer new “french tip nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "steady",
+      "badge": "→ Steady",
+      "velocity": 0.346,
+      "term": "french",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "built-in-pearl-oat-white": {
+      "text": "52% fewer new “milky nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.275,
+      "term": "milky",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "chocolate-suede-matte": {
+      "text": "48% fewer new “chocolate brown nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.3,
+      "term": "brown",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "cherry-red-high-gloss": {
+      "text": "39% fewer new “red nails” YouTube videos than the 4 weeks before · 1 beauty-magazine headline this month",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.303,
+      "term": "red",
+      "sources": [
+        "YouTube Data API",
+        "Beauty-magazine RSS"
+      ]
+    },
+    "tortoiseshell-tips": {
+      "text": "32% fewer new “tortoiseshell nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.314,
+      "term": "tortoiseshell",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "deep-teal-velvet-cat-eye": {
+      "text": "39% fewer new “cat eye nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.289,
+      "term": "cat-eye",
+      "sources": [
+        "YouTube Data API"
+      ]
+    },
+    "mismatched-jewel-tones": {
+      "text": "21% fewer new “mismatched nails” YouTube videos than the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "steady",
+      "badge": "→ Steady",
+      "velocity": 0.393,
+      "term": "mismatched",
+      "sources": [
+        "YouTube Data API"
+      ]
+    }
+  }
+}
