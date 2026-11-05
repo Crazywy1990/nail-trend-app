@@ -4,6 +4,20 @@ export function metaLine(l: Look): string {
   return `${l.shape} · ${l.length} · ${l.system} · ${l.priceRange} · ${l.durationMin} min`;
 }
 
+/** How far outside her usual set a look is, in client words (stretch 1–5). */
+export function wearLabel(l: Look): string {
+  return l.stretchLevel <= 2 ? "Easy to wear" : l.stretchLevel === 3 ? "A little new" : "Bold";
+}
+/** Quick-glance facts shown as chips on cards: price, time, how easy it is to wear. */
+export function factChips(l: Look): string[] {
+  return [l.priceRange, `${l.durationMin} min`, wearLabel(l)];
+}
+/** Meta line without price/time (those are chips). */
+export function styleLine(l: Look): string {
+  const len = l.length.charAt(0).toUpperCase() + l.length.slice(1);
+  return `${l.shape} · ${len} · ${l.system}`;
+}
+
 /** Unverified codes are never printed as fact. */
 export function shadeLabel(s: Shade): string {
   const code = !s.code ? "" : s.verified ? ` (${s.code})` : " (code to verify)";

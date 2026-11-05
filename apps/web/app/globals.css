@@ -177,3 +177,33 @@ img { max-width: 100%; display: block; }
 .understood { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; font-size: 13px; }
 .understood .tag { padding: 3px 10px; border-radius: 12px; background: var(--tint); font-weight: 600; }
 .understood .clear { margin-left: 4px; color: var(--accent); font-weight: 600; }
+
+/* Quick-glance facts */
+.facts { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.fact { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 11px; background: var(--tint); color: var(--text); }
+.facts .muted { margin-left: 2px; }
+
+/* Card + row containers (single column on phones) */
+.cards { display: flex; flex-direction: column; gap: 20px; }
+.rows-list { display: flex; flex-direction: column; gap: 10px; }
+
+/* Desktop: wider page, two big cards side by side, "Also" as a tile grid, nav on top */
+@media (min-width: 900px) {
+  .shell-wide { max-width: 1120px; }
+  .shell-wide .main { padding-left: 32px; padding-right: 32px; }
+  .shell-wide header, .shell-wide .need { max-width: 640px; }
+  .shell-wide .chips { max-width: 900px; }
+  .shell-wide .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+  .shell-wide .rows-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .shell-wide .row { flex-direction: column; align-items: stretch; padding: 0; overflow: hidden; border-radius: 18px; }
+  .shell-wide .thumb { width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 0; }
+  .shell-wide .row-text { padding: 10px 14px 14px; }
+  .shell-wide .nav {
+    order: -1; position: sticky; top: 0; z-index: 5; height: 56px; border-top: 0; border-bottom: 1px solid var(--soft);
+    justify-content: flex-end; gap: 8px; padding: 0 32px;
+  }
+  .shell-wide .nav a { flex-direction: row; gap: 6px; font-size: 14px; min-width: 0; padding: 0 12px; }
+}
+@media (min-width: 1200px) {
+  .shell-wide .rows-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

@@ -1,4 +1,4 @@
-import { isDarkTint, metaLine, slotLabel, specLine, tintFor } from "@/lib/format";
+import { factChips, isDarkTint, slotLabel, specLine, styleLine, tintFor } from "@/lib/format";
 import type { Pick } from "@/lib/types";
 import { CardActions } from "./CardActions";
 import { PhotoSlot } from "./PhotoSlot";
@@ -19,7 +19,10 @@ export function LookCard({ pick, uid, setId, priority }: { pick: Pick; uid: stri
         <h3 className="card-title" id={`t-${l.id}`}>
           <a href={`/looks/${l.id}`} style={{ textDecoration: "none" }}>{l.name}</a>
         </h3>
-        <div className="muted">{metaLine(l)}</div>
+        <div className="facts">
+          {factChips(l).map((f) => <span key={f} className="fact">{f}</span>)}
+          <span className="muted">{styleLine(l)}</span>
+        </div>
         <p className="why">{pick.why}</p>
         <div className="spec">
           <div className="label">Shades for your tech</div>
@@ -46,7 +49,7 @@ export function LookRow({ pick }: { pick: Pick }) {
       <div className="row-text">
         <span className="row-slot">{slotLabel(pick.slot, l)}</span>
         <span className="row-name">{l.name}</span>
-        <span className="row-meta">{metaLine(l)}</span>
+        <span className="row-meta">{factChips(l).join(" · ")}</span>
       </div>
     </a>
   );

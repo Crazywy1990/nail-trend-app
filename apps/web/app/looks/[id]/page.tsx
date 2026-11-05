@@ -8,7 +8,7 @@ import { ProofStrip } from "@/components/ProofStrip";
 import { ShareToTech } from "@/components/ShareToTech";
 import { TrackLanding } from "@/components/Track";
 import { fetchLook } from "@/lib/api";
-import { metaLine, photoFor, specLine } from "@/lib/format";
+import { factChips, metaLine, photoFor, specLine, styleLine } from "@/lib/format";
 import { requestUid } from "@/lib/request";
 
 type Props = { params: { id: string } };
@@ -42,7 +42,10 @@ export default async function LookPage({ params }: Props) {
           <div className="card-body">
             <ProofStrip proof={l.trendProof} />
             <h1 className="card-title" style={{ fontSize: 26 }}>{l.name}</h1>
-            <div className="muted">{metaLine(l)}</div>
+            <div className="facts">
+              {factChips(l).map((f) => <span key={f} className="fact">{f}</span>)}
+              <span className="muted">{styleLine(l)}</span>
+            </div>
             <p className="why">{l.technique}.</p>
             <div className="spec">
               <div className="label">Shades for your tech</div>

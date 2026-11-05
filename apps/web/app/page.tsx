@@ -37,7 +37,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
   const picks = [...data.cards, ...data.also].map((p) => ({ lookId: p.look.id, slot: p.slot, position: p.position }));
 
   return (
-    <div className="shell">
+    <div className="shell shell-wide">
       <main className="main">
         <header>
           <div className="wordmark">AllTen</div>
@@ -83,14 +83,18 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
             ) : null}
           </div>
 
-          {data.cards.map((p, i) => (
-            <LookCard key={p.look.id} pick={p} uid={uid} setId={data.setId} priority={i === 0} />
-          ))}
+          <div className="cards">
+            {data.cards.map((p, i) => (
+              <LookCard key={p.look.id} pick={p} uid={uid} setId={data.setId} priority={i === 0} />
+            ))}
+          </div>
 
           {data.also.length ? (
             <div className="rows">
               <h2 className="h2" style={{ fontSize: 18 }}>Also in this set</h2>
-              {data.also.map((p) => <LookRow key={p.look.id} pick={p} />)}
+              <div className="rows-list">
+                {data.also.map((p) => <LookRow key={p.look.id} pick={p} />)}
+              </div>
             </div>
           ) : null}
         </section>
