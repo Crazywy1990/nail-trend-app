@@ -210,33 +210,32 @@
   },
   "looks": {
     "burgundy-cat-eye-gold-micro-french": {
-      "text": "“cat eye nails” is holding its share of new nail videos on YouTube",
+      "text": "“burgundy nails” share of new nail videos on YouTube up 51% vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": "→ Steady",
+      "label": "rising",
+      "badge": "↑ Rising",
       "velocity": 0.496,
-      "term": "cat-eye",
+      "term": "burgundy",
       "sources": [
         "YouTube Data API"
       ]
     },
     "emerald-chrome-silver-star": {
-      "text": "“chrome nails” is holding its share of new nail videos on YouTube · 1 beauty-magazine headline this month",
+      "text": "“emerald green nails” share of new nail videos on YouTube more than doubled vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": "→ Steady",
+      "label": "rising",
+      "badge": "↑ Rising",
       "velocity": 0.619,
-      "term": "chrome",
+      "term": "emerald",
       "sources": [
-        "YouTube Data API",
-        "Beauty-magazine RSS"
+        "YouTube Data API"
       ]
     },
     "milky-pink-jelly-chrome": {
       "text": "“jelly nails” share of new nail videos on YouTube down 14% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.473,
       "term": "jelly",
       "sources": [
@@ -258,7 +257,7 @@
       "text": "“aura nails” share of new nail videos on YouTube down 16% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.439,
       "term": "aura",
       "sources": [
@@ -277,12 +276,12 @@
       ]
     },
     "built-in-pearl-oat-white": {
-      "text": "“milky nails” share of new nail videos on YouTube down 21% vs the 4 weeks before",
+      "text": "“glazed nails” share of new nail videos on YouTube more than doubled vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": "→ Steady",
+      "label": "rising",
+      "badge": "↑ Rising",
       "velocity": 0.595,
-      "term": "milky",
+      "term": "glazed",
       "sources": [
         "YouTube Data API"
       ]
@@ -291,7 +290,7 @@
       "text": "“brown nails” share of new nail videos on YouTube down 15% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.489,
       "term": "brown",
       "sources": [
@@ -302,7 +301,7 @@
       "text": "“red nails” is among the most-posted nail styles on YouTube · 1 beauty-magazine headline this month",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.5,
       "term": "red",
       "sources": [
@@ -314,7 +313,7 @@
       "text": "“tortoiseshell nails” share of new nail videos on YouTube up 11% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.512,
       "term": "tortoiseshell",
       "sources": [
@@ -325,7 +324,7 @@
       "text": "“cat eye nails” is holding its share of new nail videos on YouTube",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.471,
       "term": "cat-eye",
       "sources": [
@@ -336,7 +335,7 @@
       "text": "99 new “mismatched nails” YouTube videos in the last 4 weeks",
       "isPlaceholder": false,
       "label": "steady",
-      "badge": "→ Steady",
+      "badge": null,
       "velocity": 0.5,
       "term": "mismatched",
       "sources": [

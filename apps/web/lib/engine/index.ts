@@ -19,7 +19,7 @@ const MAX_PER_FINISH = 3;
 const SAFE_COUNT = 6;
 const OCCASION_BOOST = 0.08;
 
-type TrendRow = { text: string; isPlaceholder: boolean; badge: string; velocity: number; sources: string[] };
+type TrendRow = { text: string; isPlaceholder: boolean; badge: string | null; velocity: number; sources: string[] };
 /** Written weekly by services/pipeline. Looks without a row keep their sample trend data. */
 const TRENDS = trends as unknown as { generatedAt: string | null; looks: Record<string, TrendRow> };
 export const TRENDS_UPDATED = TRENDS.generatedAt;

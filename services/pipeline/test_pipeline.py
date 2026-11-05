@@ -89,6 +89,7 @@ def test_full_run_with_mocked_sources():
     assert "down 50%" in out["looks"]["b"]["text"] and out["looks"]["b"]["badge"] == "↓ Cooling"
     assert t["huge"]["capped"] and t["huge"]["label"] == "steady"
     assert "among the most-posted" in out["looks"]["e"]["text"]
+    assert out["looks"]["c"]["badge"] is None  # steady: no badge
     assert out["looks"]["c"]["text"].startswith("60 new “tiny nails” YouTube videos")
     assert "d" not in out["looks"]  # look with no known terms keeps its placeholder
 
@@ -135,3 +136,16 @@ def test_rescore_from_history(monkeypatch, tmp_path):
     d = json.loads(out.read_text())
     assert len(d["looks"]) == 12 and all(v["label"] == "steady" for v in d["looks"].values())
     assert hist.read_text().count("\n") == 2  # rescore doesn't append history
+
+
+def test_card_quotes_strongest_rising_term():
+    cfg = {"terms": {k: {"label": f"{k} nails"} for k in ("cat", "burg", "emer")},
+           "looks": {"x": ["cat", "burg", "emer"], "y": ["cat"]}}
+    tr = {
+        "cat": p.term_result(1000, 1000, 0),
+        "burg": p.term_result(1500, 1000, 0),
+        "emer": p.term_result(3000, 1000, 0),
+    }
+    out = p.look_results(cfg, tr)
+    assert out["x"]["term"] == "emer" and out["x"]["badge"] == "↑ Rising" and "emer nails" in out["x"]["text"]
+    assert out["y"]["term"] == "cat" and out["y"]["badge"] is None

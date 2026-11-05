@@ -203,24 +203,28 @@ def proof_text(term_label: str, t: dict) -> str:
 
 
 def look_results(cfg: dict, term_res: dict[str, dict]) -> dict[str, dict]:
-    """Each look quotes its first term; its velocity blends its terms (first term weighted 2×)."""
+    """Per look: velocity blends its terms (first term weighted 2×). The card quotes the
+    look's strongest rising term if it has one, otherwise its first term, and names that
+    term so the claim is about the style, not the whole look. The badge is shown only
+    for Rising or Cooling."""
     out: dict[str, dict] = {}
     for look_id, tids in cfg["looks"].items():
         have = [t for t in tids if t in term_res]
         if not have:
             continue
-        primary = have[0]
         weights = [2.0] + [1.0] * (len(have) - 1)
         vel = sum(w * term_res[t]["velocity"] for w, t in zip(weights, have)) / sum(weights)
-        p = term_res[primary]
+        rising = [t for t in have if term_res[t]["label"] == "rising"]
+        quoted = max(rising, key=lambda t: term_res[t]["growth"]) if rising else have[0]
+        q = term_res[quoted]
         out[look_id] = {
-            "text": proof_text(cfg["terms"][primary]["label"], p),
+            "text": proof_text(cfg["terms"][quoted]["label"], q),
             "isPlaceholder": False,
-            "label": p["label"],
-            "badge": LABEL_TEXT[p["label"]],
+            "label": q["label"],
+            "badge": LABEL_TEXT[q["label"]] if q["label"] != "steady" else None,
             "velocity": round(vel, 3),
-            "term": primary,
-            "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if p["headlines"] else []),
+            "term": quoted,
+            "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if q["headlines"] else []),
         }
     return out
 
