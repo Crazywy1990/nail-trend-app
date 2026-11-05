@@ -8,7 +8,9 @@ Measures each trend term two ways and writes the result where the web app reads 
      YouTube's counts are estimates and run low for the most recent weeks across the board,
      so each term's change is measured against the median change of all terms: its share
      of new nail videos. Counts at YouTube's 1,000,000 ceiling can't show change and are
-     left out of the median.
+     left out of the median. The estimates also jitter from call to call, so each term's
+     ratio is averaged (geometric mean) with the previous run's, and a percentage is only
+     quoted with at least 200 videos behind it.
   2. Editorial mentions: headlines in beauty-magazine RSS feeds from the last 28 days that
      contain one of the term's keywords.
 
@@ -16,6 +18,7 @@ Output: apps/web/lib/engine/trends.json (read by the engine at build time) and o
 appended to services/pipeline/history.jsonl per run.
 
 Run:  YOUTUBE_API_KEY=... python services/pipeline/pipeline.py
+      python services/pipeline/pipeline.py --rescore   (re-score the last run from history.jsonl, no API calls)
 If the key is missing or YouTube fails, the previous trends.json is kept unchanged.
 """
 from __future__ import annotations
@@ -41,7 +44,7 @@ HISTORY_FILE = HERE / "history.jsonl"
 WINDOW_DAYS = 28
 RISING = 0.25    # growth at or above +25% → rising
 FADING = -0.25   # growth at or below −25% → fading
-MIN_VIDEOS = 20  # below this (both windows combined) the growth figure is too noisy to quote
+MIN_VIDEOS = 200  # below this (both windows combined) the growth figure is too noisy to quote
 YT_CAP = 1_000_000  # YouTube reports totalResults no higher than this
 YT_SEARCH = "https://www.googleapis.com/youtube/v3/search"
 UA = "AllTenTrendBot/1.0 (+https://github.com/Crazywy1990)"
@@ -129,9 +132,22 @@ def ratio(recent: int, prior: int) -> float:
     return (recent + 1) / (prior + 1)
 
 
-def baseline(counts: dict[str, tuple[int, int]]) -> float:
-    """Median recent/prior ratio of the measurable terms (enough videos, under the cap)."""
-    rs = sorted(ratio(r, p) for r, p in counts.values() if r + p >= MIN_VIDEOS and max(r, p) < YT_CAP)
+def measurable(recent: int, prior: int) -> bool:
+    return recent + prior >= MIN_VIDEOS and max(recent, prior) < YT_CAP
+
+
+def smoothed_ratio(now: tuple[int, int], prev: tuple[int, int] | None) -> float:
+    """Geometric mean of this run's ratio and the previous run's, when both are measurable."""
+    r = ratio(*now)
+    if prev and measurable(*prev) and measurable(*now):
+        r = (r * ratio(*prev)) ** 0.5
+    return r
+
+
+def baseline(counts: dict[str, tuple[int, int]], prev: dict[str, tuple[int, int]] | None = None) -> float:
+    """Median (smoothed) recent/prior ratio of the measurable terms (enough videos, under the cap)."""
+    prev = prev or {}
+    rs = sorted(smoothed_ratio(c, prev.get(t)) for t, c in counts.items() if measurable(*c))
     if not rs:
         return 1.0
     m = len(rs) // 2
@@ -147,11 +163,11 @@ def velocity(g: float) -> float:
     return round(max(0.0, min(1.0, 0.5 + g / 2)), 3)
 
 
-def term_result(recent: int, prior: int, headlines: int, base: float = 1.0) -> dict:
+def term_result(recent: int, prior: int, headlines: int, base: float = 1.0, prev: tuple[int, int] | None = None) -> dict:
     raw = growth(recent, prior)
-    rel = ratio(recent, prior) / base - 1  # change in share of new nail videos
+    rel = smoothed_ratio((recent, prior), prev) / base - 1  # change in share of new nail videos
     capped = max(recent, prior) >= YT_CAP
-    enough = recent + prior >= MIN_VIDEOS and not capped
+    enough = measurable(recent, prior)
     return {
         "recent": recent, "prior": prior, "rawGrowth": round(raw, 3), "growth": round(rel, 3),
         "label": label_for(rel) if enough else "steady",
@@ -171,6 +187,10 @@ def proof_text(term_label: str, t: dict) -> str:
         pct = round(t["growth"] * 100)
         if abs(pct) < 5:
             parts.append(f"“{term_label}” is holding its share of new nail videos on YouTube")
+        elif pct > 100:
+            parts.append(f"“{term_label}” share of new nail videos on YouTube more than doubled vs the 4 weeks before")
+        elif pct < -50:
+            parts.append(f"“{term_label}” share of new nail videos on YouTube down by more than half vs the 4 weeks before")
         else:
             verb = "up" if pct > 0 else "down"
             parts.append(f"“{term_label}” share of new nail videos on YouTube {verb} {abs(pct)}% vs the 4 weeks before")
@@ -206,32 +226,34 @@ def look_results(cfg: dict, term_res: dict[str, dict]) -> dict[str, dict]:
 
 
 # -------------------------------------------------------------------- Run
-def run(key: str, now: datetime | None = None, get=http_get, cfg: dict | None = None) -> dict:
-    cfg = cfg or json.loads(TERMS_FILE.read_text())
-    now = now or datetime.now(timezone.utc)
+def read_history(path: Path | None = None) -> list[dict]:
+    path = path or HISTORY_FILE
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+def counts_of(entry: dict | None) -> dict[str, tuple[int, int]]:
+    return {t: (v["recent"], v["prior"]) for t, v in (entry or {}).get("terms", {}).items()}
+
+
+def score(counts: dict[str, tuple[int, int]], heads: dict[str, int], cfg: dict, now: datetime,
+          prev: dict[str, tuple[int, int]] | None = None, feeds_ok: int = 0) -> dict:
     start_recent = now - timedelta(days=WINDOW_DAYS)
     start_prior = start_recent - timedelta(days=WINDOW_DAYS)
-
-    heads, feeds_ok = editorial_counts(cfg.get("editorialFeeds", []), cfg["terms"], start_recent, get)
-
-    counts: dict[str, tuple[int, int]] = {}
-    for tid, t in cfg["terms"].items():
-        counts[tid] = (
-            youtube_count(t["query"], start_recent, now, key, get),
-            youtube_count(t["query"], start_prior, start_recent, key, get),
-        )
-    base = baseline(counts)
-    print(f"  baseline (median recent/prior ratio): {base:.3f}")
+    prev = prev or {}
+    base = baseline(counts, prev)
+    print(f"  baseline (median recent/prior ratio): {base:.3f}  smoothing with previous run: {bool(prev)}")
     term_res: dict[str, dict] = {}
     for tid, (recent, prior) in counts.items():
-        term_res[tid] = term_result(recent, prior, heads.get(tid, 0), base)
+        term_res[tid] = term_result(recent, prior, heads.get(tid, 0), base, prev.get(tid))
         r = term_res[tid]
         print(f"  {tid:14s} {recent:>7d} vs {prior:>7d}  share {r['growth']:+.0%}  {r['label']:7s} headlines={heads.get(tid, 0)}")
 
     return {
         "generatedAt": iso(now),
         "window": {"days": WINDOW_DAYS, "recentFrom": iso(start_recent), "priorFrom": iso(start_prior)},
-        "method": "Change in each term's share of new nail videos on YouTube, last 28 days vs the 28 before (US, English), relative to the median of all terms; beauty-magazine RSS headline matches",
+        "method": "Change in each term's share of new nail videos on YouTube, last 28 days vs the 28 before (US, English), relative to the median of all terms and averaged with the previous run; beauty-magazine RSS headline matches",
         "baseline": round(base, 4),
         "feedsRead": feeds_ok,
         "terms": term_res,
@@ -239,13 +261,56 @@ def run(key: str, now: datetime | None = None, get=http_get, cfg: dict | None = 
     }
 
 
+def run(key: str, now: datetime | None = None, get=http_get, cfg: dict | None = None,
+        prev: dict[str, tuple[int, int]] | None = None) -> dict:
+    cfg = cfg or json.loads(TERMS_FILE.read_text())
+    now = now or datetime.now(timezone.utc)
+    start_recent = now - timedelta(days=WINDOW_DAYS)
+    start_prior = start_recent - timedelta(days=WINDOW_DAYS)
+    heads, feeds_ok = editorial_counts(cfg.get("editorialFeeds", []), cfg["terms"], start_recent, get)
+    counts: dict[str, tuple[int, int]] = {}
+    for tid, t in cfg["terms"].items():
+        counts[tid] = (
+            youtube_count(t["query"], start_recent, now, key, get),
+            youtube_count(t["query"], start_prior, start_recent, key, get),
+        )
+    return score(counts, heads, cfg, now, prev, feeds_ok)
+
+
+def write(result: dict, history: bool = True) -> None:
+    OUT_FILE.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+    if history:
+        with HISTORY_FILE.open("a") as h:
+            h.write(json.dumps({"generatedAt": result["generatedAt"], "terms": result["terms"]}, ensure_ascii=False) + "\n")
+    print(f"Wrote {OUT_FILE.relative_to(ROOT)}: {len(result['looks'])} looks, {len(result['terms'])} terms.")
+
+
+def rescore() -> int:
+    """Re-score the latest history entry (smoothed with the one before it) without calling any API."""
+    hist = read_history()
+    if not hist:
+        print("history.jsonl is empty; nothing to re-score.", file=sys.stderr)
+        return 1
+    cfg = json.loads(TERMS_FILE.read_text())
+    last = hist[-1]
+    prev = counts_of(hist[-2]) if len(hist) > 1 else None
+    now = datetime.fromisoformat(last["generatedAt"].replace("Z", "+00:00"))
+    heads = {t: v.get("headlines", 0) for t, v in last["terms"].items()}
+    old = json.loads(OUT_FILE.read_text()) if OUT_FILE.exists() else {}
+    write(score(counts_of(last), heads, cfg, now, prev, old.get("feedsRead", 0)), history=False)
+    return 0
+
+
 def main() -> int:
+    if "--rescore" in sys.argv:
+        return rescore()
     key = os.environ.get("YOUTUBE_API_KEY", "").strip()
     if not key:
         print("YOUTUBE_API_KEY is not set; keeping the previous trends.json.", file=sys.stderr)
         return 1
+    hist = read_history()
     try:
-        result = run(key)
+        result = run(key, prev=counts_of(hist[-1]) if hist else None)
     except urllib.error.HTTPError as e:
         detail = e.read().decode("utf-8", "replace")[:300]
         print(f"YouTube request failed ({e.code}): {detail}\nKeeping the previous trends.json.", file=sys.stderr)
@@ -253,10 +318,7 @@ def main() -> int:
     except Exception as e:
         print(f"Pipeline failed ({type(e).__name__}: {e}); keeping the previous trends.json.", file=sys.stderr)
         return 1
-    OUT_FILE.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
-    with HISTORY_FILE.open("a") as h:
-        h.write(json.dumps({"generatedAt": result["generatedAt"], "terms": result["terms"]}, ensure_ascii=False) + "\n")
-    print(f"Wrote {OUT_FILE.relative_to(ROOT)}: {len(result['looks'])} looks, {len(result['terms'])} terms.")
+    write(result)
     return 0
 
 
