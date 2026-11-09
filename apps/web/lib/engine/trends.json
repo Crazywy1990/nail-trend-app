@@ -1,85 +1,85 @@
 {
-  "generatedAt": "2026-11-05T06:25:23Z",
+  "generatedAt": "2026-11-09T22:58:59Z",
   "window": {
     "days": 28,
-    "recentFrom": "2026-10-08T06:25:23Z",
-    "priorFrom": "2026-09-10T06:25:23Z"
+    "recentFrom": "2026-10-12T22:58:59Z",
+    "priorFrom": "2026-09-14T22:58:59Z"
   },
   "method": "Change in each term's share of new nail videos on YouTube, last 28 days vs the 28 before (US, English), relative to the median of all terms and averaged with the previous run; beauty-magazine RSS headline matches",
-  "baseline": 0.6138,
+  "baseline": 0.6966,
   "feedsRead": 6,
   "terms": {
     "chrome": {
-      "recent": 95384,
-      "prior": 159406,
-      "rawGrowth": -0.402,
-      "growth": -0.025,
+      "recent": 85888,
+      "prior": 170517,
+      "rawGrowth": -0.496,
+      "growth": -0.212,
       "label": "steady",
-      "velocity": 0.487,
+      "velocity": 0.394,
       "enoughData": true,
       "capped": false,
-      "headlines": 1
+      "headlines": 0
     },
     "cat-eye": {
-      "recent": 240162,
-      "prior": 391315,
-      "rawGrowth": -0.386,
-      "growth": 0.0,
-      "label": "steady",
-      "velocity": 0.5,
+      "recent": 158222,
+      "prior": 425196,
+      "rawGrowth": -0.628,
+      "growth": -0.314,
+      "label": "fading",
+      "velocity": 0.343,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "french": {
-      "recent": 134901,
-      "prior": 169326,
-      "rawGrowth": -0.203,
-      "growth": 0.298,
-      "label": "rising",
-      "velocity": 0.649,
+      "recent": 125375,
+      "prior": 167636,
+      "rawGrowth": -0.252,
+      "growth": 0.108,
+      "label": "steady",
+      "velocity": 0.554,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "micro-french": {
-      "recent": 1902,
-      "prior": 6702,
-      "rawGrowth": -0.716,
-      "growth": -0.537,
-      "label": "fading",
-      "velocity": 0.231,
+      "recent": 1838,
+      "prior": 345,
+      "rawGrowth": 4.328,
+      "growth": 0.763,
+      "label": "rising",
+      "velocity": 0.882,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "matte": {
-      "recent": 81870,
-      "prior": 108183,
-      "rawGrowth": -0.243,
-      "growth": 0.233,
+      "recent": 75291,
+      "prior": 125266,
+      "rawGrowth": -0.399,
+      "growth": -0.032,
       "label": "steady",
-      "velocity": 0.616,
+      "velocity": 0.484,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "jelly": {
-      "recent": 384283,
-      "prior": 727291,
-      "rawGrowth": -0.472,
-      "growth": -0.139,
-      "label": "steady",
-      "velocity": 0.43,
+      "recent": 273937,
+      "prior": 796220,
+      "rawGrowth": -0.656,
+      "growth": -0.388,
+      "label": "fading",
+      "velocity": 0.306,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "glazed": {
-      "recent": 18067,
-      "prior": 6630,
-      "rawGrowth": 1.725,
-      "growth": 1.228,
+      "recent": 15658,
+      "prior": 20911,
+      "rawGrowth": -0.251,
+      "growth": 1.051,
       "label": "rising",
       "velocity": 1.0,
       "enoughData": true,
@@ -87,65 +87,65 @@
       "headlines": 0
     },
     "milky": {
-      "recent": 340224,
-      "prior": 705832,
-      "rawGrowth": -0.518,
-      "growth": -0.214,
-      "label": "steady",
-      "velocity": 0.393,
+      "recent": 265398,
+      "prior": 751874,
+      "rawGrowth": -0.647,
+      "growth": -0.408,
+      "label": "fading",
+      "velocity": 0.296,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "aura": {
-      "recent": 151890,
-      "prior": 294221,
-      "rawGrowth": -0.484,
-      "growth": -0.159,
-      "label": "steady",
-      "velocity": 0.421,
+      "recent": 133986,
+      "prior": 289739,
+      "rawGrowth": -0.538,
+      "growth": -0.299,
+      "label": "fading",
+      "velocity": 0.351,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "burgundy": {
-      "recent": 46779,
-      "prior": 50546,
-      "rawGrowth": -0.075,
-      "growth": 0.508,
+      "recent": 45283,
+      "prior": 53158,
+      "rawGrowth": -0.148,
+      "growth": 0.275,
       "label": "rising",
-      "velocity": 0.754,
+      "velocity": 0.637,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "brown": {
-      "recent": 417550,
-      "prior": 799544,
-      "rawGrowth": -0.478,
-      "growth": -0.149,
-      "label": "steady",
-      "velocity": 0.425,
+      "recent": 314592,
+      "prior": 888921,
+      "rawGrowth": -0.646,
+      "growth": -0.383,
+      "label": "fading",
+      "velocity": 0.309,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "red": {
-      "recent": 606536,
+      "recent": 599401,
       "prior": 1000000,
-      "rawGrowth": -0.393,
-      "growth": -0.012,
+      "rawGrowth": -0.401,
+      "growth": -0.14,
       "label": "steady",
       "velocity": 0.5,
       "enoughData": false,
       "capped": true,
-      "headlines": 1
+      "headlines": 0
     },
     "emerald": {
-      "recent": 8774,
-      "prior": 6425,
-      "rawGrowth": 0.366,
-      "growth": 1.225,
+      "recent": 9727,
+      "prior": 5333,
+      "rawGrowth": 0.824,
+      "growth": 1.266,
       "label": "rising",
       "velocity": 1.0,
       "enoughData": true,
@@ -153,54 +153,54 @@
       "headlines": 0
     },
     "teal": {
-      "recent": 23325,
-      "prior": 46032,
-      "rawGrowth": -0.493,
-      "growth": -0.174,
-      "label": "steady",
-      "velocity": 0.413,
+      "recent": 20531,
+      "prior": 9887,
+      "rawGrowth": 1.077,
+      "growth": 0.473,
+      "label": "rising",
+      "velocity": 0.736,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "pink": {
-      "recent": 555083,
-      "prior": 830682,
-      "rawGrowth": -0.332,
-      "growth": 0.092,
+      "recent": 522810,
+      "prior": 1000000,
+      "rawGrowth": -0.477,
+      "growth": -0.249,
       "label": "steady",
-      "velocity": 0.546,
-      "enoughData": true,
-      "capped": false,
+      "velocity": 0.5,
+      "enoughData": false,
+      "capped": true,
       "headlines": 0
     },
     "tortoiseshell": {
-      "recent": 9736,
-      "prior": 14271,
-      "rawGrowth": -0.318,
-      "growth": 0.11,
+      "recent": 9350,
+      "prior": 13147,
+      "rawGrowth": -0.289,
+      "growth": 0.0,
       "label": "steady",
-      "velocity": 0.555,
+      "velocity": 0.5,
       "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "mismatched": {
-      "recent": 99,
-      "prior": 85,
-      "rawGrowth": 0.165,
-      "growth": 0.894,
+      "recent": 91,
+      "prior": 109,
+      "rawGrowth": -0.165,
+      "growth": 0.201,
       "label": "steady",
-      "velocity": 0.5,
-      "enoughData": false,
+      "velocity": 0.6,
+      "enoughData": true,
       "capped": false,
       "headlines": 0
     },
     "star": {
-      "recent": 517362,
+      "recent": 440254,
       "prior": 1000000,
-      "rawGrowth": -0.483,
-      "growth": -0.157,
+      "rawGrowth": -0.56,
+      "growth": -0.368,
       "label": "steady",
       "velocity": 0.5,
       "enoughData": false,
@@ -210,12 +210,12 @@
   },
   "looks": {
     "burgundy-cat-eye-gold-micro-french": {
-      "text": "“burgundy nails” share of new nail videos on YouTube up 51% vs the 4 weeks before",
+      "text": "“micro french nails” share of new nail videos on YouTube up 76% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "rising",
       "badge": "↑ Rising",
-      "velocity": 0.496,
-      "term": "burgundy",
+      "velocity": 0.551,
+      "term": "micro-french",
       "sources": [
         "YouTube Data API"
       ]
@@ -225,18 +225,18 @@
       "isPlaceholder": false,
       "label": "rising",
       "badge": "↑ Rising",
-      "velocity": 0.619,
+      "velocity": 0.572,
       "term": "emerald",
       "sources": [
         "YouTube Data API"
       ]
     },
     "milky-pink-jelly-chrome": {
-      "text": "“jelly nails” share of new nail videos on YouTube down 14% vs the 4 weeks before",
+      "text": "“jelly nails” share of new nail videos on YouTube down 39% vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": null,
-      "velocity": 0.473,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.377,
       "term": "jelly",
       "sources": [
         "YouTube Data API"
@@ -247,29 +247,29 @@
       "isPlaceholder": false,
       "label": "rising",
       "badge": "↑ Rising",
-      "velocity": 0.758,
+      "velocity": 0.724,
       "term": "glazed",
       "sources": [
         "YouTube Data API"
       ]
     },
     "mocha-aura-brown-chrome": {
-      "text": "“aura nails” share of new nail videos on YouTube down 16% vs the 4 weeks before",
+      "text": "“aura nails” share of new nail videos on YouTube down 30% vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": null,
-      "velocity": 0.439,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.351,
       "term": "aura",
       "sources": [
         "YouTube Data API"
       ]
     },
     "cloudy-french-milk-bath": {
-      "text": "“french tip nails” share of new nail videos on YouTube up 30% vs the 4 weeks before",
+      "text": "“french tip nails” share of new nail videos on YouTube up 11% vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "rising",
-      "badge": "↑ Rising",
-      "velocity": 0.564,
+      "label": "steady",
+      "badge": null,
+      "velocity": 0.468,
       "term": "french",
       "sources": [
         "YouTube Data API"
@@ -280,63 +280,62 @@
       "isPlaceholder": false,
       "label": "rising",
       "badge": "↑ Rising",
-      "velocity": 0.595,
+      "velocity": 0.531,
       "term": "glazed",
       "sources": [
         "YouTube Data API"
       ]
     },
     "chocolate-suede-matte": {
-      "text": "“brown nails” share of new nail videos on YouTube down 15% vs the 4 weeks before",
+      "text": "“brown nails” share of new nail videos on YouTube down 38% vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": null,
-      "velocity": 0.489,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.367,
       "term": "brown",
       "sources": [
         "YouTube Data API"
       ]
     },
     "cherry-red-high-gloss": {
-      "text": "“red nails” is among the most-posted nail styles on YouTube · 1 beauty-magazine headline this month",
+      "text": "“red nails” is among the most-posted nail styles on YouTube",
       "isPlaceholder": false,
       "label": "steady",
       "badge": null,
       "velocity": 0.5,
       "term": "red",
       "sources": [
-        "YouTube Data API",
-        "Beauty-magazine RSS"
+        "YouTube Data API"
       ]
     },
     "tortoiseshell-tips": {
-      "text": "“tortoiseshell nails” share of new nail videos on YouTube up 11% vs the 4 weeks before",
+      "text": "“tortoiseshell nails” is holding its share of new nail videos on YouTube",
       "isPlaceholder": false,
       "label": "steady",
       "badge": null,
-      "velocity": 0.512,
+      "velocity": 0.436,
       "term": "tortoiseshell",
       "sources": [
         "YouTube Data API"
       ]
     },
     "deep-teal-velvet-cat-eye": {
-      "text": "“cat eye nails” is holding its share of new nail videos on YouTube",
+      "text": "“teal nails” share of new nail videos on YouTube up 47% vs the 4 weeks before",
       "isPlaceholder": false,
-      "label": "steady",
-      "badge": null,
-      "velocity": 0.471,
-      "term": "cat-eye",
+      "label": "rising",
+      "badge": "↑ Rising",
+      "velocity": 0.474,
+      "term": "teal",
       "sources": [
         "YouTube Data API"
       ]
     },
     "mismatched-jewel-tones": {
-      "text": "99 new “mismatched nails” YouTube videos in the last 4 weeks",
+      "text": "“mismatched nails” share of new nail videos on YouTube up 20% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "steady",
       "badge": null,
-      "velocity": 0.5,
+      "velocity": 0.6,
       "term": "mismatched",
       "sources": [
         "YouTube Data API"
