@@ -147,7 +147,12 @@
       "medium": "/looks/milky-pink-jelly-chrome.jpg",
       "deep": null
     },
-    "photoAlt": "Milky Pink Jelly · Chrome Top: sheer jelly, chrome topcoat on a warm-toned hand"
+    "photoAlt": "Milky Pink Jelly · Chrome Top: sheer jelly, chrome topcoat on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/milky-pink-jelly-chrome.jpg",
+      "deep": null
+    }
   },
   {
     "id": "rose-glazed-chrome",
@@ -174,7 +179,12 @@
       "medium": "/looks/rose-glazed-chrome.jpg",
       "deep": null
     },
-    "photoAlt": "Rose Glazed Chrome: pearl chrome over sheer rose on a warm-toned hand"
+    "photoAlt": "Rose Glazed Chrome: pearl chrome over sheer rose on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": "/looks/rose-glazed-chrome__light.jpg",
+      "medium": "/looks/rose-glazed-chrome.jpg",
+      "deep": "/looks/rose-glazed-chrome__deep.jpg"
+    }
   },
   {
     "id": "mocha-aura-brown-chrome",
@@ -200,7 +210,12 @@
       "medium": "/looks/mocha-aura-brown-chrome.jpg",
       "deep": null
     },
-    "photoAlt": "Mocha Aura · Brown Chrome: airbrushed aura, brown chrome on a warm-toned hand"
+    "photoAlt": "Mocha Aura · Brown Chrome: airbrushed aura, brown chrome on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/mocha-aura-brown-chrome.jpg",
+      "deep": null
+    }
   },
   {
     "id": "cloudy-french-milk-bath",
@@ -241,7 +256,12 @@
       "medium": "/looks/cloudy-french-milk-bath.jpg",
       "deep": null
     },
-    "photoAlt": "Cloudy French · Milk Bath Base: sheer coat over white tips on a warm-toned hand"
+    "photoAlt": "Cloudy French · Milk Bath Base: sheer coat over white tips on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/cloudy-french-milk-bath.jpg",
+      "deep": null
+    }
   },
   {
     "id": "built-in-pearl-oat-white",
@@ -275,7 +295,12 @@
       "medium": "/looks/built-in-pearl-oat-white.jpg",
       "deep": null
     },
-    "photoAlt": "Built-In Pearl · Oat White: pearl powder over milky white on a warm-toned hand"
+    "photoAlt": "Built-In Pearl · Oat White: pearl powder over milky white on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/built-in-pearl-oat-white.jpg",
+      "deep": null
+    }
   },
   {
     "id": "chocolate-suede-matte",
@@ -301,7 +326,12 @@
       "medium": "/looks/chocolate-suede-matte.jpg",
       "deep": null
     },
-    "photoAlt": "Chocolate Suede · Matte: matte topcoat over deep brown on a warm-toned hand"
+    "photoAlt": "Chocolate Suede · Matte: matte topcoat over deep brown on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/chocolate-suede-matte.jpg",
+      "deep": null
+    }
   },
   {
     "id": "cherry-red-high-gloss",
@@ -335,7 +365,12 @@
       "medium": "/looks/cherry-red-high-gloss.jpg",
       "deep": null
     },
-    "photoAlt": "Cherry Red · High Gloss: classic red, glass topcoat on a warm-toned hand"
+    "photoAlt": "Cherry Red · High Gloss: classic red, glass topcoat on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/cherry-red-high-gloss.jpg",
+      "deep": null
+    }
   },
   {
     "id": "tortoiseshell-tips",
@@ -361,7 +396,12 @@
       "medium": "/looks/tortoiseshell-tips.jpg",
       "deep": null
     },
-    "photoAlt": "Tortoiseshell Tips: hand-painted tortoise on tips on a warm-toned hand"
+    "photoAlt": "Tortoiseshell Tips: hand-painted tortoise on tips on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/tortoiseshell-tips.jpg",
+      "deep": null
+    }
   },
   {
     "id": "deep-teal-velvet-cat-eye",
@@ -387,7 +427,12 @@
       "medium": "/looks/deep-teal-velvet-cat-eye.jpg",
       "deep": null
     },
-    "photoAlt": "Deep Teal Velvet Cat-Eye: velvet magnetic cat-eye on a warm-toned hand"
+    "photoAlt": "Deep Teal Velvet Cat-Eye: velvet magnetic cat-eye on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/deep-teal-velvet-cat-eye.jpg",
+      "deep": null
+    }
   },
   {
     "id": "mismatched-jewel-tones",
@@ -413,6 +458,11 @@
       "medium": "/looks/mismatched-jewel-tones.jpg",
       "deep": null
     },
-    "photoAlt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand"
+    "photoAlt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand",
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/mismatched-jewel-tones.jpg",
+      "deep": null
+    }
   }
 ]

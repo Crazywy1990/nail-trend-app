@@ -185,9 +185,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/rose-glazed-chrome__light.jpg",
       "medium": "/looks/rose-glazed-chrome.jpg",
-      "deep": null
+      "deep": "/looks/rose-glazed-chrome__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Rose Glazed Chrome: pearl chrome over sheer rose on a warm-toned hand",
