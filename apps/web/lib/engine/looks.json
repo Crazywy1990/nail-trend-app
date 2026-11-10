@@ -41,9 +41,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/burgundy-cat-eye-gold-micro-french__light.jpg",
       "medium": "/looks/burgundy-cat-eye.jpg",
-      "deep": null
+      "deep": "/looks/burgundy-cat-eye-gold-micro-french__deep.jpg"
     },
     "photoPos": "center 62%",
     "photoAlt": "Burgundy cat-eye almond nails with a gold micro-French tip, on a hand wearing thin gold rings",
@@ -104,9 +104,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/emerald-chrome-silver-star__light.jpg",
       "medium": "/looks/emerald-chrome.jpg",
-      "deep": null
+      "deep": "/looks/emerald-chrome-silver-star__deep.jpg"
     },
     "photoPos": "center 74%",
     "photoAlt": "Short emerald chrome nails with a silver star accent on one nail, on a hand wearing chunky silver rings",
@@ -149,9 +149,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/milky-pink-jelly-chrome__light.jpg",
       "medium": "/looks/milky-pink-jelly-chrome.jpg",
-      "deep": null
+      "deep": "/looks/milky-pink-jelly-chrome__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Milky Pink Jelly · Chrome Top: sheer jelly, chrome topcoat on a warm-toned hand",
@@ -220,9 +220,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/mocha-aura-brown-chrome__light.jpg",
       "medium": "/looks/mocha-aura-brown-chrome.jpg",
-      "deep": null
+      "deep": "/looks/mocha-aura-brown-chrome__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Mocha Aura · Brown Chrome: airbrushed aura, brown chrome on a warm-toned hand",
@@ -269,9 +269,9 @@
       "isPlaceholder": true
     },
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/cloudy-french-milk-bath__light.jpg",
       "medium": "/looks/cloudy-french-milk-bath.jpg",
-      "deep": null
+      "deep": "/looks/cloudy-french-milk-bath__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Cloudy French · Milk Bath Base: sheer coat over white tips on a warm-toned hand",
@@ -311,9 +311,9 @@
       "isPlaceholder": true
     },
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/built-in-pearl-oat-white__light.jpg",
       "medium": "/looks/built-in-pearl-oat-white.jpg",
-      "deep": null
+      "deep": "/looks/built-in-pearl-oat-white__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Built-In Pearl · Oat White: pearl powder over milky white on a warm-toned hand",
@@ -346,9 +346,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/chocolate-suede-matte__light.jpg",
       "medium": "/looks/chocolate-suede-matte.jpg",
-      "deep": null
+      "deep": "/looks/chocolate-suede-matte__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Chocolate Suede · Matte: matte topcoat over deep brown on a warm-toned hand",
@@ -388,9 +388,9 @@
       "isPlaceholder": true
     },
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/cherry-red-high-gloss__light.jpg",
       "medium": "/looks/cherry-red-high-gloss.jpg",
-      "deep": null
+      "deep": "/looks/cherry-red-high-gloss__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Cherry Red · High Gloss: classic red, glass topcoat on a warm-toned hand",
@@ -423,9 +423,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/tortoiseshell-tips__light.jpg",
       "medium": "/looks/tortoiseshell-tips.jpg",
-      "deep": null
+      "deep": "/looks/tortoiseshell-tips__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Tortoiseshell Tips: hand-painted tortoise on tips on a warm-toned hand",
@@ -458,9 +458,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/deep-teal-velvet-cat-eye__light.jpg",
       "medium": "/looks/deep-teal-velvet-cat-eye.jpg",
-      "deep": null
+      "deep": "/looks/deep-teal-velvet-cat-eye__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Deep Teal Velvet Cat-Eye: velvet magnetic cat-eye on a warm-toned hand",
@@ -493,9 +493,9 @@
     },
     "shades": [],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/mismatched-jewel-tones__light.jpg",
       "medium": "/looks/mismatched-jewel-tones.jpg",
-      "deep": null
+      "deep": "/looks/mismatched-jewel-tones__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand",
