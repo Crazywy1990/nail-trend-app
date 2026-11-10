@@ -65,6 +65,11 @@ def http(req: urllib.request.Request, timeout: int = 300) -> bytes:
             if e.code in (429, 500, 502, 503) and attempt < 2:
                 time.sleep(10 * (attempt + 1)); continue
             raise RuntimeError(f"HTTP {e.code}: {body}") from None
+        except (urllib.error.URLError, ConnectionError, TimeoutError) as e:
+            if attempt < 2:
+                print(f"  network error ({e}); retrying", file=sys.stderr)
+                time.sleep(15 * (attempt + 1)); continue
+            raise RuntimeError(f"network: {e}") from None
     raise RuntimeError("unreachable")
 
 
@@ -75,7 +80,7 @@ def data_url(p: Path) -> str:
 def muse(prompt: str, key: str) -> list[bytes]:
     body = json.dumps({
         "prompt": prompt, "image_urls": [data_url(p) for p in REFS], "aspect_ratio": "4:3",
-        "num_images": PER_MODEL, "output_format": "jpeg", "sync_mode": True,
+        "num_images": PER_MODEL, "output_format": "jpeg",
     }).encode()
     req = urllib.request.Request("https://fal.run/meta/muse-image/edit", data=body, method="POST",
                                  headers={"Authorization": f"Key {key}", "Content-Type": "application/json"})
