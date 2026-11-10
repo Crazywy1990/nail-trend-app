@@ -123,7 +123,10 @@ def main() -> int:
     if not (fal_key or oa_key):
         print("Neither FAL_KEY nor OPENAI_API_KEY is set.", file=sys.stderr); return 1
     OUT.mkdir(exist_ok=True)
-    manifest: dict = {"openaiModel": OPENAI_MODEL, "looks": {}}
+    mf = OUT / "manifest.json"  # keep earlier runs' results; this run adds/overwrites its own
+    manifest: dict = json.loads(mf.read_text()) if mf.exists() else {"looks": {}}
+    for v in manifest["looks"].values():
+        v.pop("errors", None)
     oa_model = [OPENAI_MODEL]
 
     def run(look: dict, model: str):
@@ -146,7 +149,9 @@ def main() -> int:
             f = d / f"{model}-{i}.jpg"; f.write_bytes(b); files.append(str(f.relative_to(OUT)))
         return look["id"], model, files, pr
 
-    jobs = [(l, m) for l in todo for m in (["muse"] if fal_key else []) + (["openai"] if oa_key else [])]
+    models = os.environ.get("MODELS", "muse openai").split()
+    use = [m for m in models if (m == "muse" and fal_key) or (m == "openai" and oa_key)]
+    jobs = [(l, m) for l in todo for m in use]
     errors = 0
     with cf.ThreadPoolExecutor(max_workers=4) as ex:
         futs = {ex.submit(run, l, m): (l["id"], m) for l, m in jobs}
@@ -160,7 +165,8 @@ def main() -> int:
                 errors += 1
                 manifest["looks"].setdefault(lid, {"files": {}}).setdefault("errors", {})[m] = str(e)[:400]
                 print(f"  FAIL {lid:36s} {m:6s} {e}", file=sys.stderr)
-    manifest["openaiModel"] = oa_model[0]
+    if "openai" in use:
+        manifest["openaiModel"] = oa_model[0]
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2))
     print(f"Done: {len(jobs) - errors}/{len(jobs)} requests succeeded.")
     return 0 if errors < len(jobs) else 1
