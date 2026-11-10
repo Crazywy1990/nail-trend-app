@@ -1,0 +1,44 @@
+name: Photo candidates
+
+# Generates candidate photos for looks without one (Muse via fal + OpenAI GPT Image),
+# and pushes them to the "photo-candidates" branch for review. Nothing goes live.
+on:
+  workflow_dispatch:
+    inputs:
+      looks:
+        description: "Look IDs, space-separated (blank = every look without a photo)"
+        required: false
+        default: ""
+      per_model:
+        description: "Candidates per model per look"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PER_MODEL: ${{ inputs.per_model }}
+        run: python services/photos/generate.py ${{ inputs.looks }}
+      - name: Push to photo-candidates branch
+        if: always()
+        run: |
+          [ -d candidates ] || { echo "No candidates."; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B photo-candidates
+          git add candidates
+          git commit -m "Photo candidates $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f origin photo-candidates
