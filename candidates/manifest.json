@@ -1,0 +1,135 @@
+{
+  "openaiModel": "gpt-image-2.5-sunburst",
+  "looks": {
+    "rose-glazed-chrome": {
+      "prompt": "Professional photo of a manicure: Rose Glazed Chrome. Technique: Pearl chrome over sheer rose. Nail shape: oval, length: short. Finish: chrome. Colors/products: sheer milky pink. Styling and set: Rose glazed chrome \u00b7 soft daylight, cream knit. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "rose-glazed-chrome/openai-1.jpg",
+          "rose-glazed-chrome/openai-2.jpg"
+        ],
+        "muse": [
+          "rose-glazed-chrome/muse-1.jpg",
+          "rose-glazed-chrome/muse-2.jpg"
+        ]
+      }
+    },
+    "mocha-aura-brown-chrome": {
+      "prompt": "Professional photo of a manicure: Mocha Aura \u00b7 Brown Chrome. Technique: Airbrushed aura, brown chrome. Nail shape: almond, length: short. Finish: chrome. Colors/products: rich brown. Styling and set: Mocha aura with brown chrome \u00b7 gold cuff, camel coat. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "mocha-aura-brown-chrome/openai-1.jpg",
+          "mocha-aura-brown-chrome/openai-2.jpg"
+        ],
+        "muse": [
+          "mocha-aura-brown-chrome/muse-1.jpg",
+          "mocha-aura-brown-chrome/muse-2.jpg"
+        ]
+      }
+    },
+    "milky-pink-jelly-chrome": {
+      "prompt": "Professional photo of a manicure: Milky Pink Jelly \u00b7 Chrome Top. Technique: Sheer jelly, chrome topcoat. Nail shape: almond, length: short. Finish: jelly. Colors/products: sheer milky pink. Styling and set: Milky pink jelly on a warm-toned hand \u00b7 thin gold band. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "milky-pink-jelly-chrome/openai-1.jpg",
+          "milky-pink-jelly-chrome/openai-2.jpg"
+        ],
+        "muse": [
+          "milky-pink-jelly-chrome/muse-1.jpg",
+          "milky-pink-jelly-chrome/muse-2.jpg"
+        ]
+      }
+    },
+    "cloudy-french-milk-bath": {
+      "prompt": "Professional photo of a manicure: Cloudy French \u00b7 Milk Bath Base. Technique: Sheer coat over white tips. Nail shape: round, length: short. Finish: french. Colors/products: Bubble Bath, Alpine Snow. Styling and set: Cloudy French \u00b7 bare hand, white linen. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "cloudy-french-milk-bath/openai-1.jpg",
+          "cloudy-french-milk-bath/openai-2.jpg"
+        ],
+        "muse": [
+          "cloudy-french-milk-bath/muse-1.jpg",
+          "cloudy-french-milk-bath/muse-2.jpg"
+        ]
+      }
+    },
+    "chocolate-suede-matte": {
+      "prompt": "Professional photo of a manicure: Chocolate Suede \u00b7 Matte. Technique: Matte topcoat over deep brown. Nail shape: square, length: short. Finish: matte. Colors/products: rich brown. Styling and set: Chocolate matte \u00b7 gold signet ring, suede bag. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "chocolate-suede-matte/openai-1.jpg",
+          "chocolate-suede-matte/openai-2.jpg"
+        ],
+        "muse": [
+          "chocolate-suede-matte/muse-1.jpg",
+          "chocolate-suede-matte/muse-2.jpg"
+        ]
+      }
+    },
+    "cherry-red-high-gloss": {
+      "prompt": "Professional photo of a manicure: Cherry Red \u00b7 High Gloss. Technique: Classic red, glass topcoat. Nail shape: square, length: short. Finish: gloss. Colors/products: Big Apple Red. Styling and set: Cherry red gloss \u00b7 holding a coupe glass. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "cherry-red-high-gloss/openai-1.jpg",
+          "cherry-red-high-gloss/openai-2.jpg"
+        ],
+        "muse": [
+          "cherry-red-high-gloss/muse-1.jpg",
+          "cherry-red-high-gloss/muse-2.jpg"
+        ]
+      }
+    },
+    "built-in-pearl-oat-white": {
+      "prompt": "Professional photo of a manicure: Built-In Pearl \u00b7 Oat White. Technique: Pearl powder over milky white. Nail shape: almond, length: medium. Finish: chrome. Colors/products: Funny Bunny. Styling and set: Oat-white pearl \u00b7 pearl earrings, ivory silk. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "built-in-pearl-oat-white/openai-1.jpg",
+          "built-in-pearl-oat-white/openai-2.jpg"
+        ],
+        "muse": [
+          "built-in-pearl-oat-white/muse-1.jpg",
+          "built-in-pearl-oat-white/muse-2.jpg"
+        ]
+      }
+    },
+    "tortoiseshell-tips": {
+      "prompt": "Professional photo of a manicure: Tortoiseshell Tips. Technique: Hand-painted tortoise on tips. Nail shape: almond, length: medium. Finish: art. Colors/products: rich brown. Styling and set: Tortoiseshell tips \u00b7 tortoise sunglasses. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "tortoiseshell-tips/openai-1.jpg",
+          "tortoiseshell-tips/openai-2.jpg"
+        ],
+        "muse": [
+          "tortoiseshell-tips/muse-1.jpg",
+          "tortoiseshell-tips/muse-2.jpg"
+        ]
+      }
+    },
+    "deep-teal-velvet-cat-eye": {
+      "prompt": "Professional photo of a manicure: Deep Teal Velvet Cat-Eye. Technique: Velvet magnetic cat-eye. Nail shape: squoval, length: short. Finish: cat-eye. Colors/products: deep teal blue. Styling and set: Deep teal velvet \u00b7 silver rings, navy wool. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "deep-teal-velvet-cat-eye/openai-1.jpg",
+          "deep-teal-velvet-cat-eye/openai-2.jpg"
+        ],
+        "muse": [
+          "deep-teal-velvet-cat-eye/muse-1.jpg",
+          "deep-teal-velvet-cat-eye/muse-2.jpg"
+        ]
+      }
+    },
+    "mismatched-jewel-tones": {
+      "prompt": "Professional photo of a manicure: Mismatched Jewel Tones. Technique: Different color per nail. Nail shape: square, length: short. Finish: gloss. Colors/products: mixed jewel tones. Styling and set: Mismatched jewel tones \u00b7 stacked mixed-metal rings. Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, all five nails clearly visible and in focus, same shape and length on every nail, clean cuticles, salon-fresh gel manicure. No text, no logos, no watermark, no extra hands.",
+      "files": {
+        "openai": [
+          "mismatched-jewel-tones/openai-1.jpg",
+          "mismatched-jewel-tones/openai-2.jpg"
+        ],
+        "muse": [
+          "mismatched-jewel-tones/muse-1.jpg",
+          "mismatched-jewel-tones/muse-2.jpg"
+        ]
+      }
+    }
+  }
+}
