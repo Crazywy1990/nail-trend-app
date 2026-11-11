@@ -4,6 +4,9 @@ name: Fill missing photos
 # to main, so the site never shows a placeholder. Runs weekly (after the trends job) to
 # catch newly added looks, or by hand from the Actions tab.
 on:
+  push:
+    branches: [main]
+    paths: ["apps/web/lib/engine/looks.json"]   # e.g. a merged look-discovery PR
   schedule:
     - cron: "47 13 * * 1"   # Mondays 13:47 UTC, 30 min after Weekly trends
   workflow_dispatch:

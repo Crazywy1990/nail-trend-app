@@ -12,6 +12,8 @@ apps/web        Next.js 14 (App Router, TypeScript). Discover screen, public loo
                 copy of the recommendation engine (lib/engine), so it runs on Vercel alone.
 services/api    FastAPI. Look catalog, set selection (MMR), profiles, event log.
 services/pipeline  Weekly trend pipeline (GitHub Actions). Writes apps/web/lib/engine/trends.json.
+services/discovery Weekly look discovery: drafts looks for rising styles the catalog lacks, as a PR to approve.
+services/photos    Photo generation (OpenAI): fills every empty look photo slot (light/medium/deep).
 ```
 
 ## Run locally
@@ -54,6 +56,16 @@ Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && pyth
 | Tech spec sheet | `/looks/[id]/spec`, public, no login. Unverified shade codes print as "code to verify". |
 | Booking (level 2) | `/looks/[id]/book` drafts an editable message to her salon with the spec link. |
 | Seasonal themes | Colors only; holiday themes start ahead of the date. |
+
+## Weekly automation (Mondays, UTC)
+
+| Time | Workflow | What it does | Cost |
+|---|---|---|---|
+| 13:17 | Weekly trends | YouTube + magazine signals → badges and evidence on each look | free (YouTube quota) |
+| 13:32 | Look discovery | Rising styles in fewer than 2 looks → up to 2 draft looks with a preview photo, opened as a PR. Merge = approve. Same style isn't re-proposed for 4 weeks. | $0 if no gaps; ≈ $0.20 per draft |
+| 13:47 + on merge | Fill missing photos | Any empty light/medium/deep slot gets a photo; light/deep are edits of the medium photo | ≈ $0.20 per photo |
+
+Worst case ≈ $1.20/week (2 drafts approved); most weeks $0–0.40. Set a hard monthly limit in the OpenAI billing settings as a backstop. Searches never generate anything.
 
 ## Data model notes
 

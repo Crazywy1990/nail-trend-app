@@ -1,0 +1,59 @@
+name: Look discovery
+
+# Turns rising trends the catalog doesn't cover into draft looks (max 2/week) and opens a
+# pull request to review them. Merge = approve. No gaps that week → no API calls, $0.
+on:
+  schedule:
+    - cron: "32 13 * * 1"   # Mondays 13:32 UTC, 15 min after Weekly trends
+  workflow_dispatch:
+    inputs:
+      max_drafts:
+        description: "Most looks to draft this run"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: catalog-writes
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Draft looks
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MAX_DRAFTS: ${{ inputs.max_drafts || '2' }}
+          DRAFT_BRANCH: looks/drafts-${{ github.run_number }}
+        run: python services/discovery/discover.py
+      - name: Open review pull request
+        if: hashFiles('pr-body.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: looks/drafts-${{ github.run_number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp services/discovery/state.json /tmp/state.json
+          git checkout -b "$BRANCH"
+          git add apps/web/public/looks apps/web/lib/engine/looks.json services/api/app/seed/looks.json \
+                  services/pipeline/trend_terms.json services/discovery/state.json
+          git commit -m "$(cat pr-title.txt)"
+          git push origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" --title "$(cat pr-title.txt)" --body-file pr-body.md \
+            || echo "::warning::Could not open the pull request automatically. Open it here: https://github.com/${{ github.repository }}/compare/main...$BRANCH"
+          # remember what was drafted on main too, so a rejected draft isn't re-proposed for 4 weeks
+          git checkout main
+          cp /tmp/state.json services/discovery/state.json
+          git add services/discovery/state.json
+          git commit -m "Look discovery: record drafted trends" && git pull --rebase origin main && git push origin HEAD:main

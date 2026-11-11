@@ -142,17 +142,12 @@
       "work",
       "wedding"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/milky-pink-jelly-chrome.jpg",
-      "deep": null
-    },
-    "photoAlt": "Milky Pink Jelly · Chrome Top: sheer jelly, chrome topcoat on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/milky-pink-jelly-chrome__light.jpg",
       "medium": "/looks/milky-pink-jelly-chrome.jpg",
       "deep": "/looks/milky-pink-jelly-chrome__deep.jpg"
-    }
+    },
+    "photo_alt": "Milky Pink Jelly · Chrome Top: sheer jelly, chrome topcoat on a warm-toned hand"
   },
   {
     "id": "rose-glazed-chrome",
@@ -174,17 +169,12 @@
       "wedding",
       "vacation"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/rose-glazed-chrome.jpg",
-      "deep": null
-    },
-    "photoAlt": "Rose Glazed Chrome: pearl chrome over sheer rose on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/rose-glazed-chrome__light.jpg",
       "medium": "/looks/rose-glazed-chrome.jpg",
       "deep": "/looks/rose-glazed-chrome__deep.jpg"
-    }
+    },
+    "photo_alt": "Rose Glazed Chrome: pearl chrome over sheer rose on a warm-toned hand"
   },
   {
     "id": "mocha-aura-brown-chrome",
@@ -205,17 +195,12 @@
       "work",
       "date night"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/mocha-aura-brown-chrome.jpg",
-      "deep": null
-    },
-    "photoAlt": "Mocha Aura · Brown Chrome: airbrushed aura, brown chrome on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/mocha-aura-brown-chrome__light.jpg",
       "medium": "/looks/mocha-aura-brown-chrome.jpg",
       "deep": "/looks/mocha-aura-brown-chrome__deep.jpg"
-    }
+    },
+    "photo_alt": "Mocha Aura · Brown Chrome: airbrushed aura, brown chrome on a warm-toned hand"
   },
   {
     "id": "cloudy-french-milk-bath",
@@ -251,17 +236,12 @@
       "wedding",
       "vacation"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/cloudy-french-milk-bath.jpg",
-      "deep": null
-    },
-    "photoAlt": "Cloudy French · Milk Bath Base: sheer coat over white tips on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/cloudy-french-milk-bath__light.jpg",
       "medium": "/looks/cloudy-french-milk-bath.jpg",
       "deep": "/looks/cloudy-french-milk-bath__deep.jpg"
-    }
+    },
+    "photo_alt": "Cloudy French · Milk Bath Base: sheer coat over white tips on a warm-toned hand"
   },
   {
     "id": "built-in-pearl-oat-white",
@@ -290,17 +270,12 @@
       "wedding",
       "work"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/built-in-pearl-oat-white.jpg",
-      "deep": null
-    },
-    "photoAlt": "Built-In Pearl · Oat White: pearl powder over milky white on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/built-in-pearl-oat-white__light.jpg",
       "medium": "/looks/built-in-pearl-oat-white.jpg",
       "deep": "/looks/built-in-pearl-oat-white__deep.jpg"
-    }
+    },
+    "photo_alt": "Built-In Pearl · Oat White: pearl powder over milky white on a warm-toned hand"
   },
   {
     "id": "chocolate-suede-matte",
@@ -321,17 +296,12 @@
       "work",
       "date night"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/chocolate-suede-matte.jpg",
-      "deep": null
-    },
-    "photoAlt": "Chocolate Suede · Matte: matte topcoat over deep brown on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/chocolate-suede-matte__light.jpg",
       "medium": "/looks/chocolate-suede-matte.jpg",
       "deep": "/looks/chocolate-suede-matte__deep.jpg"
-    }
+    },
+    "photo_alt": "Chocolate Suede · Matte: matte topcoat over deep brown on a warm-toned hand"
   },
   {
     "id": "cherry-red-high-gloss",
@@ -360,17 +330,12 @@
       "holiday party",
       "date night"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/cherry-red-high-gloss.jpg",
-      "deep": null
-    },
-    "photoAlt": "Cherry Red · High Gloss: classic red, glass topcoat on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/cherry-red-high-gloss__light.jpg",
       "medium": "/looks/cherry-red-high-gloss.jpg",
       "deep": "/looks/cherry-red-high-gloss__deep.jpg"
-    }
+    },
+    "photo_alt": "Cherry Red · High Gloss: classic red, glass topcoat on a warm-toned hand"
   },
   {
     "id": "tortoiseshell-tips",
@@ -391,17 +356,12 @@
       "vacation",
       "date night"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/tortoiseshell-tips.jpg",
-      "deep": null
-    },
-    "photoAlt": "Tortoiseshell Tips: hand-painted tortoise on tips on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/tortoiseshell-tips__light.jpg",
       "medium": "/looks/tortoiseshell-tips.jpg",
       "deep": "/looks/tortoiseshell-tips__deep.jpg"
-    }
+    },
+    "photo_alt": "Tortoiseshell Tips: hand-painted tortoise on tips on a warm-toned hand"
   },
   {
     "id": "deep-teal-velvet-cat-eye",
@@ -422,17 +382,12 @@
       "holiday party",
       "date night"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/deep-teal-velvet-cat-eye.jpg",
-      "deep": null
-    },
-    "photoAlt": "Deep Teal Velvet Cat-Eye: velvet magnetic cat-eye on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/deep-teal-velvet-cat-eye__light.jpg",
       "medium": "/looks/deep-teal-velvet-cat-eye.jpg",
       "deep": "/looks/deep-teal-velvet-cat-eye__deep.jpg"
-    }
+    },
+    "photo_alt": "Deep Teal Velvet Cat-Eye: velvet magnetic cat-eye on a warm-toned hand"
   },
   {
     "id": "mismatched-jewel-tones",
@@ -453,16 +408,11 @@
       "party",
       "vacation"
     ],
-    "photoBySkinTone": {
-      "light": null,
-      "medium": "/looks/mismatched-jewel-tones.jpg",
-      "deep": null
-    },
-    "photoAlt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand",
     "photo_by_skin_tone": {
       "light": "/looks/mismatched-jewel-tones__light.jpg",
       "medium": "/looks/mismatched-jewel-tones.jpg",
       "deep": "/looks/mismatched-jewel-tones__deep.jpg"
-    }
+    },
+    "photo_alt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand"
   }
 ]

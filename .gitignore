@@ -17,3 +17,6 @@ __pycache__/
 .env.local
 
 .DS_Store
+
+pr-body.md
+pr-title.txt
