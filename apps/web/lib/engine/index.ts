@@ -9,6 +9,7 @@
 import type { DiscoverResponse, Look, Pick, Slot } from "../types";
 import raw from "./looks.json";
 import trends from "./trends.json";
+import themesRaw from "./themes.json";
 
 export const RANKING_VERSION = "mmr-v1";
 const LAMBDA = 0.7;
@@ -18,6 +19,8 @@ const MAX_PER_COLOR = 2;
 const MAX_PER_FINISH = 3;
 const SAFE_COUNT = 6;
 const OCCASION_BOOST = 0.08;
+const THEME_BOOST = 0.25;        // a theme she typed or tapped
+const SEASON_BOOST = 0.1;        // the theme of today's date, on the default feed
 
 type TrendRow = { text: string; isPlaceholder: boolean; badge: string | null; velocity: number; sources: string[] };
 /** Written weekly by services/pipeline. Looks without a row keep their sample trend data. */
@@ -60,7 +63,29 @@ export type Filters = {
   color?: string[];
   /** From "Describe it": "subtle" keeps to stretch ≤ 2, "bold" to stretch ≥ 3. */
   vibe?: "subtle" | "bold" | null;
+  /** Theme id (themes.json). Explicit = she asked for it (filters + strong boost); otherwise a light seasonal lean. */
+  theme?: string | null;
+  themeExplicit?: boolean;
 };
+
+// ---- Themes (shared with services/discovery via themes.json) ----
+export type Theme = { label: string; words: string[]; colors: string[]; finishes: string[]; window: [string, string]; leadDays: number; brief: string };
+export const THEMES = (themesRaw as unknown as { themes: Record<string, Theme> }).themes;
+
+/** 0..1. A look belongs to a theme when its color is in the palette (0.7); a palette finish adds 0.3. */
+export function themeScore(l: Look, themeId: string | null | undefined): number {
+  const t = themeId ? THEMES[themeId] : undefined;
+  if (!t || !t.colors.includes(l.colorFamily)) return 0;
+  return 0.7 + (t.finishes.includes(l.finish) ? 0.3 : 0);
+}
+
+const mmdd = (d: Date) => `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const inWindow = (md: string, [a, b]: [string, string]) => (a <= b ? md >= a && md <= b : md >= a || md <= b);
+/** The theme whose window contains this date (the default feed leans toward it). */
+export function themeForDate(d: Date): string | null {
+  const md = mmdd(d);
+  return Object.entries(THEMES).find(([, t]) => inWindow(md, t.window))?.[0] ?? null;
+}
 
 const attrKeys = (l: Look) => [
   `color:${l.colorFamily}`, `finish:${l.finish}`, `shape:${l.shape.toLowerCase()}`, `length:${l.length}`,
@@ -70,6 +95,7 @@ export function relevance(l: Look, p: Profile, f: Filters): number {
   const attrs = attrKeys(l).map((k) => p.affinity[k] ?? 0.5);
   let s = 0.6 * l.fitPrior + 0.4 * (attrs.reduce((a, b) => a + b, 0) / attrs.length);
   if (f.occasion.length && f.occasion.some((o) => l.occasions.includes(o))) s += OCCASION_BOOST;
+  if (f.theme) s += (f.themeExplicit ? THEME_BOOST : SEASON_BOOST) * themeScore(l, f.theme);
   return Math.max(0, Math.min(1, s));
 }
 
@@ -165,9 +191,7 @@ const OCCASION_WORDS: Record<string, string> = {
   wedding: "wedding", bridal: "wedding",
   vacation: "vacation", beach: "vacation", trip: "vacation", pool: "vacation",
   date: "date night", dinner: "date night",
-  party: "holiday party", holiday: "holiday party", christmas: "holiday party",
-  "new year": "holiday party", halloween: "party",
-  thanksgiving: "holiday party", friendsgiving: "holiday party", gala: "holiday party",
+  party: "holiday party", gala: "holiday party",
   everyday: "work", daily: "work", school: "work", brunch: "date night", honeymoon: "vacation",
 };
 const COLOR_WORDS: Record<string, string> = {
@@ -193,12 +217,21 @@ function found(text: string, table: Record<string, string>): string[] {
   const t = text.toLowerCase();
   return [...new Set(Object.entries(table).filter(([k]) => new RegExp(`\\b${esc(k)}\\b`).test(t)).map(([, v]) => v))];
 }
+function findTheme(text: string): string | null {
+  const t = text.toLowerCase();
+  for (const [id, th] of Object.entries(THEMES)) {
+    if (th.words.some((w) => new RegExp(`\\b${esc(w)}\\b`).test(t))) return id;
+  }
+  return null;
+}
+
 export function parseNeed(text: string): Filters {
   const t = text.toLowerCase();
   const vibe = SUBTLE.test(t) ? "subtle" : BOLD.test(t) ? "bold" : null;
+  const theme = findTheme(text);
   return {
     occasion: found(text, OCCASION_WORDS), finish: found(text, FINISH_WORDS), length: found(text, LENGTH_WORDS),
-    color: found(text, COLOR_WORDS), vibe,
+    color: found(text, COLOR_WORDS), vibe, theme, themeExplicit: !!theme,
   };
 }
 
@@ -210,16 +243,18 @@ export function matchesAll(l: Look, f: Filters): boolean {
     && any(f.length, (v) => l.length === v)
     && any(f.color, (v) => l.colorFamily === v)
     && (f.vibe !== "subtle" || l.stretchLevel <= 2)
-    && (f.vibe !== "bold" || l.stretchLevel >= 3);
+    && (f.vibe !== "bold" || l.stretchLevel >= 3)
+    && (!f.themeExplicit || themeScore(l, f.theme) > 0);
 }
 
 const hasFilters = (f: Filters) =>
-  !!(f.occasion.length || f.finish.length || f.length.length || f.color?.length || f.vibe);
+  !!(f.occasion.length || f.finish.length || f.length.length || f.color?.length || f.vibe || f.themeExplicit);
 
 const LABELS: Record<string, string> = { "date night": "Date night", "holiday party": "Holiday party", "cat-eye": "Cat-eye" };
 const cap = (v: string) => LABELS[v] ?? v.charAt(0).toUpperCase() + v.slice(1);
 export function describeFilters(f: Filters): string[] {
   return [
+    ...(f.themeExplicit && f.theme && THEMES[f.theme] ? [THEMES[f.theme].label] : []),
     ...f.occasion.map(cap), ...f.finish.map(cap), ...f.length.map(cap),
     ...(f.color ?? []).map((c) => (c === "multi" ? "Multicolor" : cap(c))),
     ...(f.vibe ? [cap(f.vibe)] : []),
@@ -243,6 +278,10 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
     color: uniq([...(chips.color ?? []), ...(parsed.color ?? [])]),
     vibe: chips.vibe ?? parsed.vibe ?? null,
   };
+  // A theme she typed or tapped wins; otherwise the default feed leans toward today's season.
+  const explicitTheme = (chips.theme && THEMES[chips.theme] ? chips.theme : null) ?? parsed.theme ?? null;
+  f.theme = explicitTheme ?? themeForDate(new Date());
+  f.themeExplicit = !!explicitTheme;
   const p: Profile = { userId, ...DEMO_PROFILE };
   // With filters set, the set is built only from looks that match all of them.
   // If nothing matches, fall back to the closest looks and say so.
@@ -251,6 +290,7 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
   const exact = matching.length > 0;
   const pool = exact ? matching : LOOKS;
   const r = filtered && exact ? selectFiltered(pool, p, f) : selectSet(pool, p, f);
+  const seasonal = !f.themeExplicit && f.theme ? THEMES[f.theme]?.label ?? null : null;
   const pick = (l: Look, slot: Slot, position: number): Pick => ({
     look: l, slot, position,
     relevance: Math.round(r.rel.get(l.id)! * 1000) / 1000,
@@ -268,7 +308,7 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
     cards,
     also,
     summary: !filtered
-      ? `${r.safe.length} for you · ${r.trending ? 1 : 0} trending · ${r.stretch ? 1 : 0} stretch`
+      ? `${r.safe.length} for you · ${r.trending ? 1 : 0} trending · ${r.stretch ? 1 : 0} stretch${seasonal ? ` · leaning ${seasonal}` : ""}`
       : exact
         ? `${matching.length} of ${LOOKS.length} looks match`
         : "No exact match yet · showing the closest looks",

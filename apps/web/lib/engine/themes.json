@@ -1,0 +1,47 @@
+{
+  "_comment": "Themes for search and seasonal ranking. 'words' trigger the theme from the Describe-it box. 'colors'/'finishes' define its palette (colorFamily / finish values). 'window' is [start MM-DD, end MM-DD] when the default feed leans toward it and when look discovery checks the catalog has enough looks for it (drafting starts 'leadDays' before the window). Shared by the web engine and services/discovery.",
+  "themes": {
+    "christmas": {
+      "label": "Christmas", "words": ["christmas", "xmas", "holiday", "holidays", "festive", "santa", "december"],
+      "colors": ["red", "green", "white"], "finishes": ["chrome", "cat-eye", "gloss"],
+      "window": ["11-25", "12-26"], "leadDays": 30,
+      "brief": "festive but polished: deep reds, evergreen, snowy white, gold or silver chrome accents"
+    },
+    "new-year": {
+      "label": "New Year's Eve", "words": ["new year", "new years", "new year's", "nye", "countdown"],
+      "colors": ["white", "multi", "nude"], "finishes": ["chrome", "cat-eye"],
+      "window": ["12-27", "01-01"], "leadDays": 21,
+      "brief": "party sparkle: champagne, silver or gold chrome, glittering cat-eye"
+    },
+    "valentines": {
+      "label": "Valentine's Day", "words": ["valentine", "valentines", "valentine's", "galentine", "galentines"],
+      "colors": ["red", "pink"], "finishes": ["gloss", "jelly", "chrome", "french"],
+      "window": ["02-01", "02-14"], "leadDays": 30,
+      "brief": "romantic: cherry or rose reds, soft pinks, tiny hearts at most"
+    },
+    "spring": {
+      "label": "Spring", "words": ["spring", "easter", "pastel", "pastels"],
+      "colors": ["pink", "white", "green", "nude"], "finishes": ["jelly", "french", "gloss"],
+      "window": ["03-15", "05-15"], "leadDays": 21,
+      "brief": "fresh pastels, sheer jelly, soft French"
+    },
+    "summer": {
+      "label": "Summer", "words": ["summer", "beach", "pool", "poolside", "tropical", "sunny"],
+      "colors": ["pink", "multi", "white", "red", "blue"], "finishes": ["gloss", "jelly", "chrome"],
+      "window": ["06-01", "08-31"], "leadDays": 21,
+      "brief": "bright and glossy: juicy pinks, coral reds, ocean blues, playful mismatched"
+    },
+    "halloween": {
+      "label": "Halloween", "words": ["halloween", "spooky", "witchy", "october"],
+      "colors": ["red", "brown", "multi", "green"], "finishes": ["cat-eye", "matte", "chrome"],
+      "window": ["10-10", "10-31"], "leadDays": 30,
+      "brief": "wearable spooky: oxblood, dark cat-eye, matte espresso, subtle details"
+    },
+    "thanksgiving": {
+      "label": "Thanksgiving", "words": ["thanksgiving", "friendsgiving", "fall", "autumn", "harvest", "november"],
+      "colors": ["brown", "red", "nude"], "finishes": ["matte", "cat-eye", "chrome", "gloss"],
+      "window": ["11-01", "11-27"], "leadDays": 21,
+      "brief": "warm and cozy: chocolate, burgundy, caramel, suede-matte"
+    }
+  }
+}

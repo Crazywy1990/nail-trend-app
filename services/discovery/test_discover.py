@@ -38,3 +38,26 @@ def test_draft_is_sanitized():
     assert look["shades"][0]["code"] is None and look["shades"][0]["verified"] is False  # never trust model codes
     seed = d.to_seed(look)
     assert seed["color_family"] == "green" and seed["trend_proof"]["is_placeholder"] is True and "draft" not in seed
+
+
+THEMES = {
+    "christmas": {"label": "Christmas", "colors": ["red", "green", "white"], "finishes": ["chrome"],
+                  "window": ["11-25", "12-26"], "leadDays": 30, "brief": ""},
+    "thanksgiving": {"label": "Thanksgiving", "colors": ["brown"], "finishes": ["matte"],
+                     "window": ["11-01", "11-27"], "leadDays": 21, "brief": ""},
+    "new-year": {"label": "NYE", "colors": ["white"], "finishes": ["chrome"],
+                 "window": ["12-27", "01-01"], "leadDays": 21, "brief": ""},
+}
+LOOKS = [{"colorFamily": c} for c in ["red", "red", "green", "white", "brown", "nude"]]
+
+
+def test_theme_gaps_respect_lead_time_runway_and_count():
+    now = datetime(2026, 11, 16, tzinfo=timezone.utc)
+    # Christmas is 9 days away (inside 30-day lead) with 4 looks < 6 → gap.
+    # Thanksgiving ends in 11 days (< 14-day runway) → skipped. NYE lead starts Dec 6 → not yet.
+    assert d.find_theme_gaps(THEMES, LOOKS, {"drafted": {}}, now) == ["christmas"]
+    assert d.find_theme_gaps(THEMES, LOOKS * 2, {"drafted": {}}, now) == []          # 8 looks: enough
+    assert d.find_theme_gaps(THEMES, LOOKS, {"drafted": {"theme:christmas": "2026-11-10T00:00:00+00:00"}}, now) == []
+    # NYE window wraps the year end
+    s, e = d.theme_dates(THEMES["new-year"], datetime(2026, 12, 30, tzinfo=timezone.utc))
+    assert (s.month, s.day, e.year, e.month, e.day) == (12, 27, 2027, 1, 1)

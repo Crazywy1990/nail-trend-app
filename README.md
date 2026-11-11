@@ -62,10 +62,14 @@ Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && pyth
 | Time | Workflow | What it does | Cost |
 |---|---|---|---|
 | 13:17 | Weekly trends | YouTube + magazine signals → badges and evidence on each look | free (YouTube quota) |
-| 13:32 | Look discovery | Rising styles in fewer than 2 looks → up to 2 draft looks with a preview photo, opened as a PR. Merge = approve. Same style isn't re-proposed for 4 weeks. | $0 if no gaps; ≈ $0.20 per draft |
+| 13:32 | Look discovery | Upcoming holidays (themes.json) with fewer than 6 looks in their palette, then rising styles in fewer than 2 looks → up to 2 draft looks with a preview photo, opened as a PR. Merge = approve. Same style/theme isn't re-proposed for 4 weeks. | $0 if no gaps; ≈ $0.20 per draft |
 | 13:47 + on merge | Fill missing photos | Any empty light/medium/deep slot gets a photo; light/deep are edits of the medium photo | ≈ $0.20 per photo |
 
 Worst case ≈ $1.20/week (2 drafts approved); most weeks $0–0.40. Set a hard monthly limit in the OpenAI billing settings as a backstop. Searches never generate anything.
+
+## Themes
+
+`apps/web/lib/engine/themes.json` defines Christmas, New Year's Eve, Valentine's Day, Spring, Summer, Halloween and Thanksgiving: trigger words, a palette (color families + finishes), a date window and a lead time. Typing a trigger word or tapping a theme chip filters to looks whose color is in the palette and ranks palette finishes higher. Without a search, the feed leans lightly toward the theme of today's date. The same file tells look discovery which holidays need more looks.
 
 ## Data model notes
 

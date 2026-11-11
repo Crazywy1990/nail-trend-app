@@ -33,13 +33,14 @@ export type DiscoverParams = {
   q?: string;
   occasion?: string[];
   finish?: string[];
-  length?: string[];
+  length?: string[]; theme?: string[];
 };
 
 export async function fetchDiscover(p: DiscoverParams): Promise<DiscoverResponse> {
   if (!USE_REMOTE_API) {
     return engine.discover(p.userId, p.q || "", {
       occasion: p.occasion || [], finish: p.finish || [], length: p.length || [],
+      theme: p.theme?.[0] ?? null,
     });
   }
   const qs = new URLSearchParams({ userId: p.userId });

@@ -29,6 +29,9 @@ SEED_LOOKS = ROOT / "services/api/app/seed/looks.json"
 TRENDS = ROOT / "apps/web/lib/engine/trends.json"
 TERMS = ROOT / "services/pipeline/trend_terms.json"
 STATE = Path(__file__).resolve().parent / "state.json"
+THEMES = ROOT / "apps/web/lib/engine/themes.json"
+MIN_THEME_LOOKS = 6     # a holiday the feed leans into should have at least this many looks
+MIN_RUNWAY_DAYS = 14    # don't draft for a theme that ends within two weeks
 PUBLIC = ROOT / "apps/web/public/looks"
 
 MAX_DRAFTS = int(os.environ.get("MAX_DRAFTS", "2"))
@@ -55,6 +58,38 @@ def find_gaps(trends: dict, terms_cfg: dict, state: dict, now: datetime) -> list
     gaps = [(t, r["growth"]) for t, r in trends.get("terms", {}).items()
             if r.get("label") == "rising" and r.get("enoughData") and count.get(t, 0) < MIN_LOOKS and t not in recent]
     return [t for t, _ in sorted(gaps, key=lambda x: -x[1])][:MAX_DRAFTS]
+
+
+def theme_dates(t: dict, now: datetime) -> tuple[datetime, datetime]:
+    """Next (or current) occurrence of a theme's [start, end] window."""
+    def at(md: str, year: int) -> datetime:
+        m, d = map(int, md.split("-"))
+        return datetime(year, m, d, tzinfo=timezone.utc)
+    for year in (now.year - 1, now.year, now.year + 1):
+        start = at(t["window"][0], year)
+        end = at(t["window"][1], year if t["window"][1] >= t["window"][0] else year + 1)
+        if end + timedelta(days=1) > now:
+            return start, end
+    raise ValueError("unreachable")
+
+
+def theme_count(themes: dict, tid: str, looks: list[dict]) -> int:
+    return sum(1 for l in looks if l["colorFamily"] in themes[tid]["colors"])
+
+
+def find_theme_gaps(themes: dict, looks: list[dict], state: dict, now: datetime) -> list[str]:
+    """Upcoming or current themes (within their lead time, with runway left) that have too few looks."""
+    out = []
+    for tid, t in themes.items():
+        start, end = theme_dates(t, now)
+        if not (start - timedelta(days=t["leadDays"]) <= now <= end - timedelta(days=MIN_RUNWAY_DAYS)):
+            continue
+        last = state.get("drafted", {}).get(f"theme:{tid}")
+        if last and now - datetime.fromisoformat(last) < timedelta(days=COOLDOWN_DAYS):
+            continue
+        if theme_count(themes, tid, looks) < MIN_THEME_LOOKS:
+            out.append((start, tid))
+    return [tid for _, tid in sorted(out)]
 
 
 # ------------------------------------------------------------------ LLM
@@ -89,6 +124,26 @@ Return JSON with exactly these keys:
   shades: list of 1-3 objects {{"brand": string or null, "name": string}} — use real product names only if you are sure they exist; otherwise brand null and a plain description
   photoBrief: one line: nails, jewelry, props and fabric for an editorial hand photo
   terms: list of 1-3 trend term ids from {list(terms_cfg['terms'])}, with "{term_id}" first
+"""
+
+
+def theme_prompt(theme_id: str, themes: dict, terms_cfg: dict, looks: list[dict], trends: dict) -> str:
+    t = themes[theme_id]
+    catalog = "\n".join(f"- {l['name']} ({l['technique']}; {l['finish']}, {l['colorFamily']})" for l in looks)
+    rising = ", ".join(terms_cfg["terms"][k]["label"] for k, v in trends["terms"].items() if v.get("label") == "rising")
+    return f"""{t['label']} is coming up and the catalog has too few looks for it. Theme direction: {t['brief']}.
+Its palette is color families {t['colors']} and finishes {t['finishes']}. Styles rising right now: {rising} — lean on one if it fits.
+Current catalog (do not duplicate any of these):
+{catalog}
+
+Design ONE new {t['label']} look in that palette that a nail tech can do in a standard salon appointment, festive but still wearable.
+Return JSON with exactly these keys:
+  name, technique, system (one of {SYSTEMS}), finish (one of {t['finishes']}), colorFamily (one of {t['colors']}),
+  shape (one of {SHAPES}), length (short/medium/long), priceRange (like "~$70"), durationMin (integer),
+  stretchLevel (integer 1-5), occasions (1-3 of {OCCASIONS}),
+  shades (1-3 objects {{"brand": string or null, "name": string}}; real product names only if you are sure they exist),
+  photoBrief (one line: nails, jewelry, props and fabric for an editorial hand photo),
+  terms (1-3 trend term ids from {list(terms_cfg['terms'])}, the closest match first)
 """
 
 
@@ -180,10 +235,15 @@ def main() -> int:
     terms_cfg = json.loads(TERMS.read_text())
     looks = json.loads(WEB_LOOKS.read_text())
     state = json.loads(STATE.read_text()) if STATE.exists() else {"drafted": {}}
+    themes = json.loads(THEMES.read_text())["themes"] if THEMES.exists() else {}
 
+    theme_gaps = find_theme_gaps(themes, looks, state, now)
     gaps = find_gaps(trends, terms_cfg, state, now)
+    print(f"Upcoming themes needing looks: {theme_gaps or 'none'}")
     print(f"Rising styles needing looks: {gaps or 'none'}")
-    if not gaps or dry:
+    # seasonal gaps first (they have a deadline), then trends; MAX_DRAFTS in total
+    jobs = ([("theme", t) for t in theme_gaps] + [("trend", t) for t in gaps])[:MAX_DRAFTS]
+    if not jobs or dry:
         return 0
     key = os.environ.get("OPENAI_API_KEY", "").strip()
     if not key:
@@ -192,21 +252,32 @@ def main() -> int:
     g.PER_MODEL = 1
     made = []
     ids = {l["id"] for l in looks}
-    for term in gaps:
+    for kind, item in jobs:
         try:
-            look, terms = to_look(call_llm(draft_prompt(term, terms_cfg, looks, trends), key), term, terms_cfg, ids)
+            if kind == "theme":
+                raw_draft = call_llm(theme_prompt(item, themes, terms_cfg, looks, trends), key)
+                cand = [t for t in raw_draft.get("terms", []) if t in terms_cfg["terms"]]
+                term = cand[0] if cand else next(iter(terms_cfg["terms"]))
+            else:
+                term = item
+                raw_draft = call_llm(draft_prompt(term, terms_cfg, looks, trends), key)
+            look, terms = to_look(raw_draft, term, terms_cfg, ids)
+            if kind == "theme":
+                look["draft"] = {"from": f"theme:{item}", "created": look["draft"]["created"]}
+                look["colorFamily"] = look["colorFamily"] if look["colorFamily"] in themes[item]["colors"] else themes[item]["colors"][0]
+                look["occasions"] = look["occasions"]
             raw = g.openai(g.prompt_for(look), key, g.OPENAI_MODEL)[0]
         except RuntimeError as e:
-            print(f"  FAIL {term}: {e}", file=sys.stderr)
+            print(f"  FAIL {item}: {e}", file=sys.stderr)
             continue
         from fill import save_jpeg  # same folder as generate.py
         save_jpeg(raw, PUBLIC / f"{look['id']}.jpg")
         look["photoBySkinTone"]["medium"] = f"/looks/{look['id']}.jpg"
         looks.append(look); ids.add(look["id"])
         terms_cfg["looks"][look["id"]] = terms
-        state["drafted"][term] = now.isoformat()
+        state["drafted"][f"theme:{item}" if kind == "theme" else item] = now.isoformat()
         made.append(look)
-        print(f"  ok   {term} → {look['id']} ({look['name']})")
+        print(f"  ok   {kind}:{item} → {look['id']} ({look['name']})")
 
     if not made:
         return 1
@@ -223,12 +294,20 @@ def main() -> int:
     lines = ["New looks drafted from this week's rising trends. **Merge to approve** (they go live and get light/deep photos); "
              "close to reject. Edit `apps/web/lib/engine/looks.json` on this branch to tweak a draft before merging.", ""]
     for l in made:
-        r = trends["terms"][l["draft"]["from"]]
+        src = l["draft"]["from"]
+        if src.startswith("theme:"):
+            tid = src.split(":", 1)[1]
+            start, _ = theme_dates(themes[tid], now)
+            why = (f"{themes[tid]['label']} starts {start:%b %-d} and only {theme_count(themes, tid, looks) - 1} looks "
+                   f"fit its palette (target {MIN_THEME_LOOKS})")
+        else:
+            r = trends["terms"][src]
+            why = (f"“{terms_cfg['terms'][src]['label']}” share of new nail videos up "
+                   f"{round(r['growth'] * 100)}% vs the 4 weeks before")
         img = f"https://github.com/{repo}/blob/{branch}/apps/web/public/looks/{l['id']}.jpg?raw=true"
         shades = "; ".join((f"{s['brand']} " if s["brand"] else "") + s["name"] for s in l["shades"]) or "—"
         lines += [f"### {l['name']}", f"<img src=\"{img}\" width=\"480\">", "",
-                  f"- **Why now:** “{terms_cfg['terms'][l['draft']['from']]['label']}” share of new nail videos up "
-                  f"{round(r['growth'] * 100)}% vs the 4 weeks before",
+                  f"- **Why now:** {why}",
                   f"- **Technique:** {l['technique']}",
                   f"- {l['shape']} · {l['length']} · {l['system']} · {l['finish']} · {l['priceRange']} · {l['durationMin']} min · stretch {l['stretchLevel']}/5",
                   f"- **Shades (codes to verify):** {shades}",

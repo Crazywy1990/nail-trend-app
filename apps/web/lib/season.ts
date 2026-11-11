@@ -19,7 +19,7 @@ export function isSeason(v: string | null | undefined): v is Season {
   return !!v && (SEASONS as string[]).includes(v);
 }
 
-type Chip = { label: string; group: "occasion" | "finish" | "length"; value: string };
+type Chip = { label: string; group: "theme" | "occasion" | "finish" | "length"; value: string };
 
 const FINISH_CHIPS: Chip[] = [
   { label: "Chrome", group: "finish", value: "chrome" },
@@ -33,6 +33,8 @@ export const COPY: Record<Season, { greet: string; head: string; placeholder: st
     greet: "Good evening", head: "What's the occasion?",
     placeholder: "Work dinner next week, medium, not too loud",
     chips: [
+      { label: "Valentine's", group: "theme", value: "valentines" },
+      { label: "Spring", group: "theme", value: "spring" },
       { label: "Work", group: "occasion", value: "work" },
       { label: "Wedding", group: "occasion", value: "wedding" },
       { label: "Vacation", group: "occasion", value: "vacation" },
@@ -44,6 +46,7 @@ export const COPY: Record<Season, { greet: string; head: string; placeholder: st
     greet: "Morning", head: "Where are your nails going?",
     placeholder: "Beach weekend, medium length, bright",
     chips: [
+      { label: "Summer", group: "theme", value: "summer" },
       { label: "Vacation", group: "occasion", value: "vacation" },
       { label: "Work", group: "occasion", value: "work" },
       { label: "Wedding", group: "occasion", value: "wedding" },
@@ -55,6 +58,8 @@ export const COPY: Record<Season, { greet: string; head: string; placeholder: st
     greet: "Good evening", head: "What's the occasion?",
     placeholder: "Thanksgiving dinner, short, not too flashy",
     chips: [
+      { label: "Thanksgiving", group: "theme", value: "thanksgiving" },
+      { label: "Christmas", group: "theme", value: "christmas" },
       { label: "Work", group: "occasion", value: "work" },
       { label: "Date night", group: "occasion", value: "date night" },
       { label: "Wedding", group: "occasion", value: "wedding" },
@@ -66,6 +71,7 @@ export const COPY: Record<Season, { greet: string; head: string; placeholder: st
     greet: "Hey", head: "Spooky, but wearable?",
     placeholder: "Halloween party, short, a little dark",
     chips: [
+      { label: "Halloween", group: "theme", value: "halloween" },
       { label: "Party", group: "occasion", value: "party" },
       { label: "Work", group: "occasion", value: "work" },
       { label: "Date night", group: "occasion", value: "date night" },
@@ -77,6 +83,8 @@ export const COPY: Record<Season, { greet: string; head: string; placeholder: st
     greet: "Hi", head: "Ready for the holidays?",
     placeholder: "Office holiday party, medium, festive",
     chips: [
+      { label: "Christmas", group: "theme", value: "christmas" },
+      { label: "New Year's Eve", group: "theme", value: "new-year" },
       { label: "Holiday party", group: "occasion", value: "holiday party" },
       { label: "Work", group: "occasion", value: "work" },
       { label: "Date night", group: "occasion", value: "date night" },

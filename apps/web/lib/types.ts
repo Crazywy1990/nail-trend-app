@@ -44,7 +44,7 @@ export type Pick = {
 export type DiscoverResponse = {
   setId: string;
   rankingVersion: string;
-  filters: { occasion: string[]; finish: string[]; length: string[]; color?: string[]; vibe?: "subtle" | "bold" | null };
+  filters: { occasion: string[]; finish: string[]; length: string[]; color?: string[]; vibe?: "subtle" | "bold" | null; theme?: string | null; themeExplicit?: boolean };
   cards: Pick[];
   also: Pick[];
   summary: string;

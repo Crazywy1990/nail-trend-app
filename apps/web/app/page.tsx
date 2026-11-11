@@ -28,6 +28,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
   const copy = COPY[season];
   const q = arr(searchParams.q)[0] || "";
   const selected = {
+    theme: arr(searchParams.theme),
     occasion: arr(searchParams.occasion),
     finish: arr(searchParams.finish),
     length: arr(searchParams.length),
@@ -49,7 +50,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
           <label htmlFor="need" className="label">Describe it</label>
           <div className="need-row">
             <input id="need" name="q" type="text" defaultValue={q} placeholder={copy.placeholder} autoComplete="off" />
-            {(["occasion", "finish", "length"] as const).flatMap((g) =>
+            {(["theme", "occasion", "finish", "length"] as const).flatMap((g) =>
               selected[g].map((v) => <input key={g + v} type="hidden" name={g} value={v} />),
             )}
             <button type="submit" className="icon-btn" aria-label="Find looks"><SearchIcon /></button>
