@@ -501,5 +501,123 @@
     "photoAlt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand",
     "why": null,
     "whyInputs": {}
+  },
+  {
+    "id": "emerald-glazed-micro-french",
+    "name": "Emerald Glazed · Micro-French",
+    "technique": "Sheer emerald gel base with ultra-thin milky nude micro-French tips and a glossy glazed topcoat",
+    "system": "gel",
+    "finish": "french",
+    "colorFamily": "green",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$75",
+    "durationMin": 75,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short oval nails on a softly bent hand, stacked gold rings, a cream knit sleeve, and an emerald satin ribbon on a clean neutral background",
+    "occasions": [
+      "work",
+      "date night",
+      "holiday party"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "sheer emerald green gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "soft milky nude",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "clear glossy topcoat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/emerald-glazed-micro-french.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Emerald Glazed · Micro-French: sheer emerald gel base with ultra-thin milky nude micro-french tips and a glossy glazed topcoat on a warm-toned hand",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "emerald",
+      "created": "2026-11-11"
+    }
+  },
+  {
+    "id": "milk-nude-micro-french",
+    "name": "Milk Nude · Micro-French",
+    "technique": "Sheer nude base with ultra-thin soft white micro-French tips; seal with glossy topcoat for a clean salon finish.",
+    "system": "gel",
+    "finish": "french",
+    "colorFamily": "nude",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$65",
+    "durationMin": 60,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Editorial hand shot on a cream silk blouse sleeve with thin gold stacking rings, a pearl bracelet, and a soft beige linen backdrop.",
+    "occasions": [
+      "work",
+      "wedding",
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "sheer milky nude base",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "soft white micro-French tip",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "high-gloss clear topcoat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/milk-nude-micro-french.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Milk Nude · Micro-French: sheer nude base with ultra-thin soft white micro-french tips; seal with glossy topcoat for a clean salon finish. on a warm-toned hand",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "micro-french",
+      "created": "2026-11-11"
+    }
   }
 ]
