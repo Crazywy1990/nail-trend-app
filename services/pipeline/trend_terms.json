@@ -1,38 +1,227 @@
 {
   "_comment": "Trend terms the weekly pipeline measures. 'query' is searched on YouTube; 'keywords' match editorial headlines (case-insensitive, whole words). 'looks' maps each look to its terms: the first term is the one quoted on the card, the rest blend into its velocity.",
   "terms": {
-    "chrome": { "label": "chrome nails", "query": "chrome nails", "keywords": ["chrome nails", "chrome manicure"] },
-    "cat-eye": { "label": "cat eye nails", "query": "cat eye nails", "keywords": ["cat eye nails", "cat-eye nails", "magnetic nails", "velvet nails"] },
-    "french": { "label": "french tip nails", "query": "french tip nails", "keywords": ["french tip", "french manicure", "french nails"] },
-    "micro-french": { "label": "micro french nails", "query": "micro french nails", "keywords": ["micro french", "skinny french"] },
-    "matte": { "label": "matte nails", "query": "matte nails", "keywords": ["matte nails", "matte manicure", "suede nails"] },
-    "jelly": { "label": "jelly nails", "query": "jelly nails", "keywords": ["jelly nails", "jelly manicure", "sheer nails"] },
-    "glazed": { "label": "glazed nails", "query": "glazed nails", "keywords": ["glazed nails", "glazed donut", "pearl nails", "pearlescent nails"] },
-    "milky": { "label": "milky nails", "query": "milky nails", "keywords": ["milky nails", "milk bath nails", "milky white"] },
-    "aura": { "label": "aura nails", "query": "aura nails", "keywords": ["aura nails"] },
-    "burgundy": { "label": "burgundy nails", "query": "burgundy nails", "keywords": ["burgundy nails", "oxblood nails", "wine nails", "cherry wine"] },
-    "brown": { "label": "brown nails", "query": "brown nails", "keywords": ["brown nails", "chocolate nails", "mocha nails", "espresso nails"] },
-    "red": { "label": "red nails", "query": "red nails", "keywords": ["red nails", "cherry red", "red manicure"] },
-    "emerald": { "label": "emerald green nails", "query": "emerald green nails", "keywords": ["green nails", "emerald nails"] },
-    "teal": { "label": "teal nails", "query": "teal nails", "keywords": ["teal nails", "blue nails"] },
-    "pink": { "label": "pink nails", "query": "pink nails", "keywords": ["pink nails", "rose nails", "ballet pink"] },
-    "tortoiseshell": { "label": "tortoiseshell nails", "query": "tortoiseshell nails", "keywords": ["tortoiseshell", "tortoise shell nails"] },
-    "mismatched": { "label": "mismatched nails", "query": "mismatched nails", "keywords": ["mismatched nails", "skittle nails", "jewel tone nails"] },
-    "star": { "label": "star nail art", "query": "star nails", "keywords": ["star nails", "star nail art"] }
+    "chrome": {
+      "label": "chrome nails",
+      "query": "chrome nails",
+      "keywords": [
+        "chrome nails",
+        "chrome manicure"
+      ]
+    },
+    "cat-eye": {
+      "label": "cat eye nails",
+      "query": "cat eye nails",
+      "keywords": [
+        "cat eye nails",
+        "cat-eye nails",
+        "magnetic nails",
+        "velvet nails"
+      ]
+    },
+    "french": {
+      "label": "french tip nails",
+      "query": "french tip nails",
+      "keywords": [
+        "french tip",
+        "french manicure",
+        "french nails"
+      ]
+    },
+    "micro-french": {
+      "label": "micro french nails",
+      "query": "micro french nails",
+      "keywords": [
+        "micro french",
+        "skinny french"
+      ]
+    },
+    "matte": {
+      "label": "matte nails",
+      "query": "matte nails",
+      "keywords": [
+        "matte nails",
+        "matte manicure",
+        "suede nails"
+      ]
+    },
+    "jelly": {
+      "label": "jelly nails",
+      "query": "jelly nails",
+      "keywords": [
+        "jelly nails",
+        "jelly manicure",
+        "sheer nails"
+      ]
+    },
+    "glazed": {
+      "label": "glazed nails",
+      "query": "glazed nails",
+      "keywords": [
+        "glazed nails",
+        "glazed donut",
+        "pearl nails",
+        "pearlescent nails"
+      ]
+    },
+    "milky": {
+      "label": "milky nails",
+      "query": "milky nails",
+      "keywords": [
+        "milky nails",
+        "milk bath nails",
+        "milky white"
+      ]
+    },
+    "aura": {
+      "label": "aura nails",
+      "query": "aura nails",
+      "keywords": [
+        "aura nails"
+      ]
+    },
+    "burgundy": {
+      "label": "burgundy nails",
+      "query": "burgundy nails",
+      "keywords": [
+        "burgundy nails",
+        "oxblood nails",
+        "wine nails",
+        "cherry wine"
+      ]
+    },
+    "brown": {
+      "label": "brown nails",
+      "query": "brown nails",
+      "keywords": [
+        "brown nails",
+        "chocolate nails",
+        "mocha nails",
+        "espresso nails"
+      ]
+    },
+    "red": {
+      "label": "red nails",
+      "query": "red nails",
+      "keywords": [
+        "red nails",
+        "cherry red",
+        "red manicure"
+      ]
+    },
+    "emerald": {
+      "label": "emerald green nails",
+      "query": "emerald green nails",
+      "keywords": [
+        "green nails",
+        "emerald nails"
+      ]
+    },
+    "teal": {
+      "label": "teal nails",
+      "query": "teal nails",
+      "keywords": [
+        "teal nails",
+        "blue nails"
+      ]
+    },
+    "pink": {
+      "label": "pink nails",
+      "query": "pink nails",
+      "keywords": [
+        "pink nails",
+        "rose nails",
+        "ballet pink"
+      ]
+    },
+    "tortoiseshell": {
+      "label": "tortoiseshell nails",
+      "query": "tortoiseshell nails",
+      "keywords": [
+        "tortoiseshell",
+        "tortoise shell nails"
+      ]
+    },
+    "mismatched": {
+      "label": "mismatched nails",
+      "query": "mismatched nails",
+      "keywords": [
+        "mismatched nails",
+        "skittle nails",
+        "jewel tone nails"
+      ]
+    },
+    "star": {
+      "label": "star nail art",
+      "query": "star nails",
+      "keywords": [
+        "star nails",
+        "star nail art"
+      ]
+    }
   },
   "looks": {
-    "burgundy-cat-eye-gold-micro-french": ["cat-eye", "burgundy", "micro-french"],
-    "emerald-chrome-silver-star": ["chrome", "emerald", "star"],
-    "milky-pink-jelly-chrome": ["jelly", "pink", "chrome"],
-    "rose-glazed-chrome": ["glazed", "pink", "chrome"],
-    "mocha-aura-brown-chrome": ["aura", "brown", "chrome"],
-    "cloudy-french-milk-bath": ["french", "milky"],
-    "built-in-pearl-oat-white": ["milky", "glazed"],
-    "chocolate-suede-matte": ["brown", "matte"],
-    "cherry-red-high-gloss": ["red"],
-    "tortoiseshell-tips": ["tortoiseshell", "brown"],
-    "deep-teal-velvet-cat-eye": ["cat-eye", "teal"],
-    "mismatched-jewel-tones": ["mismatched"]
+    "burgundy-cat-eye-gold-micro-french": [
+      "cat-eye",
+      "burgundy",
+      "micro-french"
+    ],
+    "emerald-chrome-silver-star": [
+      "chrome",
+      "emerald",
+      "star"
+    ],
+    "milky-pink-jelly-chrome": [
+      "jelly",
+      "pink",
+      "chrome"
+    ],
+    "rose-glazed-chrome": [
+      "glazed",
+      "pink",
+      "chrome"
+    ],
+    "mocha-aura-brown-chrome": [
+      "aura",
+      "brown",
+      "chrome"
+    ],
+    "cloudy-french-milk-bath": [
+      "french",
+      "milky"
+    ],
+    "built-in-pearl-oat-white": [
+      "milky",
+      "glazed"
+    ],
+    "chocolate-suede-matte": [
+      "brown",
+      "matte"
+    ],
+    "cherry-red-high-gloss": [
+      "red"
+    ],
+    "tortoiseshell-tips": [
+      "tortoiseshell",
+      "brown"
+    ],
+    "deep-teal-velvet-cat-eye": [
+      "cat-eye",
+      "teal"
+    ],
+    "mismatched-jewel-tones": [
+      "mismatched"
+    ],
+    "emerald-glazed-micro-french": [
+      "emerald",
+      "french",
+      "glazed"
+    ],
+    "milk-nude-micro-french": [
+      "micro-french",
+      "french",
+      "milky"
+    ]
   },
   "editorialFeeds": [
     "https://www.allure.com/feed/rss",
