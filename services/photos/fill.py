@@ -5,7 +5,8 @@ Slots are (look, skin tone) for tones light / medium / deep.
     original photos (same prompt as generate.py, OpenAI candidate 1 — the chosen setup).
   - Light and deep versions are edits of that look's medium photo: same nails, jewelry,
     props, background and light; only the skin changes. This keeps the tones consistent.
-Writes apps/web/public/looks/<id>.jpg (medium) or <id>__<tone>.jpg, and updates
+Writes the clean original to assets/looks/ and a watermarked copy to apps/web/public/looks/
+(<id>.jpg for medium, <id>__<tone>.jpg otherwise), and updates
 apps/web/lib/engine/looks.json and services/api/app/seed/looks.json.
 
 Run: OPENAI_API_KEY=... python services/photos/fill.py [--max N] [lookId ...]
@@ -21,6 +22,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import generate as g  # noqa: E402
 import verify as v  # noqa: E402
+from watermark import ORIGINALS, save_photo  # noqa: E402
 
 WEB_LOOKS = g.ROOT / "apps/web/lib/engine/looks.json"
 SEED_LOOKS = g.ROOT / "services/api/app/seed/looks.json"
@@ -80,7 +82,7 @@ def main() -> int:
                 else:
                     if not s.get("medium"):
                         continue  # medium failed this run; try the other tones next run
-                    ref = g.ROOT / "apps/web/public" / s["medium"].lstrip("/")
+                    ref = ORIGINALS / Path(s["medium"]).name  # clean original, not the watermarked copy
                     saved_refs = g.REFS
                     g.REFS = [ref]
                     try:
@@ -104,7 +106,7 @@ def main() -> int:
                 failed += 1
                 print(f"  FAIL {l['id']:36s} {tone:6s} {e}", file=sys.stderr)
                 continue
-            save_jpeg(raw, PUBLIC / name)
+            save_photo(raw, name)
             s[tone] = f"/looks/{name}"
             if tone == "medium":
                 l["photoPos"] = l.get("photoPos") or "center"

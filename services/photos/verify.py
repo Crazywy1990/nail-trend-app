@@ -134,7 +134,9 @@ def main() -> int:
         todo = [l for l in todo if l["id"] not in approved]
     out = []
     for l in todo:
-        photo = (g.ROOT / "apps/web/public" / l["photoBySkinTone"]["medium"].lstrip("/")).read_bytes()
+        name = Path(l["photoBySkinTone"]["medium"]).name
+        clean = g.ROOT / "assets/looks" / name
+        photo = (clean if clean.exists() else g.ROOT / "apps/web/public/looks" / name).read_bytes()
         res = verify_look(l, photo, looks, key)
         out.append(f"### {l['name']}\n{report_md(l, res)}\n")
         print(f"  {l['id']:40s} {res['verdict']}  {res.get('scores')}", file=sys.stderr)

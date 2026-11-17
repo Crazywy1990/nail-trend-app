@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 LOOKS = ROOT / "apps/web/lib/engine/looks.json"
-REFS = [ROOT / "apps/web/public/looks/burgundy-cat-eye.jpg", ROOT / "apps/web/public/looks/emerald-chrome.jpg"]
+REFS = [ROOT / "assets/looks/burgundy-cat-eye.jpg", ROOT / "assets/looks/emerald-chrome.jpg"]  # clean originals
 OUT = ROOT / "candidates"
 PER_MODEL = int(os.environ.get("PER_MODEL", "2"))
 OPENAI_MODEL = os.environ.get("OPENAI_IMAGE_MODEL", "gpt-image-2.5-sunburst")

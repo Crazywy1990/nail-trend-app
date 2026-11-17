@@ -46,7 +46,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           cp services/discovery/state.json /tmp/state.json
           git checkout -b "$BRANCH"
-          git add apps/web/public/looks apps/web/lib/engine/looks.json services/api/app/seed/looks.json \
+          git add assets/looks apps/web/public/looks apps/web/lib/engine/looks.json services/api/app/seed/looks.json \
                   services/pipeline/trend_terms.json services/discovery/state.json
           git commit -m "$(cat pr-title.txt)"
           git push origin "$BRANCH"

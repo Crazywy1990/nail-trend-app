@@ -289,8 +289,8 @@ def main() -> int:
             print(f"  FAIL {item}: {e}", file=sys.stderr)
             continue
         reviews[look["id"]] = (review, attempts)
-        from fill import save_jpeg  # same folder as generate.py
-        save_jpeg(raw, PUBLIC / f"{look['id']}.jpg")
+        from watermark import save_photo  # same folder as generate.py
+        save_photo(raw, f"{look['id']}.jpg")
         look["photoBySkinTone"]["medium"] = f"/looks/{look['id']}.jpg"
         looks.append(look); ids.add(look["id"])
         terms_cfg["looks"][look["id"]] = terms
