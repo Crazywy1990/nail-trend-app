@@ -414,5 +414,115 @@
       "deep": "/looks/mismatched-jewel-tones__deep.jpg"
     },
     "photo_alt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand"
+  },
+  {
+    "id": "burgundy-snowfall-micro-french",
+    "name": "Burgundy Snowfall Micro-French",
+    "technique": "Sheer burgundy base with thin snowy white micro-French tips and one subtle gold chrome accent nail",
+    "system": "gel",
+    "finish": "chrome",
+    "color_family": "red",
+    "shape": "Almond",
+    "length": "medium",
+    "price_range": "~$75",
+    "duration_min": 90,
+    "stretch_level": 2,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Medium almond nails in sheer burgundy with crisp white micro-French tips and one gold chrome accent, stacked with slim gold rings, photographed beside evergreen sprigs, a white knit sleeve, and a cham",
+    "occasions": [
+      "work",
+      "holiday party",
+      "date night"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer Burgundy Gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Soft White Gel Paint",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Gold Chrome Powder",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/burgundy-snowfall-micro-french.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Burgundy Snowfall Micro-French: sheer burgundy base with thin snowy white micro-french tips and one subtle gold chrome accent nail on a warm-toned hand",
+    "why": null,
+    "why_inputs": {}
+  },
+  {
+    "id": "soft-taupe-matte-thin-cocoa-micro-french",
+    "name": "Soft Taupe Matte · Thin Cocoa Micro-French",
+    "technique": "Apply a sheer nude gel base, cure, paint ultra-thin cocoa micro-French tips, then seal everything with a soft matte topc",
+    "system": "gel",
+    "finish": "matte",
+    "color_family": "nude",
+    "shape": "Almond",
+    "length": "medium",
+    "price_range": "~$75",
+    "duration_min": 70,
+    "stretch_level": 2,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Elegant almond nails on a relaxed hand with minimal gold rings, a nude knit sleeve, and a cream satin fabric drape in soft daylight.",
+    "occasions": [
+      "work",
+      "date night",
+      "wedding"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "sheer beige nude",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "soft taupe",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "deep cocoa brown",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/soft-taupe-matte-thin-cocoa-micro-french.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Soft Taupe Matte · Thin Cocoa Micro-French: apply a sheer nude gel base, cure, paint ultra-thin cocoa micro-french tips, then seal everything with a soft matte topc on a warm-toned hand",
+    "why": null,
+    "why_inputs": {}
   }
 ]
