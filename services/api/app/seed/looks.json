@@ -524,5 +524,60 @@
     "photo_alt": "Soft Taupe Matte · Thin Cocoa Micro-French: apply a sheer nude gel base, cure, paint ultra-thin cocoa micro-french tips, then seal everything with a soft matte topc on a warm-toned hand",
     "why": null,
     "why_inputs": {}
+  },
+  {
+    "id": "emerald-gloss-micro-french",
+    "name": "Emerald Gloss · Micro-French",
+    "technique": "Deep emerald gel, two coats, with a crisp thin white micro-French tip and a high-gloss top coat",
+    "system": "gel",
+    "finish": "french",
+    "color_family": "green",
+    "shape": "Oval",
+    "length": "short",
+    "price_range": "~$75",
+    "duration_min": 75,
+    "stretch_level": 2,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Short oval nails on a softly bent hand, stacked gold rings, a cream knit sleeve, and an emerald satin ribbon on a clean neutral background",
+    "occasions": [
+      "work",
+      "date night",
+      "holiday party"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "deep emerald green gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "crisp white tip gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "high-gloss top coat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/emerald-gloss-micro-french.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Emerald Gloss · Micro-French: deep emerald gel with a thin white micro-French tip on a warm-toned hand",
+    "why": null,
+    "why_inputs": {}
   }
 ]
