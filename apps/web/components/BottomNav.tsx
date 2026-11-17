@@ -10,6 +10,7 @@ const ITEMS = [
 export function BottomNav({ current }: { current: string }) {
   return (
     <nav className="nav" aria-label="Main">
+      <a href="/" className="nav-brand" aria-label="AllTen home">AllTen</a>
       {ITEMS.map(({ href, label, Icon }) => (
         <a key={href} href={href} aria-current={current === href ? "page" : undefined}>
           <Icon />

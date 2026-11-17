@@ -29,6 +29,7 @@ export default async function Start() {
   return (
     <div className="shell">
       <main className="main">
+        <a className="back" href="/">← Discover</a>
         <header>
           <div className="wordmark">AllTen</div>
           <h1 className="h1">{p.onboarded ? "Update your picks" : "Let's pick looks for you"}</h1>

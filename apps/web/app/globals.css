@@ -198,11 +198,6 @@ img { max-width: 100%; display: block; }
   .shell-wide .row { flex-direction: column; align-items: stretch; padding: 0; overflow: hidden; border-radius: 18px; }
   .shell-wide .thumb { width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 0; }
   .shell-wide .row-text { padding: 10px 14px 14px; }
-  .shell-wide .nav {
-    order: -1; position: sticky; top: 0; z-index: 5; height: 56px; border-top: 0; border-bottom: 1px solid var(--soft);
-    justify-content: flex-end; gap: 8px; padding: 0 32px;
-  }
-  .shell-wide .nav a { flex-direction: row; gap: 6px; font-size: 14px; min-width: 0; padding: 0 12px; }
 }
 @media (min-width: 1200px) {
   .shell-wide .rows-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -242,3 +237,20 @@ img { max-width: 100%; display: block; }
 .saved-actions .save-btn { position: static; }
 .onboard > .btn, .main > .btn, .main > form > .btn { flex: none; }
 .saved-actions .btn-sm { flex: none; height: 36px; padding: 0 14px; border-radius: 18px; }
+
+/* Desktop: every page gets the menu as a top bar with the AllTen wordmark linking home */
+.nav-brand { display: none; }
+@media (min-width: 900px) {
+  .shell { max-width: 1120px; }
+  .shell:not(.shell-wide) .main { width: 100%; max-width: 640px; margin: 0 auto; }
+  .nav {
+    order: -1; position: sticky; top: 0; z-index: 5; height: 60px; border-top: 0; border-bottom: 1px solid var(--soft);
+    justify-content: flex-end; gap: 8px; padding: 0 32px;
+  }
+  .nav a { flex-direction: row; gap: 6px; font-size: 14px; min-width: 0; padding: 0 12px; flex: none; }
+  .nav .nav-brand { display: flex; margin-right: auto; padding: 0; font-weight: 800; font-size: 20px; color: var(--accent); letter-spacing: -0.01em; }
+}
+@media (min-width: 900px) {
+  .shell:has(.nav-brand) .main .wordmark { display: none; }   /* the top bar already shows it */
+  .shell-wide .onboard-banner, .shell-wide .notice { max-width: 640px; }
+}
