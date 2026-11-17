@@ -20,6 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import generate as g  # noqa: E402
+import verify as v  # noqa: E402
 
 WEB_LOOKS = g.ROOT / "apps/web/lib/engine/looks.json"
 SEED_LOOKS = g.ROOT / "services/api/app/seed/looks.json"
@@ -83,9 +84,22 @@ def main() -> int:
                     saved_refs = g.REFS
                     g.REFS = [ref]
                     try:
-                        raw = g.openai(tone_prompt(l, tone), key, g.OPENAI_MODEL)[0]
+                        # edit → AI check that only the skin changed → one retry with the fix → skip the slot if still wrong
+                        fix, ok = "", False
+                        for attempt in (1, 2):
+                            raw = g.openai(tone_prompt(l, tone) + (f" Correction: {fix}" if fix else ""), key, g.OPENAI_MODEL)[0]
+                            rv = v.verify_tone(l, raw, ref.read_bytes(), SKIN[tone], key)
+                            print(f"  review {l['id']} {tone} attempt {attempt}: {rv['verdict']} {rv.get('scores')}")
+                            if rv["verdict"] != "fail":
+                                ok = True
+                                break
+                            fix = rv.get("photo_fix") or "; ".join(rv.get("issues", [])[:3])
                     finally:
                         g.REFS = saved_refs
+                    if not ok:
+                        failed += 1
+                        print(f"  SKIP {l['id']:36s} {tone:6s} failed review twice; the site shows the medium photo", file=sys.stderr)
+                        continue
             except RuntimeError as e:
                 failed += 1
                 print(f"  FAIL {l['id']:36s} {tone:6s} {e}", file=sys.stderr)

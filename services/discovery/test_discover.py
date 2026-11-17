@@ -61,3 +61,15 @@ def test_theme_gaps_respect_lead_time_runway_and_count():
     # NYE window wraps the year end
     s, e = d.theme_dates(THEMES["new-year"], datetime(2026, 12, 30, tzinfo=timezone.utc))
     assert (s.month, s.day, e.year, e.month, e.day) == (12, 27, 2027, 1, 1)
+
+
+def test_verdict_rules():
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "photos"))
+    import verify as v
+    assert v.verdict({"scores": {"a": 5, "b": 4}}) == "pass"
+    assert v.verdict({"scores": {"a": 5, "b": 3}}) == "warn"
+    assert v.verdict({"scores": {"a": 5, "b": 2}}) == "fail"
+    assert v.verdict({"scores": {"a": 5}, "near_duplicate": True}) == "fail"
+    assert v.verdict({"scores": {}}) == "fail"  # an empty answer never passes
+    md = v.report_md({"name": "x"}, {"verdict": "warn", "model": "m", "scores": {"finish_match": 3}, "issues": ["stripe faint"]}, 2)
+    assert "⚠️ Check" in md and "regenerated 1×" in md and "stripe faint" in md

@@ -22,6 +22,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "photos"))
 import generate as g  # noqa: E402
+import verify as v  # noqa: E402
+
+PHOTO_ATTEMPTS = 2   # first photo + at most one regeneration if the reviewer fails it
 
 ROOT = g.ROOT
 WEB_LOOKS = ROOT / "apps/web/lib/engine/looks.json"
@@ -251,6 +254,7 @@ def main() -> int:
 
     g.PER_MODEL = 1
     made = []
+    reviews: dict[str, tuple[dict, int]] = {}
     ids = {l["id"] for l in looks}
     for kind, item in jobs:
         try:
@@ -266,10 +270,25 @@ def main() -> int:
                 look["draft"] = {"from": f"theme:{item}", "created": look["draft"]["created"]}
                 look["colorFamily"] = look["colorFamily"] if look["colorFamily"] in themes[item]["colors"] else themes[item]["colors"][0]
                 look["occasions"] = look["occasions"]
-            raw = g.openai(g.prompt_for(look), key, g.OPENAI_MODEL)[0]
+            # photo → independent AI review → one regeneration with the reviewer's fix if it fails
+            fix, review, attempts = "", None, 0
+            while attempts < PHOTO_ATTEMPTS:
+                attempts += 1
+                prompt = g.prompt_for(look) + (f" Correction from review: {fix}" if fix else "")
+                raw = g.openai(prompt, key, g.OPENAI_MODEL)[0]
+                review = v.verify_look(look, raw, looks, key)
+                print(f"  review {look['id']} attempt {attempts}: {review['verdict']} {review.get('scores')}")
+                if review.get("near_duplicate") or review["verdict"] != "fail":
+                    break
+                fix = review.get("photo_fix") or "; ".join(review.get("issues", [])[:3])
+            if review.get("near_duplicate"):
+                print(f"  DROP {look['id']}: near-duplicate of {review.get('duplicate_of')}")
+                state["drafted"][f"theme:{item}" if kind == "theme" else item] = now.isoformat()
+                continue
         except RuntimeError as e:
             print(f"  FAIL {item}: {e}", file=sys.stderr)
             continue
+        reviews[look["id"]] = (review, attempts)
         from fill import save_jpeg  # same folder as generate.py
         save_jpeg(raw, PUBLIC / f"{look['id']}.jpg")
         look["photoBySkinTone"]["medium"] = f"/looks/{look['id']}.jpg"
@@ -280,6 +299,7 @@ def main() -> int:
         print(f"  ok   {kind}:{item} → {look['id']} ({look['name']})")
 
     if not made:
+        STATE.write_text(json.dumps(state, indent=2) + "\n")
         return 1
     WEB_LOOKS.write_text(json.dumps(looks, indent=2, ensure_ascii=False) + "\n")
     TERMS.write_text(json.dumps(terms_cfg, indent=2, ensure_ascii=False) + "\n")
@@ -291,8 +311,10 @@ def main() -> int:
     # pull-request body for the workflow
     repo = os.environ.get("GITHUB_REPOSITORY", "")
     branch = os.environ.get("DRAFT_BRANCH", "")
-    lines = ["New looks drafted from this week's rising trends. **Merge to approve** (they go live and get light/deep photos); "
-             "close to reject. Edit `apps/web/lib/engine/looks.json` on this branch to tweak a draft before merging.", ""]
+    lines = ["New looks drafted from this week's rising trends and upcoming holidays. Each was checked by a separate AI "
+             "reviewer (photo matches the spec, natural hand, realistic spec, not a duplicate) before reaching you. "
+             "**Merge to approve** (they go live and get light/deep photos); close to reject. Edit "
+             "`apps/web/lib/engine/looks.json` on this branch to tweak a draft before merging.", ""]
     for l in made:
         src = l["draft"]["from"]
         if src.startswith("theme:"):
@@ -308,6 +330,7 @@ def main() -> int:
         shades = "; ".join((f"{s['brand']} " if s["brand"] else "") + s["name"] for s in l["shades"]) or "—"
         lines += [f"### {l['name']}", f"<img src=\"{img}\" width=\"480\">", "",
                   f"- **Why now:** {why}",
+                  v.report_md(l, *reviews[l["id"]]),
                   f"- **Technique:** {l['technique']}",
                   f"- {l['shape']} · {l['length']} · {l['system']} · {l['finish']} · {l['priceRange']} · {l['durationMin']} min · stretch {l['stretchLevel']}/5",
                   f"- **Shades (codes to verify):** {shades}",

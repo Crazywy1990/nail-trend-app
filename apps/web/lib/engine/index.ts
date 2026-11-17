@@ -294,7 +294,7 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
   const pick = (l: Look, slot: Slot, position: number): Pick => ({
     look: l, slot, position,
     relevance: Math.round(r.rel.get(l.id)! * 1000) / 1000,
-    photo: l.photoBySkinTone?.[p.skinTone] ?? null,
+    photo: l.photoBySkinTone?.[p.skinTone] ?? l.photoBySkinTone?.medium ?? null,
     why: whyFor(l, p, f),
   });
   const [hero, ...rest] = r.safe;

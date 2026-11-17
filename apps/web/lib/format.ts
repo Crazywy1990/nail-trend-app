@@ -36,7 +36,7 @@ export function slotLabel(slot: Slot, l: Look): string {
 }
 
 export function photoFor(l: Look, skinTone = "medium"): string | null {
-  return l.photoBySkinTone?.[skinTone] ?? null;
+  return l.photoBySkinTone?.[skinTone] ?? l.photoBySkinTone?.medium ?? null;
 }
 
 /** Soft background for looks whose photo isn't in yet, keyed by color family. */

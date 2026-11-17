@@ -1,0 +1,38 @@
+name: Review drafts (AI)
+
+# Runs the AI reviewer on the draft looks in a pull request and posts the result as a comment.
+# Discovery already reviews new drafts; use this after editing a draft, or for older PRs.
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "Pull request number"
+        required: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ inputs.pr }}/head
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          { echo "## AI review of the draft looks"; echo;
+            echo "_Checked by a separate model: photo matches the spec, natural hand, realistic spec, not a duplicate. Fail = something scored 2/5 or lower; Check = something scored 3/5._"; echo;
+            python services/photos/verify.py --drafts; } > review.md
+          cat review.md
+      - name: Comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr comment ${{ inputs.pr }} --repo ${{ github.repository }} --body-file review.md

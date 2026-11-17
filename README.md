@@ -67,6 +67,10 @@ Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && pyth
 
 Worst case ≈ $1.20/week (2 drafts approved); most weeks $0–0.40. Set a hard monthly limit in the OpenAI billing settings as a backstop. Searches never generate anything.
 
+## AI review before a person decides
+
+`services/photos/verify.py` asks a separate, stronger vision model to check each draft before it reaches the approver: photo matches the spec (color, finish, shape/length), natural hand, photo quality, realistic price/time, consistent spec, and not a near-duplicate of a catalog look. Scores are 1–5; the code (not the model) sets the verdict: fail at ≤ 2 or duplicate, check at 3, else pass. Discovery regenerates a failed photo once with the reviewer's fix, drops near-duplicates, and puts the review in the PR. The photo fill checks that skin-tone edits left the nails and scene unchanged, retries once, and otherwise leaves the slot empty (the site falls back to the medium photo). Workflow **Review drafts (AI)** re-runs the review on any PR. About $0.01–0.03 per check.
+
 ## Themes
 
 `apps/web/lib/engine/themes.json` defines Christmas, New Year's Eve, Valentine's Day, Spring, Summer, Halloween and Thanksgiving: trigger words, a palette (color families + finishes), a date window and a lead time. Typing a trigger word or tapping a theme chip filters to looks whose color is in the palette and ranks palette finishes higher. Without a search, the feed leans lightly toward the theme of today's date. The same file tells look discovery which holidays need more looks.
