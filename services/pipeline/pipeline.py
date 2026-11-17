@@ -220,8 +220,9 @@ def rednote_part(rn: dict | None) -> str | None:
     if not rn or rn.get("change") is None or rn["change"] < RISING:
         return None
     pct = round(rn["change"] * 100)
-    return ("likes and saves on RedNote more than doubled vs last week" if pct > 100
-            else f"likes and saves on RedNote up {pct}% vs last week")
+    # Shown on the site: the platform is deliberately not named.
+    return ("likes and saves on social media more than doubled vs last week" if pct > 100
+            else f"likes and saves on social media up {pct}% vs last week")
 
 
 def look_results(cfg: dict, term_res: dict[str, dict], rn: dict[str, dict] | None = None) -> dict[str, dict]:
@@ -248,7 +249,7 @@ def look_results(cfg: dict, term_res: dict[str, dict], rn: dict[str, dict] | Non
             "badge": LABEL_TEXT[q["label"]] if q["label"] != "steady" else None,
             "velocity": round(vel, 3),
             "term": quoted,
-            "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if q["headlines"] else []) + (["RedNote"] if extra else []),
+            "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if q["headlines"] else []) + (["Social media"] if extra else []),
         }
     return out
 

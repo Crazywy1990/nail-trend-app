@@ -321,7 +321,8 @@ def main() -> int:
             if kind == "rednote":
                 look["draft"] = {"from": f"rednote:{item['term']}", "created": look["draft"]["created"],
                                  "saves": item["saves"], "keyword": item["keyword"], "sourceUrl": item.get("sourceUrl")}
-                look["trendProof"] = {"text": "Inspired by one of the most-saved nail designs on RedNote this week",
+                # shown on the site: the platform is deliberately not named
+                look["trendProof"] = {"text": "Inspired by one of the most-saved nail designs on social media this week",
                                       "isPlaceholder": False}
             # photo → independent AI review → one regeneration with the reviewer's fix if it fails
             fix, review, attempts = "", None, 0

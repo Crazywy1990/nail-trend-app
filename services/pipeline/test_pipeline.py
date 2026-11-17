@@ -155,7 +155,8 @@ def test_card_quotes_strongest_rising_term():
 def test_rednote_evidence_is_appended_only_when_rising():
     cfg = {"terms": {"a": {"label": "a nails"}}, "looks": {"x": ["a"]}}
     tr = {"a": p.term_result(1000, 1000, 0)}
-    assert "RedNote" not in p.look_results(cfg, tr, {"a": {"change": 0.1}})["x"]["text"]
+    assert "social media" not in p.look_results(cfg, tr, {"a": {"change": 0.1}})["x"]["text"]
     out = p.look_results(cfg, tr, {"a": {"change": 0.6}})["x"]
-    assert out["text"].endswith("likes and saves on RedNote up 60% vs last week") and "RedNote" in out["sources"]
+    assert out["text"].endswith("likes and saves on social media up 60% vs last week")
+    assert "RedNote" not in out["text"] and "RedNote" not in out["sources"]  # never named on the site
     assert "more than doubled" in p.look_results(cfg, tr, {"a": {"change": 1.5}})["x"]["text"]

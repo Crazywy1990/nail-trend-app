@@ -61,7 +61,7 @@ Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && pyth
 
 | Time | Workflow | What it does | Cost |
 |---|---|---|---|
-| 13:02 | RedNote trends | Apify actor searches 12 Chinese nail keywords (top posts of the past week): likes + saves per term, week-over-week change, and text descriptions of the 3 most-saved designs. No RedNote images, captions or creators are stored or shown. | ≈ $1.50/run (secret `APIFY_TOKEN`) |
+| 13:02 | RedNote trends | Apify actor searches 12 Chinese nail keywords (top posts of the past week): likes + saves per term, week-over-week change, and text descriptions of the 3 most-saved designs. No RedNote images, captions or creators are stored or shown, and the site never names RedNote (cards say "social media"). | ≈ $1.50/run (secret `APIFY_TOKEN`) |
 | 13:17 | Weekly trends | YouTube + magazine signals → badges and evidence on each look | free (YouTube quota) |
 | 13:32 | Look discovery | Up to 3 drafts a week, each with a preview photo and an AI review, opened as one PR (merge = approve): one upcoming holiday (themes.json) with fewer than 6 looks in its palette, one RedNote-inspired original look (the PR links the source post so the approver can check it shares the trend without copying the art), then rising styles in fewer than 2 looks. The same style, theme or RedNote term is not re-proposed for 4 weeks. | $0 if nothing qualifies; ≈ $0.25 per draft |
 | 13:47 + on merge | Fill missing photos | Any empty light/medium/deep slot gets a photo; light/deep are edits of the medium photo | ≈ $0.20 per photo |
