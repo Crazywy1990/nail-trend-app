@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Use the latest reviewer code
+        run: git fetch -q origin main && git checkout origin/main -- services/photos
       - name: Review
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
