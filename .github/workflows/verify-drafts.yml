@@ -25,10 +25,13 @@ jobs:
         with:
           python-version: "3.12"
       - name: Use the latest reviewer code
-        run: git fetch -q origin main && git checkout origin/main -- services/photos
+        run: |
+          git fetch -q origin main && git checkout origin/main -- services/photos
+          git show origin/main:apps/web/lib/engine/looks.json > "$RUNNER_TEMP/main_looks.json"
       - name: Review
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MAIN_LOOKS: ${{ runner.temp }}/main_looks.json
         run: |
           { echo "## AI review of the draft looks"; echo;
             echo "_Checked by a separate model: photo matches the spec, natural hand, realistic spec, not a duplicate. Fail = something scored 2/5 or lower; Check = something scored 3/5._"; echo;

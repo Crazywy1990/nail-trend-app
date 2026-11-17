@@ -128,6 +128,10 @@ def main() -> int:
     looks = json.loads((g.ROOT / "apps/web/lib/engine/looks.json").read_text())
     ids = [a for a in sys.argv[1:] if not a.startswith("--")]
     todo = [l for l in looks if (l["id"] in ids if ids else "draft" in l)]
+    main_looks = os.environ.get("MAIN_LOOKS")  # skip drafts that are already approved on main
+    if not ids and main_looks and Path(main_looks).exists():
+        approved = {l["id"] for l in json.loads(Path(main_looks).read_text())}
+        todo = [l for l in todo if l["id"] not in approved]
     out = []
     for l in todo:
         photo = (g.ROOT / "apps/web/public" / l["photoBySkinTone"]["medium"].lstrip("/")).read_bytes()
