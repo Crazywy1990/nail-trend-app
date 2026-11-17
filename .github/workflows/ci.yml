@@ -32,6 +32,7 @@ jobs:
       - run: pip install pytest
       - run: python -m pytest -q
       - run: python -m pytest -q ../discovery
+      - run: python -m pytest -q ../rednote
 
   web:
     runs-on: ubuntu-latest

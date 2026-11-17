@@ -61,8 +61,9 @@ Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && pyth
 
 | Time | Workflow | What it does | Cost |
 |---|---|---|---|
+| 13:02 | RedNote trends | Apify actor searches 12 Chinese nail keywords (top posts of the past week): likes + saves per term, week-over-week change, and text descriptions of the 3 most-saved designs. No RedNote images, captions or creators are stored or shown. | ≈ $1.50/run (secret `APIFY_TOKEN`) |
 | 13:17 | Weekly trends | YouTube + magazine signals → badges and evidence on each look | free (YouTube quota) |
-| 13:32 | Look discovery | Upcoming holidays (themes.json) with fewer than 6 looks in their palette, then rising styles in fewer than 2 looks → up to 2 draft looks with a preview photo, opened as a PR. Merge = approve. Same style/theme isn't re-proposed for 4 weeks. | $0 if no gaps; ≈ $0.20 per draft |
+| 13:32 | Look discovery | Up to 3 drafts: one upcoming holiday, one RedNote-inspired original look (the PR links the source post so the approver can check it shares the trend without copying the art), then (themes.json) with fewer than 6 looks in their palette, then rising styles in fewer than 2 looks → up to 2 draft looks with a preview photo, opened as a PR. Merge = approve. Same style/theme isn't re-proposed for 4 weeks. | $0 if no gaps; ≈ $0.20 per draft |
 | 13:47 + on merge | Fill missing photos | Any empty light/medium/deep slot gets a photo; light/deep are edits of the medium photo | ≈ $0.20 per photo |
 
 Worst case ≈ $1.20/week (2 drafts approved); most weeks $0–0.40. Set a hard monthly limit in the OpenAI billing settings as a backstop. Searches never generate anything.

@@ -150,3 +150,12 @@ def test_card_quotes_strongest_rising_term():
     out = p.look_results(cfg, tr)
     assert out["x"]["term"] == "emer" and out["x"]["badge"] == "↑ Rising" and "emer nails" in out["x"]["text"]
     assert out["y"]["term"] == "cat" and out["y"]["badge"] is None
+
+
+def test_rednote_evidence_is_appended_only_when_rising():
+    cfg = {"terms": {"a": {"label": "a nails"}}, "looks": {"x": ["a"]}}
+    tr = {"a": p.term_result(1000, 1000, 0)}
+    assert "RedNote" not in p.look_results(cfg, tr, {"a": {"change": 0.1}})["x"]["text"]
+    out = p.look_results(cfg, tr, {"a": {"change": 0.6}})["x"]
+    assert out["text"].endswith("likes and saves on RedNote up 60% vs last week") and "RedNote" in out["sources"]
+    assert "more than doubled" in p.look_results(cfg, tr, {"a": {"change": 1.5}})["x"]["text"]

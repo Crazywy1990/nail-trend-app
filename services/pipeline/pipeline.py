@@ -202,7 +202,29 @@ def proof_text(term_label: str, t: dict) -> str:
     return " · ".join(parts)
 
 
-def look_results(cfg: dict, term_res: dict[str, dict]) -> dict[str, dict]:
+REDNOTE_FILE = ROOT / "apps" / "web" / "lib" / "engine" / "rednote.json"
+
+
+def rednote_terms(now: datetime | None = None) -> dict[str, dict]:
+    """This week's RedNote engagement per term (services/rednote), if the run is fresh."""
+    if not REDNOTE_FILE.exists():
+        return {}
+    d = json.loads(REDNOTE_FILE.read_text())
+    now = now or datetime.now(timezone.utc)
+    if now - datetime.fromisoformat(d["generatedAt"].replace("Z", "+00:00")) > timedelta(days=8):
+        return {}
+    return d.get("terms", {})
+
+
+def rednote_part(rn: dict | None) -> str | None:
+    if not rn or rn.get("change") is None or rn["change"] < RISING:
+        return None
+    pct = round(rn["change"] * 100)
+    return ("likes and saves on RedNote more than doubled vs last week" if pct > 100
+            else f"likes and saves on RedNote up {pct}% vs last week")
+
+
+def look_results(cfg: dict, term_res: dict[str, dict], rn: dict[str, dict] | None = None) -> dict[str, dict]:
     """Per look: velocity blends its terms (first term weighted 2×). The card quotes the
     look's strongest rising term if it has one, otherwise its first term, and names that
     term so the claim is about the style, not the whole look. The badge is shown only
@@ -217,14 +239,16 @@ def look_results(cfg: dict, term_res: dict[str, dict]) -> dict[str, dict]:
         rising = [t for t in have if term_res[t]["label"] == "rising"]
         quoted = max(rising, key=lambda t: term_res[t]["growth"]) if rising else have[0]
         q = term_res[quoted]
+        text = proof_text(cfg["terms"][quoted]["label"], q)
+        extra = rednote_part((rn or {}).get(quoted))
         out[look_id] = {
-            "text": proof_text(cfg["terms"][quoted]["label"], q),
+            "text": text + (f" · {extra}" if extra else ""),
             "isPlaceholder": False,
             "label": q["label"],
             "badge": LABEL_TEXT[q["label"]] if q["label"] != "steady" else None,
             "velocity": round(vel, 3),
             "term": quoted,
-            "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if q["headlines"] else []),
+            "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if q["headlines"] else []) + (["RedNote"] if extra else []),
         }
     return out
 
@@ -261,7 +285,7 @@ def score(counts: dict[str, tuple[int, int]], heads: dict[str, int], cfg: dict, 
         "baseline": round(base, 4),
         "feedsRead": feeds_ok,
         "terms": term_res,
-        "looks": look_results(cfg, term_res),
+        "looks": look_results(cfg, term_res, rednote_terms(now)),
     }
 
 

@@ -37,7 +37,9 @@ MIN_THEME_LOOKS = 6     # a holiday the feed leans into should have at least thi
 MIN_RUNWAY_DAYS = 14    # don't draft for a theme that ends within two weeks
 PUBLIC = ROOT / "apps/web/public/looks"
 
-MAX_DRAFTS = int(os.environ.get("MAX_DRAFTS", "2"))
+MAX_DRAFTS = int(os.environ.get("MAX_DRAFTS", "3"))
+REDNOTE_DRAFTS = int(os.environ.get("REDNOTE_DRAFTS", "1"))   # RedNote-inspired drafts per week
+REDNOTE = ROOT / "apps/web/lib/engine/rednote.json"
 MIN_LOOKS = 2
 COOLDOWN_DAYS = 28
 TEXT_MODELS = [m for m in [os.environ.get("OPENAI_TEXT_MODEL"), "gpt-5-mini", "gpt-5.4-mini", "gpt-4.1-mini"] if m]
@@ -150,6 +152,41 @@ Return JSON with exactly these keys:
 """
 
 
+def rednote_prompt(insp: dict, terms_cfg: dict, looks: list[dict]) -> str:
+    catalog = "\n".join(f"- {l['name']} ({l['technique']}; {l['finish']}, {l['colorFamily']})" for l in looks)
+    return f"""One of the most-saved nail designs on RedNote this week ({insp['saves']} saves) looks like this:
+"{insp['design']}"
+Turn it into an ORIGINAL AllTen look inspired by it: keep the core idea (palette, finish, technique) so it reads as the
+same trend, but do not reproduce any distinctive hand-painted motif, character or logo exactly; simplify so a nail
+tech can do it in a standard salon appointment. Do not duplicate any catalog look:
+{catalog}
+
+Return JSON with exactly these keys:
+  name, technique, system (one of {SYSTEMS}), finish (one of {FINISHES}), colorFamily (one of {COLORS}),
+  shape (one of {SHAPES}), length (short/medium/long), priceRange (like "~$70"), durationMin (integer),
+  stretchLevel (integer 1-5), occasions (1-3 of {OCCASIONS}),
+  shades (1-3 objects {{"brand": string or null, "name": string}}; real product names only if you are sure they exist),
+  photoBrief (one line: nails, jewelry, props and fabric for an editorial hand photo),
+  terms (1-3 trend term ids from {list(terms_cfg['terms'])}, "{insp['term'] if not str(insp['term']).startswith('theme:') else ''}" first if it applies)
+"""
+
+
+def find_rednote(state: dict, now: datetime) -> list[dict]:
+    """This week's RedNote inspirations not already drafted in the last COOLDOWN_DAYS."""
+    if not REDNOTE.exists():
+        return []
+    data = json.loads(REDNOTE.read_text())
+    if now - datetime.fromisoformat(data["generatedAt"].replace("Z", "+00:00")) > timedelta(days=8):
+        return []  # stale: the RedNote run didn't happen this week
+    out = []
+    for i in data.get("inspirations", []):
+        last = state.get("drafted", {}).get(f"rednote:{i['term']}")
+        if last and now - datetime.fromisoformat(last) < timedelta(days=COOLDOWN_DAYS):
+            continue
+        out.append(i)
+    return out[:REDNOTE_DRAFTS]
+
+
 def call_llm(prompt: str, key: str) -> dict:
     last = None
     for model in TEXT_MODELS:
@@ -230,6 +267,10 @@ def to_seed(look: dict) -> dict:
     return s
 
 
+def draft_key(kind: str, item) -> str:
+    return f"theme:{item}" if kind == "theme" else f"rednote:{item['term']}" if kind == "rednote" else item
+
+
 # ------------------------------------------------------------------ run
 def main() -> int:
     dry = "--dry-run" in sys.argv
@@ -242,10 +283,13 @@ def main() -> int:
 
     theme_gaps = find_theme_gaps(themes, looks, state, now)
     gaps = find_gaps(trends, terms_cfg, state, now)
+    rednote = find_rednote(state, now)
     print(f"Upcoming themes needing looks: {theme_gaps or 'none'}")
+    print(f"RedNote inspirations: {[i['term'] for i in rednote] or 'none'}")
     print(f"Rising styles needing looks: {gaps or 'none'}")
-    # seasonal gaps first (they have a deadline), then trends; MAX_DRAFTS in total
-    jobs = ([("theme", t) for t in theme_gaps] + [("trend", t) for t in gaps])[:MAX_DRAFTS]
+    # seasonal gaps first (deadline), then one RedNote design, then trend gaps; MAX_DRAFTS in total
+    jobs = ([("theme", t) for t in theme_gaps[:1]] + [("rednote", i) for i in rednote]
+            + [("trend", t) for t in gaps])[:MAX_DRAFTS]
     if not jobs or dry:
         return 0
     key = os.environ.get("OPENAI_API_KEY", "").strip()
@@ -262,6 +306,10 @@ def main() -> int:
                 raw_draft = call_llm(theme_prompt(item, themes, terms_cfg, looks, trends), key)
                 cand = [t for t in raw_draft.get("terms", []) if t in terms_cfg["terms"]]
                 term = cand[0] if cand else next(iter(terms_cfg["terms"]))
+            elif kind == "rednote":
+                raw_draft = call_llm(rednote_prompt(item, terms_cfg, looks), key)
+                cand = [t for t in raw_draft.get("terms", []) if t in terms_cfg["terms"]]
+                term = item["term"] if item["term"] in terms_cfg["terms"] else (cand[0] if cand else next(iter(terms_cfg["terms"])))
             else:
                 term = item
                 raw_draft = call_llm(draft_prompt(term, terms_cfg, looks, trends), key)
@@ -270,6 +318,11 @@ def main() -> int:
                 look["draft"] = {"from": f"theme:{item}", "created": look["draft"]["created"]}
                 look["colorFamily"] = look["colorFamily"] if look["colorFamily"] in themes[item]["colors"] else themes[item]["colors"][0]
                 look["occasions"] = look["occasions"]
+            if kind == "rednote":
+                look["draft"] = {"from": f"rednote:{item['term']}", "created": look["draft"]["created"],
+                                 "saves": item["saves"], "keyword": item["keyword"], "sourceUrl": item.get("sourceUrl")}
+                look["trendProof"] = {"text": "Inspired by one of the most-saved nail designs on RedNote this week",
+                                      "isPlaceholder": False}
             # photo → independent AI review → one regeneration with the reviewer's fix if it fails
             fix, review, attempts = "", None, 0
             while attempts < PHOTO_ATTEMPTS:
@@ -283,10 +336,10 @@ def main() -> int:
                 fix = review.get("photo_fix") or "; ".join(review.get("issues", [])[:3])
             if review.get("near_duplicate"):
                 print(f"  DROP {look['id']}: near-duplicate of {review.get('duplicate_of')}")
-                state["drafted"][f"theme:{item}" if kind == "theme" else item] = now.isoformat()
+                state["drafted"][draft_key(kind, item)] = now.isoformat()
                 continue
         except RuntimeError as e:
-            print(f"  FAIL {item}: {e}", file=sys.stderr)
+            print(f"  FAIL {draft_key(kind, item)}: {e}", file=sys.stderr)
             continue
         reviews[look["id"]] = (review, attempts)
         from watermark import save_photo  # same folder as generate.py
@@ -294,9 +347,9 @@ def main() -> int:
         look["photoBySkinTone"]["medium"] = f"/looks/{look['id']}.jpg"
         looks.append(look); ids.add(look["id"])
         terms_cfg["looks"][look["id"]] = terms
-        state["drafted"][f"theme:{item}" if kind == "theme" else item] = now.isoformat()
+        state["drafted"][draft_key(kind, item)] = now.isoformat()
         made.append(look)
-        print(f"  ok   {kind}:{item} → {look['id']} ({look['name']})")
+        print(f"  ok   {draft_key(kind, item)} → {look['id']} ({look['name']})")
 
     if not made:
         STATE.write_text(json.dumps(state, indent=2) + "\n")
@@ -317,7 +370,10 @@ def main() -> int:
              "`apps/web/lib/engine/looks.json` on this branch to tweak a draft before merging.", ""]
     for l in made:
         src = l["draft"]["from"]
-        if src.startswith("theme:"):
+        if src.startswith("rednote:"):
+            why = (f"One of the most-saved “{l['draft']['keyword']}” posts on RedNote this week ({l['draft']['saves']:,} saves). "
+                   f"Compare with the [source post]({l['draft'].get('sourceUrl')}) before merging: ours should share the trend, not copy the art.")
+        elif src.startswith("theme:"):
             tid = src.split(":", 1)[1]
             start, _ = theme_dates(themes[tid], now)
             why = (f"{themes[tid]['label']} starts {start:%b %-d} and only {theme_count(themes, tid, looks) - 1} looks "

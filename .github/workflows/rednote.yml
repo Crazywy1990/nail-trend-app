@@ -1,0 +1,40 @@
+name: RedNote trends
+
+# Weekly RedNote (Xiaohongshu) nail-trend run via a third-party Apify actor: engagement per
+# Chinese nail keyword + text descriptions of the most-saved designs (no images kept).
+# Look discovery (15 min later) turns up to one design a week into an original look for review.
+on:
+  schedule:
+    - cron: "2 13 * * 1"   # Mondays 13:02 UTC, before Weekly trends (13:17) and discovery (13:32)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-writes
+  cancel-in-progress: false
+
+jobs:
+  rednote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python services/rednote/rednote.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/engine/rednote.json services/rednote/history.jsonl 2>/dev/null || true
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git commit -m "RedNote trends: $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
+          git push origin HEAD:main
