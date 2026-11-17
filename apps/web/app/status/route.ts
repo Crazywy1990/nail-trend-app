@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { API_URL, USE_REMOTE_API } from "@/lib/api";
 import { LOOKS, RANKING_VERSION, TRENDS_UPDATED, discover } from "@/lib/engine";
+import { dbHealth } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,7 @@ export async function GET() {
         trendsUpdated: TRENDS_UPDATED,
         looksWithRealTrendData: LOOKS.filter((l) => !l.trendProof.isPlaceholder).length,
         sampleSet: d.summary,
+        database: await dbHealth(),
         ms: Date.now() - started,
       });
     } catch (err) {

@@ -131,3 +131,16 @@ export async function recordEvent(e: { userId?: string; type: string; lookId?: s
     console.error("[allten] event write failed", err);
   }
 }
+
+// ---------------------------------------------------------------- health
+/** For /status: is the database configured and reachable, and how much is in it. */
+export async function dbHealth(): Promise<{ configured: boolean; connected?: boolean; profiles?: number; saved?: number; events?: number; error?: string }> {
+  if (!sql) return { configured: false };
+  try {
+    await ensureSchema();
+    const [r] = await sql`SELECT (SELECT count(*) FROM profiles)::int AS profiles, (SELECT count(*) FROM saved)::int AS saved, (SELECT count(*) FROM events)::int AS events`;
+    return { configured: true, connected: true, profiles: r.profiles as number, saved: r.saved as number, events: r.events as number };
+  } catch (e) {
+    return { configured: true, connected: false, error: e instanceof Error ? e.message.slice(0, 200) : String(e) };
+  }
+}
