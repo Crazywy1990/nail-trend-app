@@ -619,5 +619,64 @@
       "from": "matte",
       "created": "2026-11-16"
     }
+  },
+  {
+    "id": "emerald-gloss-micro-french",
+    "name": "Emerald Gloss · Micro-French",
+    "technique": "Deep emerald gel, two coats, with a crisp thin white micro-French tip and a high-gloss top coat",
+    "system": "gel",
+    "finish": "french",
+    "colorFamily": "green",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$75",
+    "durationMin": 75,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short oval nails on a softly bent hand, stacked gold rings, a cream knit sleeve, and an emerald satin ribbon on a clean neutral background",
+    "occasions": [
+      "work",
+      "date night",
+      "holiday party"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "deep emerald green gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "crisp white tip gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "high-gloss top coat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/emerald-gloss-micro-french.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Emerald Gloss · Micro-French: deep emerald gel with a thin white micro-French tip on a warm-toned hand",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "emerald",
+      "created": "2026-11-11"
+    }
   }
 ]
