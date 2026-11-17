@@ -9,6 +9,7 @@ import { ShareToTech } from "@/components/ShareToTech";
 import { TrackLanding } from "@/components/Track";
 import { fetchLook } from "@/lib/api";
 import { factChips, metaLine, photoFor, specLine, styleLine } from "@/lib/format";
+import { getProfile } from "@/lib/store";
 import { requestUid } from "@/lib/request";
 
 type Props = { params: { id: string } };
@@ -38,7 +39,7 @@ export default async function LookPage({ params }: Props) {
       <main className="main">
         <a className="back" href="/"><ArrowLeft size={20} /> Discover</a>
         <article className="card">
-          <PhotoSlot photo={photoFor(l)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+          <PhotoSlot photo={photoFor(l, (await getProfile(requestUid())).skinTone)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
           <div className="card-body">
             <ProofStrip proof={l.trendProof} />
             <h1 className="card-title" style={{ fontSize: 26 }}>{l.name}</h1>

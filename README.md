@@ -67,6 +67,13 @@ Tests: `cd services/api && python -m pytest -q` · `cd services/pipeline && pyth
 
 Worst case ≈ $1.20/week (2 drafts approved); most weeks $0–0.40. Set a hard monthly limit in the OpenAI billing settings as a backstop. Searches never generate anything.
 
+## Users: profile, saved looks, salon
+
+- **Onboarding** (`/start`, about a minute): hand tone (picked from three hand photos, never asked as race or ethnicity), jewelry metal (→ warm/cool undertone), four this-or-that picks, length, shape, adventurousness, budget. The feed then shows every look on her hand tone and ranks by her answers, picks and saves (`buildProfile` in the engine); "Subtle" caps stretch, budget gently down-ranks pricier looks.
+- **Saved** (`/saved`): hearts persist; each saved look has Book and Spec-for-my-tech.
+- **My salon** (`/salons`): name, booking link, Instagram, phone. The booking page then offers "Copy & open booking", "Copy & DM", "Text <salon>", and the spec link carries her hand tone.
+- **Storage** (`lib/store`): Postgres when `DATABASE_URL`/`POSTGRES_URL` is set (Neon via Vercel Storage; tables `profiles`, `saved`, `events` are created automatically), otherwise an httpOnly cookie on her browser. Events always go to the log and, with a database, to the `events` table.
+
 ## AI review before a person decides
 
 `services/photos/verify.py` asks a separate, stronger vision model to check each draft before it reaches the approver: photo matches the spec (color, finish, shape/length), natural hand, photo quality, realistic price/time, consistent spec, and not a near-duplicate of a catalog look. Scores are 1–5; the code (not the model) sets the verdict: fail at ≤ 2 or duplicate, check at 3, else pass. Discovery regenerates a failed photo once with the reviewer's fix, drops near-duplicates, and puts the review in the PR. The photo fill checks that skin-tone edits left the nails and scene unchanged, retries once, and otherwise leaves the slot empty (the site falls back to the medium photo). Workflow **Review drafts (AI)** re-runs the review on any PR. About $0.01–0.03 per check.

@@ -7,7 +7,7 @@ import { fetchLook } from "@/lib/api";
 import { photoFor, shadeLabel } from "@/lib/format";
 import { requestUid } from "@/lib/request";
 
-type Props = { params: { id: string } };
+type Props = { params: { id: string }; searchParams?: { tone?: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const l = await fetchLook(params.id);
@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /** Public spec sheet for the nail tech. Opens without an account. */
-export default async function SpecSheet({ params }: Props) {
+export default async function SpecSheet({ params, searchParams }: Props) {
+  const tone = ["light", "medium", "deep"].includes(searchParams?.tone ?? "") ? searchParams!.tone! : "medium";
   const l = await fetchLook(params.id);
   if (!l) notFound();
   const uid = requestUid();
@@ -36,7 +37,7 @@ export default async function SpecSheet({ params }: Props) {
           <h1 className="h1" style={{ fontSize: 28 }}>{l.name}</h1>
         </div>
         <article className="card">
-          <PhotoSlot photo={photoFor(l)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+          <PhotoSlot photo={photoFor(l, tone)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
           <div className="card-body">
             <dl className="dl">
               <dt>Shape</dt><dd>{l.shape}</dd>

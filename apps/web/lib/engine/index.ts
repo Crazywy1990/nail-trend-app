@@ -47,7 +47,38 @@ export type Profile = {
   current: { colorFamily: string; finish: string } | null;
   affinity: Record<string, number>;
   maxStretch: number;
+  /** Max she usually spends (USD); pricier looks rank a little lower. */
+  budget?: number | null;
 };
+
+/** Input from the stored profile (lib/store) — kept structural so the engine has no storage imports. */
+export type ProfileInput = {
+  skinTone: Profile["skinTone"]; undertone: Profile["undertone"]; jewelryMetal: Profile["jewelryMetal"];
+  length: string | null; shape: string | null; budget: number | null; vibe: "subtle" | "balanced" | "bold";
+  likes: string[]; dislikes: string[];
+};
+
+const priceOf = (l: Look) => Number(String(l.priceRange).replace(/[^0-9.]/g, "")) || 0;
+
+/** Turn onboarding answers, this-or-that picks and saved looks into attribute affinities (0..1, 0.5 = neutral). */
+export function buildProfile(userId: string, input: ProfileInput | null, saved: string[] = []): Profile {
+  if (!input) return { userId, ...DEMO_PROFILE };
+  const aff: Record<string, number> = {};
+  const bump = (k: string, d: number) => { aff[k] = Math.max(0, Math.min(1, (aff[k] ?? 0.5) + d)); };
+  const byId = new Map(LOOKS.map((l) => [l.id, l]));
+  for (const id of input.likes) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.15)); }
+  for (const id of saved) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.1)); }
+  for (const id of input.dislikes) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, -0.12)); }
+  if (input.length) bump(`length:${input.length}`, 0.3);
+  if (input.shape) bump(`shape:${input.shape.toLowerCase()}`, 0.25);
+  return {
+    userId,
+    skinTone: input.skinTone, undertone: input.undertone, jewelryMetal: input.jewelryMetal,
+    current: null, affinity: aff,
+    maxStretch: input.vibe === "subtle" ? 3 : input.vibe === "bold" ? 5 : 4,
+    budget: input.budget,
+  };
+}
 
 export const DEMO_PROFILE: Omit<Profile, "userId"> = {
   skinTone: "medium",
@@ -96,6 +127,7 @@ export function relevance(l: Look, p: Profile, f: Filters): number {
   let s = 0.6 * l.fitPrior + 0.4 * (attrs.reduce((a, b) => a + b, 0) / attrs.length);
   if (f.occasion.length && f.occasion.some((o) => l.occasions.includes(o))) s += OCCASION_BOOST;
   if (f.theme) s += (f.themeExplicit ? THEME_BOOST : SEASON_BOOST) * themeScore(l, f.theme);
+  if (p.budget && priceOf(l) > p.budget) s -= Math.min(0.15, (priceOf(l) - p.budget) / 200);
   return Math.max(0, Math.min(1, s));
 }
 
@@ -269,7 +301,7 @@ function whyFor(l: Look, p: Profile, f: Filters): string {
 
 const uniq = (a: string[]) => [...new Set(a)];
 
-export function discover(userId: string, q: string, chips: Filters): DiscoverResponse {
+export function discover(userId: string, q: string, chips: Filters, profile: ProfileInput | null = null, saved: string[] = []): DiscoverResponse {
   const parsed = parseNeed(q || "");
   const f: Filters = {
     occasion: uniq([...chips.occasion, ...parsed.occasion]),
@@ -282,7 +314,7 @@ export function discover(userId: string, q: string, chips: Filters): DiscoverRes
   const explicitTheme = (chips.theme && THEMES[chips.theme] ? chips.theme : null) ?? parsed.theme ?? null;
   f.theme = explicitTheme ?? themeForDate(new Date());
   f.themeExplicit = !!explicitTheme;
-  const p: Profile = { userId, ...DEMO_PROFILE };
+  const p: Profile = buildProfile(userId, profile, saved);
   // With filters set, the set is built only from looks that match all of them.
   // If nothing matches, fall back to the closest looks and say so.
   const filtered = hasFilters(f);

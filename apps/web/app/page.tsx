@@ -5,6 +5,7 @@ import { TrackImpressions, TrackLanding } from "@/components/Track";
 import { fetchDiscover } from "@/lib/api";
 import { requestSeason, requestUid } from "@/lib/request";
 import { COPY } from "@/lib/season";
+import { getProfile, listSaved } from "@/lib/store";
 
 type SP = Record<string, string | string[] | undefined>;
 const arr = (v: string | string[] | undefined) => (Array.isArray(v) ? v : v ? [v] : []);
@@ -34,7 +35,9 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
     length: arr(searchParams.length),
   };
 
-  const data = await fetchDiscover({ userId: uid, q, ...selected });
+  const [profile, saved] = await Promise.all([getProfile(uid), listSaved(uid)]);
+  const data = await fetchDiscover({ userId: uid, q, ...selected, profile: profile.onboarded ? profile : null, saved });
+  const savedSet = new Set(saved);
   const picks = [...data.cards, ...data.also].map((p) => ({ lookId: p.look.id, slot: p.slot, position: p.position }));
 
   return (
@@ -45,6 +48,15 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
           <div className="greet">{copy.greet}</div>
           <h1 className="h1">{copy.head}</h1>
         </header>
+
+        {!profile.onboarded ? (
+          <a href="/start" className="onboard-banner">
+            <strong>Get looks picked for you</strong>
+            <span>Your hand tone, style and budget, in about a minute →</span>
+          </a>
+        ) : searchParams.welcome ? (
+          <p className="notice">Done. These are picked for you, shown on a hand like yours.</p>
+        ) : null}
 
         <form className="need" method="get" action="/" role="search">
           <label htmlFor="need" className="label">Describe it</label>
@@ -86,7 +98,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
 
           <div className="cards">
             {data.cards.map((p, i) => (
-              <LookCard key={p.look.id} pick={p} uid={uid} setId={data.setId} priority={i === 0} />
+              <LookCard key={p.look.id} pick={p} uid={uid} setId={data.setId} priority={i === 0} saved={savedSet.has(p.look.id)} />
             ))}
           </div>
 

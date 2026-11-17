@@ -5,13 +5,13 @@ import { PhotoSlot } from "./PhotoSlot";
 import { ProofStrip } from "./ProofStrip";
 import { SaveButton } from "./SaveButton";
 
-export function LookCard({ pick, uid, setId, priority }: { pick: Pick; uid: string; setId: string; priority?: boolean }) {
+export function LookCard({ pick, uid, setId, priority, saved }: { pick: Pick; uid: string; setId: string; priority?: boolean; saved?: boolean }) {
   const l = pick.look;
   return (
     <article className="card" aria-labelledby={`t-${l.id}`}>
       <PhotoSlot photo={pick.photo} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority={priority}>
         {l.trendBadge === undefined ? <span className="badge badge-trend">↑ Rising</span> : l.trendBadge ? <span className="badge badge-trend">{l.trendBadge}</span> : null}
-        <SaveButton uid={uid} lookId={l.id} setId={setId} slot={pick.slot} position={pick.position} />
+        <SaveButton uid={uid} lookId={l.id} initial={saved} setId={setId} slot={pick.slot} position={pick.position} />
         {pick.slot === "stretch" ? <span className="badge badge-slot">{slotLabel(pick.slot, l)}</span> : null}
       </PhotoSlot>
       <div className="card-body">

@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { logEvent } from "@/lib/events";
 import type { Slot } from "@/lib/types";
 import { HeartIcon } from "./Icons";
 
-export function SaveButton(p: { uid: string; lookId: string; setId?: string; slot?: Slot; position?: number }) {
-  const [saved, setSaved] = useState(false);
+export function SaveButton(p: { uid: string; lookId: string; initial?: boolean; setId?: string; slot?: Slot; position?: number }) {
+  const [saved, setSaved] = useState(!!p.initial);
   return (
     <button
       type="button"
@@ -16,7 +15,10 @@ export function SaveButton(p: { uid: string; lookId: string; setId?: string; slo
       onClick={() => {
         const next = !saved;
         setSaved(next);
-        logEvent({ userId: p.uid, type: next ? "save" : "unsave", lookId: p.lookId, setId: p.setId, slot: p.slot, position: p.position });
+        fetch("/api/v1/saved", {
+          method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+          body: JSON.stringify({ lookId: p.lookId, on: next, setId: p.setId, slot: p.slot, position: p.position }),
+        }).catch(() => setSaved(!next));
       }}
     >
       <HeartIcon size={20} filled={saved} />
