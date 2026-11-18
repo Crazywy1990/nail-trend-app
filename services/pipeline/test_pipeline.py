@@ -179,3 +179,31 @@ def test_committed_trends_have_unique_stats():
     d = json.loads(p.OUT_FILE.read_text())
     texts = [r["text"] for r in d.get("looks", {}).values() if r.get("text")]
     assert len(texts) == len(set(texts)), "two looks display the same trend stat"
+
+
+def test_pick_hero_fastest_rising_and_rotates():
+    looks = [{"id": i, "active": True, "photoBySkinTone": {"medium": f"/looks/{i}.jpg"}} for i in ("a", "b", "c")]
+    looks.append({"id": "nophoto", "active": True, "photoBySkinTone": {}})
+    looks.append({"id": "retired", "active": False, "photoBySkinTone": {"medium": "/x.jpg"}})
+    row = lambda label, g, v=0.5: {"label": label, "velocity": v, "value": {"growth": g, "termLabel": "x nails"}}
+    res = {"looks": {"a": row("rising", 0.4), "b": row("rising", 0.9), "c": row("steady", 0.0, 0.9),
+                     "nophoto": row("rising", 5.0), "retired": row("rising", 5.0)}}
+    assert p.pick_hero(res, looks, None)[0] == "b"          # fastest rising, eligible only
+    assert p.pick_hero(res, looks, "b")[0] == "a"           # don't repeat last week's hero
+    calm = {"looks": {"a": row("steady", 0, 0.4), "c": row("steady", 0, 0.9)}}
+    assert p.pick_hero(calm, looks, None)[0] == "c"         # no rising look: highest velocity
+    assert p.pick_hero({"looks": {}}, looks, None)[0] is None
+
+
+def test_update_drop_writes_this_week(monkeypatch, tmp_path):
+    from datetime import datetime, timezone
+    import json as _j
+    lf = tmp_path / "looks.json"; df = tmp_path / "drops.json"
+    lf.write_text(_j.dumps([{"id": "a", "active": True, "photoBySkinTone": {"medium": "/a.jpg"}}]))
+    df.write_text(_j.dumps({"current": "2026-w47", "drops": {"2026-w47": {"label": "x", "date": "2026-11-16", "hero": "z"}}}))
+    monkeypatch.setattr(p, "LOOKS_FILE", lf); monkeypatch.setattr(p, "DROPS_FILE", df)
+    res = {"looks": {"a": {"label": "rising", "velocity": 0.8, "value": {"growth": 0.5, "termLabel": "a nails"}}}}
+    assert p.update_drop(res, datetime(2026, 11, 25, tzinfo=timezone.utc)) == "a"
+    d = _j.loads(df.read_text())
+    assert d["current"] == "2026-w48" and d["drops"]["2026-w48"]["date"] == "2026-11-23" and d["drops"]["2026-w48"]["chosen"] == "auto"
+    assert "2026-w47" in d["drops"]

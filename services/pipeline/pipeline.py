@@ -358,6 +358,55 @@ def rescore() -> int:
     return 0
 
 
+DROPS_FILE = ROOT / "apps" / "web" / "lib" / "engine" / "drops.json"
+LOOKS_FILE = ROOT / "apps" / "web" / "lib" / "engine" / "looks.json"
+KEEP_DROPS = 12
+
+
+def pick_hero(result: dict, looks: list[dict], previous: str | None) -> tuple[str | None, str]:
+    """This week's hero: the active look (with a photo) whose sourced stat is rising fastest.
+    Ties and non-rising weeks fall back to trend velocity. Last week's hero is skipped if
+    another rising look exists, so the home page changes each week."""
+    eligible = {l["id"] for l in looks if l.get("active", True) and (l.get("photoBySkinTone") or {}).get("medium")}
+    rows = [(lid, r) for lid, r in result.get("looks", {}).items() if lid in eligible]
+    if not rows:
+        return None, "no eligible look with a sourced stat"
+    def score(item):
+        _, r = item
+        rising = r.get("label") == "rising"
+        growth = (r.get("value") or {}).get("growth") or 0.0
+        return (rising, growth if rising else 0.0, r.get("velocity", 0.5))
+    ranked = sorted(rows, key=score, reverse=True)
+    rising = [x for x in ranked if x[1].get("label") == "rising"]
+    choice = next((x for x in rising if x[0] != previous), None) or ranked[0]
+    lid, r = choice
+    v = r.get("value") or {}
+    reason = (f"fastest-rising sourced stat: {v.get('termLabel')} {round((v.get('growth') or 0) * 100):+d}%"
+              if r.get("label") == "rising" else f"highest trend velocity ({r.get('velocity')})")
+    return lid, reason
+
+
+def update_drop(result: dict, now: datetime) -> str | None:
+    """Start this ISO week's drop with an automatically chosen hero (apps/web/lib/engine/drops.json)."""
+    looks = json.loads(LOOKS_FILE.read_text())
+    d = json.loads(DROPS_FILE.read_text()) if DROPS_FILE.exists() else {"current": None, "drops": {}}
+    prev_hero = (d["drops"].get(d.get("current")) or {}).get("hero") if d.get("current") else None
+    hero, reason = pick_hero(result, looks, prev_hero)
+    if not hero:
+        print(f"Drop unchanged: {reason}")
+        return None
+    monday = (now - timedelta(days=now.weekday())).date()
+    drop_id = f"{monday:%G-w%V}"
+    d["drops"][drop_id] = {"label": "This week's drop", "date": monday.isoformat(), "hero": hero,
+                           "chosen": "auto", "reason": reason}
+    d["current"] = drop_id
+    for old in sorted(d["drops"], key=lambda k: d["drops"][k]["date"])[:-KEEP_DROPS]:
+        del d["drops"][old]
+    DROPS_FILE.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+    print(f"Drop {drop_id}: hero {hero} ({reason})")
+    return hero
+
+
 def main() -> int:
     if "--rescore" in sys.argv:
         return rescore()
@@ -376,6 +425,7 @@ def main() -> int:
         print(f"Pipeline failed ({type(e).__name__}: {e}); keeping the previous trends.json.", file=sys.stderr)
         return 1
     write(result)
+    update_drop(result, datetime.now(timezone.utc))
     return 0
 
 

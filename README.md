@@ -72,11 +72,11 @@ Worst case ≈ $1.20/week (2 drafts approved); most weeks $0–0.40. Set a hard 
 
 Every look is an executable spec: photo on her hand tone, shades (verified codes styled for the tech, the rest marked approximate), technique, honest time and price, and the techs who can do exactly it.
 
-- **Weekly drop** (`lib/engine/drops.json`): the current drop's hero look opens the home page full-bleed (tone switch, proof line with source and week, price, time, Book). Looks carry `dropId`, `dropDate`, `active`; inactive looks leave the feed but keep their pages.
+- **Weekly drop** (`lib/engine/drops.json`): every Monday the trends job starts a new drop and picks its hero automatically: the active look with a photo whose sourced stat is rising fastest (not last week's hero if another look is rising; highest velocity if nothing is). The hero opens the home page full-bleed (tone switch, proof line with source and week, price, time, Book). Looks carry `dropId`, `dropDate`, `active`; inactive looks leave the feed but keep their pages.
 - **Asked for → Got**: optional `resultPhoto` on a look renders a side-by-side pair above the description; absent → nothing.
 - **Trend provenance**: pipeline stats carry `source`, `asOf` and the value as data; the site shows only sourced stats no older than 14 days (`present()` in the engine), with "YouTube · week of …". No two looks show the same stat (enforced in the pipeline and a test).
 - **Booking requests** (concierge phase): `/looks/[id]/book` stores name, contact, preferred day/time and note in `booking_requests` (Neon) and confirms "Request sent — we'll confirm by message". `bookableBy` on looks + `/techs/[slug]` (one sample tech in `lib/engine/techs.json`) is the menu page for partner techs. Inbox: `/admin/requests?key=<ADMIN_KEY>` (set `ADMIN_KEY` in Vercel), with the 7-day funnel.
-- **Share card**: `/looks/[id]/card` renders a 1080×1350 PNG (photo with the mark, name, shades with codes, price, time). "Share to my tech" shares it as a file via the Web Share API, else the spec link, else copies the link.
+- **Share card**: `/looks/[id]/card` renders a 1080×1350 PNG in the site's fonts (Bricolage Grotesque, DM Sans; OFL, embedded via `lib/cardFonts.ts`) (photo with the mark, name, shades with codes, price, time). "Share to my tech" shares it as a file via the Web Share API, else the spec link, else copies the link.
 - **Funnel events**: `look_view`, `save`, `share_tap`, `booking_request` (plus impressions, tone switches) go to the `events` table; `/status` shows the 7-day funnel.
 
 ## Users: profile, saved looks, salon
