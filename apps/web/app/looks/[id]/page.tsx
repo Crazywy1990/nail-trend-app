@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
@@ -44,7 +45,7 @@ export default async function LookPage({ params }: Props) {
         <article className="card detail">
           <div className="detail-media">
             <TonePhoto uid={uid} lookId={l.id} photos={l.photoBySkinTone} initial={profile.skinTone} pos={l.photoPos}
-              alt={l.photoAlt || l.name} ai={l.photoSource !== "original"} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+              alt={l.photoAlt || l.name} ai={wmLabel(l.photoSource)} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
             <SaveButton uid={uid} lookId={l.id} initial={saved.includes(l.id)} />
           </div>
           <div className="card-body">

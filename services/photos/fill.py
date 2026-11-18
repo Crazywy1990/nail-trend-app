@@ -29,8 +29,8 @@ SEED_LOOKS = g.ROOT / "services/api/app/seed/looks.json"
 PUBLIC = g.ROOT / "apps/web/public/looks"
 TONES = ("medium", "light", "deep")
 SKIN = {
-    "light": "light, fair skin with a neutral undertone and a few faint freckles",
-    "deep": "deep, rich dark-brown skin with a warm undertone",
+    "light": "light, fair skin with a neutral undertone; smooth, even and refined, no freckles or spots, minimal creases",
+    "deep": "deep, rich dark-brown skin with a warm undertone; smooth, even and refined, no spots, minimal creases",
 }
 
 
@@ -38,8 +38,8 @@ def tone_prompt(look: dict, tone: str) -> str:
     return (
         f"Edit this photo. Keep everything exactly the same: the nails (shape, length, color, finish and any nail "
         f"art: {look['technique']}), every ring and accessory, the props, the fabric, the background, the "
-        f"composition, the camera angle and the lighting. Change only the hand's skin to {SKIN[tone]}, with "
-        f"natural skin texture and realistic knuckles and cuticles. The hand stays anatomically correct. "
+        f"composition, the camera angle and the lighting. Change only the hand's skin to {SKIN[tone]}: "
+        f"softly retouched like a high-end beauty ad but still real (fine pores visible, never plastic). The hand stays anatomically correct. "
         f"No text, no watermark."
     )
 

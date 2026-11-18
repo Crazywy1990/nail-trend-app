@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import { getLook } from "@/lib/engine";
 import { submitOnboarding } from "@/lib/actions";
 import { PAIRS } from "@/lib/onboarding";
@@ -75,7 +76,7 @@ export default async function Start() {
                     <label key={l.id} className="pair-opt">
                       <input type="radio" name={`pair${i}`} value={l.id} defaultChecked={chosen === l.id} />
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <span className="wm-box"><img src={l.photoBySkinTone?.[p.skinTone] ?? l.photoBySkinTone?.medium ?? ""} alt={l.name} loading="lazy" /><Watermark ai={l.photoSource !== "original"} /></span>
+                      <span className="wm-box"><img src={l.photoBySkinTone?.[p.skinTone] ?? l.photoBySkinTone?.medium ?? ""} alt={l.name} loading="lazy" /><Watermark ai={wmLabel(l.photoSource)} /></span>
                       <span>{l.name}</span>
                     </label>
                   ))}

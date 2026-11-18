@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import { BottomNav } from "@/components/BottomNav";
 import { getLook } from "@/lib/engine";
 import { factChips, isDarkTint, tintFor } from "@/lib/format";
@@ -29,7 +30,7 @@ export default async function Saved() {
                   <a href={`/looks/${l.id}`} className="thumb" style={photo ? undefined : { background: tintFor(l.colorFamily), color: isDarkTint(l.colorFamily) ? "#fff" : undefined }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     {photo ? <img src={photo} alt={l.photoAlt ?? l.name} loading="lazy" /> : null}
-                    {photo ? <Watermark ai={l.photoSource !== "original"} /> : null}
+                    {photo ? <Watermark ai={wmLabel(l.photoSource)} /> : null}
                   </a>
                   <div className="row-text">
                     <a href={`/looks/${l.id}`} className="row-name">{l.name}</a>

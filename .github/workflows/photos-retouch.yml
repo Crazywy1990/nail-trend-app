@@ -1,0 +1,43 @@
+name: Retouch skin (AI)
+
+# Smooths the hand's skin on existing look photos (nails and scene unchanged), with an AI check.
+# Resumable: assets/looks/retouched.json records finished photos, so reruns only do what's left.
+on:
+  workflow_dispatch:
+    inputs:
+      max:
+        description: "Most photos to retouch this run (~$0.22 each incl. review)"
+        required: false
+        default: "80"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-writes
+  cancel-in-progress: false
+
+jobs:
+  retouch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Retouch
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python services/photos/retouch.py --max "${{ inputs.max || '80' }}"
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/looks apps/web/public/looks apps/web/lib/engine/looks.json
+          if git diff --cached --quiet; then echo "Nothing retouched."; exit 0; fi
+          git commit -m "Retouch skin on look photos $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
+          git push origin HEAD:main

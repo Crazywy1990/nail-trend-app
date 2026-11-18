@@ -32,7 +32,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
           {src ? <img src={src} width={1080} height={810} style={{ objectFit: "cover" }} alt="" /> : null}
           <div style={{ position: "absolute", right: 40, bottom: 36, display: "flex", flexDirection: "column", alignItems: "flex-end", color: "rgba(255,255,255,0.85)", textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
             <div style={{ fontSize: 44, fontWeight: 700, fontFamily: "Bricolage Grotesque" }}>AllTen</div>
-            {l.photoSource !== "original" ? <div style={{ fontSize: 18 }}>AI-generated image</div> : null}
+            {l.photoSource !== "original" ? <div style={{ fontSize: 18 }}>{l.photoSource === "edited" ? "AI-retouched image" : "AI-generated image"}</div> : null}
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", padding: "40px 56px", gap: 18, flexGrow: 1 }}>

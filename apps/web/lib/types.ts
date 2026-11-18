@@ -36,8 +36,8 @@ export type Look = {
   /** Tech/salon slugs that can book exactly this look (lib/engine/techs.json). */
   bookableBy?: string[];
   resultPhoto?: ResultPhoto | null;
-  /** "generated" (our AI image pipeline) or "original". */
-  photoSource?: "generated" | "original";
+  /** "generated" (our AI image pipeline), "edited" (an original, AI-retouched) or "original". */
+  photoSource?: "generated" | "edited" | "original";
   /** Card badge from the trend pipeline ("↑ Rising" or "↓ Cooling"); null when steady; absent on sample data. */
   trendBadge?: string | null;
   shades: Shade[];

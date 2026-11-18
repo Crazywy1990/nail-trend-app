@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import { BottomNav } from "@/components/BottomNav";
 import { HeroPhoto } from "@/components/Hero";
 import { SearchIcon } from "@/components/Icons";
@@ -56,7 +57,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
     <div className="shell shell-wide">
       {hero ? (
         <HeroPhoto uid={uid} lookId={hero.id} photos={hero.photoBySkinTone} initial={profile.skinTone}
-          alt={hero.photoAlt || hero.name} pos={hero.photoPos} ai={hero.photoSource !== "original"}>
+          alt={hero.photoAlt || hero.name} pos={hero.photoPos} ai={wmLabel(hero.photoSource)}>
           <div className="hero-kicker">{drop.label} · {dropDate}</div>
           <h1 className="hero-title"><a href={`/looks/${hero.id}`}>{hero.name}</a></h1>
           {!hero.trendIsPlaceholder && hero.trendProof.text ? (

@@ -5,7 +5,7 @@ import { Watermark } from "./Watermark";
 export function PhotoSlot({
   photo, pos, alt, tint, dark, children, priority, ai = true, wmCorner = "bottom",
 }: {
-  ai?: boolean;
+  ai?: boolean | string;
   wmCorner?: "bottom" | "top";
   photo: string | null;
   pos?: string;

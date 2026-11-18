@@ -13,7 +13,7 @@ const LABEL: Record<Tone, string> = { light: "Light", medium: "Medium", deep: "D
  */
 export function TonePhoto(p: {
   uid: string; lookId: string; photos: Partial<Record<Tone, string | null>>; initial: string;
-  alt: string; pos?: string; ai?: boolean; tint?: string; dark?: boolean; priority?: boolean;
+  alt: string; pos?: string; ai?: boolean | string; tint?: string; dark?: boolean; priority?: boolean;
 }) {
   const tones = (["light", "medium", "deep"] as Tone[]).filter((t) => p.photos[t]);
   const start = (tones.includes(p.initial as Tone) ? p.initial : tones.includes("medium") ? "medium" : tones[0]) as Tone | undefined;

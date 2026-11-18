@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
@@ -34,7 +35,7 @@ export default async function TechPage({ params }: Props) {
           {looks.map((l) => (
             <article key={l.id} className="card">
               <a href={`/looks/${l.id}`} aria-label={l.name}>
-                <PhotoSlot photo={photoFor(l, skinTone)} ai={l.photoSource !== "original"} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} />
+                <PhotoSlot photo={photoFor(l, skinTone)} ai={wmLabel(l.photoSource)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} />
               </a>
               <div className="card-body">
                 <h3 className="card-title"><a href={`/looks/${l.id}`} style={{ textDecoration: "none" }}>{l.name}</a></h3>

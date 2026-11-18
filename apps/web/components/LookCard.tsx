@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import { factChips, isDarkTint, slotLabel, styleLine, tintFor } from "@/lib/format";
 import type { Pick } from "@/lib/types";
 import { CardActions } from "./CardActions";
@@ -11,7 +12,7 @@ export function LookCard({ pick, uid, setId, priority, saved }: { pick: Pick; ui
   const l = pick.look;
   return (
     <article className="card" aria-labelledby={`t-${l.id}`}>
-      <PhotoSlot photo={pick.photo} ai={l.photoSource !== "original"} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority={priority}>
+      <PhotoSlot photo={pick.photo} ai={wmLabel(l.photoSource)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority={priority}>
         {l.trendBadge && !l.trendIsPlaceholder ? <span className="badge badge-trend">{l.trendBadge}</span> : null}
         <SaveButton uid={uid} lookId={l.id} initial={saved} setId={setId} slot={pick.slot} position={pick.position} />
         {pick.slot === "stretch" ? <span className="badge badge-slot">{slotLabel(pick.slot, l)}</span> : null}
@@ -44,7 +45,7 @@ export function LookRow({ pick }: { pick: Pick }) {
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={pick.photo} alt="" style={{ objectPosition: l.photoPos }} />
-            <Watermark ai={l.photoSource !== "original"} />
+            <Watermark ai={wmLabel(l.photoSource)} />
           </>
         ) : (
           <span className="sr-only">Photo coming soon</span>

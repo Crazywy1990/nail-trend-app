@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "@/components/Icons";
@@ -39,7 +40,7 @@ export default async function BookPage({ params, searchParams }: Props) {
       <main className="main">
         <a className="back" href={tech ? `/techs/${tech.slug}` : `/looks/${l.id}`}><ArrowLeft size={20} /> {tech ? tech.name : l.name}</a>
         <div className="book-look">
-          <PhotoSlot photo={photoFor(l, skinTone)} ai={l.photoSource !== "original"} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} />
+          <PhotoSlot photo={photoFor(l, skinTone)} ai={wmLabel(l.photoSource)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} />
           <div>
             <div className="label">Book exactly this</div>
             <h1 className="h1" style={{ fontSize: 26 }}>{l.name}</h1>

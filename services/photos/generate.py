@@ -36,8 +36,10 @@ COLOR_WORDS = {
 }
 
 STYLE = (
-    "Match the photographic style of the two reference photos exactly: an editorial close-up of one woman's hand, "
-    "warm-toned medium skin with natural texture and a few freckles, soft directional window light, shallow depth "
+    "Match the framing, lighting and fabric styling of the two reference photos: an editorial close-up of one woman's hand. "
+    "SKIN: warm-toned medium skin that is smooth, even and refined, like a high-end nail-polish or hand-cream ad: "
+    "no freckles, no spots, minimal knuckle creases, softly retouched but still real (visible fine pores, never "
+    "plastic or waxy). The skin must be smoother than in the references. Soft directional window light, shallow depth "
     "of field, rich tactile fabric filling the background, muted elegant palette, shot on a full-frame camera with "
     "a macro lens, 4:3 landscape framing. Do NOT copy the nail color, nail art or jewelry from the references; they "
     "show style only. The hand must be anatomically correct: one hand, four fingers and a thumb, natural joints, "

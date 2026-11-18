@@ -39,6 +39,8 @@ Look at the photo and score each item 1-5 (5 = fully correct, 3 = noticeable pro
   finish_match: the finish/technique is visibly what the spec says (e.g. chrome sheen, magnetic cat-eye stripe, matte, sheer jelly, French tips, aura glow)
   shape_length_match: nail shape and length match the spec, consistent across nails
   hand_anatomy: one natural hand, correct finger count and joints, no fused/extra/missing fingers, nails sit naturally
+  skin_finish: skin is smooth, even and refined like a beauty ad (5) — few or no freckles/spots, soft creases — without
+    looking plastic; score 2 or lower if freckles, blotches or deep wrinkles are prominent
   photo_quality: in focus, realistic, no text/watermark/artifacts, nails clearly visible
   spec_realism: the technique is doable in a standard salon appointment and price/time fit a typical US salon
   spec_consistency: name, technique, shades, finish and color family agree with each other
@@ -51,6 +53,7 @@ Score 1-5:
   scene_unchanged: same rings/accessories, props, fabric, background, framing and light
   tone_correct: the skin in the second photo clearly is {tone_desc}, with natural texture
   hand_anatomy: natural hand, correct fingers and joints
+  skin_finish: the second photo's skin is smooth, even and refined (few or no freckles/spots, soft creases) without looking plastic
 Return JSON: {{"scores": {{...}}, "issues": [short concrete problems], "photo_fix": "one sentence of what to correct, or empty"}}"""
 
 

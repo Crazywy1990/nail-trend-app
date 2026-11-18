@@ -94,6 +94,10 @@ Every look is an executable spec: photo on her hand tone, shades (verified codes
 
 Clean originals live in `assets/looks/`; the site serves the same clean files from `apps/web/public/looks/`. The AllTen watermark is drawn as an overlay inside every photo container (`components/Watermark.tsx`): same corner, size (container-query units) and opacity on cards, list thumbnails, hero, detail page, onboarding and tech pages, so a crop can never clip it. Where UI covers the bottom-right (the hero's text block) the mark moves to the top-right instead of the UI moving. "AI-generated image" appears under it for generated photos (`photoSource: "generated"`). The share card bakes the same mark into its image.
 
+## Skin finish
+
+Feedback: the hands looked rough (freckles, creases). Every prompt now asks for smooth, even, refined skin in a beauty-ad finish that still looks real, and the AI reviewer scores `skin_finish` (prominent freckles, blotches or deep wrinkles fail and regenerate). Existing photos are retouched by the **Retouch skin (AI)** workflow (`services/photos/retouch.py`): skin only, nails and scene unchanged, checked by the reviewer, resumable via `assets/looks/retouched.json`. Retouched originals get `photoSource: "edited"` and the watermark line "AI-retouched image".
+
 ## Themes
 
 `apps/web/lib/engine/themes.json` defines Christmas, New Year's Eve, Valentine's Day, Spring, Summer, Halloween and Thanksgiving: trigger words, a palette (color families + finishes), a date window and a lead time. Typing a trigger word or tapping a theme chip filters to looks whose color is in the palette and ranks palette finishes higher. Without a search, the feed leans lightly toward the theme of today's date. The same file tells look discovery which holidays need more looks.

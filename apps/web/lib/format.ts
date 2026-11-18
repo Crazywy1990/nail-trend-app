@@ -50,3 +50,8 @@ export function tintFor(colorFamily: string): string {
   return `linear-gradient(135deg, ${a} 0%, ${b} 100%)`;
 }
 export const isDarkTint = (colorFamily: string) => ["red", "green", "brown", "blue", "multi"].includes(colorFamily);
+
+/** Second line of the watermark: what kind of image this is. */
+export function wmLabel(source: string | undefined): string | false {
+  return source === "original" ? false : source === "edited" ? "AI-retouched image" : "AI-generated image";
+}

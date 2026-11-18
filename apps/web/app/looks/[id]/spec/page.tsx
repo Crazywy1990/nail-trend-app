@@ -1,3 +1,4 @@
+import { wmLabel } from "@/lib/format";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PhotoSlot } from "@/components/PhotoSlot";
@@ -37,7 +38,7 @@ export default async function SpecSheet({ params, searchParams }: Props) {
           <h1 className="h1" style={{ fontSize: 28 }}>{l.name}</h1>
         </div>
         <article className="card">
-          <PhotoSlot photo={photoFor(l, tone)} ai={l.photoSource !== "original"} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+          <PhotoSlot photo={photoFor(l, tone)} ai={wmLabel(l.photoSource)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
           <div className="card-body">
             <dl className="dl">
               <dt>Shape</dt><dd>{l.shape}</dd>

@@ -12,7 +12,7 @@ type Tone = "light" | "medium" | "deep";
  */
 export function HeroPhoto(p: {
   uid: string; lookId: string; photos: Partial<Record<Tone, string | null>>; initial: string;
-  alt: string; pos?: string; ai?: boolean; children: React.ReactNode;
+  alt: string; pos?: string; ai?: boolean | string; children: React.ReactNode;
 }) {
   const tones = (["light", "medium", "deep"] as Tone[]).filter((t) => p.photos[t]);
   const [tone, setTone] = useState<Tone>((tones.includes(p.initial as Tone) ? p.initial : "medium") as Tone);
