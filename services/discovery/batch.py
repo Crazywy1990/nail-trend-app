@@ -77,16 +77,32 @@ def generate() -> int:
     catalog = json.loads(d.WEB_LOOKS.read_text())
     ids = {l["id"] for l in catalog}
     (STAGING / "photos").mkdir(parents=True, exist_ok=True)
-    out = {"batches": {}, "dropped": []}
-    jobs = [(b, s) for b, ss in seeds.items() for s in ss]
+    # Resume: keep earlier drafts and near-duplicate drops; retry only seeds that errored.
+    prev = json.loads((STAGING / "batch.json").read_text()) if (STAGING / "batch.json").exists() else {"batches": {}, "dropped": []}
+    out = {"batches": prev.get("batches", {}), "dropped": [x for x in prev.get("dropped", []) if x["why"].startswith("near-duplicate")]}
+    done = {it["look"]["draft"]["concept"] for items in out["batches"].values() for it in items} | {x["concept"] for x in out["dropped"]}
+    for items in out["batches"].values():
+        ids.update(it["look"]["id"] for it in items)
+        catalog.extend(it["look"] for it in items)
+    jobs = [(b, s) for b, ss in seeds.items() for s in ss if s["concept"] not in done]
+    print(f"{len(jobs)} seeds to draft ({len(done)} already done or dropped).")
+    out_of_credit = {"hit": False}
+
+    def guarded(s, b):
+        if out_of_credit["hit"]:
+            raise RuntimeError("skipped: OpenAI credit exhausted earlier in this run")
+        return draft_one(s, b, terms_cfg, catalog, ids, key)
+
     with cf.ThreadPoolExecutor(max_workers=int(os.environ.get("BATCH_WORKERS", "4"))) as ex:
-        futs = {ex.submit(draft_one, s, b, terms_cfg, catalog, ids, key): (b, s) for b, s in jobs}
+        futs = {ex.submit(guarded, s, b): (b, s) for b, s in jobs}
         for f in cf.as_completed(futs):
             b, s = futs[f]
             try:
                 look, terms, photo, review, attempts = f.result()
             except Exception as e:  # one failed seed shouldn't stop the batch
-                print(f"  FAIL {s['concept'][:50]}: {e}", file=sys.stderr)
+                if "insufficient_quota" in str(e) or "credit" in str(e).lower():
+                    out_of_credit["hit"] = True
+                print(f"  FAIL {s['concept'][:50]}: {str(e)[:160]}", file=sys.stderr)
                 out["dropped"].append({"concept": s["concept"], "why": str(e)[:200]}); continue
             if review.get("near_duplicate"):
                 out["dropped"].append({"concept": s["concept"], "why": f"near-duplicate of {review.get('duplicate_of')}"}); continue
@@ -98,7 +114,9 @@ def generate() -> int:
             out["batches"].setdefault(b, []).append({"look": look, "terms": terms, "review": review, "attempts": attempts})
             print(f"  ok   batch {b}: {look['id']}")
     (STAGING / "batch.json").write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
-    print(f"Drafted {sum(len(x) for x in out['batches'].values())} looks; dropped {len(out['dropped'])}.")
+    print(f"Drafted {sum(len(x) for x in out['batches'].values())} looks in total; dropped {len(out['dropped'])}.")
+    if out_of_credit["hit"]:
+        print("::warning::OpenAI credit ran out. Add credit, then run this workflow again: it resumes with the remaining seeds.")
     return 0
 
 

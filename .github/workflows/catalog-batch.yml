@@ -27,6 +27,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pillow
+      - name: Restore earlier drafts (resume)
+        run: |
+          git fetch -q origin catalog-staging && git checkout origin/catalog-staging -- catalog-staging || echo "No earlier drafts."
+          git reset -q
       - name: Draft all seeds
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -40,11 +44,15 @@ jobs:
           git commit -m "Catalog batch drafts $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -f origin catalog-staging
           git checkout -q main
-      - name: Open batch 1
+      - name: Open batch 1 (unless a batch PR is already open or done)
         env:
           GH_TOKEN: ${{ github.token }}
           BATCH: "1"
-        run: bash .github/scripts/open-batch.sh
+        run: |
+          if gh pr list --state all --head catalog-batch-1 --json number --jq 'length' | grep -qv '^0$'; then
+            echo "Batch 1 already opened; later batches open as each batch PR is merged or closed."; exit 0
+          fi
+          bash .github/scripts/open-batch.sh
 
   next-batch:
     if: github.event_name == 'pull_request' && startsWith(github.event.pull_request.head.ref, 'catalog-batch-')
