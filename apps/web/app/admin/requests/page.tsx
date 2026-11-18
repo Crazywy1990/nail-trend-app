@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getLook } from "@/lib/engine";
 import { funnel, listBookingRequests } from "@/lib/store";
+import { windowLabel } from "@/lib/timeWindows";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Booking requests", robots: { index: false, follow: false } };
@@ -26,7 +27,7 @@ export default async function Requests({ searchParams }: { searchParams: { key?:
                   <td>{r.createdAt?.slice(0, 16).replace("T", " ")}</td>
                   <td><a href={`/looks/${r.lookId}`}>{getLook(r.lookId)?.name ?? r.lookId}</a></td>
                   <td>{r.techSlug ?? "—"}</td><td>{r.name}</td><td>{r.contact}</td>
-                  <td>{r.preferredDate ?? "any day"} · {r.timeWindow}</td><td>{r.note ?? ""}</td><td>{r.status}</td>
+                  <td>{r.preferredDate ?? "any day"} · {windowLabel(r.timeWindow)}</td><td>{r.note ?? ""}</td><td>{r.status}</td>
                 </tr>
               ))}
             </tbody>

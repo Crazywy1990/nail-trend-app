@@ -1,4 +1,5 @@
 import { submitBookingRequest } from "@/lib/actions";
+import { TIME_WINDOWS } from "@/lib/timeWindows";
 
 /** Booking request for one look (optionally with one tech). Server action, works without JavaScript. */
 export function BookingForm({ lookId, tech, error }: { lookId: string; tech?: string | null; error?: string }) {
@@ -14,10 +15,7 @@ export function BookingForm({ lookId, tech, error }: { lookId: string; tech?: st
         <label className="field">Preferred day <small>optional</small><input type="date" name="date" min={today} /></label>
         <label className="field">Time
           <select name="window" defaultValue="any">
-            <option value="any">Any time</option>
-            <option value="morning">Morning</option>
-            <option value="afternoon">Afternoon</option>
-            <option value="evening">Evening</option>
+            {TIME_WINDOWS.map((w) => <option key={w.value} value={w.value}>{w.label}</option>)}
           </select>
         </label>
       </div>

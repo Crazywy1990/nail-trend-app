@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { PAIRS } from "./onboarding";
+import { TIME_WINDOWS } from "./timeWindows";
 import { DEFAULT_PROFILE, createBookingRequest, getProfile, recordEvent, saveProfile, type UserProfile } from "./store";
 
 const uidOf = () => cookies().get("uid")?.value || "anon";
@@ -59,7 +60,7 @@ export async function resetProfile() {
   redirect("/start");
 }
 
-const WINDOWS = ["morning", "afternoon", "evening", "any"] as const;
+const WINDOWS = TIME_WINDOWS.map((w) => w.value);
 
 /** "Book this look": a booking request tied to one look (and optionally one tech). No payment, no calendar yet. */
 export async function submitBookingRequest(form: FormData) {
