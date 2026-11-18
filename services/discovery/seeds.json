@@ -1,0 +1,41 @@
+{
+  "_comment": "One-time catalog expansion: 30 concepts that fill gaps in the catalog (long lengths, coffin/oval/round shapes, French, jelly and nail-art finishes, greens/blues/whites, bridal, vacation and the holidays). Each becomes a full look via the same drafting, photo and AI-review steps as weekly discovery. Batches open as 3 review PRs in order.",
+  "batches": {
+    "1": [
+      {"concept": "Deep red velvet cat-eye with one tiny gold star accent nail", "finish": "cat-eye", "colorFamily": "red", "shape": "Square", "length": "short", "theme": "christmas"},
+      {"concept": "Evergreen jelly with sparse gold flakes", "finish": "jelly", "colorFamily": "green", "shape": "Oval", "length": "short", "theme": "christmas"},
+      {"concept": "Snowy milky white base with silver chrome micro-French tips", "finish": "french", "colorFamily": "white", "shape": "Round", "length": "short", "theme": "christmas"},
+      {"concept": "Minimal candy-cane: sheer nude with a thin red diagonal stripe on two accent nails", "finish": "art", "colorFamily": "red", "shape": "Almond", "length": "medium", "theme": "christmas"},
+      {"concept": "Champagne gold chrome, all over", "finish": "chrome", "colorFamily": "nude", "shape": "Almond", "length": "medium", "theme": "new-year"},
+      {"concept": "Midnight navy gloss with fine silver micro-glitter fade at the cuticle", "finish": "gloss", "colorFamily": "blue", "shape": "Coffin", "length": "medium", "theme": "new-year"},
+      {"concept": "Silver mirror-chrome French tips on a sheer nude base", "finish": "french", "colorFamily": "white", "shape": "Almond", "length": "long", "theme": "new-year"},
+      {"concept": "Icy blue jelly with frosted white tips", "finish": "jelly", "colorFamily": "blue", "shape": "Squoval", "length": "short", "theme": "winter"},
+      {"concept": "Cocoa brown cat-eye with a warm gold shimmer line", "finish": "cat-eye", "colorFamily": "brown", "shape": "Oval", "length": "medium", "theme": "winter"},
+      {"concept": "Soft pink jelly with tiny hand-painted red hearts on two nails", "finish": "art", "colorFamily": "pink", "shape": "Round", "length": "short", "theme": "valentines"}
+    ],
+    "2": [
+      {"concept": "Bridal: sheer pink 'your nails but better' with one pearl accent", "finish": "gloss", "colorFamily": "pink", "shape": "Oval", "length": "short", "occasion": "wedding"},
+      {"concept": "Classic crisp white French tips on a pink-nude base", "finish": "french", "colorFamily": "white", "shape": "Almond", "length": "long", "occasion": "wedding"},
+      {"concept": "Muted mauve gloss, office-safe", "finish": "gloss", "colorFamily": "pink", "shape": "Squoval", "length": "short", "occasion": "work"},
+      {"concept": "Greige suede-matte", "finish": "matte", "colorFamily": "nude", "shape": "Square", "length": "short", "occasion": "work"},
+      {"concept": "Baby-boomer ombre: nude fading to soft white at the tip", "finish": "french", "colorFamily": "nude", "shape": "Almond", "length": "medium", "occasion": "wedding"},
+      {"concept": "Sheer peach jelly with a thin gold cuff at the cuticle", "finish": "jelly", "colorFamily": "pink", "shape": "Round", "length": "short", "occasion": "date night"},
+      {"concept": "Lilac pearl chrome", "finish": "chrome", "colorFamily": "pink", "shape": "Oval", "length": "medium", "occasion": "date night"},
+      {"concept": "Glossy espresso brown", "finish": "gloss", "colorFamily": "brown", "shape": "Round", "length": "short", "occasion": "work"},
+      {"concept": "Olive green suede-matte", "finish": "matte", "colorFamily": "green", "shape": "Square", "length": "short", "occasion": "work"},
+      {"concept": "Glossy navy with a gold micro-French tip", "finish": "french", "colorFamily": "blue", "shape": "Squoval", "length": "short", "occasion": "date night"}
+    ],
+    "3": [
+      {"concept": "Cherry red high-gloss with a fine chrome outline", "finish": "gloss", "colorFamily": "red", "shape": "Coffin", "length": "long", "occasion": "party"},
+      {"concept": "Juicy coral-pink jelly", "finish": "jelly", "colorFamily": "pink", "shape": "Oval", "length": "short", "occasion": "vacation"},
+      {"concept": "Ocean blue aura: soft blue glow fading to sheer at the edges", "finish": "art", "colorFamily": "blue", "shape": "Almond", "length": "medium", "occasion": "vacation"},
+      {"concept": "Subtle leopard spots on a sheer nude base, two accent nails", "finish": "art", "colorFamily": "multi", "shape": "Almond", "length": "medium", "occasion": "party"},
+      {"concept": "Abstract neutral swirls: cream, taupe and cocoa lines on nude", "finish": "art", "colorFamily": "nude", "shape": "Almond", "length": "medium", "occasion": "date night"},
+      {"concept": "3D chrome droplets on milky white", "finish": "chrome", "colorFamily": "white", "shape": "Almond", "length": "medium", "occasion": "party"},
+      {"concept": "Pink-to-lilac chrome aura", "finish": "chrome", "colorFamily": "pink", "shape": "Coffin", "length": "long", "occasion": "party"},
+      {"concept": "Deep green French tips on a sheer nude base", "finish": "french", "colorFamily": "green", "shape": "Squoval", "length": "short", "occasion": "work"},
+      {"concept": "Deep plum velvet cat-eye", "finish": "cat-eye", "colorFamily": "red", "shape": "Almond", "length": "long", "occasion": "date night"},
+      {"concept": "Mismatched pastel French: a different soft pastel tip on each nail", "finish": "french", "colorFamily": "multi", "shape": "Round", "length": "short", "occasion": "vacation"}
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+name: Catalog batch
+
+# One-time catalog expansion from services/discovery/seeds.json.
+# "Run workflow" drafts every seed (spec, photo, AI review) onto the catalog-staging branch and
+# opens batch 1 as a review PR. Merging or closing a batch PR opens the next batch.
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: catalog-writes
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Draft all seeds
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python services/discovery/batch.py generate
+      - name: Save drafts to the catalog-staging branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B catalog-staging
+          git add -f catalog-staging
+          git commit -m "Catalog batch drafts $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f origin catalog-staging
+          git checkout -q main
+      - name: Open batch 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BATCH: "1"
+        run: bash .github/scripts/open-batch.sh
+
+  next-batch:
+    if: github.event_name == 'pull_request' && startsWith(github.event.pull_request.head.ref, 'catalog-batch-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Open the next batch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DONE: ${{ github.event.pull_request.head.ref }}
+        run: |
+          N=$(( ${DONE#catalog-batch-} + 1 ))
+          BATCH=$N bash .github/scripts/open-batch.sh
