@@ -13,7 +13,7 @@ export function CardActions(p: {
   const base = { userId: p.uid, lookId: p.lookId, setId: p.setId, slot: p.slot, position: p.position };
 
   async function share() {
-    const url = `${window.location.origin}/looks/${p.lookId}/spec?ref=share_tech&utm_source=share`;
+    const url = `${process.env.NEXT_PUBLIC_SITE_ORIGIN || window.location.origin}/looks/${p.lookId}/spec?ref=share_tech&utm_source=share`;
     logEvent({ ...base, type: "share_tap" });
     try {
       if (navigator.share) {

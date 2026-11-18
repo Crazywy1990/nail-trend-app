@@ -11,7 +11,7 @@ import { logEvent } from "@/lib/events";
 export function ShareToTech(p: { uid: string; lookId: string; lookName: string; primary?: boolean; tone?: string }) {
   const [note, setNote] = useState("");
   async function share() {
-    const origin = window.location.origin;
+    const origin = process.env.NEXT_PUBLIC_SITE_ORIGIN || window.location.origin;
     const url = `${origin}/looks/${p.lookId}/spec?ref=share_tech&utm_source=share${p.tone && p.tone !== "medium" ? `&tone=${p.tone}` : ""}`;
     const text = `Can you do this set? ${p.lookName}. Shades, shape and time are on the AllTen spec: ${url}`;
     logEvent({ userId: p.uid, type: "share_tap", lookId: p.lookId });
