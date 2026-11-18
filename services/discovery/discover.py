@@ -215,6 +215,16 @@ def pick(v, allowed, default):
     return v if v in allowed else default
 
 
+def _drop() -> tuple[str, str]:
+    """The drop new looks join: the current one in drops.json."""
+    p = ROOT / "apps/web/lib/engine/drops.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        return d["current"], d["drops"][d["current"]]["date"]
+    today = datetime.now(timezone.utc).date()
+    return f"{today:%G-w%V}", today.isoformat()
+
+
 def to_look(d: dict, term_id: str, terms_cfg: dict, existing_ids: set[str]) -> tuple[dict, list[str]]:
     name = str(d.get("name") or terms_cfg["terms"][term_id]["label"].title()).strip()[:60]
     lid = slug(name)
@@ -249,6 +259,10 @@ def to_look(d: dict, term_id: str, terms_cfg: dict, existing_ids: set[str]) -> t
         "why": None,
         "whyInputs": {},
         "draft": {"from": term_id, "created": datetime.now(timezone.utc).date().isoformat()},
+        # weekly drop + booking hooks (apps/web/lib/engine/drops.json, techs.json)
+        "dropId": _drop()[0], "dropDate": _drop()[1], "active": True,
+        "bookableBy": [], "resultPhoto": None, "photoSource": "generated",
+        "trendSource": None, "trendAsOf": None,
     }
     look["photoAlt"] = f"{name}: {look['technique'].lower()} on a warm-toned hand"
     return look, terms
@@ -263,6 +277,10 @@ SNAKE = {"colorFamily": "color_family", "priceRange": "price_range", "durationMi
 
 def to_seed(look: dict) -> dict:
     s = {SNAKE.get(k, k): v for k, v in look.items() if k != "draft"}
+    for k, v in {"dropId": "drop_id", "dropDate": "drop_date", "bookableBy": "bookable_by", "resultPhoto": "result_photo",
+                 "photoSource": "photo_source", "trendSource": "trend_source", "trendAsOf": "trend_as_of"}.items():
+        if k in s:
+            s[v] = s.pop(k)
     s["trend_proof"] = {"text": look["trendProof"]["text"], "is_placeholder": look["trendProof"]["isPlaceholder"]}
     return s
 
@@ -324,6 +342,8 @@ def main() -> int:
                 # shown on the site: the platform is deliberately not named
                 look["trendProof"] = {"text": "Inspired by one of the most-saved nail designs on social media this week",
                                       "isPlaceholder": False}
+                look["trendSource"] = f"Social media · saves on top posts · week of {now:%b %-d}"
+                look["trendAsOf"] = now.date().isoformat()
             # photo → independent AI review → one regeneration with the reviewer's fix if it fails
             fix, review, attempts = "", None, 0
             while attempts < PHOTO_ATTEMPTS:

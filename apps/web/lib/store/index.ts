@@ -144,3 +144,53 @@ export async function dbHealth(): Promise<{ configured: boolean; connected?: boo
     return { configured: true, connected: false, error: e instanceof Error ? e.message.slice(0, 200) : String(e) };
   }
 }
+
+// ---------------------------------------------------------------- booking requests (concierge phase)
+export type BookingRequest = {
+  id?: number; uid: string; lookId: string; techSlug: string | null;
+  name: string; contact: string; preferredDate: string | null; timeWindow: string; note: string | null;
+  status?: string; createdAt?: string;
+};
+
+async function ensureBookingTable() {
+  if (!sql) return;
+  await ensureSchema();
+  await sql`CREATE TABLE IF NOT EXISTS booking_requests (
+    id bigserial PRIMARY KEY, uid text, look_id text NOT NULL, tech_slug text,
+    name text NOT NULL, contact text NOT NULL, preferred_date date, time_window text, note text,
+    status text NOT NULL DEFAULT 'new', created_at timestamptz NOT NULL DEFAULT now())`;
+}
+
+/** Stores a request. Returns false only when there is no database to keep it in. */
+export async function createBookingRequest(r: BookingRequest): Promise<boolean> {
+  console.log(JSON.stringify({ tag: "allten-booking-request", at: new Date().toISOString(), ...r }));
+  if (!sql) return false;
+  await ensureBookingTable();
+  await sql`INSERT INTO booking_requests (uid, look_id, tech_slug, name, contact, preferred_date, time_window, note)
+            VALUES (${r.uid}, ${r.lookId}, ${r.techSlug}, ${r.name}, ${r.contact}, ${r.preferredDate}, ${r.timeWindow}, ${r.note})`;
+  return true;
+}
+
+export async function listBookingRequests(limit = 200): Promise<BookingRequest[]> {
+  if (!sql) return [];
+  await ensureBookingTable();
+  const rows = await sql`SELECT id, uid, look_id, tech_slug, name, contact, preferred_date::text AS preferred_date, time_window, note, status, created_at::text AS created_at
+                         FROM booking_requests ORDER BY created_at DESC LIMIT ${limit}`;
+  return rows.map((x) => ({
+    id: x.id as number, uid: x.uid as string, lookId: x.look_id as string, techSlug: (x.tech_slug as string) ?? null,
+    name: x.name as string, contact: x.contact as string, preferredDate: (x.preferred_date as string) ?? null,
+    timeWindow: x.time_window as string, note: (x.note as string) ?? null, status: x.status as string, createdAt: x.created_at as string,
+  }));
+}
+
+/** Funnel counts for the last N days (look_view → save → share_tap → booking_request). */
+export async function funnel(days = 7): Promise<Record<string, number> | null> {
+  if (!sql) return null;
+  await ensureSchema();
+  const rows = await sql`SELECT type, count(*)::int AS n FROM events
+                         WHERE at > now() - make_interval(days => ${days}) AND type IN ('look_view','save','share_tap','booking_request')
+                         GROUP BY type`;
+  const out: Record<string, number> = { look_view: 0, save: 0, share_tap: 0, booking_request: 0 };
+  rows.forEach((r) => { out[r.type as string] = r.n as number; });
+  return out;
+}

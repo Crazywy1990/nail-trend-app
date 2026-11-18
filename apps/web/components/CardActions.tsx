@@ -14,7 +14,7 @@ export function CardActions(p: {
 
   async function share() {
     const url = `${window.location.origin}/looks/${p.lookId}/spec?ref=share_tech&utm_source=share`;
-    logEvent({ ...base, type: "share_click" });
+    logEvent({ ...base, type: "share_tap" });
     try {
       if (navigator.share) {
         await navigator.share({ title: "AllTen — shades for your tech", text: `Can you do this set? ${p.lookName} (spec sheet from AllTen)`, url });

@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { ArrowLeft } from "@/components/Icons";
-import { PhotoSlot } from "@/components/PhotoSlot";
-import { isDarkTint, tintFor } from "@/lib/format";
 import { ProofStrip } from "@/components/ProofStrip";
+import { ShadeList } from "@/components/ShadeList";
 import { ShareToTech } from "@/components/ShareToTech";
-import { TrackLanding } from "@/components/Track";
+import { TonePhoto } from "@/components/ToneToggle";
+import { TrackLanding, TrackView } from "@/components/Track";
+import { SaveButton } from "@/components/SaveButton";
 import { fetchLook } from "@/lib/api";
-import { factChips, metaLine, photoFor, specLine, styleLine } from "@/lib/format";
-import { getProfile } from "@/lib/store";
+import { factChips, isDarkTint, metaLine, styleLine, tintFor } from "@/lib/format";
+import { getProfile, listSaved } from "@/lib/store";
 import { requestUid } from "@/lib/request";
 
 type Props = { params: { id: string } };
@@ -17,45 +18,69 @@ type Props = { params: { id: string } };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const l = await fetchLook(params.id);
   if (!l) return { title: "Look not found" };
-  const photo = photoFor(l);
-  const description = `${l.technique}. ${metaLine(l)}. See the shades and send the spec to your nail tech.`;
+  const description = `${l.technique}. ${metaLine(l)}. See it. Book exactly it.`;
+  const card = `/looks/${l.id}/card`;
   return {
     title: l.name,
     description,
     alternates: { canonical: `/looks/${l.id}` },
-    openGraph: { title: l.name, description, type: "article", images: photo ? [{ url: photo, alt: l.photoAlt || l.name }] : [] },
-    twitter: { card: photo ? "summary_large_image" : "summary", title: l.name, description },
+    openGraph: { title: l.name, description, type: "article", images: [{ url: card, width: 1080, height: 1350, alt: l.photoAlt || l.name }] },
+    twitter: { card: "summary_large_image", title: l.name, description, images: [card] },
   };
 }
 
-/** Public look page: the landing spot for Pinterest pins, bio links and Google results. No login. */
+/** A look as an executable spec: photo on her hand tone, proof, exact shades, honest time and price, book or share. */
 export default async function LookPage({ params }: Props) {
   const l = await fetchLook(params.id);
   if (!l) notFound();
   const uid = requestUid();
+  const [profile, saved] = await Promise.all([getProfile(uid), listSaved(uid)]);
+  const r = l.resultPhoto;
 
   return (
     <div className="shell">
       <main className="main">
         <a className="back" href="/"><ArrowLeft size={20} /> Discover</a>
-        <article className="card">
-          <PhotoSlot photo={photoFor(l, (await getProfile(requestUid())).skinTone)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+        <article className="card detail">
+          <div className="detail-media">
+            <TonePhoto uid={uid} lookId={l.id} photos={l.photoBySkinTone} initial={profile.skinTone} pos={l.photoPos}
+              alt={l.photoAlt || l.name} ai={l.photoSource !== "original"} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+            <SaveButton uid={uid} lookId={l.id} initial={saved.includes(l.id)} />
+          </div>
           <div className="card-body">
-            <ProofStrip proof={l.trendProof} />
+            <ProofStrip look={l} />
             <h1 className="card-title" style={{ fontSize: 26 }}>{l.name}</h1>
             <div className="facts">
               {factChips(l).map((f) => <span key={f} className="fact">{f}</span>)}
               <span className="muted">{styleLine(l)}</span>
             </div>
+
+            {r ? (
+              <section className="asked-got" aria-label="Asked for and got">
+                <figure>
+                  <div className="ag-img">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={l.photoBySkinTone?.[profile.skinTone] ?? l.photoBySkinTone?.medium ?? ""} alt={`Asked for: ${l.name}`} />
+                  </div>
+                  <figcaption>Asked for</figcaption>
+                </figure>
+                <span className="ag-arrow" aria-hidden="true">→</span>
+                <figure>
+                  <div className="ag-img">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={r.src} alt={r.alt} />
+                  </div>
+                  <figcaption>Got{r.caption ? ` · ${r.caption}` : ""}</figcaption>
+                </figure>
+              </section>
+            ) : null}
+
             <p className="why">{l.technique}.</p>
-            <div className="spec">
-              <div className="label">Shades for your tech</div>
-              <div className="spec-text">{specLine(l)}</div>
-            </div>
+            <ShadeList look={l} />
             <div className="actions">
               <a className="btn btn-primary" href={`/looks/${l.id}/book`}>Book this look</a>
               <div className="actions-row">
-                <ShareToTech uid={uid} lookId={l.id} lookName={l.name} />
+                <ShareToTech uid={uid} lookId={l.id} lookName={l.name} tone={profile.skinTone} />
                 <a className="btn" href="/">More looks for me</a>
               </div>
             </div>
@@ -64,6 +89,7 @@ export default async function LookPage({ params }: Props) {
       </main>
       <BottomNav current="" />
       <TrackLanding uid={uid} lookId={l.id} />
+      <TrackView uid={uid} lookId={l.id} />
     </div>
   );
 }

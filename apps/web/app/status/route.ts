@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { API_URL, USE_REMOTE_API } from "@/lib/api";
 import { LOOKS, RANKING_VERSION, TRENDS_UPDATED, discover } from "@/lib/engine";
-import { dbHealth } from "@/lib/store";
+import { dbHealth, funnel } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +20,7 @@ export async function GET() {
         looksWithRealTrendData: LOOKS.filter((l) => !l.trendProof.isPlaceholder).length,
         sampleSet: d.summary,
         database: await dbHealth(),
+        funnel7d: await funnel(7).catch(() => null),
         ms: Date.now() - started,
       });
     } catch (err) {

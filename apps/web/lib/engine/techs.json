@@ -1,0 +1,13 @@
+{
+  "techs": [
+    {
+      "slug": "sample-tech",
+      "name": "Sample Tech",
+      "studio": "AllTen Studio (sample profile)",
+      "city": "Bellevue, WA",
+      "placeholder": true,
+      "bio": "Gel and builder-gel specialist. This is a sample profile showing how a partner tech's menu will look; requests are handled by the AllTen team for now.",
+      "instagram": null
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import { PhotoSlot } from "@/components/PhotoSlot";
 import { isDarkTint, tintFor } from "@/lib/format";
 import { TrackLanding } from "@/components/Track";
 import { fetchLook } from "@/lib/api";
-import { photoFor, shadeLabel } from "@/lib/format";
+import { photoFor } from "@/lib/format";
 import { requestUid } from "@/lib/request";
 
 type Props = { params: { id: string }; searchParams?: { tone?: string } };
@@ -27,7 +27,7 @@ export default async function SpecSheet({ params, searchParams }: Props) {
   const l = await fetchLook(params.id);
   if (!l) notFound();
   const uid = requestUid();
-  const anyUnverified = l.shades.some((s) => s.code && !s.verified);
+  const anyUnverified = l.shades.some((s) => !(s.verified && s.code));
 
   return (
     <div className="shell">
@@ -37,7 +37,7 @@ export default async function SpecSheet({ params, searchParams }: Props) {
           <h1 className="h1" style={{ fontSize: 28 }}>{l.name}</h1>
         </div>
         <article className="card">
-          <PhotoSlot photo={photoFor(l, tone)} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
+          <PhotoSlot photo={photoFor(l, tone)} ai={l.photoSource !== "original"} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority />
           <div className="card-body">
             <dl className="dl">
               <dt>Shape</dt><dd>{l.shape}</dd>
@@ -48,8 +48,14 @@ export default async function SpecSheet({ params, searchParams }: Props) {
               <dt>Shades</dt>
               <dd>
                 {l.shades.length ? (
-                  <ul style={{ margin: 0, paddingLeft: 18, display: "flex", flexDirection: "column", gap: 4 }}>
-                    {l.shades.map((s) => <li key={s.name}>{shadeLabel(s)}</li>)}
+                  <ul className="shade-list">
+                    {l.shades.map((s) => (
+                      <li key={s.name}>
+                        {s.verified && s.code
+                          ? <><strong>{s.brand ? `${s.brand} ${s.name}` : s.name}</strong> <span className="code">{s.code}</span></>
+                          : <span>{s.brand ? `${s.brand} ${s.name}` : s.name} <span className="muted">(approximate)</span></span>}
+                      </li>
+                    ))}
                   </ul>
                 ) : "Match from the photo"}
               </dd>
@@ -58,7 +64,7 @@ export default async function SpecSheet({ params, searchParams }: Props) {
             </dl>
             {anyUnverified ? (
               <p className="muted" style={{ margin: 0 }}>
-                Shades marked &ldquo;code to verify&rdquo; haven&rsquo;t been checked against the brand catalog yet. Match by name and photo.
+                Shades marked &ldquo;approximate&rdquo; don&rsquo;t have a code checked against a retailer or pro listing yet. Match by name and photo.
               </p>
             ) : null}
           </div>

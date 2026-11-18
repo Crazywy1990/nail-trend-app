@@ -59,7 +59,17 @@
       "undertone": "warm",
       "jewelryMetal": "gold",
       "occasionFit": "work"
-    }
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [
+      "sample-tech"
+    ],
+    "resultPhoto": null,
+    "photoSource": "original",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "emerald-chrome-silver-star",
@@ -121,7 +131,17 @@
       "undertone": "warm",
       "jewelryMetal": "gold",
       "occasionFit": "work"
-    }
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [
+      "sample-tech"
+    ],
+    "resultPhoto": null,
+    "photoSource": "original",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "milky-pink-jelly-chrome",
@@ -156,7 +176,15 @@
     "photoPos": "center",
     "photoAlt": "Milky Pink Jelly · Chrome Top: sheer jelly, chrome topcoat on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "rose-glazed-chrome",
@@ -192,7 +220,17 @@
     "photoPos": "center",
     "photoAlt": "Rose Glazed Chrome: pearl chrome over sheer rose on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [
+      "sample-tech"
+    ],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "mocha-aura-brown-chrome",
@@ -227,7 +265,15 @@
     "photoPos": "center",
     "photoAlt": "Mocha Aura · Brown Chrome: airbrushed aura, brown chrome on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "cloudy-french-milk-bath",
@@ -276,7 +322,17 @@
     "photoPos": "center",
     "photoAlt": "Cloudy French · Milk Bath Base: sheer coat over white tips on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [
+      "sample-tech"
+    ],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "built-in-pearl-oat-white",
@@ -318,7 +374,15 @@
     "photoPos": "center",
     "photoAlt": "Built-In Pearl · Oat White: pearl powder over milky white on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "chocolate-suede-matte",
@@ -353,7 +417,17 @@
     "photoPos": "center",
     "photoAlt": "Chocolate Suede · Matte: matte topcoat over deep brown on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [
+      "sample-tech"
+    ],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "cherry-red-high-gloss",
@@ -395,7 +469,17 @@
     "photoPos": "center",
     "photoAlt": "Cherry Red · High Gloss: classic red, glass topcoat on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [
+      "sample-tech"
+    ],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "tortoiseshell-tips",
@@ -430,7 +514,15 @@
     "photoPos": "center",
     "photoAlt": "Tortoiseshell Tips: hand-painted tortoise on tips on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "deep-teal-velvet-cat-eye",
@@ -465,7 +557,15 @@
     "photoPos": "center",
     "photoAlt": "Deep Teal Velvet Cat-Eye: velvet magnetic cat-eye on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "mismatched-jewel-tones",
@@ -500,7 +600,15 @@
     "photoPos": "center",
     "photoAlt": "Mismatched Jewel Tones: different color per nail on a warm-toned hand",
     "why": null,
-    "whyInputs": {}
+    "whyInputs": {},
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "burgundy-snowfall-micro-french",
@@ -559,7 +667,15 @@
     "draft": {
       "from": "theme:christmas",
       "created": "2026-11-16"
-    }
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   },
   {
     "id": "soft-taupe-matte-thin-cocoa-micro-french",
@@ -618,6 +734,14 @@
     "draft": {
       "from": "matte",
       "created": "2026-11-16"
-    }
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   }
 ]

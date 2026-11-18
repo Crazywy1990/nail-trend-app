@@ -35,3 +35,14 @@ export function TrackImpressions({
   }, [uid, setId, picks]);
   return null;
 }
+
+/** Funnel event: one look_view per detail-page view. */
+export function TrackView({ uid, lookId }: { uid: string; lookId: string }) {
+  const done = useRef(false);
+  useEffect(() => {
+    if (done.current) return;
+    done.current = true;
+    logEvent({ userId: uid, type: "look_view", lookId });
+  }, [uid, lookId]);
+  return null;
+}

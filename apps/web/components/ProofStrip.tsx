@@ -1,12 +1,15 @@
-import type { TrendProof } from "@/lib/types";
+import type { Look } from "@/lib/types";
 
-/** Trend evidence. A visible "Sample data" tag stays on until the trend pipeline supplies real numbers. */
-export function ProofStrip({ proof }: { proof: TrendProof }) {
-  if (!proof.text && !proof.isPlaceholder) return null;
+const fmt = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+
+/** Trend evidence with its source and week. Placeholder or stale stats are not shown at all. */
+export function ProofStrip({ look }: { look: Pick<Look, "trendProof" | "trendIsPlaceholder" | "trendSource" | "trendAsOf"> }) {
+  if (look.trendIsPlaceholder !== false || !look.trendProof.text) return null;
+  const platform = look.trendSource?.split(" · ")[0];
   return (
     <div className="proof">
-      {proof.isPlaceholder ? <span className="sample-tag">Sample data</span> : null}
-      <span>{proof.text || "Trend data coming soon"}</span>
+      <span>{look.trendProof.text}</span>
+      {look.trendAsOf ? <span className="proof-source">{platform ? `${platform} · ` : ""}week of {fmt(look.trendAsOf)}</span> : null}
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { PAIRS } from "./onboarding";
-import { DEFAULT_PROFILE, getProfile, recordEvent, saveProfile, type UserProfile } from "./store";
+import { DEFAULT_PROFILE, createBookingRequest, getProfile, recordEvent, saveProfile, type UserProfile } from "./store";
 
 const uidOf = () => cookies().get("uid")?.value || "anon";
 const one = <T extends string>(v: FormDataEntryValue | null, allowed: readonly T[], fallback: T): T =>
@@ -57,4 +57,28 @@ export async function resetProfile() {
   const p = await getProfile(uid);
   await saveProfile(uid, { ...DEFAULT_PROFILE, salon: p.salon });
   redirect("/start");
+}
+
+const WINDOWS = ["morning", "afternoon", "evening", "any"] as const;
+
+/** "Book this look": a booking request tied to one look (and optionally one tech). No payment, no calendar yet. */
+export async function submitBookingRequest(form: FormData) {
+  const uid = uidOf();
+  const { getLook, getTech } = await import("./engine");
+  const lookId = String(form.get("lookId") || "");
+  const look = getLook(lookId);
+  if (!look) redirect("/");
+  const techRaw = String(form.get("tech") || "");
+  const techSlug = techRaw && getTech(techRaw) ? techRaw : null;
+  const name = String(form.get("name") || "").trim().slice(0, 80);
+  const contact = String(form.get("contact") || "").trim().slice(0, 80);
+  const back = `/looks/${lookId}/book${techSlug ? `?tech=${techSlug}&` : "?"}`;
+  if (!name || !contact) redirect(`${back}error=missing`);
+  const date = String(form.get("date") || "");
+  const preferredDate = /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : null;
+  const timeWindow = one(form.get("window"), WINDOWS, "any");
+  const note = String(form.get("note") || "").trim().slice(0, 500) || null;
+  await createBookingRequest({ uid, lookId, techSlug, name, contact, preferredDate, timeWindow, note });
+  await recordEvent({ userId: uid, type: "booking_request", lookId, techSlug, timeWindow });
+  redirect(`${back}sent=1`);
 }

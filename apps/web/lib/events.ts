@@ -12,6 +12,7 @@ export type EventPayload = {
   path?: string;
   ref?: string;
   utmSource?: string;
+  tone?: string;
 };
 
 const ENDPOINT = "/api/v1/events";

@@ -209,17 +209,6 @@
     }
   },
   "looks": {
-    "burgundy-cat-eye-gold-micro-french": {
-      "text": "“burgundy nails” share of new nail videos on YouTube up 56% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "rising",
-      "badge": "↑ Rising",
-      "velocity": 0.424,
-      "term": "burgundy",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
     "emerald-chrome-silver-star": {
       "text": "“emerald green nails” share of new nail videos on YouTube more than doubled vs the 4 weeks before",
       "isPlaceholder": false,
@@ -229,62 +218,23 @@
       "term": "emerald",
       "sources": [
         "YouTube Data API"
-      ]
-    },
-    "milky-pink-jelly-chrome": {
-      "text": "“jelly nails” share of new nail videos on YouTube down 48% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "fading",
-      "badge": "↓ Cooling",
-      "velocity": 0.338,
-      "term": "jelly",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
-    "rose-glazed-chrome": {
-      "text": "“glazed nails” share of new nail videos on YouTube up 13% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "steady",
-      "badge": null,
-      "velocity": 0.49,
-      "term": "glazed",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
-    "mocha-aura-brown-chrome": {
-      "text": "“aura nails” share of new nail videos on YouTube down 49% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "fading",
-      "badge": "↓ Cooling",
-      "velocity": 0.299,
-      "term": "aura",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
-    "cloudy-french-milk-bath": {
-      "text": "“french tip nails” share of new nail videos on YouTube up 44% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "rising",
-      "badge": "↑ Rising",
-      "velocity": 0.587,
-      "term": "french",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
-    "built-in-pearl-oat-white": {
-      "text": "“milky nails” share of new nail videos on YouTube down 36% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "fading",
-      "badge": "↓ Cooling",
-      "velocity": 0.403,
-      "term": "milky",
-      "sources": [
-        "YouTube Data API"
-      ]
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "emerald",
+        "termLabel": "emerald green nails",
+        "growth": 2.315,
+        "recent": 9298,
+        "prior": 5856,
+        "capped": false,
+        "headlines": 0
+      }
     },
     "chocolate-suede-matte": {
       "text": "“matte nails” share of new nail videos on YouTube up 95% vs the 4 weeks before",
@@ -295,40 +245,50 @@
       "term": "matte",
       "sources": [
         "YouTube Data API"
-      ]
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "matte",
+        "termLabel": "matte nails",
+        "growth": 0.954,
+        "recent": 59422,
+        "prior": 35505,
+        "capped": false,
+        "headlines": 0
+      }
     },
-    "cherry-red-high-gloss": {
-      "text": "“red nails” is among the most-posted nail styles on YouTube",
-      "isPlaceholder": false,
-      "label": "steady",
-      "badge": null,
-      "velocity": 0.5,
-      "term": "red",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
-    "tortoiseshell-tips": {
-      "text": "“tortoiseshell nails” share of new nail videos on YouTube up 27% vs the 4 weeks before",
-      "isPlaceholder": false,
-      "label": "rising",
-      "badge": "↑ Rising",
-      "velocity": 0.506,
-      "term": "tortoiseshell",
-      "sources": [
-        "YouTube Data API"
-      ]
-    },
-    "deep-teal-velvet-cat-eye": {
-      "text": "“teal nails” share of new nail videos on YouTube up 56% vs the 4 weeks before",
+    "soft-taupe-matte-thin-cocoa-micro-french": {
+      "text": "“french tip nails” share of new nail videos on YouTube up 44% vs the 4 weeks before",
       "isPlaceholder": false,
       "label": "rising",
       "badge": "↑ Rising",
-      "velocity": 0.445,
-      "term": "teal",
+      "velocity": 0.73,
+      "term": "french",
       "sources": [
         "YouTube Data API"
-      ]
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "french",
+        "termLabel": "french tip nails",
+        "growth": 0.438,
+        "recent": 108380,
+        "prior": 148842,
+        "capped": false,
+        "headlines": 0
+      }
     },
     "mismatched-jewel-tones": {
       "text": "“mismatched nails” share of new nail videos on YouTube up 68% vs the 4 weeks before",
@@ -339,7 +299,266 @@
       "term": "mismatched",
       "sources": [
         "YouTube Data API"
-      ]
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "mismatched",
+        "termLabel": "mismatched nails",
+        "growth": 0.681,
+        "recent": 120,
+        "prior": 135,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "deep-teal-velvet-cat-eye": {
+      "text": "“teal nails” share of new nail videos on YouTube up 56% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "rising",
+      "badge": "↑ Rising",
+      "velocity": 0.445,
+      "term": "teal",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "teal",
+        "termLabel": "teal nails",
+        "growth": 0.564,
+        "recent": 12599,
+        "prior": 40573,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "burgundy-cat-eye-gold-micro-french": {
+      "text": "“burgundy nails” share of new nail videos on YouTube up 56% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "rising",
+      "badge": "↑ Rising",
+      "velocity": 0.424,
+      "term": "burgundy",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "burgundy",
+        "termLabel": "burgundy nails",
+        "growth": 0.563,
+        "recent": 41368,
+        "prior": 54740,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "burgundy-snowfall-micro-french": {
+      "text": "“micro french nails” share of new nail videos on YouTube down 28% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.485,
+      "term": "micro-french",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "micro-french",
+        "termLabel": "micro french nails",
+        "growth": -0.278,
+        "recent": 141,
+        "prior": 5488,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "cloudy-french-milk-bath": {
+      "text": "“milky nails” share of new nail videos on YouTube down 36% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.587,
+      "term": "milky",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "milky",
+        "termLabel": "milky nails",
+        "growth": -0.357,
+        "recent": 203941,
+        "prior": 660328,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "tortoiseshell-tips": {
+      "text": "“tortoiseshell nails” share of new nail videos on YouTube up 27% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "rising",
+      "badge": "↑ Rising",
+      "velocity": 0.506,
+      "term": "tortoiseshell",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "tortoiseshell",
+        "termLabel": "tortoiseshell nails",
+        "growth": 0.268,
+        "recent": 4685,
+        "prior": 7865,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "milky-pink-jelly-chrome": {
+      "text": "“jelly nails” share of new nail videos on YouTube down 48% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.338,
+      "term": "jelly",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "jelly",
+        "termLabel": "jelly nails",
+        "growth": -0.48,
+        "recent": 161543,
+        "prior": 779638,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "rose-glazed-chrome": {
+      "text": "“glazed nails” share of new nail videos on YouTube up 13% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "steady",
+      "badge": null,
+      "velocity": 0.49,
+      "term": "glazed",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "glazed",
+        "termLabel": "glazed nails",
+        "growth": 0.129,
+        "recent": 7781,
+        "prior": 17346,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "mocha-aura-brown-chrome": {
+      "text": "“aura nails” share of new nail videos on YouTube down 49% vs the 4 weeks before",
+      "isPlaceholder": false,
+      "label": "fading",
+      "badge": "↓ Cooling",
+      "velocity": 0.299,
+      "term": "aura",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "aura",
+        "termLabel": "aura nails",
+        "growth": -0.487,
+        "recent": 42843,
+        "prior": 285672,
+        "capped": false,
+        "headlines": 0
+      }
+    },
+    "cherry-red-high-gloss": {
+      "text": "“red nails” is among the most-posted nail styles on YouTube",
+      "isPlaceholder": false,
+      "label": "steady",
+      "badge": null,
+      "velocity": 0.5,
+      "term": "red",
+      "sources": [
+        "YouTube Data API"
+      ],
+      "source": {
+        "platform": "YouTube",
+        "metric": "share of new nail videos",
+        "period": "4 weeks to Nov 16 vs the 4 weeks before"
+      },
+      "sourceLabel": "YouTube · share of new nail videos · week of Nov 16",
+      "asOf": "2026-11-16",
+      "value": {
+        "term": "red",
+        "termLabel": "red nails",
+        "growth": -0.251,
+        "recent": 384569,
+        "prior": 1000000,
+        "capped": true,
+        "headlines": 0
+      }
     }
   }
 }

@@ -22,22 +22,59 @@ const OCCASION_BOOST = 0.08;
 const THEME_BOOST = 0.25;        // a theme she typed or tapped
 const SEASON_BOOST = 0.1;        // the theme of today's date, on the default feed
 
-type TrendRow = { text: string; isPlaceholder: boolean; badge: string | null; velocity: number; sources: string[] };
+import dropsRaw from "./drops.json";
+import techsRaw from "./techs.json";
+
+type TrendRow = {
+  text: string; isPlaceholder: boolean; badge: string | null; velocity: number; sources: string[];
+  sourceLabel?: string; asOf?: string; value?: Record<string, unknown>;
+};
 /** Written weekly by services/pipeline. Looks without a row keep their sample trend data. */
 const TRENDS = trends as unknown as { generatedAt: string | null; looks: Record<string, TrendRow> };
 export const TRENDS_UPDATED = TRENDS.generatedAt;
 
-export const LOOKS = (raw as unknown as Look[]).map((l): Look => {
+/** Every look in the catalog, active or retired, with the pipeline's stat merged in. */
+export const ALL_LOOKS = (raw as unknown as Look[]).map((l): Look => {
   const t = TRENDS.looks[l.id];
-  if (!t) return l;
+  if (!t || !t.asOf) return l;  // no pipeline record → the seed copy stays flagged as placeholder
   return {
     ...l,
-    trendProof: { text: t.text, isPlaceholder: t.isPlaceholder },
+    trendProof: { text: t.text, isPlaceholder: false },
     trendBadge: t.badge,
     trendVelocity: t.velocity,
     trendSources: t.sources,
+    trendSource: t.sourceLabel ?? null,
+    trendAsOf: t.asOf,
+    trendValue: t.value ?? null,
   };
 });
+/** Looks in rotation (retired looks keep their pages but leave the feed). */
+export const LOOKS = ALL_LOOKS.filter((l) => l.active !== false);
+
+const STALE_DAYS = 14;
+/** Freshness is judged at request time: a stat without provenance, or older than 14 days, is a placeholder and is hidden. */
+export function present(l: Look, now: Date = new Date()): Look {
+  const asOf = l.trendAsOf ? new Date(`${l.trendAsOf}T00:00:00Z`) : null;
+  const fresh = !!asOf && !!l.trendSource && (now.getTime() - asOf.getTime()) / 86_400_000 <= STALE_DAYS;
+  const placeholder = !fresh || l.trendProof.isPlaceholder;
+  return {
+    ...l,
+    trendIsPlaceholder: placeholder,
+    trendProof: { text: placeholder ? null : l.trendProof.text, isPlaceholder: placeholder },
+    trendBadge: placeholder ? null : l.trendBadge,
+  };
+}
+
+// ---- Weekly drops and techs ----
+export type Drop = { id: string; label: string; date: string; hero: string };
+const DROPS = dropsRaw as unknown as { current: string; drops: Record<string, Omit<Drop, "id">> };
+export function currentDrop(): Drop {
+  return { id: DROPS.current, ...DROPS.drops[DROPS.current] };
+}
+export type Tech = { slug: string; name: string; studio: string; city: string; placeholder: boolean; bio: string; instagram: string | null };
+export const TECHS = (techsRaw as unknown as { techs: Tech[] }).techs;
+export const getTech = (slug: string) => TECHS.find((t) => t.slug === slug) ?? null;
+export const looksForTech = (slug: string) => LOOKS.filter((l) => l.bookableBy?.includes(slug)).map((l) => present(l));
 
 export type Profile = {
   userId: string;
@@ -324,7 +361,7 @@ export function discover(userId: string, q: string, chips: Filters, profile: Pro
   const r = filtered && exact ? selectFiltered(pool, p, f) : selectSet(pool, p, f);
   const seasonal = !f.themeExplicit && f.theme ? THEMES[f.theme]?.label ?? null : null;
   const pick = (l: Look, slot: Slot, position: number): Pick => ({
-    look: l, slot, position,
+    look: present(l), slot, position,
     relevance: Math.round(r.rel.get(l.id)! * 1000) / 1000,
     photo: l.photoBySkinTone?.[p.skinTone] ?? l.photoBySkinTone?.medium ?? null,
     why: whyFor(l, p, f),
@@ -349,6 +386,8 @@ export function discover(userId: string, q: string, chips: Filters, profile: Pro
   };
 }
 
+/** Any look by id, including retired ones (their pages and spec links keep working). */
 export function getLook(id: string): Look | null {
-  return LOOKS.find((l) => l.id === id) ?? null;
+  const l = ALL_LOOKS.find((x) => x.id === id);
+  return l ? present(l) : null;
 }

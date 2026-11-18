@@ -1,9 +1,12 @@
-"""AllTen watermark for every look photo the website serves.
+"""Photo publishing.
 
-Clean originals live in assets/looks/ (not served; used as references for skin-tone edits
-and for the AI reviewer). The website serves watermarked copies in apps/web/public/looks/.
+Clean originals live in assets/looks/ (references for skin-tone edits and the AI reviewer).
+The website serves the same clean files from apps/web/public/looks/ and draws the AllTen
+watermark as an overlay inside each photo's container (apps/web/components/Watermark.tsx),
+so no crop at any size can clip it. The share card bakes the mark into its own image.
+`stamp()` remains for any image that leaves the site as a file.
 
-  python services/photos/watermark.py          re-stamp every original into public/
+  python services/photos/watermark.py          re-publish every original into public/
 """
 from __future__ import annotations
 
@@ -53,17 +56,17 @@ def save_photo(raw: bytes, name: str) -> None:
     ORIGINALS.mkdir(parents=True, exist_ok=True)
     im = Image.open(io.BytesIO(raw)).convert("RGB")
     im.save(ORIGINALS / name, quality=88, optimize=True, progressive=True)
-    stamp(im, ai=name not in NOT_AI).save(PUBLIC / name, quality=84, optimize=True, progressive=True)
+    im.save(PUBLIC / name, quality=84, optimize=True, progressive=True)  # clean; the site overlays the mark
 
 
 def restamp_all() -> int:
     n = 0
     for p in sorted(ORIGINALS.glob("*.jpg")):
-        stamp(Image.open(p), ai=p.name not in NOT_AI).save(PUBLIC / p.name, quality=84, optimize=True, progressive=True)
+        Image.open(p).convert("RGB").save(PUBLIC / p.name, quality=84, optimize=True, progressive=True)
         n += 1
     return n
 
 
 if __name__ == "__main__":
-    print(f"Stamped {restamp_all()} photos.")
+    print(f"Published {restamp_all()} photos.")
     sys.exit(0)

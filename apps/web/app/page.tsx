@@ -1,8 +1,11 @@
 import { BottomNav } from "@/components/BottomNav";
+import { HeroPhoto } from "@/components/Hero";
 import { SearchIcon } from "@/components/Icons";
 import { LookCard, LookRow } from "@/components/LookCard";
 import { TrackImpressions, TrackLanding } from "@/components/Track";
 import { fetchDiscover } from "@/lib/api";
+import { currentDrop, getLook } from "@/lib/engine";
+import { factChips } from "@/lib/format";
 import { requestSeason, requestUid } from "@/lib/request";
 import { COPY } from "@/lib/season";
 import { getProfile, listSaved } from "@/lib/store";
@@ -38,16 +41,38 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
   const [profile, saved] = await Promise.all([getProfile(uid), listSaved(uid)]);
   const data = await fetchDiscover({ userId: uid, q, ...selected, profile: profile.onboarded ? profile : null, saved });
   const savedSet = new Set(saved);
-  const picks = [...data.cards, ...data.also].map((p) => ({ lookId: p.look.id, slot: p.slot, position: p.position }));
+
+  // Default view opens on this week's hero look, full-bleed; a search or filter goes straight to results.
+  const drop = currentDrop();
+  const browsing = !q && !Object.values(selected).some((v) => v.length);
+  const hero = browsing ? getLook(drop.hero) : null;
+  const cards = hero ? data.cards.filter((p) => p.look.id !== hero.id) : data.cards;
+  const also = hero ? data.also.filter((p) => p.look.id !== hero.id) : data.also;
+  if (hero && cards.length === 0 && also.length) cards.push(also.shift()!);
+  const picks = [...cards, ...also].map((p) => ({ lookId: p.look.id, slot: p.slot, position: p.position }));
+  const dropDate = new Date(`${drop.date}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 
   return (
     <div className="shell shell-wide">
+      {hero ? (
+        <HeroPhoto uid={uid} lookId={hero.id} photos={hero.photoBySkinTone} initial={profile.skinTone}
+          alt={hero.photoAlt || hero.name} pos={hero.photoPos} ai={hero.photoSource !== "original"}>
+          <div className="hero-kicker">{drop.label} · {dropDate}</div>
+          <h1 className="hero-title"><a href={`/looks/${hero.id}`}>{hero.name}</a></h1>
+          {!hero.trendIsPlaceholder && hero.trendProof.text ? (
+            <p className="hero-proof">{hero.trendProof.text}
+              {hero.trendAsOf ? <span className="proof-source">· {hero.trendSource?.split(" · ")[0]}, week of {new Date(`${hero.trendAsOf}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}</span> : null}
+            </p>
+          ) : null}
+          <div className="hero-facts">{factChips(hero).slice(0, 2).join(" · ")}</div>
+          <div className="hero-actions">
+            <a className="btn btn-primary" href={`/looks/${hero.id}/book`}>Book this look</a>
+            <a className="btn btn-glass" href={`/looks/${hero.id}`}>See the spec</a>
+          </div>
+        </HeroPhoto>
+      ) : null}
       <main className="main">
-        <header>
-          <div className="wordmark">AllTen</div>
-          <div className="greet">{copy.greet}</div>
-          <h1 className="h1">{copy.head}</h1>
-        </header>
+        {!hero ? <h1 className="sr-only">AllTen: see it, book exactly it</h1> : null}
 
         {!profile.onboarded ? (
           <a href="/start" className="onboard-banner">
@@ -82,9 +107,10 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
 
         <section aria-labelledby="picked" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            {browsing ? <div className="drop-kicker">{drop.label} · {dropDate}</div> : null}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-              <h2 className="h2" id="picked">Picked for you</h2>
-              <span className="muted">{data.cards.length + data.also.length} looks</span>
+              <h2 className="h2" id="picked">{browsing ? "Picked for you from this drop" : "Picked for you"}</h2>
+              <span className="muted">{cards.length + also.length} looks</span>
             </div>
             <div className="muted">{data.summary}</div>
             {data.understood?.length ? (
@@ -97,16 +123,16 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
           </div>
 
           <div className="cards">
-            {data.cards.map((p, i) => (
+            {cards.map((p, i) => (
               <LookCard key={p.look.id} pick={p} uid={uid} setId={data.setId} priority={i === 0} saved={savedSet.has(p.look.id)} />
             ))}
           </div>
 
-          {data.also.length ? (
+          {also.length ? (
             <div className="rows">
               <h2 className="h2" style={{ fontSize: 18 }}>Also in this set</h2>
               <div className="rows-list">
-                {data.also.map((p) => <LookRow key={p.look.id} pick={p} />)}
+                {also.map((p) => <LookRow key={p.look.id} pick={p} />)}
               </div>
             </div>
           ) : null}

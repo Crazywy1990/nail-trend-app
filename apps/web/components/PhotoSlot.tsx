@@ -1,9 +1,12 @@
 import { CameraIcon } from "./Icons";
+import { Watermark } from "./Watermark";
 
 /** 4:3 look photo. With no asset yet, a soft tile in the look's color says the photo is coming. */
 export function PhotoSlot({
-  photo, pos, alt, tint, dark, children, priority,
+  photo, pos, alt, tint, dark, children, priority, ai = true, wmCorner = "bottom",
 }: {
+  ai?: boolean;
+  wmCorner?: "bottom" | "top";
   photo: string | null;
   pos?: string;
   alt: string;
@@ -23,6 +26,7 @@ export function PhotoSlot({
           <div className="photo-slot-title">Photo coming soon</div>
         </>
       )}
+      {photo ? <Watermark ai={ai} corner={wmCorner} /> : null}
       {children}
     </div>
   );

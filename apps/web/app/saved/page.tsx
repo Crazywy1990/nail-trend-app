@@ -4,6 +4,7 @@ import { factChips, isDarkTint, tintFor } from "@/lib/format";
 import { requestUid } from "@/lib/request";
 import { getProfile, listSaved } from "@/lib/store";
 import { SaveButton } from "@/components/SaveButton";
+import { Watermark } from "@/components/Watermark";
 
 export const metadata = { title: "Saved" };
 export const dynamic = "force-dynamic";
@@ -28,6 +29,7 @@ export default async function Saved() {
                   <a href={`/looks/${l.id}`} className="thumb" style={photo ? undefined : { background: tintFor(l.colorFamily), color: isDarkTint(l.colorFamily) ? "#fff" : undefined }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     {photo ? <img src={photo} alt={l.photoAlt ?? l.name} loading="lazy" /> : null}
+                    {photo ? <Watermark ai={l.photoSource !== "original"} /> : null}
                   </a>
                   <div className="row-text">
                     <a href={`/looks/${l.id}`} className="row-name">{l.name}</a>

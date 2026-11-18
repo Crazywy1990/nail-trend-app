@@ -160,3 +160,22 @@ def test_rednote_evidence_is_appended_only_when_rising():
     assert out["text"].endswith("likes and saves on social media up 60% vs last week")
     assert "RedNote" not in out["text"] and "RedNote" not in out["sources"]  # never named on the site
     assert "more than doubled" in p.look_results(cfg, tr, {"a": {"change": 1.5}})["x"]["text"]
+
+
+def test_no_two_looks_share_a_stat():
+    cfg = {"terms": {k: {"label": f"{k} nails"} for k in ("a", "b", "c")},
+           "looks": {"x": ["a", "b"], "y": ["a", "c"], "z": ["a"]}}
+    tr = {"a": p.term_result(3000, 1000, 0), "b": p.term_result(1000, 1000, 0), "c": p.term_result(1500, 1000, 0)}
+    out = p.look_results(cfg, tr, None, "2026-11-16")
+    texts = [r["text"] for r in out.values()]
+    assert len(texts) == len(set(texts))
+    assert {r["term"] for r in out.values()} == {"a", "b", "c"} or len(out) == 2
+    assert "z" not in out or out["z"]["term"] != "a" or all(r["term"] != "a" for k, r in out.items() if k != "z")
+    r = next(iter(out.values()))
+    assert r["asOf"] == "2026-11-16" and r["sourceLabel"].endswith("week of Nov 16") and r["value"]["growth"] is not None
+
+
+def test_committed_trends_have_unique_stats():
+    d = json.loads(p.OUT_FILE.read_text())
+    texts = [r["text"] for r in d.get("looks", {}).values() if r.get("text")]
+    assert len(texts) == len(set(texts)), "two looks display the same trend stat"

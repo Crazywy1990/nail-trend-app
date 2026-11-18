@@ -2,6 +2,8 @@
 
 export type Shade = { brand: string | null; name: string; code: string | null; verified: boolean };
 export type TrendProof = { text: string | null; isPlaceholder: boolean };
+/** A real client's photo of this look, shown as "Asked for → Got". */
+export type ResultPhoto = { src: string; alt: string; caption?: string | null };
 
 export type Look = {
   id: string;
@@ -19,6 +21,23 @@ export type Look = {
   trendVelocity: number;
   trendSources: string[];
   trendProof: TrendProof;
+  /** Provenance of the displayed stat, e.g. "YouTube · share of new nail videos · week of Nov 16". */
+  trendSource?: string | null;
+  /** Date (YYYY-MM-DD) the stat was pulled. */
+  trendAsOf?: string | null;
+  /** True when the stat has no provenance or is older than 14 days: hidden on the site. */
+  trendIsPlaceholder?: boolean;
+  /** The stat as data (term, growth, counts), for analysis and the share card. */
+  trendValue?: Record<string, unknown> | null;
+  /** Weekly drop this look belongs to; inactive looks are retired, not deleted. */
+  dropId?: string;
+  dropDate?: string;
+  active?: boolean;
+  /** Tech/salon slugs that can book exactly this look (lib/engine/techs.json). */
+  bookableBy?: string[];
+  resultPhoto?: ResultPhoto | null;
+  /** "generated" (our AI image pipeline) or "original". */
+  photoSource?: "generated" | "original";
   /** Card badge from the trend pipeline ("↑ Rising" or "↓ Cooling"); null when steady; absent on sample data. */
   trendBadge?: string | null;
   shades: Shade[];
@@ -55,4 +74,4 @@ export type DiscoverResponse = {
 
 export type EventType =
   | "impression" | "save" | "unsave" | "reject" | "too_bold"
-  | "book_click" | "share_click" | "landing";
+  | "book_click" | "share_click" | "landing" | "look_view" | "share_tap" | "booking_request" | "tone_switch";

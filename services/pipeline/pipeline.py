@@ -225,20 +225,41 @@ def rednote_part(rn: dict | None) -> str | None:
             else f"likes and saves on social media up {pct}% vs last week")
 
 
-def look_results(cfg: dict, term_res: dict[str, dict], rn: dict[str, dict] | None = None) -> dict[str, dict]:
-    """Per look: velocity blends its terms (first term weighted 2×). The card quotes the
-    look's strongest rising term if it has one, otherwise its first term, and names that
-    term so the claim is about the style, not the whole look. The badge is shown only
-    for Rising or Cooling."""
+def look_results(cfg: dict, term_res: dict[str, dict], rn: dict[str, dict] | None = None,
+                 as_of: str | None = None) -> dict[str, dict]:
+    """Per look: velocity blends its terms (first term weighted 2×). The card quotes one term,
+    named so the claim is about the style, not the whole look.
+
+    Uniqueness: no two looks may display the same stat. Terms are handed out greedily —
+    looks whose best rising term grows fastest choose first; a look takes its strongest
+    unused rising term, else its first unused term; a look with every term already taken
+    gets no stat (the site then shows no trend line for it).
+
+    Provenance: every row carries source (platform, metric, period), asOf and the value as
+    data, so the site can show where and when the number comes from and hide stale ones.
+    The badge is shown only for Rising or Cooling."""
+    as_of = as_of or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    week = datetime.fromisoformat(as_of).strftime("%b %-d")
+
+    def best_growth(tids):
+        g = [term_res[t]["growth"] for t in tids if t in term_res and term_res[t]["label"] == "rising"]
+        return max(g) if g else -9.0
+
+    order = sorted(cfg["looks"].items(), key=lambda kv: -best_growth(kv[1]))
+    used: set[str] = set()
     out: dict[str, dict] = {}
-    for look_id, tids in cfg["looks"].items():
+    for look_id, tids in order:
         have = [t for t in tids if t in term_res]
         if not have:
             continue
         weights = [2.0] + [1.0] * (len(have) - 1)
         vel = sum(w * term_res[t]["velocity"] for w, t in zip(weights, have)) / sum(weights)
-        rising = [t for t in have if term_res[t]["label"] == "rising"]
-        quoted = max(rising, key=lambda t: term_res[t]["growth"]) if rising else have[0]
+        free = [t for t in have if t not in used]
+        if not free:
+            continue  # every term this look could quote is already on another card
+        rising = [t for t in free if term_res[t]["label"] == "rising"]
+        quoted = max(rising, key=lambda t: term_res[t]["growth"]) if rising else free[0]
+        used.add(quoted)
         q = term_res[quoted]
         text = proof_text(cfg["terms"][quoted]["label"], q)
         extra = rednote_part((rn or {}).get(quoted))
@@ -250,6 +271,13 @@ def look_results(cfg: dict, term_res: dict[str, dict], rn: dict[str, dict] | Non
             "velocity": round(vel, 3),
             "term": quoted,
             "sources": ["YouTube Data API"] + (["Beauty-magazine RSS"] if q["headlines"] else []) + (["Social media"] if extra else []),
+            "source": {"platform": "YouTube", "metric": "share of new nail videos",
+                       "period": f"4 weeks to {week} vs the 4 weeks before"},
+            "sourceLabel": f"YouTube · share of new nail videos · week of {week}",
+            "asOf": as_of,
+            "value": {"term": quoted, "termLabel": cfg["terms"][quoted]["label"], "growth": q["growth"],
+                      "recent": q["recent"], "prior": q["prior"], "capped": q.get("capped", False),
+                      "headlines": q["headlines"]},
         }
     return out
 
@@ -286,7 +314,7 @@ def score(counts: dict[str, tuple[int, int]], heads: dict[str, int], cfg: dict, 
         "baseline": round(base, 4),
         "feedsRead": feeds_ok,
         "terms": term_res,
-        "looks": look_results(cfg, term_res, rednote_terms(now)),
+        "looks": look_results(cfg, term_res, rednote_terms(now), now.strftime("%Y-%m-%d")),
     }
 
 

@@ -1,21 +1,23 @@
-import { factChips, isDarkTint, slotLabel, specLine, styleLine, tintFor } from "@/lib/format";
+import { factChips, isDarkTint, slotLabel, styleLine, tintFor } from "@/lib/format";
 import type { Pick } from "@/lib/types";
 import { CardActions } from "./CardActions";
+import { Watermark } from "./Watermark";
 import { PhotoSlot } from "./PhotoSlot";
 import { ProofStrip } from "./ProofStrip";
+import { ShadeList } from "./ShadeList";
 import { SaveButton } from "./SaveButton";
 
 export function LookCard({ pick, uid, setId, priority, saved }: { pick: Pick; uid: string; setId: string; priority?: boolean; saved?: boolean }) {
   const l = pick.look;
   return (
     <article className="card" aria-labelledby={`t-${l.id}`}>
-      <PhotoSlot photo={pick.photo} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority={priority}>
-        {l.trendBadge === undefined ? <span className="badge badge-trend">↑ Rising</span> : l.trendBadge ? <span className="badge badge-trend">{l.trendBadge}</span> : null}
+      <PhotoSlot photo={pick.photo} ai={l.photoSource !== "original"} pos={l.photoPos} alt={l.photoAlt || l.name} tint={tintFor(l.colorFamily)} dark={isDarkTint(l.colorFamily)} priority={priority}>
+        {l.trendBadge && !l.trendIsPlaceholder ? <span className="badge badge-trend">{l.trendBadge}</span> : null}
         <SaveButton uid={uid} lookId={l.id} initial={saved} setId={setId} slot={pick.slot} position={pick.position} />
         {pick.slot === "stretch" ? <span className="badge badge-slot">{slotLabel(pick.slot, l)}</span> : null}
       </PhotoSlot>
       <div className="card-body">
-        <ProofStrip proof={l.trendProof} />
+        <ProofStrip look={l} />
         <h3 className="card-title" id={`t-${l.id}`}>
           <a href={`/looks/${l.id}`} style={{ textDecoration: "none" }}>{l.name}</a>
         </h3>
@@ -24,9 +26,8 @@ export function LookCard({ pick, uid, setId, priority, saved }: { pick: Pick; ui
           <span className="muted">{styleLine(l)}</span>
         </div>
         <p className="why">{pick.why}</p>
-        <div className="spec">
-          <div className="label">Shades for your tech</div>
-          <div className="spec-text">{specLine(l)}</div>
+        <div className="spec-wrap">
+          <ShadeList look={l} />
         </div>
         <CardActions uid={uid} lookId={l.id} lookName={l.name} setId={setId} slot={pick.slot} position={pick.position} />
       </div>
@@ -40,8 +41,11 @@ export function LookRow({ pick }: { pick: Pick }) {
     <a className="row" href={`/looks/${l.id}`}>
       <div className="thumb" style={pick.photo ? undefined : { background: tintFor(l.colorFamily) }}>
         {pick.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={pick.photo} alt="" style={{ objectPosition: l.photoPos }} />
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={pick.photo} alt="" style={{ objectPosition: l.photoPos }} />
+            <Watermark ai={l.photoSource !== "original"} />
+          </>
         ) : (
           <span className="sr-only">Photo coming soon</span>
         )}

@@ -3,6 +3,7 @@ import { submitOnboarding } from "@/lib/actions";
 import { PAIRS } from "@/lib/onboarding";
 import { requestUid } from "@/lib/request";
 import { getProfile } from "@/lib/store";
+import { Watermark } from "@/components/Watermark";
 
 export const metadata = { title: "Set up your picks" };
 export const dynamic = "force-dynamic";
@@ -45,7 +46,7 @@ export default async function Start() {
                 <label key={t.v} className="tone-opt">
                   <input type="radio" name="tone" value={t.v} defaultChecked={p.skinTone === t.v} required />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={t.img} alt={`${t.label} skin tone hand`} />
+                  <span className="wm-box"><img src={t.img} alt={`${t.label} skin tone hand`} /><Watermark /></span>
                   <span>{t.label}</span>
                 </label>
               ))}
@@ -74,7 +75,7 @@ export default async function Start() {
                     <label key={l.id} className="pair-opt">
                       <input type="radio" name={`pair${i}`} value={l.id} defaultChecked={chosen === l.id} />
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={l.photoBySkinTone?.[p.skinTone] ?? l.photoBySkinTone?.medium ?? ""} alt={l.name} loading="lazy" />
+                      <span className="wm-box"><img src={l.photoBySkinTone?.[p.skinTone] ?? l.photoBySkinTone?.medium ?? ""} alt={l.name} loading="lazy" /><Watermark ai={l.photoSource !== "original"} /></span>
                       <span>{l.name}</span>
                     </label>
                   ))}
