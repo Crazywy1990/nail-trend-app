@@ -67,7 +67,7 @@
       "sample-tech"
     ],
     "resultPhoto": null,
-    "photoSource": "original",
+    "photoSource": "edited",
     "trendSource": null,
     "trendAsOf": null
   },
@@ -139,7 +139,7 @@
       "sample-tech"
     ],
     "resultPhoto": null,
-    "photoSource": "original",
+    "photoSource": "edited",
     "trendSource": null,
     "trendAsOf": null
   },
@@ -680,7 +680,7 @@
   {
     "id": "soft-taupe-matte-thin-cocoa-micro-french",
     "name": "Soft Taupe Matte · Thin Cocoa Micro-French",
-    "technique": "Apply a sheer soft-taupe nude gel base to medium almond nails and cure. Paint ultra-thin cocoa micro-French tips following the almond edge, cure, then seal with a velvety matte topcoat.",
+    "technique": "Shape nails to a medium almond, apply a sheer soft-taupe nude gel base and cure. Paint ultra-thin cocoa micro-French tips following the almond edge, cure, then seal with a soft matte gel topcoat.",
     "system": "gel",
     "finish": "matte",
     "colorFamily": "nude",
@@ -728,7 +728,7 @@
       "deep": "/looks/soft-taupe-matte-thin-cocoa-micro-french__deep.jpg"
     },
     "photoPos": "center",
-    "photoAlt": "Soft Taupe Matte · Thin Cocoa Micro-French: apply a sheer soft-taupe nude gel base to medium almond nails and cure. paint ultra-thin cocoa micro-french tips followi",
+    "photoAlt": "Soft Taupe Matte · Thin Cocoa Micro-French: shape nails to a medium almond, apply a sheer soft-taupe nude gel base and cure. paint ultra-thin cocoa micro-french tip",
     "why": null,
     "whyInputs": {},
     "draft": {
@@ -747,10 +747,10 @@
   {
     "id": "snowfall-micro-french-silver-chrome",
     "name": "Snowfall Micro-French · Silver Chrome",
-    "technique": "Apply a sheer milky-white gel base to short round nails, then trace ultra-fine silver chrome micro-French tips with a crisp curved smile line hugging the free edge. Seal with high-gloss gel top coat.",
+    "technique": "Apply a sheer milky pink-nude gel base to short round nails, then trace ultra-fine silver chrome micro-French tips with a crisp curved smile line hugging the free edge. Seal with high-gloss gel top coat.",
     "system": "gel",
     "finish": "french",
-    "colorFamily": "white",
+    "colorFamily": "nude",
     "shape": "Round",
     "length": "short",
     "priceRange": "~$65",
@@ -789,7 +789,7 @@
       "deep": null
     },
     "photoPos": "center",
-    "photoAlt": "Snowfall Micro-French · Silver Chrome: apply a sheer milky-white gel base to short round nails, then trace ultra-fine silver chrome micro-french tips with a cr",
+    "photoAlt": "Snowfall Micro-French · Silver Chrome: apply a sheer milky pink-nude gel base to short round nails, then trace ultra-fine silver chrome micro-french ",
     "why": null,
     "whyInputs": {},
     "draft": {
@@ -809,7 +809,7 @@
   {
     "id": "evergreen-jelly-sparse-gold-flake",
     "name": "Evergreen Jelly · Sparse Gold Flake",
-    "technique": "Apply a translucent forest-green jelly gel in 2 thin coats on short oval nails. Place a few tiny irregular gold leaf flakes sparsely on each nail, then seal with a glossy top coat.",
+    "technique": "Build deep evergreen jelly gel in 2–3 thin coats on short oval nails for a rich, glassy depth. Place a few tiny irregular gold leaf flakes sparsely on each nail, then seal with a high-gloss top coat.",
     "system": "gel",
     "finish": "jelly",
     "colorFamily": "green",
@@ -851,7 +851,7 @@
       "deep": null
     },
     "photoPos": "center",
-    "photoAlt": "Evergreen Jelly · Sparse Gold Flake: apply a translucent forest-green jelly gel in 2 thin coats on short oval nails. place a few tiny irregular gold leaf fla",
+    "photoAlt": "Evergreen Jelly · Sparse Gold Flake: build deep evergreen jelly gel in 2–3 thin coats on short oval nails for a rich, glassy depth. place a few tin",
     "why": null,
     "whyInputs": {},
     "draft": {
@@ -870,7 +870,7 @@
   },
   {
     "id": "sheer-nude-candy-cane-red-diagonal-accent",
-    "name": "Sheer Nude Candy Cane · Red Diagonal Accent",
+    "name": "Sheer Nude · Red Diagonal Stripe",
     "technique": "Apply a sheer nude gel base to medium almond nails. Add one ultra-thin red diagonal stripe on two accent nails, leaving the rest clean, glossy, and minimal.",
     "system": "gel",
     "finish": "art",
@@ -913,7 +913,7 @@
       "deep": null
     },
     "photoPos": "center",
-    "photoAlt": "Sheer Nude Candy Cane · Red Diagonal Accent: apply a sheer nude gel base to medium almond nails. add one ultra-thin red diagonal stripe on two accent nails, leaving ",
+    "photoAlt": "Sheer Nude · Red Diagonal Stripe: apply a sheer nude gel base to medium almond nails. add one ultra-thin red diagonal stripe on two accent nails",
     "why": null,
     "whyInputs": {},
     "draft": {
@@ -940,7 +940,7 @@
     "shape": "Square",
     "length": "short",
     "priceRange": "~$75",
-    "durationMin": 105,
+    "durationMin": 85,
     "stretchLevel": 2,
     "fitPrior": 0.75,
     "trendVelocity": 0.75,
@@ -1066,7 +1066,7 @@
     "technique": "Structured long almond builder-gel set with a sheer nude base, crisp silver mirror-chrome French tips following the almond smile line, and a high-gloss seal.",
     "system": "builder gel",
     "finish": "french",
-    "colorFamily": "white",
+    "colorFamily": "nude",
     "shape": "Almond",
     "length": "long",
     "priceRange": "~$90",
@@ -1111,7 +1111,7 @@
       "deep": null
     },
     "photoPos": "center",
-    "photoAlt": "Silver Mirror French · Sheer Nude Base: structured long almond builder-gel set with a sheer nude base, crisp silver mirror-chrome french tips following the almo",
+    "photoAlt": "Silver Mirror French · Sheer Nude Base: structured long almond builder-gel set with a sheer nude base, crisp silver mirror-chrome french tips followin",
     "why": null,
     "whyInputs": {},
     "draft": {
