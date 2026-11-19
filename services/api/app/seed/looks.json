@@ -1661,5 +1661,489 @@
     "photo_source": "generated",
     "trend_source": null,
     "trend_as_of": null
+  },
+  {
+    "id": "cherry-chrome-outline-glass-red",
+    "name": "Cherry Chrome Outline · Glass Red",
+    "technique": "Long coffin builder-gel set in glossy glass cherry red, finished with a high-shine topcoat and a razor-thin silver chrome outline tracing each nail’s sidewalls and free edge.",
+    "system": "builder gel",
+    "finish": "gloss",
+    "color_family": "red",
+    "shape": "Coffin",
+    "length": "long",
+    "price_range": "~$95",
+    "duration_min": 140,
+    "stretch_level": 3,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Editorial hand shot with long coffin nails over a black satin clutch, slim silver rings, champagne coupe and a deep red silk slip dress sleeve catching the light; glossy cherry nails should reflect a ",
+    "occasions": [
+      "party",
+      "holiday party",
+      "date night"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Boujee",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Big Apple Red",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "CND",
+        "name": "Silver Chrome Effects",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/cherry-chrome-outline-glass-red.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Cherry Chrome Outline · Glass Red: long coffin builder-gel set in glossy glass cherry red, finished with a high-shine topcoat and a razor-thin silver chrom",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "juicy-coral-jelly-sheer-vacation-glow",
+    "name": "Juicy Coral Jelly · Sheer Vacation Glow",
+    "technique": "Prep and shape nails short oval; apply 2 thin coats of translucent coral-pink jelly gel, keeping coverage sheer and even. Seal with a high-gloss gel top coat for a juicy vacation glow.",
+    "system": "gel",
+    "finish": "jelly",
+    "color_family": "pink",
+    "shape": "Oval",
+    "length": "short",
+    "price_range": "~$55",
+    "duration_min": 70,
+    "stretch_level": 1,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Short oval nails in juicy coral-pink jelly with a wet-look shine, photographed against sun-kissed skin, thin gold huggie rings, a woven straw clutch, and crisp white linen for a polished beach-resort ",
+    "occasions": [
+      "vacation",
+      "date night"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Tropix",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Sheer coral-pink jelly",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/juicy-coral-jelly-sheer-vacation-glow.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Juicy Coral Jelly · Sheer Vacation Glow: prep and shape nails short oval; apply 2 thin coats of translucent coral-pink jelly gel, keeping coverage sheer and even",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "ocean-blue-aura-sheer-glow-fade",
+    "name": "Ocean Blue Aura · Sheer Glow Fade",
+    "technique": "Apply a sheer milky nude gel base, then airbrush a soft ocean-blue aura concentrated at the center of each medium almond nail and fade it out to translucent edges. Seal with a high-gloss gel top coat for a sheer glow finish.",
+    "system": "gel",
+    "finish": "art",
+    "color_family": "blue",
+    "shape": "Almond",
+    "length": "medium",
+    "price_range": "~$75",
+    "duration_min": 90,
+    "stretch_level": 3,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Almond medium nails with a soft blue center glow on a sheer base, styled with thin gold rings, a raffia sunhat, and a white linen blouse sleeve against sunlit beach fabric.",
+    "occasions": [
+      "vacation"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Daisy",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI GelColor",
+        "name": "I’m Really an Actress",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Sheer Sky Blue",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/ocean-blue-aura-sheer-glow-fade.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Ocean Blue Aura · Sheer Glow Fade: apply a sheer milky nude gel base, then airbrush a soft ocean-blue aura concentrated at the center of each medium almond",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "sheer-nude-leopard-two-accent-spots",
+    "name": "Sheer Nude Leopard · Two Accent Spots",
+    "technique": "Build a glossy sheer nude-beige gel base on medium almond nails. Add leopard accents on two nails, hand-painting irregular warm caramel spots with soft espresso-brown outlines, leaving the remaining nails clean nude.",
+    "system": "gel",
+    "finish": "art",
+    "color_family": "multi",
+    "shape": "Almond",
+    "length": "medium",
+    "price_range": "~$75",
+    "duration_min": 105,
+    "stretch_level": 2,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Almond medium-length nails on a relaxed hand, stacked gold rings and a delicate bracelet, posed against champagne satin or a sheer black silk wrap with soft evening light and a cocktail glass in the f",
+    "occasions": [
+      "party",
+      "date night"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": "OPI",
+        "name": "Put It In Neutral",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Chocolate Moose",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Coconuts Over OPI",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/sheer-nude-leopard-two-accent-spots.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Sheer Nude Leopard · Two Accent Spots: build a glossy sheer nude-beige gel base on medium almond nails. add leopard accents on two nails, hand-painting irregul",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "abstract-neutral-swirls-nude-line-art",
+    "name": "Abstract Neutral Swirls · Nude Line Art",
+    "technique": "Sheer nude gel base on medium almond nails, with hand-painted abstract wavy line art in cream, taupe, and cocoa. Keep the swirls fluid and varied on each nail, then seal with glossy gel top coat.",
+    "system": "gel",
+    "finish": "art",
+    "color_family": "nude",
+    "shape": "Almond",
+    "length": "medium",
+    "price_range": "~$85",
+    "duration_min": 100,
+    "stretch_level": 3,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Editorial close-up of almond medium nails with abstract neutral swirl art, paired with slim gold rings, a champagne satin slip dress sleeve, and a soft beige silk clutch on warm stone.",
+    "occasions": [
+      "date night"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer Nude Beige",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Cream",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Taupe and Cocoa",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/abstract-neutral-swirls-nude-line-art.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Abstract Neutral Swirls · Nude Line Art: sheer nude gel base on medium almond nails, with hand-painted abstract wavy line art in cream, taupe, and cocoa. keep th",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "milky-white-chrome-3d-droplet-beads",
+    "name": "Milky White Chrome · 3D Droplet Beads",
+    "technique": "Sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. Rub in pearl-white chrome, seal, and place tiny domed clear 3D gel droplet beads across each nail before final cure.",
+    "system": "builder gel",
+    "finish": "chrome",
+    "color_family": "white",
+    "shape": "Almond",
+    "length": "medium",
+    "price_range": "~$95",
+    "duration_min": 110,
+    "stretch_level": 3,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Editorial close-up of medium almond nails with soft chrome droplets catching light, worn with thin stacked silver rings, a satin ivory blouse cuff, and a champagne silk clutch against a blurred party ",
+    "occasions": [
+      "party",
+      "holiday party",
+      "date night"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Milky White",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "No-Wipe Top Coat",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Chrome Powder",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/milky-white-chrome-3d-droplet-beads.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Milky White Chrome · 3D Droplet Beads: sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. rub in pearl-whit",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "forest-french-sheer-nude-base",
+    "name": "Forest French · Sheer Nude Base",
+    "technique": "Prep short squoval nails and apply a sheer nude builder-gel overlay for a smooth, natural base. Paint clean deep forest-green French tips following the rounded free edge, then seal with a glossy top coat.",
+    "system": "builder gel",
+    "finish": "french",
+    "color_family": "green",
+    "shape": "Squoval",
+    "length": "short",
+    "price_range": "~$65",
+    "duration_min": 75,
+    "stretch_level": 2,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Short squoval nails on a neutral hand, paired with thin gold stacking rings, a cream cashmere sleeve, and a matte taupe notebook on a clean marble or stone surface.",
+    "occasions": [
+      "work"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Naked",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Stay Off the Lawn!!",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/forest-french-sheer-nude-base.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Forest French · Sheer Nude Base: prep short squoval nails and apply a sheer nude builder-gel overlay for a smooth, natural base. paint clean deep forest-",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
+  },
+  {
+    "id": "pastel-resort-french-mixed-soft-tips",
+    "name": "Pastel Resort French · Mixed Soft Tips",
+    "technique": "Apply a sheer milky nude gel base on short round nails, then paint thin, crisp French tips in a different soft pastel on each nail—lavender, mint, peach and pale yellow. Seal with a glossy gel top coat.",
+    "system": "gel",
+    "finish": "french",
+    "color_family": "multi",
+    "shape": "Round",
+    "length": "short",
+    "price_range": "~$65",
+    "duration_min": 75,
+    "stretch_level": 2,
+    "fit_prior": 0.75,
+    "trend_velocity": 0.75,
+    "photo_brief": "Short round nails with a sheer milky nude base and mismatched pastel French tips in soft lilac, baby blue, mint, peach, butter yellow, and blush; styled with slim gold stacking rings, a woven straw cl",
+    "occasions": [
+      "vacation",
+      "date night",
+      "work"
+    ],
+    "trend_sources": [],
+    "trend_proof": {
+      "text": null,
+      "is_placeholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer Milky Nude",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Do You Lilac It?",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "It’s a Boy!",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photo_by_skin_tone": {
+      "light": null,
+      "medium": "/looks/pastel-resort-french-mixed-soft-tips.jpg",
+      "deep": null
+    },
+    "photo_pos": "center",
+    "photo_alt": "Pastel Resort French · Mixed Soft Tips: apply a sheer milky nude gel base on short round nails, then paint thin, crisp french tips in a different soft pastel on",
+    "why": null,
+    "why_inputs": {},
+    "active": true,
+    "drop_id": "2026-w47",
+    "drop_date": "2026-11-16",
+    "bookable_by": [],
+    "result_photo": null,
+    "photo_source": "generated",
+    "trend_source": null,
+    "trend_as_of": null
   }
 ]
