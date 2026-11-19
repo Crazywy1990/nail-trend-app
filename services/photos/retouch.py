@@ -36,6 +36,9 @@ def main() -> int:
     if not key:
         print("OPENAI_API_KEY is not set.", file=sys.stderr); return 1
     limit = int(sys.argv[sys.argv.index("--max") + 1]) if "--max" in sys.argv else 80
+    # --tones medium: retouch only those tones; the other tones of each look were made in the new
+    # smooth-skin style already, so they are recorded as done without editing (no cost).
+    tones = sys.argv[sys.argv.index("--tones") + 1].split(",") if "--tones" in sys.argv else ["medium", "light", "deep"]
     g.PER_MODEL = 1
     looks = json.loads(LOOKS.read_text())
     done = json.loads(DONE.read_text()) if DONE.exists() else {}
@@ -44,8 +47,12 @@ def main() -> int:
         for tone in ("medium", "light", "deep"):
             src = (l.get("photoBySkinTone") or {}).get(tone)
             name = Path(src).name if src else None
-            if name and name not in done and (ORIGINALS / name).exists() and name not in {t[1] for t in todo}:
+            if not name or name in done or not (ORIGINALS / name).exists() or name in {t[1] for t in todo}:
+                continue
+            if tone in tones:
                 todo.append((l, name, tone))
+            else:
+                done[name] = "new-style"
     print(f"{len(todo)} photos to retouch; doing up to {limit}.")
     ok = failed = 0
     for l, name, tone in todo[:limit]:

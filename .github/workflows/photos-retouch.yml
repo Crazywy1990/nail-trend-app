@@ -9,6 +9,10 @@ on:
         description: "Most photos to retouch this run (~$0.22 each incl. review)"
         required: false
         default: "80"
+      tones:
+        description: "Tones to retouch (comma-separated); others are marked done"
+        required: false
+        default: "medium,light,deep"
 
 permissions:
   contents: write
@@ -30,7 +34,7 @@ jobs:
       - name: Retouch
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python services/photos/retouch.py --max "${{ inputs.max || '80' }}"
+        run: python services/photos/retouch.py --max "${{ inputs.max || '80' }}" --tones "${{ inputs.tones || 'medium,light,deep' }}"
       - name: Commit
         if: always()
         run: |
