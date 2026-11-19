@@ -1,0 +1,41 @@
+name: Repair cut-off techniques
+
+# One-off: rewrites technique lines cut at 120 characters by an old bug, from each look's photo,
+# on main, the catalog-staging drafts and any open catalog-batch PR branches.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-writes
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Repair on each branch
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp -r services /tmp/tools   # run main's repair code on every branch
+          for b in main catalog-staging $(git branch -r | grep -o 'catalog-batch-[0-9]*' | sort -u); do
+            git checkout -q -B "$b" "origin/$b" || continue
+            f=apps/web/lib/engine/looks.json; [ "$b" = catalog-staging ] && f=catalog-staging/batch.json
+            PYTHONPATH= python /tmp/tools/discovery/repair_specs.py "$f"
+            git add -f "$f"
+            if git diff --cached --quiet; then echo "$b: nothing to repair"; continue; fi
+            git commit -m "Repair cut-off technique lines"
+            git push origin "$b"
+          done

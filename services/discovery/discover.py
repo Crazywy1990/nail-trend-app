@@ -215,6 +215,15 @@ def pick(v, allowed, default):
     return v if v in allowed else default
 
 
+def _clip(text: str, n: int) -> str:
+    """Shorten at a sentence or word boundary, never mid-word (the old hard cut left text like 'with a crisp')."""
+    if len(text) <= n:
+        return text
+    cut = text[:n]
+    end = max(cut.rfind(". "), cut.rfind("; "))
+    return (cut[:end + 1] if end > n * 0.5 else cut[:cut.rfind(" ")].rstrip(",;:") + "…").strip()
+
+
 def _drop() -> tuple[str, str]:
     """The drop new looks join: the current one in drops.json."""
     p = ROOT / "apps/web/lib/engine/drops.json"
@@ -235,7 +244,7 @@ def to_look(d: dict, term_id: str, terms_cfg: dict, existing_ids: set[str]) -> t
     look = {
         "id": lid,
         "name": name,
-        "technique": str(d.get("technique", "")).strip()[:120],
+        "technique": _clip(str(d.get("technique", "")).strip(), 400),
         "system": pick(d.get("system"), SYSTEMS, "gel"),
         "finish": pick(d.get("finish"), FINISHES, "gloss"),
         "colorFamily": pick(d.get("colorFamily"), COLORS, "nude"),
@@ -246,7 +255,7 @@ def to_look(d: dict, term_id: str, terms_cfg: dict, existing_ids: set[str]) -> t
         "stretchLevel": max(1, min(5, int(d.get("stretchLevel") or 3))),
         "fitPrior": 0.75,  # neutral prior for a new look; feedback moves it
         "trendVelocity": 0.75,
-        "photoBrief": str(d.get("photoBrief", "")).strip()[:200],
+        "photoBrief": _clip(str(d.get("photoBrief", "")).strip(), 400),
         "occasions": [o for o in d.get("occasions", []) if o in OCCASIONS][:3] or ["date night"],
         "trendSources": [],
         "trendProof": {"text": None, "isPlaceholder": True},
