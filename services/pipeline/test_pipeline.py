@@ -135,7 +135,10 @@ def test_rescore_from_history(monkeypatch, tmp_path):
     assert p.rescore() == 0
     d = json.loads(out.read_text())
     n_looks = len(json.loads(p.TERMS_FILE.read_text())["looks"])
-    assert len(d["looks"]) == n_looks and all(v["label"] == "steady" for v in d["looks"].values())
+    # one stat per term: looks whose terms are all taken get no row (no duplicate stats)
+    assert 0 < len(d["looks"]) <= n_looks and all(v["label"] == "steady" for v in d["looks"].values())
+    texts = [v["text"] for v in d["looks"].values()]
+    assert len(texts) == len(set(texts))
     assert hist.read_text().count("\n") == 2  # rescore doesn't append history
 
 
