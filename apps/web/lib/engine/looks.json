@@ -1325,5 +1325,509 @@
     "photoSource": "generated",
     "trendSource": null,
     "trendAsOf": null
+  },
+  {
+    "id": "sheer-bridal-pink-pearl-accent",
+    "name": "Sheer Bridal Pink · Pearl Accent",
+    "technique": "Apply a sheer milky bridal-pink gel in thin, even layers on short oval nails, then seal with a high-gloss top coat. Place one small pearl accent near the cuticle on the middle finger.",
+    "system": "gel",
+    "finish": "gloss",
+    "colorFamily": "pink",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$60",
+    "durationMin": 75,
+    "stretchLevel": 1,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short oval nails in sheer pink gloss with one delicate pearl accent on the ring finger, styled with a slim diamond band, soft white silk, and a pale bouquet or veil for an airy bridal editorial hand s",
+    "occasions": [
+      "wedding",
+      "work",
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "sheer blush pink gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "milky pink nude gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "small pearl accent",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/sheer-bridal-pink-pearl-accent.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Sheer Bridal Pink · Pearl Accent: apply a sheer milky bridal-pink gel in thin, even layers on short oval nails, then seal with a high-gloss top ",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-18",
+      "concept": "Bridal: sheer pink 'your nails but better' with one pearl accent"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "baby-boomer-french-soft-bridal-fade",
+    "name": "Baby-Boomer French · Soft Bridal Fade",
+    "technique": "Apply a sheer nude builder-gel overlay shaped to medium almonds, then sponge/brush a seamless baby-boomer fade from soft pink-nude at the cuticle into milky white French tips. Finish with a high-gloss top coat.",
+    "system": "builder gel",
+    "finish": "french",
+    "colorFamily": "nude",
+    "shape": "Almond",
+    "length": "medium",
+    "priceRange": "~$85",
+    "durationMin": 105,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Medium almond nails on a softly bent hand, paired with a thin gold wedding band, pearl stud earrings nearby, and ivory satin fabric draped under natural window light for a clean bridal editorial feel.",
+    "occasions": [
+      "wedding",
+      "work",
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer Nude Pink",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Soft White",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/baby-boomer-french-soft-bridal-fade.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Baby-Boomer French · Soft Bridal Fade: apply a sheer nude builder-gel overlay shaped to medium almonds, then sponge/brush a seamless baby-boomer fade from soft",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-18",
+      "concept": "Baby-boomer ombre: nude fading to soft white at the tip"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "peach-jelly-cuff-cuticle-gold",
+    "name": "Peach Jelly Cuff · Cuticle Gold",
+    "technique": "Apply 2–3 thin coats of sheer peach-pink jelly gel on short oval nails. Trace an ultra-thin metallic gold cuff along the cuticle curve of each nail, then seal with a high-gloss top coat.",
+    "system": "gel",
+    "finish": "jelly",
+    "colorFamily": "pink",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$60",
+    "durationMin": 75,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short round nails with glossy peach jelly and delicate gold cuticle cuffs, styled with slim gold hoops, a champagne silk blouse sleeve, and a champagne coupe or soft pink rose prop against warm neutra",
+    "occasions": [
+      "date night",
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "sheer peach-pink jelly gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "fine gold metallic liner gel",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/peach-jelly-cuff-cuticle-gold.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Peach Jelly Cuff · Cuticle Gold: apply 2–3 thin coats of sheer peach-pink jelly gel on short oval nails. trace an ultra-thin metallic gold cuff",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-19",
+      "concept": "Sheer peach jelly with a thin gold cuff at the cuticle"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "muted-mauve-gloss-micro-contour-french",
+    "name": "Muted Mauve Gloss · Micro-Contour French",
+    "technique": "Short squoval gel nails with a sheer muted mauve-pink cover, sealed in high-gloss top coat. Finished with an ultra-thin deeper mauve micro-contour French line tracing the free edge.",
+    "system": "gel",
+    "finish": "gloss",
+    "colorFamily": "pink",
+    "shape": "Squoval",
+    "length": "short",
+    "priceRange": "~$55",
+    "durationMin": 75,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short squoval mauve-pink glossy nails on a clean hand, paired with a thin gold watch and a simple ring, resting on a cream silk blouse cuff with a neutral wool blazer sleeve in soft window light.",
+    "occasions": [
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Dolly",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Bare My Soul",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/muted-mauve-gloss-micro-contour-french.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Muted Mauve Gloss · Micro-Contour French: short squoval gel nails with a sheer muted mauve-pink cover, sealed in high-gloss top coat. finished with an ultra-thin ",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-19",
+      "concept": "Muted mauve gloss, office-safe"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "greige-suede-soft-matte-nude",
+    "name": "Greige Suede · Soft Matte Nude",
+    "technique": "Prep short square nails with softly rounded corners, then apply an opaque greige-taupe beige gel in 2 thin coats for smooth, even coverage. Seal with a soft-touch matte top coat for a suede finish.",
+    "system": "gel",
+    "finish": "matte",
+    "colorFamily": "nude",
+    "shape": "Square",
+    "length": "short",
+    "priceRange": "~$55",
+    "durationMin": 75,
+    "stretchLevel": 1,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short square greige matte nails on a hand resting on a camel wool blazer sleeve, with minimal gold ring stack and a soft beige cashmere scarf in natural window light.",
+    "occasions": [
+      "work",
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "OPI",
+        "name": "Put It In Neutral",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Dolly",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Sheer greige nude",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/greige-suede-soft-matte-nude.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Greige Suede · Soft Matte Nude: prep short square nails with softly rounded corners, then apply an opaque greige-taupe beige gel in 2 thin coa",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-19",
+      "concept": "Greige suede-matte"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "espresso-gloss-clean-short-round",
+    "name": "Espresso Gloss · Clean Short Oval",
+    "technique": "Apply deep espresso brown gel in 2 thin coats on short oval nails, keeping cuticle lines tight and sidewalls clean. Build a subtle apex, refine the soft oval free edge, and seal with a high-gloss top coat for a smooth glassy finish.",
+    "system": "gel",
+    "finish": "gloss",
+    "colorFamily": "brown",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$55",
+    "durationMin": 60,
+    "stretchLevel": 1,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short round glossy espresso nails held over a cream cashmere blazer cuff, with slim gold hoops and a black coffee cup on a marble desk for a polished editorial work photo.",
+    "occasions": [
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "espresso brown gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "high-gloss no-wipe top coat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/espresso-gloss-clean-short-round.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Espresso Gloss · Clean Short Oval: apply deep espresso brown gel in 2 thin coats on short oval nails, keeping cuticle lines tight and sidewalls c",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-19",
+      "concept": "Glossy espresso brown"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "midnight-navy-micro-french-gold-edge",
+    "name": "Midnight Navy Micro-French · Gold Edge",
+    "technique": "Short squoval nails with an opaque midnight navy gel base, finished with a razor-thin metallic gold micro-French line cleanly traced along the free edge and sealed in a high-gloss gel top coat.",
+    "system": "gel",
+    "finish": "french",
+    "colorFamily": "blue",
+    "shape": "Squoval",
+    "length": "short",
+    "priceRange": "~$65",
+    "durationMin": 75,
+    "stretchLevel": 1,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Editorial close-up of short squoval nails on a softly bent hand, paired with delicate gold rings, a silk black slip dress cuff, and a champagne clutch; background should feel dim, warm, and upscale wi",
+    "occasions": [
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "OPI",
+        "name": "Russian Navy",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Gold Leaf",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/midnight-navy-micro-french-gold-edge.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Midnight Navy Micro-French · Gold Edge: short squoval nails with an opaque midnight navy gel base, finished with a razor-thin metallic gold micro-french line cl",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-19",
+      "concept": "Glossy navy with a gold micro-French tip"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "olive-suede-matte-clean-work-square",
+    "name": "Olive Suede Matte · Clean Work Squoval",
+    "technique": "Short natural nails are filed into a short squoval shape with softly rounded corners, cuticles detailed, and coated in muted olive green gel. Finished with an even velvet-matte topcoat for a soft suede effect.",
+    "system": "gel",
+    "finish": "matte",
+    "colorFamily": "green",
+    "shape": "Squoval",
+    "length": "short",
+    "priceRange": "~$55",
+    "durationMin": 75,
+    "stretchLevel": 1,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short square olive matte nails on a relaxed hand with minimal gold jewelry, a tailored cream blazer sleeve, and a soft neutral wool fabric backdrop in natural window light.",
+    "occasions": [
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Olive",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Suzi – The First Lady of Nails",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "Gelish",
+        "name": "Matte Top It Off",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/olive-suede-matte-clean-work-square.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Olive Suede Matte · Clean Work Squoval: short natural nails are filed into a short squoval shape with softly rounded corners, cuticles detailed, and c",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:2",
+      "created": "2026-11-19",
+      "concept": "Olive green suede-matte"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   }
 ]
