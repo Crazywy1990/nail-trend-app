@@ -1372,9 +1372,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/sheer-bridal-pink-pearl-accent__light.jpg",
       "medium": "/looks/sheer-bridal-pink-pearl-accent.jpg",
-      "deep": null
+      "deep": "/looks/sheer-bridal-pink-pearl-accent__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Sheer Bridal Pink · Pearl Accent: apply a sheer milky bridal-pink gel in thin, even layers on short oval nails, then seal with a high-gloss top ",
@@ -1434,9 +1434,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/baby-boomer-french-soft-bridal-fade__light.jpg",
       "medium": "/looks/baby-boomer-french-soft-bridal-fade.jpg",
-      "deep": null
+      "deep": "/looks/baby-boomer-french-soft-bridal-fade__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Baby-Boomer French · Soft Bridal Fade: apply a sheer nude builder-gel overlay shaped to medium almonds, then sponge/brush a seamless baby-boomer fade from soft",
@@ -1495,9 +1495,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/peach-jelly-cuff-cuticle-gold__light.jpg",
       "medium": "/looks/peach-jelly-cuff-cuticle-gold.jpg",
-      "deep": null
+      "deep": "/looks/peach-jelly-cuff-cuticle-gold__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Peach Jelly Cuff · Cuticle Gold: apply 2–3 thin coats of sheer peach-pink jelly gel on short oval nails. trace an ultra-thin metallic gold cuff",
@@ -1555,9 +1555,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/muted-mauve-gloss-micro-contour-french__light.jpg",
       "medium": "/looks/muted-mauve-gloss-micro-contour-french.jpg",
-      "deep": null
+      "deep": "/looks/muted-mauve-gloss-micro-contour-french__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Muted Mauve Gloss · Micro-Contour French: short squoval gel nails with a sheer muted mauve-pink cover, sealed in high-gloss top coat. finished with an ultra-thin ",
@@ -1622,9 +1622,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/greige-suede-soft-matte-nude__light.jpg",
       "medium": "/looks/greige-suede-soft-matte-nude.jpg",
-      "deep": null
+      "deep": "/looks/greige-suede-soft-matte-nude__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Greige Suede · Soft Matte Nude: prep short square nails with softly rounded corners, then apply an opaque greige-taupe beige gel in 2 thin coa",
@@ -1682,9 +1682,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/espresso-gloss-clean-short-round__light.jpg",
       "medium": "/looks/espresso-gloss-clean-short-round.jpg",
-      "deep": null
+      "deep": "/looks/espresso-gloss-clean-short-round__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Espresso Gloss · Clean Short Oval: apply deep espresso brown gel in 2 thin coats on short oval nails, keeping cuticle lines tight and sidewalls c",
@@ -1742,9 +1742,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/midnight-navy-micro-french-gold-edge__light.jpg",
       "medium": "/looks/midnight-navy-micro-french-gold-edge.jpg",
-      "deep": null
+      "deep": "/looks/midnight-navy-micro-french-gold-edge__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Midnight Navy Micro-French · Gold Edge: short squoval nails with an opaque midnight navy gel base, finished with a razor-thin metallic gold micro-french line cl",
@@ -1808,9 +1808,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/olive-suede-matte-clean-work-square__light.jpg",
       "medium": "/looks/olive-suede-matte-clean-work-square.jpg",
-      "deep": null
+      "deep": "/looks/olive-suede-matte-clean-work-square__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Olive Suede Matte · Clean Work Squoval: short natural nails are filed into a short squoval shape with softly rounded corners, cuticles detailed, and c",
