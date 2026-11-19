@@ -743,5 +743,587 @@
     "photoSource": "generated",
     "trendSource": null,
     "trendAsOf": null
+  },
+  {
+    "id": "snowfall-micro-french-silver-chrome",
+    "name": "Snowfall Micro-French · Silver Chrome",
+    "technique": "Apply a sheer milky pink-nude gel base to short round nails, then trace ultra-fine silver chrome micro-French tips with a crisp curved smile line hugging the free edge. Seal with high-gloss gel top coat.",
+    "system": "gel",
+    "finish": "french",
+    "colorFamily": "nude",
+    "shape": "Round",
+    "length": "short",
+    "priceRange": "~$65",
+    "durationMin": 85,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Close-up editorial hand shot of short round nails resting on ivory satin with a few silver rings, soft winter light, and a folded cashmere sweater sleeve for a clean festive feel.",
+    "occasions": [
+      "holiday party",
+      "work",
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer milky white builder gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Silver chrome gel",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/snowfall-micro-french-silver-chrome.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Snowfall Micro-French · Silver Chrome: apply a sheer milky pink-nude gel base to short round nails, then trace ultra-fine silver chrome micro-french ",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Snowy milky white base with silver chrome micro-French tips"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "evergreen-jelly-sparse-gold-flake",
+    "name": "Evergreen Jelly · Sparse Gold Flake",
+    "technique": "Build deep evergreen jelly gel in 2–3 thin coats on short oval nails for a rich, glassy depth. Place a few tiny irregular gold leaf flakes sparsely on each nail, then seal with a high-gloss top coat.",
+    "system": "gel",
+    "finish": "jelly",
+    "colorFamily": "green",
+    "shape": "Oval",
+    "length": "short",
+    "priceRange": "~$65",
+    "durationMin": 75,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short oval nails in translucent evergreen with barely-there gold flakes, styled with thin gold rings, a cream cashmere sleeve, and a dark green satin ribbon on warm neutral linen for an expensive holi",
+    "occasions": [
+      "holiday party",
+      "date night",
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "The GelBottle Inc",
+        "name": "Jelly Green",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "ORLY",
+        "name": "Gold Leaf Flakes",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/evergreen-jelly-sparse-gold-flake.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Evergreen Jelly · Sparse Gold Flake: build deep evergreen jelly gel in 2–3 thin coats on short oval nails for a rich, glassy depth. place a few tin",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Evergreen jelly with sparse gold flakes"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "sheer-nude-candy-cane-red-diagonal-accent",
+    "name": "Sheer Nude · Red Diagonal Stripe",
+    "technique": "Apply a sheer nude gel base to medium almond nails. Add one ultra-thin red diagonal stripe on two accent nails, leaving the rest clean, glossy, and minimal.",
+    "system": "gel",
+    "finish": "art",
+    "colorFamily": "red",
+    "shape": "Almond",
+    "length": "medium",
+    "priceRange": "~$65",
+    "durationMin": 75,
+    "stretchLevel": 1,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Elegant hand pose with almond medium nails over a cream cashmere sweater cuff, simple gold ring stack, and a red velvet ribbon or satin bow for a subtle Christmas cue; soft natural window light, clean",
+    "occasions": [
+      "holiday party",
+      "work",
+      "date night"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer nude pink-beige gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "OPI",
+        "name": "Big Apple Red",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/sheer-nude-candy-cane-red-diagonal-accent.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Sheer Nude · Red Diagonal Stripe: apply a sheer nude gel base to medium almond nails. add one ultra-thin red diagonal stripe on two accent nails",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Minimal candy-cane: sheer nude with a thin red diagonal stripe on two accent nails"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "velvet-noel-tiny-gold-star",
+    "name": "Velvet Noel · Tiny Gold Star",
+    "technique": "Short square gel nails in deep red magnetic velvet cat-eye, finished with a high-gloss topcoat. Add one tiny hand-painted gold star accent on the ring finger.",
+    "system": "gel",
+    "finish": "cat-eye",
+    "colorFamily": "red",
+    "shape": "Square",
+    "length": "short",
+    "priceRange": "~$75",
+    "durationMin": 85,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Editorial close-up of short square hands with stacked gold rings, a black velvet ribbon or dress fabric beneath, and warm holiday lights softly blurred in the background.",
+    "occasions": [
+      "holiday party",
+      "date night",
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "deep red magnetic cat-eye gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "gold metallic gel paint",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/velvet-noel-tiny-gold-star.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Velvet Noel · Tiny Gold Star: short square gel nails in deep red magnetic velvet cat-eye, finished with a high-gloss topcoat. add one tiny hand-painte",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Deep red velvet cat-eye with one tiny gold star accent nail"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "midnight-navy-fade-silver-cuticle-dust",
+    "name": "Midnight Navy Fade · Silver Cuticle Dust",
+    "technique": "Apply a glossy midnight navy gel base on medium coffin nails, then pack fine silver micro-glitter at the cuticle and softly feather it downward into a diffused fade.",
+    "system": "gel",
+    "finish": "gloss",
+    "colorFamily": "blue",
+    "shape": "Coffin",
+    "length": "medium",
+    "priceRange": "~$85",
+    "durationMin": 100,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Medium coffin nails on a relaxed hand with slim silver rings, a black satin cuff, and a deep navy silk drape; soft flash to catch the glitter fade and glossy reflection.",
+    "occasions": [
+      "holiday party",
+      "date night",
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "OPI",
+        "name": "Russian Navy",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "Gelish",
+        "name": "Silver Sand",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Clear High-Gloss Top Coat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/midnight-navy-fade-silver-cuticle-dust.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Midnight Navy Fade · Silver Cuticle Dust: apply a glossy midnight navy gel base on medium coffin nails, then pack fine silver micro-glitter at the cuticle and sof",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Midnight navy gloss with fine silver micro-glitter fade at the cuticle"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "silver-mirror-french-sheer-nude-base",
+    "name": "Silver Mirror French · Sheer Nude Base",
+    "technique": "Structured long almond builder-gel set with a sheer nude base, crisp silver mirror-chrome French tips following the almond smile line, and a high-gloss seal.",
+    "system": "builder gel",
+    "finish": "french",
+    "colorFamily": "nude",
+    "shape": "Almond",
+    "length": "long",
+    "priceRange": "~$90",
+    "durationMin": 135,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Long almond nails on a sheer nude base with mirror-silver French tips, styled with slim silver rings, a champagne satin sleeve, and a soft metallic holiday backdrop.",
+    "occasions": [
+      "holiday party",
+      "date night",
+      "wedding"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer nude builder gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Silver mirror chrome powder",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Clear glossy top coat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/silver-mirror-french-sheer-nude-base.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Silver Mirror French · Sheer Nude Base: structured long almond builder-gel set with a sheer nude base, crisp silver mirror-chrome french tips followin",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Silver mirror-chrome French tips on a sheer nude base"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "champagne-gold-chrome-nude-glow",
+    "name": "Champagne Gold Chrome · Nude Glow",
+    "technique": "Build medium almond nails with a sheer nude-beige builder gel base. Burnish champagne-gold chrome powder evenly over the full nail for a smooth mirror glow, then seal with glossy top coat.",
+    "system": "builder gel",
+    "finish": "chrome",
+    "colorFamily": "nude",
+    "shape": "Almond",
+    "length": "medium",
+    "priceRange": "~$85",
+    "durationMin": 105,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Medium almond nails in all-over champagne chrome, shot on a hand with thin gold stacking rings and a soft cashmere sleeve, resting on ivory satin with a few champagne flutes and warm candlelight refle",
+    "occasions": [
+      "holiday party",
+      "date night",
+      "wedding"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": "OPI",
+        "name": "Bubble Bath",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "champagne gold chrome powder",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": "Aprés Nail",
+        "name": "Non-Wipe Top Gelcoat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/champagne-gold-chrome-nude-glow.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Champagne Gold Chrome · Nude Glow: build medium almond nails with a sheer nude-beige builder gel base. burnish champagne-gold chrome powder evenly over the",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Champagne gold chrome, all over"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "pink-jelly-hearts-hand-painted-accent",
+    "name": "Pink Jelly Hearts · Hand-Painted Accent",
+    "technique": "Apply a sheer pink jelly gel base to all short round nails, then hand-paint tiny crisp red hearts on two accent nails. Finish with a high-gloss gel top coat to seal the artwork.",
+    "system": "gel",
+    "finish": "art",
+    "colorFamily": "pink",
+    "shape": "Round",
+    "length": "short",
+    "priceRange": "~$65",
+    "durationMin": 90,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Short round nails in translucent pink jelly with two tiny red heart accent nails, styled with delicate gold rings, a pale blush knit sleeve, and a soft satin ribbon for a polished Valentine hand shot.",
+    "occasions": [
+      "date night",
+      "holiday party",
+      "work"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Sheer soft pink jelly gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Opaque true red art gel",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/pink-jelly-hearts-hand-painted-accent.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Pink Jelly Hearts · Hand-Painted Accent: apply a sheer pink jelly gel base to all short round nails, then hand-paint tiny crisp red hearts on two accent nails. f",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Soft pink jelly with tiny hand-painted red hearts on two nails"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
+  },
+  {
+    "id": "cocoa-cat-eye-warm-gold-beam",
+    "name": "Cocoa Cat-Eye · Warm Gold Beam",
+    "technique": "Apply a cocoa-brown magnetic cat-eye gel on medium oval nails, then use a magnet to pull a slim warm-gold beam diagonally across each nail. Cure and seal with a high-gloss gel top coat.",
+    "system": "gel",
+    "finish": "cat-eye",
+    "colorFamily": "brown",
+    "shape": "Oval",
+    "length": "medium",
+    "priceRange": "~$75",
+    "durationMin": 95,
+    "stretchLevel": 2,
+    "fitPrior": 0.75,
+    "trendVelocity": 0.75,
+    "photoBrief": "Editorial close-up of oval medium nails with cocoa cat-eye sheen and a fine warm gold line, styled with slim gold rings, a camel cashmere sweater sleeve, and a soft taupe wool scarf on neutral stone.",
+    "occasions": [
+      "work",
+      "date night",
+      "holiday party"
+    ],
+    "trendSources": [],
+    "trendProof": {
+      "text": null,
+      "isPlaceholder": true
+    },
+    "shades": [
+      {
+        "brand": null,
+        "name": "Cocoa brown cat-eye gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "Warm gold magnetic shimmer gel",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "High-gloss top coat",
+        "code": null,
+        "verified": false
+      }
+    ],
+    "photoBySkinTone": {
+      "light": null,
+      "medium": "/looks/cocoa-cat-eye-warm-gold-beam.jpg",
+      "deep": null
+    },
+    "photoPos": "center",
+    "photoAlt": "Cocoa Cat-Eye · Warm Gold Beam: apply a cocoa-brown magnetic cat-eye gel on medium oval nails, then use a magnet to pull a slim warm-gold beam diagonall",
+    "why": null,
+    "whyInputs": {},
+    "draft": {
+      "from": "batch:1",
+      "created": "2026-11-18",
+      "concept": "Cocoa brown cat-eye with a warm gold shimmer line"
+    },
+    "dropId": "2026-w47",
+    "dropDate": "2026-11-16",
+    "active": true,
+    "bookableBy": [],
+    "resultPhoto": null,
+    "photoSource": "generated",
+    "trendSource": null,
+    "trendAsOf": null
   }
 ]

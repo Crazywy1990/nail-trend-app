@@ -221,6 +221,48 @@
       "matte",
       "french",
       "brown"
+    ],
+    "snowfall-micro-french-silver-chrome": [
+      "french",
+      "micro-french",
+      "chrome"
+    ],
+    "evergreen-jelly-sparse-gold-flake": [
+      "jelly",
+      "emerald",
+      "glazed"
+    ],
+    "sheer-nude-candy-cane-red-diagonal-accent": [
+      "red",
+      "micro-french"
+    ],
+    "velvet-noel-tiny-gold-star": [
+      "cat-eye",
+      "red",
+      "star"
+    ],
+    "midnight-navy-fade-silver-cuticle-dust": [
+      "chrome"
+    ],
+    "silver-mirror-french-sheer-nude-base": [
+      "chrome",
+      "french",
+      "milky"
+    ],
+    "champagne-gold-chrome-nude-glow": [
+      "chrome",
+      "glazed",
+      "milky"
+    ],
+    "pink-jelly-hearts-hand-painted-accent": [
+      "jelly",
+      "pink",
+      "red"
+    ],
+    "cocoa-cat-eye-warm-gold-beam": [
+      "cat-eye",
+      "brown",
+      "chrome"
     ]
   },
   "editorialFeeds": [
