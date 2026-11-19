@@ -1,0 +1,2357 @@
+{
+  "batches": {
+    "1": [
+      {
+        "look": {
+          "id": "snowfall-micro-french-silver-chrome",
+          "name": "Snowfall Micro-French · Silver Chrome",
+          "technique": "Apply a sheer milky white base on short round nails, then paint ultra-fine silver chrome micro-French tips with a crisp ",
+          "system": "gel",
+          "finish": "french",
+          "colorFamily": "white",
+          "shape": "Round",
+          "length": "short",
+          "priceRange": "~$65",
+          "durationMin": 85,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Close-up editorial hand shot of short round nails resting on ivory satin with a few silver rings, soft winter light, and a folded cashmere sweater sleeve for a clean festive feel.",
+          "occasions": [
+            "holiday party",
+            "work",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer milky white builder gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Silver chrome gel",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/snowfall-micro-french-silver-chrome.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Snowfall Micro-French · Silver Chrome: apply a sheer milky white base on short round nails, then paint ultra-fine silver chrome micro-french tips with a crisp  on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Snowy milky white base with silver chrome micro-French tips"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "french",
+          "micro-french",
+          "chrome"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 4,
+            "finish_match": 4,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Base reads more sheer blush-pink/nude than milky white.",
+            "Silver chrome French tips are visible but a little thicker than an ultra-fine micro-French on several nails.",
+            "Some nails read slightly oval/squoval rather than purely round.",
+            "Technique text appears truncated after \"with a crisp\"."
+          ],
+          "photo_fix": "Retouch or reshoot with a milkier white base and thinner, crisper silver chrome micro-French tips on uniformly short round nails.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "evergreen-jelly-sparse-gold-flake",
+          "name": "Evergreen Jelly · Sparse Gold Flake",
+          "technique": "Apply a translucent forest-green jelly base in 2 thin coats on short oval nails, then place a few tiny irregular gold le",
+          "system": "gel",
+          "finish": "jelly",
+          "colorFamily": "green",
+          "shape": "Oval",
+          "length": "short",
+          "priceRange": "~$65",
+          "durationMin": 75,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short oval nails in translucent evergreen with barely-there gold flakes, styled with thin gold rings, a cream cashmere sleeve, and a dark green satin ribbon on warm neutral linen for an expensive holi",
+          "occasions": [
+            "holiday party",
+            "date night",
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Jelly Green",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "ORLY",
+              "name": "Gold Leaf Flakes",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/evergreen-jelly-sparse-gold-flake.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Evergreen Jelly · Sparse Gold Flake: apply a translucent forest-green jelly base in 2 thin coats on short oval nails, then place a few tiny irregular gold le on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Evergreen jelly with sparse gold flakes"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "jelly",
+          "emerald",
+          "glazed"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Green color matches evergreen, but the base reads quite dark and glossy/opaque rather than clearly translucent jelly.",
+            "Gold flakes are sparse overall, but a few nails have slightly larger/more clustered flakes than the 'barely-there' brief."
+          ],
+          "photo_fix": "Reshoot or adjust the manicure so the forest green reads more translucent jelly, with fewer and tinier gold flakes on each nail.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "sheer-nude-candy-cane-red-diagonal-accent",
+          "name": "Sheer Nude Candy Cane · Red Diagonal Accent",
+          "technique": "Sheer nude base on all nails; paint a single ultra-thin diagonal red stripe across two almond accent nails, keeping the ",
+          "system": "gel",
+          "finish": "art",
+          "colorFamily": "red",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$65",
+          "durationMin": 75,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Elegant hand pose with almond medium nails over a cream cashmere sweater cuff, simple gold ring stack, and a red velvet ribbon or satin bow for a subtle Christmas cue; soft natural window light, clean",
+          "occasions": [
+            "holiday party",
+            "work",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer nude pink-beige gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Big Apple Red",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/sheer-nude-candy-cane-red-diagonal-accent.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Sheer Nude Candy Cane · Red Diagonal Accent: sheer nude base on all nails; paint a single ultra-thin diagonal red stripe across two almond accent nails, keeping the  on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Minimal candy-cane: sheer nude with a thin red diagonal stripe on two accent nails"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "red",
+          "micro-french"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Sheer nude pink-beige base and red accent color match well.",
+            "Diagonal red accent is visible, but the second accent nail is partly obscured and the stripe reads slightly thicker than 'ultra-thin'.",
+            "Spec technique line appears incomplete after 'keeping the'.",
+            "Name says 'Candy Cane', but the actual design is a very minimal single red diagonal stripe rather than a classic candy-cane stripe pattern."
+          ],
+          "photo_fix": "Re-shoot or crop so both accent nails are fully visible, with one clearly ultra-thin red diagonal stripe on each and no added parallel/white stripe.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "velvet-noel-tiny-gold-star",
+          "name": "Velvet Noel · Tiny Gold Star",
+          "technique": "Short square nails in a deep red magnetic velvet cat-eye, finished with a glossy topcoat; add one tiny hand-painted gold",
+          "system": "gel",
+          "finish": "cat-eye",
+          "colorFamily": "red",
+          "shape": "Square",
+          "length": "short",
+          "priceRange": "~$75",
+          "durationMin": 105,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Editorial close-up of short square hands with stacked gold rings, a black velvet ribbon or dress fabric beneath, and warm holiday lights softly blurred in the background.",
+          "occasions": [
+            "holiday party",
+            "date night",
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "deep red magnetic cat-eye gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "gold metallic gel paint",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/velvet-noel-tiny-gold-star.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Velvet Noel · Tiny Gold Star: short square nails in a deep red magnetic velvet cat-eye, finished with a glossy topcoat; add one tiny hand-painted gold on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Deep red velvet cat-eye with one tiny gold star accent nail"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "cat-eye",
+          "red",
+          "star"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Nails are short and mostly square, but a few corners read slightly rounded/squoval rather than crisp square.",
+            "Technique text appears truncated: 'add one tiny hand-painted gold' should specify 'gold star'."
+          ],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "midnight-navy-fade-silver-cuticle-dust",
+          "name": "Midnight Navy Fade · Silver Cuticle Dust",
+          "technique": "Apply a sheer midnight navy gel base, then softly concentrate fine silver micro-glitter at the cuticle in a diffused fad",
+          "system": "gel",
+          "finish": "gloss",
+          "colorFamily": "blue",
+          "shape": "Coffin",
+          "length": "medium",
+          "priceRange": "~$85",
+          "durationMin": 100,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Medium coffin nails on a relaxed hand with slim silver rings, a black satin cuff, and a deep navy silk drape; soft flash to catch the glitter fade and glossy reflection.",
+          "occasions": [
+            "holiday party",
+            "date night",
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "OPI",
+              "name": "Russian Navy",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "Gelish",
+              "name": "Silver Sand",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Clear High-Gloss Top Coat",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/midnight-navy-fade-silver-cuticle-dust.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Midnight Navy Fade · Silver Cuticle Dust: apply a sheer midnight navy gel base, then softly concentrate fine silver micro-glitter at the cuticle in a diffused fad on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Midnight navy gloss with fine silver micro-glitter fade at the cuticle"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "chrome"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 4,
+            "finish_match": 4,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Navy base reads more opaque than sheer midnight navy.",
+            "Silver glitter is fairly dense and slightly chunky at the cuticle, not a very fine micro-glitter dust.",
+            "Fade is visible but could be softer and more diffused on some nails.",
+            "Coffin shape is mostly correct, but a few nails look slightly more tapered/pointed than a clean medium coffin."
+          ],
+          "photo_fix": "Reshoot or adjust the set with a slightly sheerer navy base and finer, more softly diffused silver cuticle glitter while keeping the glossy reflections clear.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "silver-mirror-french-sheer-nude-base",
+          "name": "Silver Mirror French · Sheer Nude Base",
+          "technique": "Structured long almond set on sheer nude gel base with crisp silver mirror-chrome French smile lines and a high-gloss se",
+          "system": "builder gel",
+          "finish": "french",
+          "colorFamily": "white",
+          "shape": "Almond",
+          "length": "long",
+          "priceRange": "~$90",
+          "durationMin": 135,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Long almond nails on a sheer nude base with mirror-silver French tips, styled with slim silver rings, a champagne satin sleeve, and a soft metallic holiday backdrop.",
+          "occasions": [
+            "holiday party",
+            "date night",
+            "wedding"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer nude builder gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Silver mirror chrome powder",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Clear glossy top coat",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/silver-mirror-french-sheer-nude-base.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Silver Mirror French · Sheer Nude Base: structured long almond set on sheer nude gel base with crisp silver mirror-chrome french smile lines and a high-gloss se on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Silver mirror-chrome French tips on a sheer nude base"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "chrome",
+          "french",
+          "milky"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Color family is listed as white, but the look is sheer nude with metallic silver chrome French tips.",
+            "Length reads more medium-long than very long on some nails, though almond shape is consistent."
+          ],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "champagne-gold-chrome-nude-glow",
+          "name": "Champagne Gold Chrome · Nude Glow",
+          "technique": "Apply a sheer nude-beige base, then layer a uniform champagne-gold chrome powder over the full nail for a smooth mirrore",
+          "system": "builder gel",
+          "finish": "chrome",
+          "colorFamily": "nude",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$85",
+          "durationMin": 105,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Medium almond nails in all-over champagne chrome, shot on a hand with thin gold stacking rings and a soft cashmere sleeve, resting on ivory satin with a few champagne flutes and warm candlelight refle",
+          "occasions": [
+            "holiday party",
+            "date night",
+            "wedding"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "OPI",
+              "name": "Bubble Bath",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "champagne gold chrome powder",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "Aprés Nail",
+              "name": "Non-Wipe Top Gelcoat",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/champagne-gold-chrome-nude-glow.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Champagne Gold Chrome · Nude Glow: apply a sheer nude-beige base, then layer a uniform champagne-gold chrome powder over the full nail for a smooth mirrore on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Champagne gold chrome, all over"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "chrome",
+          "glazed",
+          "milky"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Spec copy has small truncation/typo issues: 'mirrore' and photo brief cuts off at 'refle'.",
+            "Color family is listed as nude, but the visible result reads more champagne-gold chrome than nude; acceptable because the base is nude-beige."
+          ],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "pink-jelly-hearts-hand-painted-accent",
+          "name": "Pink Jelly Hearts · Hand-Painted Accent",
+          "technique": "Apply a sheer pink jelly base on all short round nails, then hand-paint tiny crisp red hearts on two accent nails; seal ",
+          "system": "gel",
+          "finish": "art",
+          "colorFamily": "pink",
+          "shape": "Round",
+          "length": "short",
+          "priceRange": "~$65",
+          "durationMin": 90,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short round nails in translucent pink jelly with two tiny red heart accent nails, styled with delicate gold rings, a pale blush knit sleeve, and a soft satin ribbon for a polished Valentine hand shot.",
+          "occasions": [
+            "date night",
+            "holiday party",
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer soft pink jelly gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Opaque true red art gel",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/pink-jelly-hearts-hand-painted-accent.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Pink Jelly Hearts · Hand-Painted Accent: apply a sheer pink jelly base on all short round nails, then hand-paint tiny crisp red hearts on two accent nails; seal  on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Soft pink jelly with tiny hand-painted red hearts on two nails"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "jelly",
+          "pink",
+          "red"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "cocoa-cat-eye-warm-gold-beam",
+          "name": "Cocoa Cat-Eye · Warm Gold Beam",
+          "technique": "Apply a medium-brown magnetic cat-eye gel over an oval medium-length base, then place a thin warm gold magnetic highligh",
+          "system": "gel",
+          "finish": "cat-eye",
+          "colorFamily": "brown",
+          "shape": "Oval",
+          "length": "medium",
+          "priceRange": "~$75",
+          "durationMin": 95,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Editorial close-up of oval medium nails with cocoa cat-eye sheen and a fine warm gold line, styled with slim gold rings, a camel cashmere sweater sleeve, and a soft taupe wool scarf on neutral stone.",
+          "occasions": [
+            "work",
+            "date night",
+            "holiday party"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Cocoa brown cat-eye gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Warm gold magnetic shimmer gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "High-gloss top coat",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/cocoa-cat-eye-warm-gold-beam.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Cocoa Cat-Eye · Warm Gold Beam: apply a medium-brown magnetic cat-eye gel over an oval medium-length base, then place a thin warm gold magnetic highligh on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:1",
+            "created": "2026-11-18",
+            "concept": "Cocoa brown cat-eye with a warm gold shimmer line"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "cat-eye",
+          "brown",
+          "chrome"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 4,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Base color reads slightly deeper espresso/chocolate than the specified medium cocoa brown.",
+            "Gold cat-eye beam is visible and warm, but a little broad on some nails compared with a very fine line."
+          ],
+          "photo_fix": "Use a slightly lighter cocoa-brown base and magnetize the warm gold beam into a consistently thinner line across all nails.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      }
+    ],
+    "2": [
+      {
+        "look": {
+          "id": "sheer-bridal-pink-pearl-accent",
+          "name": "Sheer Bridal Pink · Pearl Accent",
+          "technique": "Apply a sheer pink milky gel base in thin even layers on short oval nails, finish with a high-gloss top, and add one sin",
+          "system": "gel",
+          "finish": "gloss",
+          "colorFamily": "pink",
+          "shape": "Oval",
+          "length": "short",
+          "priceRange": "~$60",
+          "durationMin": 75,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short oval nails in sheer pink gloss with one delicate pearl accent on the ring finger, styled with a slim diamond band, soft white silk, and a pale bouquet or veil for an airy bridal editorial hand s",
+          "occasions": [
+            "wedding",
+            "work",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "sheer blush pink gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "milky pink nude gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "small pearl accent",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/sheer-bridal-pink-pearl-accent.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Sheer Bridal Pink · Pearl Accent: apply a sheer pink milky gel base in thin even layers on short oval nails, finish with a high-gloss top, and add one sin on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-18",
+            "concept": "Bridal: sheer pink 'your nails but better' with one pearl accent"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "pink",
+          "milky"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Pearl accent appears to be on the middle finger rather than the ring finger with the diamond band.",
+            "Technique line and photo brief are truncated in the spec, which should be completed before cataloging."
+          ],
+          "photo_fix": "Reshoot or retouch so the single pearl accent is placed on the ring-finger nail, ideally the same finger wearing the slim diamond band.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "baby-boomer-french-soft-bridal-fade",
+          "name": "Baby-Boomer French · Soft Bridal Fade",
+          "technique": "Apply a sheer nude base in a soft almond-friendly overlay, then sponge/brush a seamless baby-boomer ombre from nude into",
+          "system": "builder gel",
+          "finish": "french",
+          "colorFamily": "nude",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$85",
+          "durationMin": 105,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Medium almond nails on a softly bent hand, paired with a thin gold wedding band, pearl stud earrings nearby, and ivory satin fabric draped under natural window light for a clean bridal editorial feel.",
+          "occasions": [
+            "wedding",
+            "work",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer Nude Pink",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Soft White",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/baby-boomer-french-soft-bridal-fade.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Baby-Boomer French · Soft Bridal Fade: apply a sheer nude base in a soft almond-friendly overlay, then sponge/brush a seamless baby-boomer ombre from nude into on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-18",
+            "concept": "Baby-boomer ombre: nude fading to soft white at the tip"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "french",
+          "milky"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Technique description appears truncated after “from nude into”; it should specify the soft white tip fade.",
+            "Builder gel system is not directly verifiable from the photo, though the look is realistic for builder gel."
+          ],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "peach-jelly-cuff-cuticle-gold",
+          "name": "Peach Jelly Cuff · Cuticle Gold",
+          "technique": "Apply a sheer peach-pink jelly base in 2-3 thin coats on short round nails, then paint an ultra-thin metallic gold cuff ",
+          "system": "gel",
+          "finish": "jelly",
+          "colorFamily": "pink",
+          "shape": "Round",
+          "length": "short",
+          "priceRange": "~$60",
+          "durationMin": 75,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short round nails with glossy peach jelly and delicate gold cuticle cuffs, styled with slim gold hoops, a champagne silk blouse sleeve, and a champagne coupe or soft pink rose prop against warm neutra",
+          "occasions": [
+            "date night",
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "sheer peach-pink jelly gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "fine gold metallic liner gel",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/peach-jelly-cuff-cuticle-gold.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Peach Jelly Cuff · Cuticle Gold: apply a sheer peach-pink jelly base in 2-3 thin coats on short round nails, then paint an ultra-thin metallic gold cuff  on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-19",
+            "concept": "Sheer peach jelly with a thin gold cuff at the cuticle"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "jelly",
+          "pink",
+          "micro-french"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Some nails read slightly oval/squoval rather than true short round.",
+            "Skin texture and knuckle creases are visible, though still refined.",
+            "Photo styling shows slim gold rings, not clearly slim gold hoops from the brief."
+          ],
+          "photo_fix": "File all nails to a more consistently short round shape and, if following the brief exactly, add visible slim gold hoops to the styling.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "muted-mauve-gloss-micro-contour-french",
+          "name": "Muted Mauve Gloss · Micro-Contour French",
+          "technique": "Short squoval gel set in a muted mauve-pink sheer cover, finished with a high-gloss top and a very thin deeper mauve mic",
+          "system": "gel",
+          "finish": "gloss",
+          "colorFamily": "pink",
+          "shape": "Squoval",
+          "length": "short",
+          "priceRange": "~$55",
+          "durationMin": 75,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short squoval mauve-pink glossy nails on a clean hand, paired with a thin gold watch and a simple ring, resting on a cream silk blouse cuff with a neutral wool blazer sleeve in soft window light.",
+          "occasions": [
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Dolly",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Bare My Soul",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/muted-mauve-gloss-micro-contour-french.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Muted Mauve Gloss · Micro-Contour French: short squoval gel set in a muted mauve-pink sheer cover, finished with a high-gloss top and a very thin deeper mauve mic on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-19",
+            "concept": "Muted mauve gloss, office-safe"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "pink",
+          "micro-french",
+          "glazed"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Deeper mauve micro-contour/French line is present but very subtle and slightly uneven in visibility across nails.",
+            "Skin texture on knuckles is natural but a bit more pronounced than ideal beauty-retouch finish."
+          ],
+          "photo_fix": "Increase the contrast and crispness of the ultra-thin deeper mauve contour line while keeping the short squoval glossy mauve-pink base unchanged.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "greige-suede-soft-matte-nude",
+          "name": "Greige Suede · Soft Matte Nude",
+          "technique": "Prep short square nails, apply a sheer greige nude gel in 2 thin coats for even coverage, then finish with a soft-touch ",
+          "system": "gel",
+          "finish": "matte",
+          "colorFamily": "nude",
+          "shape": "Square",
+          "length": "short",
+          "priceRange": "~$55",
+          "durationMin": 75,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short square greige matte nails on a hand resting on a camel wool blazer sleeve, with minimal gold ring stack and a soft beige cashmere scarf in natural window light.",
+          "occasions": [
+            "work",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "OPI",
+              "name": "Put It In Neutral",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Dolly",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Sheer greige nude",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/greige-suede-soft-matte-nude.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Greige Suede · Soft Matte Nude: prep short square nails, apply a sheer greige nude gel in 2 thin coats for even coverage, then finish with a soft-touch  on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-19",
+            "concept": "Greige suede-matte"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "matte",
+          "milky",
+          "brown"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 4,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 3,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Nail color matches greige nude overall but reads a bit more opaque beige-taupe than a sheer greige gel.",
+            "Skin texture and knuckle creasing are fairly visible for a beauty-ad catalog image."
+          ],
+          "photo_fix": "Retouch the hand slightly to soften knuckle texture while keeping the short square matte greige nails natural and clearly visible.",
+          "model": "gpt-5.5",
+          "verdict": "warn"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "espresso-gloss-clean-short-round",
+          "name": "Espresso Gloss · Clean Short Round",
+          "technique": "Apply a deep espresso brown gel in 2 thin coats on short round nails, perfect the sidewalls and apex subtly for a smooth",
+          "system": "gel",
+          "finish": "gloss",
+          "colorFamily": "brown",
+          "shape": "Round",
+          "length": "short",
+          "priceRange": "~$55",
+          "durationMin": 60,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short round glossy espresso nails held over a cream cashmere blazer cuff, with slim gold hoops and a black coffee cup on a marble desk for a polished editorial work photo.",
+          "occasions": [
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "espresso brown gel",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "high-gloss no-wipe top coat",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/espresso-gloss-clean-short-round.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Espresso Gloss · Clean Short Round: apply a deep espresso brown gel in 2 thin coats on short round nails, perfect the sidewalls and apex subtly for a smooth on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-19",
+            "concept": "Glossy espresso brown"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "brown"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Nails read slightly more oval/soft squoval than perfectly round on some fingers.",
+            "Photo uses gold rings/bangle rather than the requested slim gold hoops."
+          ],
+          "photo_fix": "Reshoot or crop with more clearly short round tips and include the requested slim gold hoop styling instead of only rings.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "midnight-navy-micro-french-gold-edge",
+          "name": "Midnight Navy Micro-French · Gold Edge",
+          "technique": "Short squoval nails with an opaque midnight navy gel base, then a razor-thin metallic gold micro-French line painted cle",
+          "system": "gel",
+          "finish": "french",
+          "colorFamily": "blue",
+          "shape": "Squoval",
+          "length": "short",
+          "priceRange": "~$65",
+          "durationMin": 75,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Editorial close-up of short squoval nails on a softly bent hand, paired with delicate gold rings, a silk black slip dress cuff, and a champagne clutch; background should feel dim, warm, and upscale wi",
+          "occasions": [
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "OPI",
+              "name": "Russian Navy",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Gold Leaf",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/midnight-navy-micro-french-gold-edge.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Midnight Navy Micro-French · Gold Edge: short squoval nails with an opaque midnight navy gel base, then a razor-thin metallic gold micro-french line painted cle on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-19",
+            "concept": "Glossy navy with a gold micro-French tip"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "french",
+          "micro-french"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Spec technique and photo brief text are truncated.",
+            "Skin texture and knuckle creases are visible in the macro lighting, though still natural and polished.",
+            "Gold micro-French edge is slightly thicker on a few nails but still reads as a fine metallic tip."
+          ],
+          "photo_fix": "Use slightly softer diffusion/retouching on the knuckles while keeping the nails sharply focused and the gold tip line uniformly razor-thin.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "olive-suede-matte-clean-work-square",
+          "name": "Olive Suede Matte · Clean Work Square",
+          "technique": "Short square set in a muted olive green gel, fully prepped and shaped, then finished with a smooth velvet-matte topcoat ",
+          "system": "gel",
+          "finish": "matte",
+          "colorFamily": "green",
+          "shape": "Square",
+          "length": "short",
+          "priceRange": "~$55",
+          "durationMin": 75,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short square olive matte nails on a relaxed hand with minimal gold jewelry, a tailored cream blazer sleeve, and a soft neutral wool fabric backdrop in natural window light.",
+          "occasions": [
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Olive",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Suzi – The First Lady of Nails",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "Gelish",
+              "name": "Matte Top It Off",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/olive-suede-matte-clean-work-square.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Olive Suede Matte · Clean Work Square: short square set in a muted olive green gel, fully prepped and shaped, then finished with a smooth velvet-matte topcoat  on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:2",
+            "created": "2026-11-19",
+            "concept": "Olive green suede-matte"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "matte"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Nail color is a strong match: muted olive green gel.",
+            "Matte finish reads correctly with no visible chrome/gloss effect.",
+            "Shape is short and mostly square, but corners are softly rounded/squoval rather than a crisp clean square.",
+            "Multiple gold rings feel slightly heavier than the brief's 'minimal gold jewelry.'"
+          ],
+          "photo_fix": "Reshoot or refine with crisper short-square corners and slightly fewer gold rings to keep the styling more minimal.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 2
+      }
+    ],
+    "3": [
+      {
+        "look": {
+          "id": "cherry-chrome-outline-glass-red",
+          "name": "Cherry Chrome Outline · Glass Red",
+          "technique": "Long coffin set in opaque cherry red gel, finished with a high-gloss topcoat; add a razor-thin silver chrome outline tra",
+          "system": "builder gel",
+          "finish": "gloss",
+          "colorFamily": "red",
+          "shape": "Coffin",
+          "length": "long",
+          "priceRange": "~$95",
+          "durationMin": 140,
+          "stretchLevel": 3,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Editorial hand shot with long coffin nails over a black satin clutch, slim silver rings, champagne coupe and a deep red silk slip dress sleeve catching the light; glossy cherry nails should reflect a ",
+          "occasions": [
+            "party",
+            "holiday party",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Boujee",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Big Apple Red",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "CND",
+              "name": "Silver Chrome Effects",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/cherry-chrome-outline-glass-red.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Cherry Chrome Outline · Glass Red: long coffin set in opaque cherry red gel, finished with a high-gloss topcoat; add a razor-thin silver chrome outline tra on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Cherry red high-gloss with a fine chrome outline"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "chrome",
+          "red"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 4,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 4,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Red reads more deep wine/cherry than bright opaque cherry red/OPI Big Apple Red.",
+            "Silver chrome outline is visible and attractive but not consistently razor-thin, especially along the sidewalls and tips.",
+            "Spec text is truncated in the technique and photo brief.",
+            "Clutch reads more pebbled black leather than black satin."
+          ],
+          "photo_fix": "Reshoot or retouch with a slightly brighter cherry-red gel tone, a finer uniform silver chrome perimeter, and a true satin clutch texture.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "juicy-coral-jelly-sheer-vacation-glow",
+          "name": "Juicy Coral Jelly · Sheer Vacation Glow",
+          "technique": "Prep short oval nails; apply 2 thin coats of translucent coral-pink jelly gel for even color, then finish with a high-gl",
+          "system": "gel",
+          "finish": "jelly",
+          "colorFamily": "pink",
+          "shape": "Oval",
+          "length": "short",
+          "priceRange": "~$55",
+          "durationMin": 70,
+          "stretchLevel": 1,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short oval nails in juicy coral-pink jelly with a wet-look shine, photographed against sun-kissed skin, thin gold huggie rings, a woven straw clutch, and crisp white linen for a polished beach-resort ",
+          "occasions": [
+            "vacation",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Tropix",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Sheer coral-pink jelly",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/juicy-coral-jelly-sheer-vacation-glow.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Juicy Coral Jelly · Sheer Vacation Glow: prep short oval nails; apply 2 thin coats of translucent coral-pink jelly gel for even color, then finish with a high-gl on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Juicy coral-pink jelly"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "jelly",
+          "pink"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Technique text is cut off after \"high-gl\"; it should explicitly say high-gloss topcoat.",
+            "Skin texture and knuckle creases are visible, though still natural and refined.",
+            "Photo brief mentions gold huggie rings, but the image shows gold finger rings."
+          ],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "ocean-blue-aura-sheer-glow-fade",
+          "name": "Ocean Blue Aura · Sheer Glow Fade",
+          "technique": "Apply a sheer milky nude base, then airbrush a soft ocean-blue aura concentrated at the center of each almond nail and f",
+          "system": "gel",
+          "finish": "art",
+          "colorFamily": "blue",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$75",
+          "durationMin": 90,
+          "stretchLevel": 3,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Almond medium nails with a soft blue center glow on a sheer base, styled with thin gold rings, a raffia sunhat, and a white linen blouse sleeve against sunlit beach fabric.",
+          "occasions": [
+            "vacation"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Daisy",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI GelColor",
+              "name": "I’m Really an Actress",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Sheer Sky Blue",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/ocean-blue-aura-sheer-glow-fade.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Ocean Blue Aura · Sheer Glow Fade: apply a sheer milky nude base, then airbrush a soft ocean-blue aura concentrated at the center of each almond nail and f on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Ocean blue aura: soft blue glow fading to sheer at the edges"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "aura"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 3
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Technique line is truncated after “and f,” so the working spec is incomplete.",
+            "Shade list is inconsistent: OPI GelColor “I’m Really an Actress” is a red shade and does not fit the sheer nude/ocean-blue aura design.",
+            "Skin texture is natural and acceptable, but knuckle creases are fairly visible for a beauty-ad finish."
+          ],
+          "photo_fix": "",
+          "model": "gpt-5.5",
+          "verdict": "warn"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "sheer-nude-leopard-two-accent-spots",
+          "name": "Sheer Nude Leopard · Two Accent Spots",
+          "technique": "Build a sheer nude-beige base on all nails, then hand-paint tiny irregular leopard spots in soft espresso and warm caram",
+          "system": "gel",
+          "finish": "art",
+          "colorFamily": "multi",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$75",
+          "durationMin": 105,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Almond medium-length nails on a relaxed hand, stacked gold rings and a delicate bracelet, posed against champagne satin or a sheer black silk wrap with soft evening light and a cocktail glass in the f",
+          "occasions": [
+            "party",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "OPI",
+              "name": "Put It In Neutral",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Chocolate Moose",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Coconuts Over OPI",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/sheer-nude-leopard-two-accent-spots.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Sheer Nude Leopard · Two Accent Spots: build a sheer nude-beige base on all nails, then hand-paint tiny irregular leopard spots in soft espresso and warm caram on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Subtle leopard spots on a sheer nude base, two accent nails"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "tortoiseshell",
+          "brown",
+          "mismatched"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 5,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 4,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Second leopard accent nail is only partially visible at the right edge, so the two-accent concept is not fully clear.",
+            "Skin texture and knuckle creases are a little prominent for a beauty-ad finish.",
+            "Spec wording appears truncated at 'warm caram' and should read 'warm caramel'."
+          ],
+          "photo_fix": "Repose the hand so both leopard accent nails are fully visible, with slightly softer skin retouching and lighting.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "abstract-neutral-swirls-nude-line-art",
+          "name": "Abstract Neutral Swirls · Nude Line Art",
+          "technique": "Sheer nude gel base on medium almond nails, then hand-paint thin abstract swirling lines in cream, taupe, and cocoa with",
+          "system": "gel",
+          "finish": "art",
+          "colorFamily": "nude",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$85",
+          "durationMin": 100,
+          "stretchLevel": 3,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Editorial close-up of almond medium nails with abstract neutral swirl art, paired with slim gold rings, a champagne satin slip dress sleeve, and a soft beige silk clutch on warm stone.",
+          "occasions": [
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer Nude Beige",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Cream",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Taupe and Cocoa",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/abstract-neutral-swirls-nude-line-art.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Abstract Neutral Swirls · Nude Line Art: sheer nude gel base on medium almond nails, then hand-paint thin abstract swirling lines in cream, taupe, and cocoa with on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Abstract neutral swirls: cream, taupe and cocoa lines on nude"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "brown",
+          "milky",
+          "matte"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Swirl art matches the neutral palette, but several taupe/cocoa strokes are broad ribbon shapes rather than consistently thin line art.",
+            "Skin texture and knuckle creases are visible but still refined and natural for a beauty-ad image."
+          ],
+          "photo_fix": "Keep the same setup, but make the cream/taupe/cocoa swirl lines finer and more delicate across all nails.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "milky-white-chrome-3d-droplet-beads",
+          "name": "Milky White Chrome · 3D Droplet Beads",
+          "technique": "Apply a semi-sheer milky white base in smooth even layers on medium almond nails, cure, then place tiny domed 3D gel dro",
+          "system": "builder gel",
+          "finish": "chrome",
+          "colorFamily": "white",
+          "shape": "Almond",
+          "length": "medium",
+          "priceRange": "~$95",
+          "durationMin": 110,
+          "stretchLevel": 3,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Editorial close-up of medium almond nails with soft chrome droplets catching light, worn with thin stacked silver rings, a satin ivory blouse cuff, and a champagne silk clutch against a blurred party ",
+          "occasions": [
+            "party",
+            "holiday party",
+            "date night"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Milky White",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "No-Wipe Top Coat",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": null,
+              "name": "Chrome Powder",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/milky-white-chrome-3d-droplet-beads.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Milky White Chrome · 3D Droplet Beads: apply a semi-sheer milky white base in smooth even layers on medium almond nails, cure, then place tiny domed 3d gel dro on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "3D chrome droplets on milky white"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "chrome",
+          "milky",
+          "glazed"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Raised accents read more like pearl beads than clear domed 3D gel droplets.",
+            "Spec technique text appears truncated and does not fully describe the droplet placement.",
+            "Shades list does not include a 3D gel or clear builder product for the droplets."
+          ],
+          "photo_fix": "Use clearer, glassy gel droplets instead of pearl-like beads so the 3D droplet effect matches the spec.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "forest-french-sheer-nude-base",
+          "name": "Forest French · Sheer Nude Base",
+          "technique": "Prep short squoval nails, apply a sheer nude builder-gel overlay for an even base, then paint deep forest-green French t",
+          "system": "builder gel",
+          "finish": "french",
+          "colorFamily": "green",
+          "shape": "Squoval",
+          "length": "short",
+          "priceRange": "~$65",
+          "durationMin": 75,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short squoval nails on a neutral hand, paired with thin gold stacking rings, a cream cashmere sleeve, and a matte taupe notebook on a clean marble or stone surface.",
+          "occasions": [
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": "The GelBottle Inc",
+              "name": "Naked",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Stay Off the Lawn!!",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/forest-french-sheer-nude-base.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Forest French · Sheer Nude Base: prep short squoval nails, apply a sheer nude builder-gel overlay for an even base, then paint deep forest-green french t on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Deep green French tips on a sheer nude base"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "french"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 5,
+            "finish_match": 4,
+            "shape_length_match": 4,
+            "hand_anatomy": 5,
+            "skin_finish": 3,
+            "photo_quality": 5,
+            "spec_realism": 5,
+            "spec_consistency": 5
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Forest-green tips and sheer nude base match the concept well.",
+            "French tip thickness and smile-line curvature vary slightly between nails; thumb tip reads more diagonal than classic French.",
+            "Shape is mostly short squoval, but a few nails lean slightly oval/rounded.",
+            "Skin texture and knuckle creases are fairly visible for a polished beauty-ad catalog image."
+          ],
+          "photo_fix": "Retouch the hand texture slightly and reshoot or refine the manicure so all green French tips have consistent width and rounded smile lines on short squoval nails.",
+          "model": "gpt-5.5",
+          "verdict": "warn"
+        },
+        "attempts": 1
+      },
+      {
+        "look": {
+          "id": "pastel-resort-french-mixed-soft-tips",
+          "name": "Pastel Resort French · Mixed Soft Tips",
+          "technique": "Apply a sheer milky nude base on short round nails, then paint a thin crisp French tip in a different soft pastel on eac",
+          "system": "gel",
+          "finish": "french",
+          "colorFamily": "multi",
+          "shape": "Round",
+          "length": "short",
+          "priceRange": "~$65",
+          "durationMin": 75,
+          "stretchLevel": 2,
+          "fitPrior": 0.75,
+          "trendVelocity": 0.75,
+          "photoBrief": "Short round nails with a sheer milky nude base and mismatched pastel French tips in soft lilac, baby blue, mint, peach, butter yellow, and blush; styled with slim gold stacking rings, a woven straw cl",
+          "occasions": [
+            "vacation",
+            "date night",
+            "work"
+          ],
+          "trendSources": [],
+          "trendProof": {
+            "text": null,
+            "isPlaceholder": true
+          },
+          "shades": [
+            {
+              "brand": null,
+              "name": "Sheer Milky Nude",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "Do You Lilac It?",
+              "code": null,
+              "verified": false
+            },
+            {
+              "brand": "OPI",
+              "name": "It’s a Boy!",
+              "code": null,
+              "verified": false
+            }
+          ],
+          "photoBySkinTone": {
+            "light": null,
+            "medium": "/looks/pastel-resort-french-mixed-soft-tips.jpg",
+            "deep": null
+          },
+          "photoPos": "center",
+          "photoAlt": "Pastel Resort French · Mixed Soft Tips: apply a sheer milky nude base on short round nails, then paint a thin crisp french tip in a different soft pastel on eac on a warm-toned hand",
+          "why": null,
+          "whyInputs": {},
+          "draft": {
+            "from": "batch:3",
+            "created": "2026-11-19",
+            "concept": "Mismatched pastel French: a different soft pastel tip on each nail"
+          },
+          "dropId": "2026-w47",
+          "dropDate": "2026-11-16",
+          "active": true,
+          "bookableBy": [],
+          "resultPhoto": null,
+          "photoSource": "generated",
+          "trendSource": null,
+          "trendAsOf": null
+        },
+        "terms": [
+          "french",
+          "mismatched",
+          "pink"
+        ],
+        "review": {
+          "scores": {
+            "color_match": 4,
+            "finish_match": 4,
+            "shape_length_match": 5,
+            "hand_anatomy": 5,
+            "skin_finish": 4,
+            "photo_quality": 4,
+            "spec_realism": 5,
+            "spec_consistency": 4
+          },
+          "near_duplicate": false,
+          "duplicate_of": null,
+          "issues": [
+            "Baby-blue tip is not clearly visible; the thumb is mostly obscured.",
+            "French tips read slightly thicker than the specified thin/crisp soft tips on a few nails.",
+            "Photo brief calls for six pastel tip colors, but only five nails are clearly shown.",
+            "Shade list only names lilac and baby blue plus base, while the brief also requires mint, peach, butter yellow, and blush."
+          ],
+          "photo_fix": "Reshoot with the thumb fully visible or include both hands so all pastel French tip colors, especially baby blue, are clearly shown.",
+          "model": "gpt-5.5",
+          "verdict": "pass"
+        },
+        "attempts": 1
+      }
+    ]
+  },
+  "dropped": [
+    {
+      "concept": "Icy blue jelly with frosted white tips",
+      "why": "near-duplicate of Cloudy French · Milk Bath Base"
+    },
+    {
+      "concept": "Classic crisp white French tips on a pink-nude base",
+      "why": "near-duplicate of Cloudy French · Milk Bath Base"
+    },
+    {
+      "concept": "Lilac pearl chrome",
+      "why": "near-duplicate of Rose Glazed Chrome"
+    },
+    {
+      "concept": "Pink-to-lilac chrome aura",
+      "why": "near-duplicate of Rose Glazed Chrome"
+    },
+    {
+      "concept": "Deep plum velvet cat-eye",
+      "why": "near-duplicate of Velvet Noel · Tiny Gold Star"
+    }
+  ]
+}
