@@ -1870,9 +1870,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/cherry-chrome-outline-glass-red__light.jpg",
       "medium": "/looks/cherry-chrome-outline-glass-red.jpg",
-      "deep": null
+      "deep": "/looks/cherry-chrome-outline-glass-red__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Cherry Chrome Outline · Glass Red: long coffin builder-gel set in glossy deep cherry-wine red, finished with a high-shine topcoat and a razor-thi",
@@ -1931,9 +1931,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/juicy-coral-jelly-sheer-vacation-glow__light.jpg",
       "medium": "/looks/juicy-coral-jelly-sheer-vacation-glow.jpg",
-      "deep": null
+      "deep": "/looks/juicy-coral-jelly-sheer-vacation-glow__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Juicy Coral Jelly · Sheer Vacation Glow: prep and shape nails short oval; apply 2 thin coats of translucent coral-pink jelly gel, keeping coverage sheer and even",
@@ -1997,9 +1997,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/ocean-blue-aura-sheer-glow-fade__light.jpg",
       "medium": "/looks/ocean-blue-aura-sheer-glow-fade.jpg",
-      "deep": null
+      "deep": "/looks/ocean-blue-aura-sheer-glow-fade__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Ocean Blue Aura · Sheer Glow Fade: apply a sheer milky nude gel base, then airbrush a soft ocean-blue aura concentrated at the center of each med",
@@ -2064,9 +2064,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/sheer-nude-leopard-two-accent-spots__light.jpg",
       "medium": "/looks/sheer-nude-leopard-two-accent-spots.jpg",
-      "deep": null
+      "deep": "/looks/sheer-nude-leopard-two-accent-spots__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Sheer Nude Leopard · Two Accent Spots: build a glossy sheer nude-beige gel base on medium almond nails. add leopard accents on two nails, hand-painting irregul",
@@ -2130,9 +2130,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/abstract-neutral-swirls-nude-line-art__light.jpg",
       "medium": "/looks/abstract-neutral-swirls-nude-line-art.jpg",
-      "deep": null
+      "deep": "/looks/abstract-neutral-swirls-nude-line-art__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Abstract Neutral Swirls · Nude Line Art: sheer nude gel base on medium almond nails, with hand-painted abstract wavy line art in cream, taupe, and cocoa. keep th",
@@ -2198,9 +2198,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/milky-white-chrome-3d-droplet-beads__light.jpg",
       "medium": "/looks/milky-white-chrome-3d-droplet-beads.jpg",
-      "deep": null
+      "deep": "/looks/milky-white-chrome-3d-droplet-beads__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Milky White Chrome · 3D Pearl Beads: sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. rub in ",
@@ -2258,9 +2258,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/forest-french-sheer-nude-base__light.jpg",
       "medium": "/looks/forest-french-sheer-nude-base.jpg",
-      "deep": null
+      "deep": "/looks/forest-french-sheer-nude-base__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Forest French · Sheer Nude Base: prep short squoval nails and apply a sheer nude builder-gel overlay for a smooth, natural base. paint clean deep forest-",
@@ -2320,9 +2320,9 @@
       }
     ],
     "photoBySkinTone": {
-      "light": null,
+      "light": "/looks/pastel-resort-french-mixed-soft-tips__light.jpg",
       "medium": "/looks/pastel-resort-french-mixed-soft-tips.jpg",
-      "deep": null
+      "deep": "/looks/pastel-resort-french-mixed-soft-tips__deep.jpg"
     },
     "photoPos": "center",
     "photoAlt": "Pastel Resort French · Mixed Soft Tips: apply a sheer milky nude gel base on short round nails, then paint thin, crisp french tips in a different soft",
