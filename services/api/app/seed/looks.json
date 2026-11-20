@@ -1665,7 +1665,7 @@
   {
     "id": "cherry-chrome-outline-glass-red",
     "name": "Cherry Chrome Outline · Glass Red",
-    "technique": "Long coffin builder-gel set in glossy glass cherry red, finished with a high-shine topcoat and a razor-thin silver chrome outline tracing each nail’s sidewalls and free edge.",
+    "technique": "Long coffin builder-gel set in glossy deep cherry-wine red, finished with a high-shine topcoat and a razor-thin silver chrome outline tracing each nail’s sidewalls and free edge.",
     "system": "builder gel",
     "finish": "gloss",
     "color_family": "red",
@@ -1695,12 +1695,6 @@
         "verified": false
       },
       {
-        "brand": "OPI",
-        "name": "Big Apple Red",
-        "code": null,
-        "verified": false
-      },
-      {
         "brand": "CND",
         "name": "Silver Chrome Effects",
         "code": null,
@@ -1713,7 +1707,7 @@
       "deep": null
     },
     "photo_pos": "center",
-    "photo_alt": "Cherry Chrome Outline · Glass Red: long coffin builder-gel set in glossy glass cherry red, finished with a high-shine topcoat and a razor-thin silver chrom",
+    "photo_alt": "Cherry Chrome Outline · Glass Red: long coffin builder-gel set in glossy deep cherry-wine red, finished with a high-shine topcoat and a razor-thi",
     "why": null,
     "why_inputs": {},
     "active": true,
@@ -1806,20 +1800,20 @@
     },
     "shades": [
       {
-        "brand": "The GelBottle Inc",
-        "name": "Daisy",
-        "code": null,
-        "verified": false
-      },
-      {
-        "brand": "OPI GelColor",
-        "name": "I’m Really an Actress",
+        "brand": null,
+        "name": "sheer milky nude base gel",
         "code": null,
         "verified": false
       },
       {
         "brand": null,
-        "name": "Sheer Sky Blue",
+        "name": "ocean-blue airbrush / aura pigment",
+        "code": null,
+        "verified": false
+      },
+      {
+        "brand": null,
+        "name": "high-gloss gel top coat",
         "code": null,
         "verified": false
       }
@@ -1830,7 +1824,7 @@
       "deep": null
     },
     "photo_pos": "center",
-    "photo_alt": "Ocean Blue Aura · Sheer Glow Fade: apply a sheer milky nude gel base, then airbrush a soft ocean-blue aura concentrated at the center of each medium almond",
+    "photo_alt": "Ocean Blue Aura · Sheer Glow Fade: apply a sheer milky nude gel base, then airbrush a soft ocean-blue aura concentrated at the center of each med",
     "why": null,
     "why_inputs": {},
     "active": true,
@@ -1967,8 +1961,8 @@
   },
   {
     "id": "milky-white-chrome-3d-droplet-beads",
-    "name": "Milky White Chrome · 3D Droplet Beads",
-    "technique": "Sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. Rub in pearl-white chrome, seal, and place tiny domed clear 3D gel droplet beads across each nail before final cure.",
+    "name": "Milky White Chrome · 3D Pearl Beads",
+    "technique": "Sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. Rub in pearl-white chrome, seal, and set tiny pearl-white 3D beads across each nail with 3D gel before the final cure.",
     "system": "builder gel",
     "finish": "chrome",
     "color_family": "white",
@@ -1993,19 +1987,19 @@
     "shades": [
       {
         "brand": null,
-        "name": "Milky White",
+        "name": "milky white gel",
         "code": null,
         "verified": false
       },
       {
         "brand": null,
-        "name": "No-Wipe Top Coat",
+        "name": "pearl-white chrome powder",
         "code": null,
         "verified": false
       },
       {
         "brand": null,
-        "name": "Chrome Powder",
+        "name": "3D sculpting gel + pearl-white beads",
         "code": null,
         "verified": false
       }
@@ -2016,7 +2010,7 @@
       "deep": null
     },
     "photo_pos": "center",
-    "photo_alt": "Milky White Chrome · 3D Droplet Beads: sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. rub in pearl-whit",
+    "photo_alt": "Milky White Chrome · 3D Pearl Beads: sculpt medium almond nails with builder gel, then apply smooth semi-sheer milky white layers and cure. rub in ",
     "why": null,
     "why_inputs": {},
     "active": true,
@@ -2111,19 +2105,13 @@
     "shades": [
       {
         "brand": null,
-        "name": "Sheer Milky Nude",
+        "name": "sheer milky nude base",
         "code": null,
         "verified": false
       },
       {
-        "brand": "OPI",
-        "name": "Do You Lilac It?",
-        "code": null,
-        "verified": false
-      },
-      {
-        "brand": "OPI",
-        "name": "It’s a Boy!",
+        "brand": null,
+        "name": "pastel tip gels: lavender, mint, peach, butter yellow",
         "code": null,
         "verified": false
       }
@@ -2134,7 +2122,7 @@
       "deep": null
     },
     "photo_pos": "center",
-    "photo_alt": "Pastel Resort French · Mixed Soft Tips: apply a sheer milky nude gel base on short round nails, then paint thin, crisp french tips in a different soft pastel on",
+    "photo_alt": "Pastel Resort French · Mixed Soft Tips: apply a sheer milky nude gel base on short round nails, then paint thin, crisp french tips in a different soft",
     "why": null,
     "why_inputs": {},
     "active": true,
