@@ -1,7 +1,8 @@
-import { HeartIcon, PinIcon, SearchIcon, UserIcon } from "./Icons";
+import { HeartIcon, PinIcon, SearchIcon, SparkleIcon, UserIcon } from "./Icons";
 
 const ITEMS = [
   { href: "/", label: "Discover", Icon: SearchIcon },
+  { href: "/community", label: "Community", Icon: SparkleIcon },
   { href: "/saved", label: "Saved", Icon: HeartIcon },
   { href: "/salons", label: "Salons", Icon: PinIcon },
   { href: "/profile", label: "Profile", Icon: UserIcon },

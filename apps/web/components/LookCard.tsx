@@ -36,7 +36,7 @@ export function LookCard({ pick, uid, setId, priority, saved }: { pick: Pick; ui
   );
 }
 
-export function LookRow({ pick }: { pick: Pick }) {
+export function LookRow({ pick, kicker }: { pick: Pick; kicker?: string }) {
   const l = pick.look;
   return (
     <a className="row" href={`/looks/${l.id}`}>
@@ -52,7 +52,7 @@ export function LookRow({ pick }: { pick: Pick }) {
         )}
       </div>
       <div className="row-text">
-        <span className="row-slot">{slotLabel(pick.slot, l)}</span>
+        <span className="row-slot">{kicker ?? slotLabel(pick.slot, l)}</span>
         <span className="row-name">{l.name}</span>
         <span className="row-meta">{factChips(l).join(" · ")}</span>
       </div>

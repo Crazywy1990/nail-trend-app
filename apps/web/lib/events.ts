@@ -13,6 +13,7 @@ export type EventPayload = {
   ref?: string;
   utmSource?: string;
   tone?: string;
+  postId?: string;
 };
 
 const ENDPOINT = "/api/v1/events";

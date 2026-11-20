@@ -46,3 +46,14 @@ export function TrackView({ uid, lookId }: { uid: string; lookId: string }) {
   }, [uid, lookId]);
   return null;
 }
+
+/** Browse history: one post_view per community post page view. */
+export function TrackPostView({ uid, postId }: { uid: string; postId: string }) {
+  const done = useRef(false);
+  useEffect(() => {
+    if (done.current) return;
+    done.current = true;
+    logEvent({ userId: uid, type: "post_view", postId });
+  }, [uid, postId]);
+  return null;
+}

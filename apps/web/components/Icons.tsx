@@ -24,3 +24,15 @@ export const CameraIcon = ({ size }: P) => (
 export const ArrowLeft = ({ size }: P) => (
   <svg {...base(size)}><path d="M15 18l-6-6 6-6" /></svg>
 );
+export const SparkleIcon = ({ size }: P) => (
+  <svg {...base(size)}><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z" /></svg>
+);
+export const BookmarkIcon = ({ size, filled }: P & { filled?: boolean }) => (
+  <svg {...base(size)} fill={filled ? "currentColor" : "none"}><path d="M6 4h12v17l-6-4-6 4z" /></svg>
+);
+export const FlagIcon = ({ size }: P) => (
+  <svg {...base(size)}><path d="M5 21V4M5 4h11l-2 4 2 4H5" /></svg>
+);
+export const PlusIcon = ({ size }: P) => (
+  <svg {...base(size)}><path d="M12 5v14M5 12h14" /></svg>
+);

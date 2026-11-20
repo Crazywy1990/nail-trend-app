@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { PAIRS } from "./onboarding";
 import { TIME_WINDOWS } from "./timeWindows";
-import { DEFAULT_PROFILE, createBookingRequest, getProfile, recordEvent, saveProfile, type UserProfile } from "./store";
+import { DEFAULT_PROFILE, clearHistory, createBookingRequest, getProfile, recordEvent, saveProfile, type UserProfile } from "./store";
 
 const uidOf = () => cookies().get("uid")?.value || "anon";
 const one = <T extends string>(v: FormDataEntryValue | null, allowed: readonly T[], fallback: T): T =>
@@ -68,6 +68,11 @@ export async function resetProfile() {
   redirect("/start");
 }
 
+export async function clearMyHistory() {
+  await clearHistory(uidOf());
+  redirect("/profile?cleared=1#history");
+}
+
 const WINDOWS = TIME_WINDOWS.map((w) => w.value);
 
 /** "Book this look": a booking request tied to one look (and optionally one tech). No payment, no calendar yet. */
@@ -75,13 +80,18 @@ export async function submitBookingRequest(form: FormData) {
   const uid = uidOf();
   const { getLook, getTech } = await import("./engine");
   const lookId = String(form.get("lookId") || "");
-  const look = getLook(lookId);
-  if (!look) redirect("/");
+  // A community set books the same way, with the post's photo as the reference (lookId "post:<id>").
+  const postId = lookId.startsWith("post:") ? lookId.slice(5) : null;
+  if (postId) {
+    const { getPost } = await import("./store/community");
+    const post = await getPost(postId);
+    if (!post || post.status !== "approved") redirect("/community");
+  } else if (!getLook(lookId)) redirect("/");
   const techRaw = String(form.get("tech") || "");
-  const techSlug = techRaw && getTech(techRaw) ? techRaw : null;
+  const techSlug = !postId && techRaw && getTech(techRaw) ? techRaw : null;
   const name = String(form.get("name") || "").trim().slice(0, 80);
   const contact = String(form.get("contact") || "").trim().slice(0, 80);
-  const back = `/looks/${lookId}/book${techSlug ? `?tech=${techSlug}&` : "?"}`;
+  const back = postId ? `/community/${postId}/book?` : `/looks/${lookId}/book${techSlug ? `?tech=${techSlug}&` : "?"}`;
   if (!name || !contact) redirect(`${back}error=missing`);
   const date = String(form.get("date") || "");
   const preferredDate = /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : null;

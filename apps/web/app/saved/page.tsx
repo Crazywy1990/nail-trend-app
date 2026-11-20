@@ -6,20 +6,23 @@ import { requestUid } from "@/lib/request";
 import { getProfile, listSaved } from "@/lib/store";
 import { SaveButton } from "@/components/SaveButton";
 import { Watermark } from "@/components/Watermark";
+import { PostTile } from "@/components/PostTile";
+import { reactedPosts } from "@/lib/store/community";
 
 export const metadata = { title: "Saved" };
 export const dynamic = "force-dynamic";
 
 export default async function Saved() {
   const uid = requestUid();
-  const [ids, p] = await Promise.all([listSaved(uid), getProfile(uid)]);
+  const [ids, p, community] = await Promise.all([listSaved(uid), getProfile(uid), reactedPosts(uid, ["save"])]);
   const looks = ids.map(getLook).filter((l): l is NonNullable<typeof l> => !!l);
+  const posts = community.map((c) => c.post);
   return (
     <div className="shell shell-wide">
       <main className="main">
         <header>
           <h1 className="h1">Saved looks</h1>
-          <p className="muted">{looks.length ? `${looks.length} saved. Saving also tunes your picks.` : "Tap the heart on any look to keep it here."}</p>
+          <p className="muted">{looks.length || posts.length ? `${looks.length + posts.length} saved. Saving also tunes your picks.` : "Tap the heart on any look, or the bookmark on a community set, to keep it here."}</p>
         </header>
         {looks.length ? (
           <div className="rows-list saved-grid">
@@ -45,9 +48,15 @@ export default async function Saved() {
               );
             })}
           </div>
-        ) : (
+        ) : !posts.length ? (
           <a className="btn btn-primary" href="/" style={{ flex: "none" }}>Find looks</a>
-        )}
+        ) : null}
+        {posts.length ? (
+          <section aria-labelledby="saved-community" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <h2 className="h2" id="saved-community" style={{ fontSize: 18 }}>From the community</h2>
+            <div className="post-grid">{posts.map((x) => <PostTile key={x.id} post={x} />)}</div>
+          </section>
+        ) : null}
       </main>
       <BottomNav current="/saved" />
     </div>

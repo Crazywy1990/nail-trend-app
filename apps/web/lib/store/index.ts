@@ -5,7 +5,7 @@
  * and saving work today and move to the database as soon as one is connected.
  */
 import { cookies } from "next/headers";
-import { neon } from "@neondatabase/serverless";
+import { neon, neonConfig } from "@neondatabase/serverless";
 
 export type SkinTone = "light" | "medium" | "deep";
 export type Salon = { name: string; bookingUrl?: string; instagram?: string; phone?: string; address?: string; placeId?: string; mapsUrl?: string };
@@ -21,6 +21,8 @@ export type UserProfile = {
   likes: string[];                 // look ids picked in this-or-that
   dislikes: string[];              // look ids she passed on
   salon: Salon | null;
+  /** Shown on her community posts (no login; set on first post). */
+  nickname?: string | null;
 };
 
 export const DEFAULT_PROFILE: UserProfile = {
@@ -30,16 +32,23 @@ export const DEFAULT_PROFILE: UserProfile = {
 
 const DB_URL = process.env.DATABASE_URL || process.env.POSTGRES_URL || "";
 export const hasDatabase = () => !!DB_URL;
+// Local testing only: point the driver at a local SQL-over-HTTP endpoint instead of Neon.
+if (process.env.NEON_LOCAL_FETCH_ENDPOINT) {
+  neonConfig.fetchEndpoint = process.env.NEON_LOCAL_FETCH_ENDPOINT;
+}
 const sql = DB_URL ? neon(DB_URL) : null;
+/** Shared with lib/store/community. */
+export const db = sql;
 
 let schemaReady: Promise<unknown> | null = null;
-function ensureSchema() {
+export function ensureSchema() {
   if (!sql) return Promise.resolve();
   schemaReady ??= (async () => {
     await sql`CREATE TABLE IF NOT EXISTS profiles (uid text PRIMARY KEY, data jsonb NOT NULL, updated_at timestamptz NOT NULL DEFAULT now())`;
     await sql`CREATE TABLE IF NOT EXISTS saved (uid text NOT NULL, look_id text NOT NULL, created_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY (uid, look_id))`;
     await sql`CREATE TABLE IF NOT EXISTS events (id bigserial PRIMARY KEY, uid text, type text NOT NULL, look_id text, data jsonb, at timestamptz NOT NULL DEFAULT now())`;
     await sql`CREATE INDEX IF NOT EXISTS events_type_at ON events (type, at)`;
+    await sql`CREATE INDEX IF NOT EXISTS events_uid_type_at ON events (uid, type, at)`;
   })().catch((e) => { schemaReady = null; throw e; });
   return schemaReady;
 }
@@ -122,7 +131,14 @@ export async function setSaved(uid: string, lookId: string, on: boolean): Promis
 // ---------------------------------------------------------------- events
 export async function recordEvent(e: { userId?: string; type: string; lookId?: string } & Record<string, unknown>): Promise<void> {
   console.log(JSON.stringify({ tag: "allten-event", at: new Date().toISOString(), ...e }));
-  if (!sql) return;
+  if (!sql) {
+    // No database (local dev): keep browse history in memory so history and picks still work.
+    if (e.userId && (e.type === "look_view" || e.type === "post_view")) {
+      const ref = e.type === "post_view" ? String(e.postId ?? "") : e.lookId;
+      if (ref) memHistory().push({ uid: e.userId, kind: e.type === "post_view" ? "post" : "look", ref, at: Date.now() });
+    }
+    return;
+  }
   try {
     await ensureSchema();
     const { userId, type, lookId, ...rest } = e;
@@ -193,4 +209,40 @@ export async function funnel(days = 7): Promise<Record<string, number> | null> {
   const out: Record<string, number> = { look_view: 0, save: 0, share_tap: 0, booking_request: 0 };
   rows.forEach((r) => { out[r.type as string] = r.n as number; });
   return out;
+}
+
+// ---------------------------------------------------------------- browse history
+export type HistoryItem = { kind: "look" | "post"; ref: string; at: string };
+type MemHist = { uid: string; kind: "look" | "post"; ref: string; at: number };
+const g = globalThis as unknown as { __alltenHistory?: MemHist[] };
+function memHistory() { return (g.__alltenHistory ??= []); }
+
+/** Most recent first, one row per look or post, last 90 days. */
+export async function recentlyViewed(uid: string, limit = 24): Promise<HistoryItem[]> {
+  if (sql) {
+    try {
+      await ensureSchema();
+      const rows = await sql`SELECT CASE WHEN type = 'post_view' THEN 'post' ELSE 'look' END AS kind,
+                                    COALESCE(look_id, data->>'postId') AS ref, max(at)::text AS at
+                             FROM events WHERE uid = ${uid} AND type IN ('look_view', 'post_view') AND at > now() - interval '90 days'
+                             GROUP BY 1, 2 HAVING COALESCE(look_id, data->>'postId') IS NOT NULL ORDER BY 3 DESC LIMIT ${limit}`;
+      return rows.map((r) => ({ kind: r.kind as "look" | "post", ref: r.ref as string, at: r.at as string }));
+    } catch (e) {
+      console.error("[allten] history read failed", e);
+      return [];
+    }
+  }
+  const seen = new Map<string, MemHist>();
+  memHistory().filter((h) => h.uid === uid).forEach((h) => seen.set(h.kind + h.ref, h));
+  return [...seen.values()].sort((a, b) => b.at - a.at).slice(0, limit)
+    .map((h) => ({ kind: h.kind, ref: h.ref, at: new Date(h.at).toISOString() }));
+}
+
+export async function clearHistory(uid: string): Promise<void> {
+  if (sql) {
+    await ensureSchema();
+    await sql`DELETE FROM events WHERE uid = ${uid} AND type IN ('look_view', 'post_view')`;
+    return;
+  }
+  g.__alltenHistory = memHistory().filter((h) => h.uid !== uid);
 }

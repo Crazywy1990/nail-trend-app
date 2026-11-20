@@ -5,7 +5,10 @@ import { SearchIcon } from "@/components/Icons";
 import { LookCard, LookRow } from "@/components/LookCard";
 import { TrackImpressions, TrackLanding } from "@/components/Track";
 import { fetchDiscover } from "@/lib/api";
-import { currentDrop, getLook } from "@/lib/engine";
+import { buildProfile, currentDrop, getLook, rankForYou } from "@/lib/engine";
+import { PostTile } from "@/components/PostTile";
+import { listPosts, popularity } from "@/lib/store/community";
+import { tasteSignals } from "@/lib/taste";
 import { factChips } from "@/lib/format";
 import { requestSeason, requestUid } from "@/lib/request";
 import { COPY } from "@/lib/season";
@@ -39,8 +42,13 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
     length: arr(searchParams.length),
   };
 
-  const [profile, saved] = await Promise.all([getProfile(uid), listSaved(uid)]);
-  const data = await fetchDiscover({ userId: uid, q, ...selected, profile: profile.onboarded ? profile : null, saved });
+  const [profile, saved, signals, community] = await Promise.all([
+    getProfile(uid), listSaved(uid), tasteSignals(uid), listPosts({ status: "approved", uid, limit: 80 }),
+  ]);
+  const data = await fetchDiscover({ userId: uid, q, ...selected, profile: profile.onboarded ? profile : null, saved, signals });
+  // Community sets she's likely to love: ranked by the same taste profile (answers + saves + likes + views).
+  const taste = buildProfile(uid, profile.onboarded ? profile : null, saved, signals);
+  const communityPicks = rankForYou(community.filter((x) => x.uid !== uid).map((x) => ({ ...x, popularity: popularity(x) })), taste).slice(0, 4);
   const savedSet = new Set(saved);
 
   // Default view opens on this week's hero look, full-bleed; a search or filter goes straight to results.
@@ -138,6 +146,16 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
             </div>
           ) : null}
         </section>
+
+        {communityPicks.length ? (
+          <section aria-labelledby="from-community" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <h2 className="h2" id="from-community" style={{ fontSize: 18 }}>From the community, for you</h2>
+              <a href="/community" className="muted">See all →</a>
+            </div>
+            <div className="post-grid post-grid-sm">{communityPicks.map((x) => <PostTile key={x.id} post={x} />)}</div>
+          </section>
+        ) : null}
       </main>
       <BottomNav current="/" />
       <TrackLanding uid={uid} />

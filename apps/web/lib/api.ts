@@ -36,6 +36,7 @@ export type DiscoverParams = {
   length?: string[]; theme?: string[];
   profile?: import("./engine").ProfileInput | null;
   saved?: string[];
+  signals?: import("./engine").TasteSignals | null;
 };
 
 export async function fetchDiscover(p: DiscoverParams): Promise<DiscoverResponse> {
@@ -43,7 +44,7 @@ export async function fetchDiscover(p: DiscoverParams): Promise<DiscoverResponse
     return engine.discover(p.userId, p.q || "", {
       occasion: p.occasion || [], finish: p.finish || [], length: p.length || [],
       theme: p.theme?.[0] ?? null,
-    }, p.profile ?? null, p.saved ?? []);
+    }, p.profile ?? null, p.saved ?? [], p.signals ?? null);
   }
   const qs = new URLSearchParams({ userId: p.userId });
   if (p.q) qs.set("q", p.q);

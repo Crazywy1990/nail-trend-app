@@ -15,6 +15,7 @@ export default async function Requests({ searchParams }: { searchParams: { key?:
     <div className="shell shell-wide">
       <main className="main">
         <h1 className="h1">Booking requests</h1>
+        <p className="muted"><a href={`/admin/posts?key=${encodeURIComponent(key)}`}>Community review queue →</a></p>
         {f7 ? (
           <p className="muted">Last 7 days: {f7.look_view} look views → {f7.save} saves → {f7.share_tap} shares → {f7.booking_request} booking requests</p>
         ) : null}
@@ -25,7 +26,9 @@ export default async function Requests({ searchParams }: { searchParams: { key?:
               {rows.map((r) => (
                 <tr key={r.id}>
                   <td>{r.createdAt?.slice(0, 16).replace("T", " ")}</td>
-                  <td><a href={`/looks/${r.lookId}`}>{getLook(r.lookId)?.name ?? r.lookId}</a></td>
+                  <td>{r.lookId.startsWith("post:")
+                    ? <a href={`/community/${r.lookId.slice(5)}`}>Community set {r.lookId.slice(5)}</a>
+                    : <a href={`/looks/${r.lookId}`}>{getLook(r.lookId)?.name ?? r.lookId}</a>}</td>
                   <td>{r.techSlug ?? "—"}</td><td>{r.name}</td><td>{r.contact}</td>
                   <td>{r.preferredDate ?? "any day"} · {windowLabel(r.timeWindow)}</td><td>{r.note ?? ""}</td><td>{r.status}</td>
                 </tr>

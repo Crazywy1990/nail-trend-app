@@ -74,4 +74,4 @@ export type DiscoverResponse = {
 
 export type EventType =
   | "impression" | "save" | "unsave" | "reject" | "too_bold"
-  | "book_click" | "share_click" | "landing" | "look_view" | "share_tap" | "booking_request" | "tone_switch";
+  | "book_click" | "share_click" | "landing" | "look_view" | "share_tap" | "booking_request" | "tone_switch" | "post_view";

@@ -97,17 +97,45 @@ export type ProfileInput = {
 
 const priceOf = (l: Look) => Number(String(l.priceRange).replace(/[^0-9.]/g, "")) || 0;
 
-/** Turn onboarding answers, this-or-that picks and saved looks into attribute affinities (0..1, 0.5 = neutral). */
-export function buildProfile(userId: string, input: ProfileInput | null, saved: string[] = []): Profile {
-  if (!input) return { userId, ...DEMO_PROFILE };
+/** What she does in the app, beyond her answers: looks she opened, community sets she liked or saved. */
+/** AI tags of a community post (lib/moderation), as the engine sees them. */
+export type TagSet = { colorFamily?: string | null; finish?: string | null; shape?: string | null; length?: string | null };
+
+export type TasteSignals = {
+  /** Look ids she viewed, most recent first. A weak signal: opening isn't liking. */
+  viewed: string[];
+  /** Attributes of community posts she liked (weight 1) or saved (weight 2), from the AI tags. */
+  posts: (TagSet & { weight: number })[];
+};
+
+const tagKeys = (t: TagSet) => [
+  t.colorFamily && `color:${t.colorFamily}`, t.finish && `finish:${t.finish}`,
+  t.shape && `shape:${t.shape.toLowerCase()}`, t.length && `length:${t.length}`,
+].filter((k): k is string => !!k);
+
+/**
+ * Turn onboarding answers, this-or-that picks, saved looks and behavior into attribute affinities
+ * (0..1, 0.5 = neutral). Strongest to weakest: her answers, picks, saves, community saves/likes, views.
+ * Without answers she still gets a profile from behavior alone, on top of the demo defaults.
+ */
+export function buildProfile(userId: string, input: ProfileInput | null, saved: string[] = [], signals?: TasteSignals | null): Profile {
+  const hasBehavior = !!signals && (signals.viewed.length > 0 || signals.posts.length > 0);
+  if (!input && !saved.length && !hasBehavior) return { userId, ...DEMO_PROFILE };
   const aff: Record<string, number> = {};
   const bump = (k: string, d: number) => { aff[k] = Math.max(0, Math.min(1, (aff[k] ?? 0.5) + d)); };
-  const byId = new Map(LOOKS.map((l) => [l.id, l]));
-  for (const id of input.likes) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.15)); }
+  const byId = new Map(ALL_LOOKS.map((l) => [l.id, l]));
+  for (const id of input?.likes ?? []) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.15)); }
   for (const id of saved) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.1)); }
-  for (const id of input.dislikes) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, -0.12)); }
-  if (input.length) bump(`length:${input.length}`, 0.3);
-  if (input.shape) bump(`shape:${input.shape.toLowerCase()}`, 0.25);
+  for (const id of input?.dislikes ?? []) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, -0.12)); }
+  // Community: each like nudges, each save nudges twice as much; capped so a burst of likes can't swamp her answers.
+  for (const t of (signals?.posts ?? []).slice(0, 40)) tagKeys(t).forEach((k) => bump(k, 0.04 * Math.min(2, t.weight)));
+  // Views: the 30 most recent, fading with recency; a look she also saved already counted above.
+  (signals?.viewed ?? []).filter((id) => !saved.includes(id)).slice(0, 30).forEach((id, i) => {
+    const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.025 * (1 - i / 40)));
+  });
+  if (input?.length) bump(`length:${input.length}`, 0.3);
+  if (input?.shape) bump(`shape:${input.shape.toLowerCase()}`, 0.25);
+  if (!input) return { userId, ...DEMO_PROFILE, current: null, affinity: aff };
   return {
     userId,
     skinTone: input.skinTone, undertone: input.undertone, jewelryMetal: input.jewelryMetal,
@@ -115,6 +143,31 @@ export function buildProfile(userId: string, input: ProfileInput | null, saved: 
     maxStretch: input.vibe === "subtle" ? 3 : input.vibe === "bold" ? 5 : 4,
     budget: input.budget,
   };
+}
+
+/** How well a set of tags fits her (0..1). Unknown tags count as neutral. */
+export function tagFit(t: TagSet, p: Profile): number {
+  const keys = tagKeys(t);
+  if (!keys.length) return 0.5;
+  return keys.reduce((a, k) => a + (p.affinity[k] ?? 0.5), 0) / keys.length;
+}
+
+/** Rank community posts for her: taste fit first, then popularity, so new sets still surface. */
+export function rankForYou<T extends { tags: TagSet; popularity: number }>(items: T[], p: Profile): T[] {
+  const maxPop = Math.max(1e-6, ...items.map((x) => x.popularity));
+  return [...items]
+    .map((x) => ({ x, s: 0.7 * tagFit(x.tags, p) + 0.3 * (x.popularity / maxPop) }))
+    .sort((a, b) => b.s - a.s)
+    .map(({ x }) => x);
+}
+
+/** Catalog looks closest to a community set (same color, then finish, then shape), best fit for her first. */
+export function similarLooks(t: TagSet, p: Profile, n = 3): Look[] {
+  const score = (l: Look) =>
+    (t.colorFamily === l.colorFamily ? 3 : 0) + (t.finish === l.finish ? 2 : 0) +
+    (t.shape && t.shape.toLowerCase() === l.shape.toLowerCase() ? 1 : 0) + (t.length === l.length ? 0.5 : 0) +
+    relevance(l, p, { occasion: [], finish: [], length: [] });
+  return LOOKS.map((l) => ({ l, s: score(l) })).filter((x) => x.s >= 2).sort((a, b) => b.s - a.s).slice(0, n).map((x) => present(x.l));
 }
 
 export const DEMO_PROFILE: Omit<Profile, "userId"> = {
@@ -338,7 +391,7 @@ function whyFor(l: Look, p: Profile, f: Filters): string {
 
 const uniq = (a: string[]) => [...new Set(a)];
 
-export function discover(userId: string, q: string, chips: Filters, profile: ProfileInput | null = null, saved: string[] = []): DiscoverResponse {
+export function discover(userId: string, q: string, chips: Filters, profile: ProfileInput | null = null, saved: string[] = [], signals: TasteSignals | null = null): DiscoverResponse {
   const parsed = parseNeed(q || "");
   const f: Filters = {
     occasion: uniq([...chips.occasion, ...parsed.occasion]),
@@ -351,7 +404,7 @@ export function discover(userId: string, q: string, chips: Filters, profile: Pro
   const explicitTheme = (chips.theme && THEMES[chips.theme] ? chips.theme : null) ?? parsed.theme ?? null;
   f.theme = explicitTheme ?? themeForDate(new Date());
   f.themeExplicit = !!explicitTheme;
-  const p: Profile = buildProfile(userId, profile, saved);
+  const p: Profile = buildProfile(userId, profile, saved, signals);
   // With filters set, the set is built only from looks that match all of them.
   // If nothing matches, fall back to the closest looks and say so.
   const filtered = hasFilters(f);
