@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 import { neon } from "@neondatabase/serverless";
 
 export type SkinTone = "light" | "medium" | "deep";
-export type Salon = { name: string; bookingUrl?: string; instagram?: string; phone?: string };
+export type Salon = { name: string; bookingUrl?: string; instagram?: string; phone?: string; address?: string; placeId?: string; mapsUrl?: string };
 export type UserProfile = {
   onboarded: boolean;
   skinTone: SkinTone;

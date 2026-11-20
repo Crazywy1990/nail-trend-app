@@ -1,5 +1,6 @@
 import { BottomNav } from "@/components/BottomNav";
 import { saveSalon } from "@/lib/actions";
+import { SalonFields } from "@/components/SalonFields";
 import { requestUid } from "@/lib/request";
 import { getProfile } from "@/lib/store";
 
@@ -18,12 +19,9 @@ export default async function Salons({ searchParams }: { searchParams: { saved?:
         </header>
         {searchParams.saved ? <p className="notice">{s ? `Saved ${s.name}.` : "Salon removed."}</p> : null}
         <form action={saveSalon} className="onboard">
-          <label className="field">Salon name<input name="name" defaultValue={s?.name} placeholder="e.g. Polished Studio" maxLength={80} /></label>
-          <label className="field">Online booking link <small>optional</small><input name="bookingUrl" defaultValue={s?.bookingUrl} placeholder="vagaro.com/…, square.site/…, etc." inputMode="url" /></label>
-          <label className="field">Instagram <small>optional</small><input name="instagram" defaultValue={s?.instagram} placeholder="@yoursalon" /></label>
-          <label className="field">Phone for texts <small>optional</small><input name="phone" defaultValue={s?.phone} placeholder="(425) 555-0123" inputMode="tel" /></label>
+          <SalonFields salon={s} />
           <button type="submit" className="btn btn-primary">{s ? "Save changes" : "Save my salon"}</button>
-          <p className="muted" style={{ fontSize: 12 }}>Leave the name empty and save to remove it. Finding salons near you comes later.</p>
+          <p className="muted" style={{ fontSize: 12 }}>Leave the name empty and save to remove it.</p>
         </form>
       </main>
       <BottomNav current="/salons" />

@@ -83,7 +83,7 @@ Every look is an executable spec: photo on her hand tone, shades (verified codes
 
 - **Onboarding** (`/start`, about a minute): hand tone (picked from three hand photos, never asked as race or ethnicity), jewelry metal (→ warm/cool undertone), four this-or-that picks, length, shape, adventurousness, budget. The feed then shows every look on her hand tone and ranks by her answers, picks and saves (`buildProfile` in the engine); "Subtle" caps stretch, budget gently down-ranks pricier looks.
 - **Saved** (`/saved`): hearts persist; each saved look has Book and Spec-for-my-tech.
-- **My salon** (`/salons`): name, booking link, Instagram, phone. The booking page then offers "Copy & open booking", "Copy & DM", "Text <salon>", and the spec link carries her hand tone.
+- **My salon** (`/salons`): Google Maps–style search: typing shows nearby nail/beauty salons (Google Places API (New), biased to her shared location, else Vercel's IP location, else Bellevue); picking one fills name, address, phone, website and a Maps link. Key `GOOGLE_PLACES_API_KEY` stays server-side (`/api/v1/places/*`); without it the field is manual. Instagram stays manual. Also: name, booking link, Instagram, phone. The booking page then offers "Copy & open booking", "Copy & DM", "Text <salon>", and the spec link carries her hand tone.
 - **Storage** (`lib/store`): Postgres when `DATABASE_URL`/`POSTGRES_URL` is set (Neon via Vercel Storage; tables `profiles`, `saved`, `events` are created automatically), otherwise an httpOnly cookie on her browser. Events always go to the log and, with a database, to the `events` table.
 
 ## AI review before a person decides

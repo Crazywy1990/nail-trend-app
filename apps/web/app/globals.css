@@ -336,3 +336,16 @@ html, body { overflow-x: clip; }
   .nav { box-shadow: 0 0 0 100vmax var(--nav); clip-path: inset(0 -100vmax); }
 }
 .hero-proof .proof-source { display: inline; margin-left: 6px; opacity: 0.8; }
+
+/* Salon search (Google Places) */
+.salon-search { position: relative; }
+.salon-list { position: absolute; left: 0; right: 0; top: 74px; z-index: 20; margin: 0; padding: 4px; list-style: none;
+  background: var(--surface); border: 1px solid var(--soft); border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.salon-list li { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 400; }
+.salon-list li strong { font-weight: 600; font-size: 15px; }
+.salon-list li span { font-size: 13px; color: var(--muted); }
+.salon-list li.on, .salon-list li:hover { background: var(--tint); }
+.salon-list .salon-attrib { cursor: default; font-size: 11px; color: var(--muted); padding: 4px 12px; }
+.salon-list .salon-attrib:hover { background: transparent; }
+.link-btn { align-self: flex-start; border: 0; background: none; padding: 0; font: inherit; font-size: 13px; color: var(--accent); cursor: pointer; text-decoration: underline; }
+.salon-picked { font-weight: 400; color: var(--muted); }

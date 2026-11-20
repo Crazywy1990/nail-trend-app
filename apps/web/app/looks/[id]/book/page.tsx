@@ -65,6 +65,7 @@ export default async function BookPage({ params, searchParams }: Props) {
         <details className="own-salon">
           <summary>Or message {salon?.name ?? "your own salon"} yourself</summary>
           <p className="why">Copy this into a text or Instagram DM. Your tech gets the photo and exact specs from the link.</p>
+          {salon?.address ? <p className="muted" style={{ margin: 0 }}>📍 {salon.address}{salon.mapsUrl ? <> · <a href={salon.mapsUrl} target="_blank" rel="noopener noreferrer">Map</a></> : null}</p> : null}
           <BookMessage uid={uid} lookId={l.id} draft={draft} salon={salon} />
           {!salon ? <p className="muted"><a href="/salons">Add your salon</a> to send this straight to their booking page, Instagram or phone.</p> : null}
         </details>

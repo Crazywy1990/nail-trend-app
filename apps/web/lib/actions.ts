@@ -48,7 +48,15 @@ export async function saveSalon(form: FormData) {
   let bookingUrl = clean("bookingUrl");
   if (bookingUrl && !/^https?:\/\//i.test(bookingUrl)) bookingUrl = `https://${bookingUrl}`;
   const instagram = clean("instagram", 60)?.replace(/^@/, "");
-  await saveProfile(uid, { ...p, salon: name ? { name, bookingUrl, instagram, phone: clean("phone", 30) } : null });
+  const mapsUrl = clean("mapsUrl", 300);
+  await saveProfile(uid, {
+    ...p,
+    salon: name ? {
+      name, bookingUrl, instagram, phone: clean("phone", 30),
+      address: clean("address", 200), placeId: clean("placeId", 300),
+      mapsUrl: mapsUrl && /^https:\/\/(maps\.google\.com|www\.google\.com\/maps|goo\.gl|maps\.app\.goo\.gl)/.test(mapsUrl) ? mapsUrl : undefined,
+    } : null,
+  });
   await recordEvent({ userId: uid, type: name ? "salon_saved" : "salon_removed" });
   redirect("/salons?saved=1");
 }
