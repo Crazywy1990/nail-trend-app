@@ -20,7 +20,7 @@ async function shrink(file: File, max = 1600): Promise<Blob> {
   }
 }
 
-export function UploadForm({ nickname }: { nickname: string }) {
+export function UploadForm({ handle }: { handle: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -65,10 +65,7 @@ export function UploadForm({ nickname }: { nickname: string }) {
       </label>
       {preview ? <button type="button" className="link-btn" onClick={() => input.current?.click()}>Choose a different photo</button> : null}
 
-      <label className="field">Nickname
-        <input name="nickname" required minLength={2} maxLength={20} defaultValue={nickname} placeholder="e.g. mochanails" autoComplete="nickname" />
-        <small className="muted">Shown with your post. 2–20 letters or numbers.</small>
-      </label>
+      <p className="muted" style={{ margin: 0 }}>Posting as <strong>@{handle}</strong></p>
       <label className="field">Caption <small>optional</small>
         <textarea name="caption" rows={2} maxLength={200} placeholder="Milky pink with gold flakes, done at …" />
       </label>

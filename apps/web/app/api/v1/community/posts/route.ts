@@ -1,8 +1,9 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
-import { checkUpload, cleanNickname } from "@/lib/moderation";
-import { getProfile, recordEvent, saveProfile } from "@/lib/store";
+import { sessionUid } from "@/lib/auth";
+import { checkUpload } from "@/lib/moderation";
+import { getUser } from "@/lib/store/social";
+import { recordEvent } from "@/lib/store";
 import { DAILY_UPLOADS, createPost, deletePost, newPostId, storeImage, uploadsToday } from "@/lib/store/community";
 
 export const runtime = "nodejs";
@@ -12,18 +13,19 @@ const MAX_BYTES = 8 * 1024 * 1024;
 const bad = (error: string, status = 400) => NextResponse.json({ error }, { status });
 
 /**
- * Upload a photo of her own set. multipart/form-data: photo, nickname, caption?, consent=yes.
+ * Upload a photo of her own set (signed in, with a handle). multipart/form-data: photo, caption?, consent=yes.
  * The photo is re-encoded (which drops EXIF, including GPS), checked by AI, and queued for the owner's review.
  */
 export async function POST(req: Request) {
-  const uid = cookies().get("uid")?.value;
-  if (!uid) return bad("Refresh the page and try again.");
+  const uid = await sessionUid();
+  if (!uid) return bad("Sign in to share your nails.", 401);
+  const user = await getUser(uid);
+  if (!user?.handle) return bad("Pick your @handle first.", 403);
+  const nickname = user.nickname || user.handle;
   let form: FormData;
   try { form = await req.formData(); } catch { return bad("That upload didn't come through. Try a smaller photo."); }
 
   if (form.get("consent") !== "yes") return bad("Please confirm the photo is yours and agree to the guidelines.");
-  const nickname = cleanNickname(String(form.get("nickname") || ""));
-  if (!nickname) return bad("Pick a nickname of 2–20 letters or numbers (no links or phone numbers).");
   const caption = String(form.get("caption") || "").replace(/\s+/g, " ").trim().slice(0, 200) || null;
   if (caption && /(https?:\/\/|www\.)/i.test(caption)) return bad("Captions can't include links.");
 
@@ -49,15 +51,13 @@ export async function POST(req: Request) {
   const status = ai.verdict === "reject" ? "rejected" : "pending";
   await createPost({ id, uid, nickname, imageUrl, width: full.info.width, height: full.info.height, caption, tags, ai, status });
 
-  const profile = await getProfile(uid);
-  if (profile.nickname !== nickname) await saveProfile(uid, { ...profile, nickname });
   await recordEvent({ userId: uid, type: "post_upload", postId: id, verdict: ai.verdict });
   return NextResponse.json({ id, status, reason: ai.reason }, { status: 201 });
 }
 
 /** Delete her own post. Body: { id } */
 export async function DELETE(req: Request) {
-  const uid = cookies().get("uid")?.value;
+  const uid = await sessionUid();
   const b = (await req.json().catch(() => ({}))) as { id?: string };
   if (!uid || !b.id) return bad("id required");
   const ok = await deletePost(b.id, uid);

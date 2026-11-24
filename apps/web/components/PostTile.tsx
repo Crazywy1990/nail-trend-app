@@ -10,7 +10,7 @@ export function PostTile({ post, priority, hideable = true }: { post: Post; prio
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={post.imageUrl} alt={post.caption ? `${post.nickname}'s nails: ${post.caption}` : `Nails shared by ${post.nickname}`}
           loading={priority ? "eager" : "lazy"} decoding="async" />
-        <span className="post-credit">@{post.nickname}</span>
+        <span className="post-credit">{post.handle ? `@${post.handle}` : post.nickname}</span>
       </a>
       <div className="post-tile-bar">
         <span className="post-tile-tags">{[post.tags.finish, post.tags.colorFamily].filter(Boolean).join(" · ")}</span>

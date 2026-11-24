@@ -6,14 +6,37 @@ import { getProfile, hasDatabase, listSaved, recentlyViewed, type HistoryItem } 
 import { listPosts } from "@/lib/store/community";
 import { isDarkTint, tintFor, wmLabel } from "@/lib/format";
 import { Watermark } from "@/components/Watermark";
+import { currentUser } from "@/lib/auth";
 
 export const metadata = { title: "Profile" };
 export const dynamic = "force-dynamic";
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export default async function Profile({ searchParams }: { searchParams: { cleared?: string } }) {
+function Account({ user, signedOut }: { user: Awaited<ReturnType<typeof currentUser>>; signedOut: boolean }) {
+  if (user?.handle) {
+    return (
+      <a className="account-card" href={`/u/${user.handle}`}>
+        <span className="avatar" aria-hidden="true">{(user.nickname || user.handle).slice(0, 1).toUpperCase()}</span>
+        <span><strong>{user.nickname || user.handle}</strong><br /><span className="muted">@{user.handle} · My page →</span></span>
+      </a>
+    );
+  }
+  if (user) return <a className="onboard-banner" href="/welcome?next=/profile"><strong>Pick your @handle</strong><span>Finish setting up your page →</span></a>;
+  return (
+    <>
+      {signedOut ? <p className="notice" role="status">You&rsquo;re signed out.</p> : null}
+      <a className="onboard-banner" href="/login?next=/profile">
+        <strong>Sign in to get your own page</strong>
+        <span>Share sets, follow people, comment and review salons →</span>
+      </a>
+    </>
+  );
+}
+
+export default async function Profile({ searchParams }: { searchParams: { cleared?: string; signedout?: string } }) {
   const uid = requestUid();
+  const account = <Account user={await currentUser()} signedOut={!!searchParams.signedout} />;
   const [p, saved, history] = await Promise.all([getProfile(uid), listSaved(uid), recentlyViewed(uid, 24)]);
   const viewed = await History({ items: history, uid, skinTone: p.skinTone, cleared: !!searchParams.cleared });
   if (!p.onboarded) {
@@ -21,6 +44,7 @@ export default async function Profile({ searchParams }: { searchParams: { cleare
       <div className="shell">
         <main className="main">
           <h1 className="h1">Your profile</h1>
+          {account}
           <p className="why">Answer a few quick questions and every look is shown on a hand like yours, ranked for your taste, length and budget.</p>
           <a className="btn btn-primary" href="/start" style={{ flex: "none" }}>Set up in a minute</a>
           {viewed}
@@ -39,7 +63,6 @@ export default async function Profile({ searchParams }: { searchParams: { cleare
     ["Budget", p.budget ? `Up to $${p.budget}` : "Doesn't matter"],
     ["Picked in this-or-that", liked.join(", ") || "—"],
     ["Saved looks", String(saved.length)],
-    ["Nickname", p.nickname ? `@${p.nickname}` : "Set when you first share"],
     ["My salon", p.salon?.name ?? "Not set"],
   ];
   return (
@@ -49,6 +72,7 @@ export default async function Profile({ searchParams }: { searchParams: { cleare
           <h1 className="h1">Your profile</h1>
           <p className="muted">Your picks are ranked from these answers and from the looks you save.</p>
         </header>
+        {account}
         <dl className="profile-list">
           {rows.map(([k, v]) => (
             <div key={k}><dt>{k}</dt><dd>{v}</dd></div>

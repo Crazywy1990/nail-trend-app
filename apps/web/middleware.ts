@@ -1,18 +1,21 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { isSeason, seasonFor } from "./lib/season";
+import { SESSION_COOKIE, verifySession } from "./lib/session";
 
 /**
  * - Gives every visitor an anonymous id (cookie "uid") so events and profiles join up.
+ *   A valid signed session (cookie "sess") wins: then the id is her account's.
  * - Resolves the theme: ?theme= override (remembered in a cookie), else the date.
  */
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const themeParam = url.searchParams.get("theme");
   const themeCookie = req.cookies.get("theme")?.value;
   const season = isSeason(themeParam) ? themeParam : isSeason(themeCookie) ? themeCookie : seasonFor(new Date());
 
-  let uid = req.cookies.get("uid")?.value;
-  const newUid = !uid;
+  const account = await verifySession(req.cookies.get(SESSION_COOKIE)?.value);
+  let uid = account ?? req.cookies.get("uid")?.value;
+  const newUid = !uid || (!!account && req.cookies.get("uid")?.value !== account);
   if (!uid) uid = crypto.randomUUID().replace(/-/g, "").slice(0, 24);
 
   const headers = new Headers(req.headers);

@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { recordEvent } from "./store";
 import { setPostStatus, type PostStatus } from "./store/community";
+import { resolveFlag } from "./store/social";
 
 /** Approve or reject a community post from /admin/posts. Requires ADMIN_KEY. */
 export async function reviewPost(form: FormData) {
@@ -18,4 +19,14 @@ export async function reviewPost(form: FormData) {
   }
   const view = String(form.get("view") || "queue");
   redirect(`/admin/posts?key=${encodeURIComponent(given)}&view=${view}#q`);
+}
+
+/** Keep or remove a reported comment or review. */
+export async function reviewFlag(form: FormData) {
+  const key = process.env.ADMIN_KEY;
+  const given = String(form.get("key") || "");
+  if (!key || given !== key) redirect("/");
+  const kind = form.get("kind") === "review" ? "review" : "comment";
+  await resolveFlag(kind, String(form.get("id") || ""), form.get("decision") === "keep");
+  redirect(`/admin/posts?key=${encodeURIComponent(given)}&view=reported`);
 }

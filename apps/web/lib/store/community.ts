@@ -5,6 +5,7 @@
  * otherwise in Postgres (post_images), otherwise in memory (local dev only).
  */
 import { db as sql, ensureSchema } from "./index";
+import { ensureSocial } from "./social";
 
 export type PostStatus = "pending" | "approved" | "rejected" | "flagged";
 export type PostTags = { colorFamily: string | null; finish: string | null; shape: string | null; length: string | null; words: string[] };
@@ -21,6 +22,8 @@ export type Post = {
   createdAt: string; likes: number; saves: number; reports: number; liked: boolean; saved: boolean;
   /** Her private signals: thumbs-down, and "not interested" (hidden from her feeds). Never shown to others. */
   disliked: boolean; hidden: boolean;
+  /** Author's @handle when she has an account (links to /u/handle). */
+  handle: string | null;
 };
 export type ReactKind = "like" | "save" | "report" | "dislike" | "hide";
 
@@ -30,7 +33,7 @@ export const REPORTS_TO_HIDE = 3;
 export const DAILY_UPLOADS = 5;
 
 // ---------------------------------------------------------------- memory fallback (no database: local dev)
-type MemPost = Omit<Post, "likes" | "saves" | "reports" | "liked" | "saved" | "disliked" | "hidden">;
+type MemPost = Omit<Post, "likes" | "saves" | "reports" | "liked" | "saved" | "disliked" | "hidden" | "handle">;
 type Mem = { posts: MemPost[]; reacts: Map<string, number>; images: Map<string, { data: Buffer; type: string }> };
 const g = globalThis as unknown as { __alltenCommunity?: Mem };
 const mem = (): Mem => (g.__alltenCommunity ??= { posts: [] as MemPost[], reacts: new Map(), images: new Map() });
@@ -43,28 +46,12 @@ function memDecorate(p: MemPost, uid: string | null): Post {
     saved: !!uid && mem().reacts.has(rkey(uid, p.id, "save")),
     disliked: !!uid && mem().reacts.has(rkey(uid, p.id, "dislike")),
     hidden: !!uid && mem().reacts.has(rkey(uid, p.id, "hide")),
+    handle: null,
   };
 }
 
-let ready: Promise<unknown> | null = null;
-function ensureCommunity() {
-  if (!sql) return Promise.resolve();
-  ready ??= (async () => {
-    await ensureSchema();
-    await sql`CREATE TABLE IF NOT EXISTS posts (
-      id text PRIMARY KEY, uid text NOT NULL, nickname text NOT NULL, image_url text NOT NULL,
-      width int NOT NULL DEFAULT 0, height int NOT NULL DEFAULT 0, caption text, tags jsonb NOT NULL DEFAULT '{}'::jsonb,
-      ai jsonb, status text NOT NULL DEFAULT 'pending', consent_at timestamptz NOT NULL DEFAULT now(),
-      created_at timestamptz NOT NULL DEFAULT now(), reviewed_at timestamptz)`;
-    await sql`CREATE INDEX IF NOT EXISTS posts_status_created ON posts (status, created_at DESC)`;
-    await sql`CREATE INDEX IF NOT EXISTS posts_uid ON posts (uid, created_at DESC)`;
-    await sql`CREATE TABLE IF NOT EXISTS post_reacts (uid text NOT NULL, post_id text NOT NULL, kind text NOT NULL,
-      created_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY (uid, post_id, kind))`;
-    await sql`CREATE INDEX IF NOT EXISTS post_reacts_post ON post_reacts (post_id, kind)`;
-    await sql`CREATE TABLE IF NOT EXISTS post_images (id text PRIMARY KEY, type text NOT NULL, data text NOT NULL)`;
-  })().catch((e) => { ready = null; throw e; });
-  return ready;
-}
+/** All community and account tables are created together in ensureSocial (lib/store/social). */
+export const ensureCommunity = () => ensureSocial();
 
 type Row = Record<string, unknown>;
 function fromRow(r: Row): Post {
@@ -74,7 +61,7 @@ function fromRow(r: Row): Post {
     tags: { colorFamily: null, finish: null, shape: null, length: null, words: [], ...(r.tags as Partial<PostTags>) },
     ai: (r.ai as AiCheck) ?? null, status: r.status as PostStatus, createdAt: r.created_at as string,
     likes: Number(r.likes) || 0, saves: Number(r.saves) || 0, reports: Number(r.reports) || 0,
-    liked: !!r.liked, saved: !!r.saved, disliked: !!r.disliked, hidden: !!r.hidden,
+    liked: !!r.liked, saved: !!r.saved, disliked: !!r.disliked, hidden: !!r.hidden, handle: (r.handle as string) ?? null,
   };
 }
 
@@ -147,7 +134,7 @@ export async function uploadsToday(uid: string): Promise<number> {
 }
 
 export type ListOpts = {
-  status?: PostStatus | PostStatus[]; uid?: string | null; byUid?: string; sort?: "new" | "popular"; limit?: number; ids?: string[];
+  status?: PostStatus | PostStatus[]; uid?: string | null; byUid?: string; byUids?: string[]; sort?: "new" | "popular"; limit?: number; ids?: string[];
   /** Leave out posts the viewer (uid) marked "not interested". */
   skipHidden?: boolean;
 };
@@ -161,7 +148,7 @@ export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
     try {
       await ensureCommunity();
       const rows = await sql`
-        SELECT p.*, p.created_at::text AS created_at,
+        SELECT p.*, p.created_at::text AS created_at, u.handle, COALESCE(u.nickname, p.nickname) AS nickname,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'like')::int AS likes,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'save')::int AS saves,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'report')::int AS reports,
@@ -169,9 +156,10 @@ export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
           EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'save') AS saved,
           EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'dislike') AS disliked,
           EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'hide') AS hidden
-        FROM posts p
+        FROM posts p LEFT JOIN users u ON u.uid = p.uid
         WHERE (${statuses}::text[] IS NULL OR p.status = ANY(${statuses}::text[]))
           AND (${o.byUid ?? null}::text IS NULL OR p.uid = ${o.byUid ?? null})
+          AND (${o.byUids ?? null}::text[] IS NULL OR p.uid = ANY(${o.byUids ?? null}::text[]))
           AND (${o.ids ?? null}::text[] IS NULL OR p.id = ANY(${o.ids ?? null}::text[]))
         ORDER BY p.created_at DESC LIMIT ${limit}`;
       const posts = rows.map(fromRow).filter((x) => !(o.skipHidden && x.hidden));
@@ -182,7 +170,7 @@ export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
     }
   }
   const posts = mem().posts
-    .filter((p) => (!statuses || statuses.includes(p.status)) && (!o.byUid || p.uid === o.byUid) && (!o.ids || o.ids.includes(p.id)))
+    .filter((p) => (!statuses || statuses.includes(p.status)) && (!o.byUid || p.uid === o.byUid) && (!o.byUids || o.byUids.includes(p.uid)) && (!o.ids || o.ids.includes(p.id)))
     .slice(0, limit).map((p) => memDecorate(p, viewer)).filter((x) => !(o.skipHidden && x.hidden));
   return o.sort === "popular" ? posts.sort((a, b) => popularity(b) - popularity(a)) : posts;
 }

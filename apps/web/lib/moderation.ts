@@ -145,3 +145,16 @@ export function cleanNickname(raw: string): string | null {
   if (/(https?|www\.|\.com|\d{6,})/i.test(s)) return null;
   return s;
 }
+
+/** Text-only moderation for comments and reviews (free endpoint). "unchecked" when there's no key or the call fails. */
+export async function checkText(text: string): Promise<"ok" | "flagged" | "unchecked"> {
+  if (!KEY()) return "unchecked";
+  try {
+    const r = await openai("moderations", { model: "omni-moderation-latest", input: text });
+    const results = (r.results as { flagged: boolean }[]) || [];
+    return results.some((x) => x.flagged) ? "flagged" : "ok";
+  } catch (e) {
+    console.error("[allten] text moderation failed", e);
+    return "unchecked";
+  }
+}

@@ -6,6 +6,8 @@ import { requestUid } from "@/lib/request";
 import { getProfile, listSaved } from "@/lib/store";
 import { listPosts, popularity } from "@/lib/store/community";
 import { tasteSignals } from "@/lib/taste";
+import { sessionUid } from "@/lib/auth";
+import { followingUids } from "@/lib/store/social";
 
 export const metadata = { title: "Community", description: "Real sets from real people. Like, save, and book the ones you love." };
 export const dynamic = "force-dynamic";
@@ -14,6 +16,7 @@ const TABS = [
   { value: "for-you", label: "For you" },
   { value: "new", label: "New" },
   { value: "popular", label: "Popular" },
+  { value: "following", label: "Following" },
 ] as const;
 type Tab = (typeof TABS)[number]["value"];
 
@@ -25,9 +28,12 @@ const STATUS_NOTE: Record<string, string> = {
 
 export default async function Community({ searchParams }: { searchParams: { sort?: string; posted?: string; deleted?: string } }) {
   const uid = requestUid();
+  const me = await sessionUid();
   const tab: Tab = TABS.some((t) => t.value === searchParams.sort) ? (searchParams.sort as Tab) : "for-you";
+  const follows = tab === "following" && me ? await followingUids(me) : [];
   const [approved, mine, profile, saved, signals] = await Promise.all([
-    listPosts({ status: "approved", uid, sort: tab === "popular" ? "popular" : "new", limit: 120, skipHidden: true }),
+    tab === "following" && !follows.length ? Promise.resolve([]) :
+    listPosts({ status: "approved", uid, sort: tab === "popular" ? "popular" : "new", limit: 120, skipHidden: true, byUids: tab === "following" ? follows : undefined }),
     listPosts({ byUid: uid, uid, limit: 20 }),
     getProfile(uid), listSaved(uid), tasteSignals(uid),
   ]);
@@ -78,7 +84,13 @@ export default async function Community({ searchParams }: { searchParams: { sort
           ))}
         </nav>
 
-        {posts.length ? (
+        {tab === "following" && !posts.length ? (
+          <div className="empty">
+            <p className="h2">{me ? "Nobody here yet" : "See sets from people you follow"}</p>
+            <p className="muted">{me ? "Tap a name on any post and follow them. Their new sets show up here." : "Sign in, then follow people whose nails you love."}</p>
+            {me ? null : <a className="btn btn-primary" href="/login?next=/community?sort=following" style={{ flex: "none" }}>Sign in</a>}
+          </div>
+        ) : posts.length ? (
           <div className="post-grid">
             {posts.map((x, i) => <PostTile key={x.id} post={x} priority={i < 4} />)}
           </div>

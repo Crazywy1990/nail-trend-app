@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { actorUid } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { recordEvent } from "@/lib/store";
 import { setReact, type ReactKind } from "@/lib/store/community";
@@ -7,7 +7,7 @@ const KINDS: ReactKind[] = ["like", "save", "report", "dislike", "hide"];
 
 /** Like, thumbs-down, save, hide ("not interested") or report a community post. Body: { postId, kind, on } */
 export async function POST(req: Request) {
-  const uid = cookies().get("uid")?.value;
+  const uid = await actorUid();
   if (!uid) return NextResponse.json({ error: "No user" }, { status: 400 });
   const b = (await req.json().catch(() => ({}))) as { postId?: string; kind?: ReactKind; on?: boolean };
   if (!b.postId || !b.kind || !KINDS.includes(b.kind)) return NextResponse.json({ error: "postId and kind required" }, { status: 400 });

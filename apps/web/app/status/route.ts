@@ -27,6 +27,7 @@ export async function GET() {
           photoStore: process.env.BLOB_READ_WRITE_TOKEN ? "vercel-blob" : "database",
           aiCheck: !!process.env.OPENAI_API_KEY,
         },
+        accounts: { loginEmail: !!process.env.RESEND_API_KEY, from: process.env.EMAIL_FROM ? "custom" : "resend test sender" },
         ms: Date.now() - started,
       });
     } catch (err) {

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { reviewPost } from "@/lib/adminActions";
+import { reviewFlag, reviewPost } from "@/lib/adminActions";
+import { flaggedItems } from "@/lib/store/social";
 import { communityCounts, listPosts, type Post, type PostStatus } from "@/lib/store/community";
 
 export const dynamic = "force-dynamic";
@@ -9,6 +10,7 @@ const VIEWS: Record<string, { label: string; status: PostStatus[] }> = {
   queue: { label: "To review", status: ["pending", "flagged"] },
   rejected: { label: "Rejected", status: ["rejected"] },
   approved: { label: "Live", status: ["approved"] },
+  reported: { label: "Reported comments & reviews", status: [] },
 };
 const VERDICT: Record<string, string> = { pass: "AI: looks fine", review: "AI: check this", reject: "AI: reject" };
 
@@ -17,7 +19,10 @@ export default async function AdminPosts({ searchParams }: { searchParams: { key
   const key = process.env.ADMIN_KEY;
   if (!key || searchParams.key !== key) notFound();
   const view = VIEWS[searchParams.view ?? ""] ? searchParams.view! : "queue";
-  const [posts, counts] = await Promise.all([listPosts({ status: VIEWS[view].status, limit: 200 }), communityCounts()]);
+  const [posts, counts, flagged] = await Promise.all([
+    view === "reported" ? Promise.resolve([]) : listPosts({ status: VIEWS[view].status, limit: 200 }),
+    communityCounts(), view === "reported" ? flaggedItems() : Promise.resolve([]),
+  ]);
   const k = encodeURIComponent(key);
 
   return (
@@ -33,7 +38,23 @@ export default async function AdminPosts({ searchParams }: { searchParams: { key
             <a key={v} className="chip" aria-pressed={v === view} href={`/admin/posts?key=${k}&view=${v}`}>{label}</a>
           ))}
         </nav>
-        {posts.length ? (
+        {view === "reported" ? (
+          flagged.length ? (
+            <ul className="review-list">
+              {flagged.map((f) => (
+                <li key={f.kind + f.id} className="review-item">
+                  <div className="muted">{f.kind} by @{f.who} · {f.reports} reports · <a href={f.where}>open</a></div>
+                  <p className="review-text">{f.body}</p>
+                  <form action={reviewFlag} className="review-actions">
+                    <input type="hidden" name="key" value={key} /><input type="hidden" name="kind" value={f.kind} /><input type="hidden" name="id" value={f.id} />
+                    <button className="btn btn-sm" name="decision" value="keep">Keep</button>
+                    <button className="btn btn-primary btn-sm" name="decision" value="remove">Remove</button>
+                  </form>
+                </li>
+              ))}
+            </ul>
+          ) : <p className="muted">Nothing reported.</p>
+        ) : posts.length ? (
           <div className="review-grid">
             {posts.map((p) => <ReviewCard key={p.id} post={p} adminKey={key} view={view} />)}
           </div>
