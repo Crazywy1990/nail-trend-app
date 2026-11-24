@@ -19,8 +19,10 @@ export type Post = {
   id: string; uid: string; nickname: string; imageUrl: string; width: number; height: number;
   caption: string | null; tags: PostTags; ai: AiCheck | null; status: PostStatus;
   createdAt: string; likes: number; saves: number; reports: number; liked: boolean; saved: boolean;
+  /** Her private signals: thumbs-down, and "not interested" (hidden from her feeds). Never shown to others. */
+  disliked: boolean; hidden: boolean;
 };
-export type ReactKind = "like" | "save" | "report";
+export type ReactKind = "like" | "save" | "report" | "dislike" | "hide";
 
 /** Reports from this many different people take a post down until it is reviewed again. */
 export const REPORTS_TO_HIDE = 3;
@@ -28,7 +30,7 @@ export const REPORTS_TO_HIDE = 3;
 export const DAILY_UPLOADS = 5;
 
 // ---------------------------------------------------------------- memory fallback (no database: local dev)
-type MemPost = Omit<Post, "likes" | "saves" | "reports" | "liked" | "saved">;
+type MemPost = Omit<Post, "likes" | "saves" | "reports" | "liked" | "saved" | "disliked" | "hidden">;
 type Mem = { posts: MemPost[]; reacts: Map<string, number>; images: Map<string, { data: Buffer; type: string }> };
 const g = globalThis as unknown as { __alltenCommunity?: Mem };
 const mem = (): Mem => (g.__alltenCommunity ??= { posts: [] as MemPost[], reacts: new Map(), images: new Map() });
@@ -39,6 +41,8 @@ function memDecorate(p: MemPost, uid: string | null): Post {
     ...p, likes: count("like"), saves: count("save"), reports: count("report"),
     liked: !!uid && mem().reacts.has(rkey(uid, p.id, "like")),
     saved: !!uid && mem().reacts.has(rkey(uid, p.id, "save")),
+    disliked: !!uid && mem().reacts.has(rkey(uid, p.id, "dislike")),
+    hidden: !!uid && mem().reacts.has(rkey(uid, p.id, "hide")),
   };
 }
 
@@ -70,7 +74,7 @@ function fromRow(r: Row): Post {
     tags: { colorFamily: null, finish: null, shape: null, length: null, words: [], ...(r.tags as Partial<PostTags>) },
     ai: (r.ai as AiCheck) ?? null, status: r.status as PostStatus, createdAt: r.created_at as string,
     likes: Number(r.likes) || 0, saves: Number(r.saves) || 0, reports: Number(r.reports) || 0,
-    liked: !!r.liked, saved: !!r.saved,
+    liked: !!r.liked, saved: !!r.saved, disliked: !!r.disliked, hidden: !!r.hidden,
   };
 }
 
@@ -142,7 +146,11 @@ export async function uploadsToday(uid: string): Promise<number> {
   return mem().posts.filter((p) => p.uid === uid && Date.now() - Date.parse(p.createdAt) < 86_400_000).length;
 }
 
-export type ListOpts = { status?: PostStatus | PostStatus[]; uid?: string | null; byUid?: string; sort?: "new" | "popular"; limit?: number; ids?: string[] };
+export type ListOpts = {
+  status?: PostStatus | PostStatus[]; uid?: string | null; byUid?: string; sort?: "new" | "popular"; limit?: number; ids?: string[];
+  /** Leave out posts the viewer (uid) marked "not interested". */
+  skipHidden?: boolean;
+};
 
 /** Posts with like/save/report counts, plus whether `uid` liked or saved each one. */
 export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
@@ -158,13 +166,15 @@ export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'save')::int AS saves,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'report')::int AS reports,
           EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'like') AS liked,
-          EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'save') AS saved
+          EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'save') AS saved,
+          EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'dislike') AS disliked,
+          EXISTS (SELECT 1 FROM post_reacts r WHERE r.post_id = p.id AND r.uid = ${viewer} AND r.kind = 'hide') AS hidden
         FROM posts p
         WHERE (${statuses}::text[] IS NULL OR p.status = ANY(${statuses}::text[]))
           AND (${o.byUid ?? null}::text IS NULL OR p.uid = ${o.byUid ?? null})
           AND (${o.ids ?? null}::text[] IS NULL OR p.id = ANY(${o.ids ?? null}::text[]))
         ORDER BY p.created_at DESC LIMIT ${limit}`;
-      const posts = rows.map(fromRow);
+      const posts = rows.map(fromRow).filter((x) => !(o.skipHidden && x.hidden));
       return o.sort === "popular" ? posts.sort((a, b) => popularity(b) - popularity(a)) : posts;
     } catch (e) {
       console.error("[allten] posts read failed", e);
@@ -173,7 +183,7 @@ export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
   }
   const posts = mem().posts
     .filter((p) => (!statuses || statuses.includes(p.status)) && (!o.byUid || p.uid === o.byUid) && (!o.ids || o.ids.includes(p.id)))
-    .slice(0, limit).map((p) => memDecorate(p, viewer));
+    .slice(0, limit).map((p) => memDecorate(p, viewer)).filter((x) => !(o.skipHidden && x.hidden));
   return o.sort === "popular" ? posts.sort((a, b) => popularity(b) - popularity(a)) : posts;
 }
 
@@ -220,11 +230,15 @@ export async function deletePost(id: string, uid: string): Promise<boolean> {
 export async function setReact(uid: string, postId: string, kind: ReactKind, on: boolean): Promise<{ likes: number; saves: number } | null> {
   const p = await getPost(postId, uid);
   if (!p || p.status !== "approved") return null;
+  // Like and thumbs-down cancel each other.
+  const opposite: ReactKind | null = on && kind === "like" ? "dislike" : on && kind === "dislike" ? "like" : null;
   if (sql) {
     await ensureCommunity();
+    if (opposite) await sql`DELETE FROM post_reacts WHERE uid = ${uid} AND post_id = ${postId} AND kind = ${opposite}`;
     if (on) await sql`INSERT INTO post_reacts (uid, post_id, kind) VALUES (${uid}, ${postId}, ${kind}) ON CONFLICT DO NOTHING`;
     else await sql`DELETE FROM post_reacts WHERE uid = ${uid} AND post_id = ${postId} AND kind = ${kind}`;
   } else {
+    if (opposite) mem().reacts.delete(rkey(uid, postId, opposite));
     if (on) mem().reacts.set(rkey(uid, postId, kind), Date.now());
     else mem().reacts.delete(rkey(uid, postId, kind));
   }

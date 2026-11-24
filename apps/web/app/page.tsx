@@ -43,7 +43,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
   };
 
   const [profile, saved, signals, community] = await Promise.all([
-    getProfile(uid), listSaved(uid), tasteSignals(uid), listPosts({ status: "approved", uid, limit: 80 }),
+    getProfile(uid), listSaved(uid), tasteSignals(uid), listPosts({ status: "approved", uid, limit: 80, skipHidden: true }),
   ]);
   const data = await fetchDiscover({ userId: uid, q, ...selected, profile: profile.onboarded ? profile : null, saved, signals });
   // Community sets she's likely to love: ranked by the same taste profile (answers + saves + likes + views).

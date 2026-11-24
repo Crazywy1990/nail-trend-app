@@ -104,7 +104,7 @@ export type TagSet = { colorFamily?: string | null; finish?: string | null; shap
 export type TasteSignals = {
   /** Look ids she viewed, most recent first. A weak signal: opening isn't liking. */
   viewed: string[];
-  /** Attributes of community posts she liked (weight 1) or saved (weight 2), from the AI tags. */
+  /** Attributes of community posts she reacted to, from the AI tags: save 2, like 1, not interested -1, thumbs-down -1.5. */
   posts: (TagSet & { weight: number })[];
 };
 
@@ -127,8 +127,8 @@ export function buildProfile(userId: string, input: ProfileInput | null, saved: 
   for (const id of input?.likes ?? []) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.15)); }
   for (const id of saved) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.1)); }
   for (const id of input?.dislikes ?? []) { const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, -0.12)); }
-  // Community: each like nudges, each save nudges twice as much; capped so a burst of likes can't swamp her answers.
-  for (const t of (signals?.posts ?? []).slice(0, 40)) tagKeys(t).forEach((k) => bump(k, 0.04 * Math.min(2, t.weight)));
+  // Community: likes and saves nudge toward a set's tags, thumbs-down and "not interested" nudge away; capped so a burst of likes can't swamp her answers.
+  for (const t of (signals?.posts ?? []).slice(0, 40)) tagKeys(t).forEach((k) => bump(k, 0.04 * Math.max(-2, Math.min(2, t.weight))));
   // Views: the 30 most recent, fading with recency; a look she also saved already counted above.
   (signals?.viewed ?? []).filter((id) => !saved.includes(id)).slice(0, 30).forEach((id, i) => {
     const l = byId.get(id); if (l) attrKeys(l).forEach((k) => bump(k, 0.025 * (1 - i / 40)));

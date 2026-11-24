@@ -54,7 +54,7 @@ export default async function Saved() {
         {posts.length ? (
           <section aria-labelledby="saved-community" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <h2 className="h2" id="saved-community" style={{ fontSize: 18 }}>From the community</h2>
-            <div className="post-grid">{posts.map((x) => <PostTile key={x.id} post={x} />)}</div>
+            <div className="post-grid">{posts.map((x) => <PostTile key={x.id} post={x} hideable={false} />)}</div>
           </section>
         ) : null}
       </main>

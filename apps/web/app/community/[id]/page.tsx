@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { ArrowLeft } from "@/components/Icons";
 import { LookRow } from "@/components/LookCard";
-import { DeletePostButton, LikeButton, ReportButton, SavePostButton } from "@/components/PostButtons";
+import { DeletePostButton, LikeDislike, NotInterestedButton, ReportButton, SavePostButton } from "@/components/PostButtons";
 import { PostTile } from "@/components/PostTile";
 import { TrackPostView } from "@/components/Track";
 import { buildProfile, rankForYou, similarLooks } from "@/lib/engine";
@@ -37,7 +37,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
   const [profile, saved, signals, others] = await Promise.all([
     getProfile(uid), listSaved(uid), tasteSignals(uid),
-    listPosts({ status: "approved", uid, limit: 60 }),
+    listPosts({ status: "approved", uid, limit: 60, skipHidden: true }),
   ]);
   const p = buildProfile(uid, profile.onboarded ? profile : null, saved, signals);
   const similar = similarLooks(post.tags, p, 3);
@@ -65,7 +65,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
           </div>
           {post.status === "approved" ? (
             <div className="post-react-row">
-              <LikeButton postId={post.id} liked={post.liked} count={post.likes} />
+              <LikeDislike postId={post.id} liked={post.liked} disliked={post.disliked} count={post.likes} />
               <SavePostButton postId={post.id} saved={post.saved} />
             </div>
           ) : null}
@@ -99,7 +99,12 @@ export default async function PostPage({ params }: { params: { id: string } }) {
         ) : null}
 
         <div className="post-footer">
-          {mine ? <DeletePostButton postId={post.id} /> : post.status === "approved" ? <ReportButton postId={post.id} /> : null}
+          {mine ? <DeletePostButton postId={post.id} /> : post.status === "approved" ? (
+            <>
+              <NotInterestedButton postId={post.id} hidden={post.hidden} />
+              <ReportButton postId={post.id} />
+            </>
+          ) : null}
         </div>
       </main>
       <BottomNav current="/community" />

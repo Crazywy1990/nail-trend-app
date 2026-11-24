@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 import { recordEvent } from "@/lib/store";
 import { setReact, type ReactKind } from "@/lib/store/community";
 
-const KINDS: ReactKind[] = ["like", "save", "report"];
+const KINDS: ReactKind[] = ["like", "save", "report", "dislike", "hide"];
 
-/** Like, save or report a community post. Body: { postId, kind, on } */
+/** Like, thumbs-down, save, hide ("not interested") or report a community post. Body: { postId, kind, on } */
 export async function POST(req: Request) {
   const uid = cookies().get("uid")?.value;
   if (!uid) return NextResponse.json({ error: "No user" }, { status: 400 });

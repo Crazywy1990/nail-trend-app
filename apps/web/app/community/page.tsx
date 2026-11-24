@@ -27,7 +27,7 @@ export default async function Community({ searchParams }: { searchParams: { sort
   const uid = requestUid();
   const tab: Tab = TABS.some((t) => t.value === searchParams.sort) ? (searchParams.sort as Tab) : "for-you";
   const [approved, mine, profile, saved, signals] = await Promise.all([
-    listPosts({ status: "approved", uid, sort: tab === "popular" ? "popular" : "new", limit: 120 }),
+    listPosts({ status: "approved", uid, sort: tab === "popular" ? "popular" : "new", limit: 120, skipHidden: true }),
     listPosts({ byUid: uid, uid, limit: 20 }),
     getProfile(uid), listSaved(uid), tasteSignals(uid),
   ]);

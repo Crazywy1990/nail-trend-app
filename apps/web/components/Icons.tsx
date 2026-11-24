@@ -36,3 +36,11 @@ export const FlagIcon = ({ size }: P) => (
 export const PlusIcon = ({ size }: P) => (
   <svg {...base(size)}><path d="M12 5v14M5 12h14" /></svg>
 );
+export const ThumbDownIcon = ({ size, filled }: P & { filled?: boolean }) => (
+  <svg {...base(size)} fill={filled ? "currentColor" : "none"}>
+    <path d="M17 14V4h3v10z" /><path d="M17 14l-4 7a2.5 2.5 0 0 1-2.5-3l.7-3.5H5.6a2 2 0 0 1-2-2.4l1.3-6A2 2 0 0 1 6.9 4.5H17" />
+  </svg>
+);
+export const XIcon = ({ size }: P) => (
+  <svg {...base(size)}><path d="M6 6l12 12M18 6L6 18" /></svg>
+);
