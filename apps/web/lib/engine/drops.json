@@ -1,10 +1,17 @@
 {
-  "current": "2026-w47",
+  "current": "2026-w48",
   "drops": {
     "2026-w47": {
       "label": "This week's drop",
       "date": "2026-11-16",
       "hero": "burgundy-cat-eye-gold-micro-french"
+    },
+    "2026-w48": {
+      "label": "This week's drop",
+      "date": "2026-11-23",
+      "hero": "emerald-chrome-silver-star",
+      "chosen": "auto",
+      "reason": "fastest-rising sourced stat: emerald green nails +370%"
     }
   }
 }
