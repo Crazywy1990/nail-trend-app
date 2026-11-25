@@ -1,3 +1,4 @@
+import { LegalLinks } from "@/components/LegalLinks";
 import { BottomNav } from "@/components/BottomNav";
 import { PlusIcon } from "@/components/Icons";
 import { PostTile } from "@/components/PostTile";
@@ -101,6 +102,7 @@ export default async function Community({ searchParams }: { searchParams: { sort
             <a className="btn btn-primary" href="/community/new" style={{ flex: "none" }}>Share your nails</a>
           </div>
         )}
+        <LegalLinks />
       </main>
       <BottomNav current="/community" />
     </div>

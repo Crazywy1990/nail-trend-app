@@ -552,3 +552,4 @@ html, body { overflow-x: clip; }
 .delete-list { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; }
 .consent a, .onboard .muted a { color: inherit; text-decoration: underline; }
 .legal .back { color: var(--text); }
+.contact-list a { font-weight: 600; }

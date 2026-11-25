@@ -1,3 +1,4 @@
+import { LegalLinks } from "@/components/LegalLinks";
 import { wmLabel } from "@/lib/format";
 import { BottomNav } from "@/components/BottomNav";
 import { HeroPhoto } from "@/components/Hero";
@@ -156,6 +157,7 @@ export default async function Discover({ searchParams }: { searchParams: SP }) {
             <div className="post-grid post-grid-sm">{communityPicks.map((x) => <PostTile key={x.id} post={x} />)}</div>
           </section>
         ) : null}
+        <LegalLinks />
       </main>
       <BottomNav current="/" />
       <TrackLanding uid={uid} />
