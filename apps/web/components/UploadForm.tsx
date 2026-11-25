@@ -71,7 +71,7 @@ export function UploadForm({ handle }: { handle: string }) {
       </label>
       <label className="consent">
         <input type="checkbox" name="consent" value="yes" required />
-        <span>These are my nails and my photo. I agree to the guidelines below and let AllTen show this post in the app.</span>
+        <span>These are my nails and my photo. I agree to the <a href="/guidelines">guidelines</a> and <a href="/terms">terms</a> and let AllTen show this post in the app.</span>
       </label>
       {error ? <p className="notice" role="alert">{error}</p> : null}
       <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? "Checking your photo…" : "Share"}</button>

@@ -95,7 +95,7 @@ export async function readImage(id: string): Promise<{ data: Buffer; type: strin
   return mem().images.get(id) ?? null;
 }
 
-async function dropImage(p: Pick<Post, "id" | "imageUrl">) {
+export async function dropImage(p: Pick<Post, "id" | "imageUrl">) {
   try {
     if (p.imageUrl.startsWith("https://") && process.env.BLOB_READ_WRITE_TOKEN) {
       const { del } = await import("@vercel/blob");

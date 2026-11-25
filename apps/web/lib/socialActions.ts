@@ -5,7 +5,7 @@ import { endSession, sessionUid } from "./auth";
 import { checkText, cleanNickname } from "./moderation";
 import { recordEvent } from "./store";
 import { getPost } from "./store/community";
-import { addReview, deleteReview, getUser, updateUser } from "./store/social";
+import { addReview, deleteAccount, deleteReview, getUser, updateUser } from "./store/social";
 import { MAX_STYLES, PROFILE_STYLES } from "./profileStyles";
 
 const safeNext = (v: FormDataEntryValue | null) => {
@@ -93,4 +93,14 @@ export async function removeReview(form: FormData) {
   await deleteReview(String(form.get("id") || ""), uid);
   const u = await getUser(uid);
   redirect(`/u/${u?.handle}?tab=reviews`);
+}
+
+/** Settings → Delete account. She must type DELETE to confirm. */
+export async function deleteMyAccount(form: FormData) {
+  const uid = await me();
+  if (String(form.get("confirm") || "").trim().toUpperCase() !== "DELETE") back("/settings/delete", "Type DELETE to confirm.");
+  await deleteAccount(uid);
+  endSession();
+  console.log(JSON.stringify({ tag: "allten-event", type: "account_deleted", at: new Date().toISOString() }));
+  redirect("/profile?accountdeleted=1");
 }

@@ -22,7 +22,7 @@ export default async function NewReview({ searchParams }: { searchParams: { post
       <main className="main">
         <a className="back" href={ownPost ? `/community/${ownPost.id}` : `/u/${user.handle}?tab=reviews`}><ArrowLeft size={18} /> Back</a>
         <h1 className="h1">Review a salon</h1>
-        <p className="muted">Share what it was like: the result, how long it lasted, the price, the service. Be honest and fair.</p>
+        <p className="muted">Share what it was like: the result, how long it lasted, the price, the service. Only salons you visited yourself; no reviews of your own business or for pay. See the <a href="/guidelines">guidelines</a>.</p>
         <form action={submitReview} className="onboard">
           {ownPost ? <input type="hidden" name="postId" value={ownPost.id} /> : null}
           <SalonFields salon={salon} />

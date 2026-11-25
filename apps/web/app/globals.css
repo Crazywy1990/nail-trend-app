@@ -536,3 +536,19 @@ html, body { overflow-x: clip; }
 .onboard .style-pick legend { width: 100%; }
 .account-row { display: flex; flex-direction: column; gap: 4px; }
 .account-links { display: flex; gap: 20px; padding-left: 4px; }
+
+/* Legal pages */
+.legal h2 { font-size: 19px; margin: 18px 0 0; }
+.legal h3 { font-size: 15px; margin: 8px 0 0; }
+.legal p, .legal li { font-size: 15px; line-height: 1.6; }
+.legal p { margin: 0; }
+.legal ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.legal a { color: var(--accent); }
+.legal-links { display: flex; flex-wrap: wrap; gap: 4px 8px; font-size: 13px; color: var(--muted); padding: 16px 0 8px; }
+.legal-links a { color: var(--muted); }
+.btn-danger { background: #a3261b; color: #fff; border-color: #a3261b; flex: none; }
+.danger-link { color: #a3261b; }
+.settings-foot { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+.delete-list { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; }
+.consent a, .onboard .muted a { color: inherit; text-decoration: underline; }
+.legal .back { color: var(--text); }

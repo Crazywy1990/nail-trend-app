@@ -373,3 +373,36 @@ export async function resolveFlag(kind: "comment" | "review", id: string, keep: 
   else await db`UPDATE reviews SET status = ${status} WHERE id = ${id}`;
   if (keep) await db`DELETE FROM reports WHERE kind = ${kind} AND target = ${id}`;
 }
+
+// ---------------------------------------------------------------- account deletion
+/**
+ * Deletes an account and everything tied to it: posts and their photos (and others' likes and comments on them),
+ * her likes, saves, comments, reviews, follows both ways, reports, preferences, history, booking requests,
+ * profile and cover photos, and the account row. Comments she wrote on others' posts are removed with their replies.
+ */
+export async function deleteAccount(uid: string): Promise<void> {
+  const db = need();
+  await ensureSocial();
+  const { dropImage } = await import("./community");
+  const [u] = await db`SELECT email, avatar_url, cover_url FROM users WHERE uid = ${uid}`;
+  const posts = await db`SELECT id, image_url FROM posts WHERE uid = ${uid}`;
+  for (const p of posts) await dropImage({ id: p.id as string, imageUrl: p.image_url as string });
+  for (const url of [u?.avatar_url, u?.cover_url].filter(Boolean) as string[]) {
+    const id = url.startsWith("/community/img/") ? url.slice("/community/img/".length) : "x";
+    await dropImage({ id, imageUrl: url });
+  }
+  const ids = posts.map((p) => p.id as string);
+  await db`DELETE FROM post_reacts WHERE post_id = ANY(${ids}::text[]) OR uid = ${uid}`;
+  await db`DELETE FROM comments WHERE post_id = ANY(${ids}::text[])
+           OR parent_id IN (SELECT id FROM comments WHERE uid = ${uid}) OR uid = ${uid}`;
+  await db`DELETE FROM posts WHERE uid = ${uid}`;
+  await db`DELETE FROM reviews WHERE uid = ${uid}`;
+  await db`DELETE FROM follows WHERE follower = ${uid} OR followee = ${uid}`;
+  await db`DELETE FROM reports WHERE uid = ${uid}`;
+  await db`DELETE FROM saved WHERE uid = ${uid}`;
+  await db`DELETE FROM profiles WHERE uid = ${uid}`;
+  await db`DELETE FROM events WHERE uid = ${uid}`;
+  await db`DELETE FROM booking_requests WHERE uid = ${uid}`;
+  if (u?.email) await db`DELETE FROM login_codes WHERE email = ${u.email}`;
+  await db`DELETE FROM users WHERE uid = ${uid}`;
+}

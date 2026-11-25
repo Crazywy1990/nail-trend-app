@@ -30,7 +30,7 @@ export function LoginForm({ next }: { next: string }) {
       </label>
       {error ? <p className="notice" role="alert">{error}</p> : null}
       <button className="btn btn-primary" disabled={busy}>{busy ? "Sending…" : "Email me a code"}</button>
-      <p className="muted" style={{ fontSize: 12, margin: 0 }}>No password. Your email is never shown to anyone.</p>
+      <p className="muted" style={{ fontSize: 12, margin: 0 }}>No password. Your email is never shown to anyone. By continuing you agree to our <a href="/terms">Terms</a> and <a href="/privacy">Privacy policy</a>, and confirm you&rsquo;re 13 or older.</p>
     </form>
   ) : (
     <form className="onboard" onSubmit={async (e) => {

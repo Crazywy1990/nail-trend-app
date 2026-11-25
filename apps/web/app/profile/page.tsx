@@ -8,6 +8,7 @@ import { isDarkTint, tintFor, wmLabel } from "@/lib/format";
 import { Watermark } from "@/components/Watermark";
 import { currentUser } from "@/lib/auth";
 import { logOut } from "@/lib/socialActions";
+import { LegalLinks } from "@/components/LegalLinks";
 import { Avatar } from "@/components/Avatar";
 
 export const metadata = { title: "Profile" };
@@ -15,7 +16,7 @@ export const dynamic = "force-dynamic";
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-function Account({ user, signedOut }: { user: Awaited<ReturnType<typeof currentUser>>; signedOut: boolean }) {
+function Account({ user, signedOut, deleted }: { user: Awaited<ReturnType<typeof currentUser>>; signedOut: boolean; deleted?: boolean }) {
   if (user?.handle) {
     return (
       <div className="account-row">
@@ -40,7 +41,7 @@ function Account({ user, signedOut }: { user: Awaited<ReturnType<typeof currentU
   }
   return (
     <>
-      {signedOut ? <p className="notice" role="status">You&rsquo;re signed out.</p> : null}
+      {deleted ? <p className="notice" role="status">Your account and its data were deleted.</p> : signedOut ? <p className="notice" role="status">You&rsquo;re signed out.</p> : null}
       <a className="onboard-banner" href="/login?next=/profile">
         <strong>Sign in to get your own page</strong>
         <span>Share sets, follow people, comment and review salons →</span>
@@ -49,9 +50,9 @@ function Account({ user, signedOut }: { user: Awaited<ReturnType<typeof currentU
   );
 }
 
-export default async function Profile({ searchParams }: { searchParams: { cleared?: string; signedout?: string } }) {
+export default async function Profile({ searchParams }: { searchParams: { cleared?: string; signedout?: string; accountdeleted?: string } }) {
   const uid = requestUid();
-  const account = <Account user={await currentUser()} signedOut={!!searchParams.signedout} />;
+  const account = <Account user={await currentUser()} signedOut={!!searchParams.signedout} deleted={!!searchParams.accountdeleted} />;
   const [p, saved, history] = await Promise.all([getProfile(uid), listSaved(uid), recentlyViewed(uid, 24)]);
   const viewed = await History({ items: history, uid, skinTone: p.skinTone, cleared: !!searchParams.cleared });
   if (!p.onboarded) {
@@ -63,6 +64,7 @@ export default async function Profile({ searchParams }: { searchParams: { cleare
           <p className="why">Answer a few quick questions and every look is shown on a hand like yours, ranked for your taste, length and budget.</p>
           <a className="btn btn-primary" href="/start" style={{ flex: "none" }}>Set up in a minute</a>
           {viewed}
+          <LegalLinks />
         </main>
         <BottomNav current="/profile" />
       </div>
@@ -104,6 +106,7 @@ export default async function Profile({ searchParams }: { searchParams: { cleare
             ? "Saved to your AllTen account on this browser."
             : "Saved on this browser only. Clearing cookies resets it."}
         </p>
+        <LegalLinks />
       </main>
       <BottomNav current="/profile" />
     </div>

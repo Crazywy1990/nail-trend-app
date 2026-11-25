@@ -27,6 +27,7 @@ export default async function NewPost() {
             <li>Credit your tech in the caption if you like (no links).</li>
             <li>Be kind. Posts that break these rules are removed.</li>
           </ul>
+          <a href="/guidelines" className="link-btn link-sm">Full community guidelines</a>
         </section>
       </main>
     </div>

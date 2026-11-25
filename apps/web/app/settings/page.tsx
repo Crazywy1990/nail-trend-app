@@ -3,6 +3,7 @@ import { ArrowLeft } from "@/components/Icons";
 import { currentUser } from "@/lib/auth";
 import { logOut, saveAccount } from "@/lib/socialActions";
 import { ProfilePhotos } from "@/components/ProfilePhotos";
+import { LegalLinks } from "@/components/LegalLinks";
 import { MAX_STYLES, PROFILE_STYLES } from "@/lib/profileStyles";
 
 export const metadata = { title: "Edit profile", robots: { index: false } };
@@ -46,7 +47,11 @@ export default async function Settings({ searchParams }: { searchParams: { error
           {searchParams.error ? <p className="notice" role="alert">{searchParams.error}</p> : null}
           <button className="btn btn-primary">Save</button>
         </form>
-        <form action={logOut}><button className="link-btn">Sign out</button></form>
+        <div className="settings-foot">
+          <form action={logOut}><button className="link-btn">Sign out</button></form>
+          <a className="link-btn danger-link" href="/settings/delete">Delete account</a>
+        </div>
+        <LegalLinks />
       </main>
     </div>
   );
