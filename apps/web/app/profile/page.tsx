@@ -7,6 +7,7 @@ import { listPosts } from "@/lib/store/community";
 import { isDarkTint, tintFor, wmLabel } from "@/lib/format";
 import { Watermark } from "@/components/Watermark";
 import { currentUser } from "@/lib/auth";
+import { logOut } from "@/lib/socialActions";
 import { Avatar } from "@/components/Avatar";
 
 export const metadata = { title: "Profile" };
@@ -17,13 +18,26 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 function Account({ user, signedOut }: { user: Awaited<ReturnType<typeof currentUser>>; signedOut: boolean }) {
   if (user?.handle) {
     return (
+      <div className="account-row">
       <a className="account-card" href={`/u/${user.handle}`}>
         <Avatar name={user.nickname || user.handle} url={user.avatarUrl} />
         <span><strong>{user.nickname || user.handle}</strong><br /><span className="muted">@{user.handle} · My page →</span></span>
       </a>
+      <div className="account-links">
+        <a className="link-btn link-sm" href="/settings">Edit profile</a>
+        <form action={logOut}><button className="link-btn link-sm">Sign out</button></form>
+      </div>
+      </div>
     );
   }
-  if (user) return <a className="onboard-banner" href="/welcome?next=/profile"><strong>Pick your @handle</strong><span>Finish setting up your page →</span></a>;
+  if (user) {
+    return (
+      <div className="account-row">
+        <a className="onboard-banner" href="/welcome?next=/profile"><strong>Pick your @handle</strong><span>Finish setting up your page →</span></a>
+        <form action={logOut}><button className="link-btn link-sm">Sign out</button></form>
+      </div>
+    );
+  }
   return (
     <>
       {signedOut ? <p className="notice" role="status">You&rsquo;re signed out.</p> : null}

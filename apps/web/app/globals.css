@@ -534,3 +534,5 @@ html, body { overflow-x: clip; }
 @media (min-width: 900px) { .user-hero { border-radius: 0 0 24px 24px; margin-bottom: 0; } .user-body { border-radius: 0; } }
 .onboard .style-pick { flex-direction: row; flex-wrap: wrap; }
 .onboard .style-pick legend { width: 100%; }
+.account-row { display: flex; flex-direction: column; gap: 4px; }
+.account-links { display: flex; gap: 20px; padding-left: 4px; }
