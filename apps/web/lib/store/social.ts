@@ -10,11 +10,12 @@ import { db as sql, ensureSchema } from "./index";
 export type User = {
   uid: string; email: string; handle: string | null; nickname: string | null; bio: string | null;
   showLikes: boolean; createdAt: string;
+  avatarUrl: string | null; coverUrl: string | null; location: string | null; styles: string[];
 };
-export type PublicUser = { uid: string; handle: string; nickname: string; bio: string | null; showLikes: boolean };
+export type PublicUser = { uid: string; handle: string; nickname: string; bio: string | null; showLikes: boolean; avatarUrl: string | null };
 export type Comment = {
   id: string; postId: string; uid: string; handle: string | null; nickname: string; body: string;
-  parentId: string | null; createdAt: string; mine: boolean;
+  parentId: string | null; createdAt: string; mine: boolean; avatarUrl: string | null;
 };
 export type Review = {
   id: string; uid: string; handle: string | null; salonName: string; salonAddress: string | null; placeId: string | null;
@@ -43,6 +44,11 @@ export function ensureSocial() {
     await sql`CREATE TABLE IF NOT EXISTS users (
       uid text PRIMARY KEY, email text NOT NULL UNIQUE, handle text UNIQUE, nickname text, bio text,
       show_likes boolean NOT NULL DEFAULT false, created_at timestamptz NOT NULL DEFAULT now())`;
+    // Profile page extras (RedNote-style): photo, cover, location, favorite styles.
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS cover_url text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS location text`;
+    await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS styles text[] NOT NULL DEFAULT '{}'`;
     await sql`CREATE TABLE IF NOT EXISTS login_codes (
       email text PRIMARY KEY, code_hash text NOT NULL, expires_at timestamptz NOT NULL, attempts int NOT NULL DEFAULT 0,
       sends int NOT NULL DEFAULT 1, window_start timestamptz NOT NULL DEFAULT now())`;
@@ -68,6 +74,8 @@ type Row = Record<string, unknown>;
 const toUser = (r: Row): User => ({
   uid: r.uid as string, email: r.email as string, handle: (r.handle as string) ?? null, nickname: (r.nickname as string) ?? null,
   bio: (r.bio as string) ?? null, showLikes: !!r.show_likes, createdAt: r.created_at as string,
+  avatarUrl: (r.avatar_url as string) ?? null, coverUrl: (r.cover_url as string) ?? null,
+  location: (r.location as string) ?? null, styles: (r.styles as string[]) ?? [],
 });
 
 // ---------------------------------------------------------------- users
@@ -93,7 +101,10 @@ export function handleProblem(h: string): string | null {
   return null;
 }
 
-export async function updateUser(uid: string, u: { handle?: string; nickname?: string; bio?: string | null; showLikes?: boolean }): Promise<string | null> {
+export async function updateUser(uid: string, u: {
+  handle?: string; nickname?: string; bio?: string | null; showLikes?: boolean; location?: string | null; styles?: string[];
+  avatarUrl?: string | null; coverUrl?: string | null;
+}): Promise<string | null> {
   const db = need();
   await ensureSocial();
   if (u.handle !== undefined) {
@@ -106,7 +117,11 @@ export async function updateUser(uid: string, u: { handle?: string; nickname?: s
       handle = COALESCE(${u.handle ?? null}, handle),
       nickname = COALESCE(${u.nickname ?? null}, nickname),
       bio = CASE WHEN ${u.bio !== undefined} THEN ${u.bio ?? null} ELSE bio END,
-      show_likes = COALESCE(${u.showLikes ?? null}, show_likes)
+      show_likes = COALESCE(${u.showLikes ?? null}, show_likes),
+      location = CASE WHEN ${u.location !== undefined} THEN ${u.location ?? null} ELSE location END,
+      styles = COALESCE(${u.styles ?? null}::text[], styles),
+      avatar_url = CASE WHEN ${u.avatarUrl !== undefined} THEN ${u.avatarUrl ?? null} ELSE avatar_url END,
+      cover_url = CASE WHEN ${u.coverUrl !== undefined} THEN ${u.coverUrl ?? null} ELSE cover_url END
     WHERE uid = ${uid}`;
   // Her posts show her current nickname.
   if (u.nickname) await db`UPDATE posts SET nickname = ${u.nickname} WHERE uid = ${uid}`;
@@ -225,7 +240,7 @@ export async function followingUids(uid: string): Promise<string[]> {
 
 const publicUser = (r: Row): PublicUser => ({
   uid: r.uid as string, handle: r.handle as string, nickname: (r.nickname as string) || (r.handle as string),
-  bio: (r.bio as string) ?? null, showLikes: !!r.show_likes,
+  bio: (r.bio as string) ?? null, showLikes: !!r.show_likes, avatarUrl: (r.avatar_url as string) ?? null,
 });
 
 /** Handles for a set of uids (to link post and comment authors). */
@@ -243,13 +258,13 @@ export const REPORTS_TO_REMOVE = 3;
 export async function listComments(postId: string, viewer: string | null): Promise<Comment[]> {
   if (!sql) return [];
   await ensureSocial();
-  const rows = await sql`SELECT c.*, c.created_at::text AS created_at, u.handle, COALESCE(u.nickname, u.handle, 'someone') AS nickname
+  const rows = await sql`SELECT c.*, c.created_at::text AS created_at, u.handle, u.avatar_url, COALESCE(u.nickname, u.handle, 'someone') AS nickname
                          FROM comments c LEFT JOIN users u ON u.uid = c.uid
                          WHERE c.post_id = ${postId} AND c.status = 'live' ORDER BY c.created_at LIMIT 500`;
   return rows.map((r) => ({
     id: r.id as string, postId: r.post_id as string, uid: r.uid as string, handle: (r.handle as string) ?? null,
     nickname: r.nickname as string, body: r.body as string, parentId: (r.parent_id as string) ?? null,
-    createdAt: r.created_at as string, mine: !!viewer && r.uid === viewer,
+    createdAt: r.created_at as string, mine: !!viewer && r.uid === viewer, avatarUrl: (r.avatar_url as string) ?? null,
   }));
 }
 

@@ -6,6 +6,7 @@ import { checkText, cleanNickname } from "./moderation";
 import { recordEvent } from "./store";
 import { getPost } from "./store/community";
 import { addReview, deleteReview, getUser, updateUser } from "./store/social";
+import { MAX_STYLES, PROFILE_STYLES } from "./profileStyles";
 
 const safeNext = (v: FormDataEntryValue | null) => {
   const s = String(v || "");
@@ -20,7 +21,8 @@ async function me(): Promise<string> {
 }
 
 function cleanBio(raw: FormDataEntryValue | null): string | null | false {
-  const s = String(raw || "").replace(/\s+/g, " ").trim().slice(0, 160);
+  // Keep up to 3 line breaks; collapse other whitespace.
+  const s = String(raw || "").replace(/\r/g, "").replace(/[ \t]+/g, " ").split("\n").map((l) => l.trim()).filter(Boolean).slice(0, 4).join("\n").slice(0, 160);
   if (/(https?:\/\/|www\.)/i.test(s)) return false;
   return s || null;
 }
@@ -47,8 +49,11 @@ export async function saveAccount(form: FormData) {
   if (!nickname) back("/settings", "Display name: 2–20 letters or numbers, no links or phone numbers.");
   const bio = cleanBio(form.get("bio"));
   if (bio === false) back("/settings", "Bios can't include links.");
-  if ((await checkText(`${nickname} ${bio ?? ""}`)) === "flagged") back("/settings", "Please keep your name and bio kind.");
-  await updateUser(uid, { nickname: nickname!, bio: bio as string | null, showLikes: form.get("showLikes") === "on" });
+  const location = String(form.get("location") || "").replace(/\s+/g, " ").trim().slice(0, 40) || null;
+  if (location && /(https?:\/\/|www\.|\d{5,})/i.test(location)) back("/settings", "Location: just a city or area, like \"Bellevue, WA\".");
+  const styles = form.getAll("styles").map(String).filter((x) => (PROFILE_STYLES as readonly string[]).includes(x)).slice(0, MAX_STYLES);
+  if ((await checkText(`${nickname} ${bio ?? ""} ${location ?? ""}`)) === "flagged") back("/settings", "Please keep your name, bio and location kind.");
+  await updateUser(uid, { nickname: nickname!, bio: bio as string | null, showLikes: form.get("showLikes") === "on", location, styles });
   const u = await getUser(uid);
   redirect(u?.handle ? `/u/${u.handle}?saved=1` : "/profile");
 }

@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
+import { Avatar } from "@/components/Avatar";
+import { PinIcon } from "@/components/Icons";
 import { FollowButton, FollowerCount } from "@/components/FollowButton";
 import { PostTile } from "@/components/PostTile";
 import { ReportLink } from "@/components/ReportLink";
@@ -45,34 +47,44 @@ export default async function UserPage({ params, searchParams }: { params: { han
 
   return (
     <div className="shell shell-wide">
-      <main className="main">
+      <header className={`user-hero${user.coverUrl ? " has-cover" : ""}`} style={user.coverUrl ? { backgroundImage: `url(${user.coverUrl})` } : undefined}>
+        <div className="user-hero-inner">
+          <div className="user-head">
+            <Avatar name={name} url={user.avatarUrl} size="lg" />
+            <div className="user-id">
+              <h1 className="user-name">{name}</h1>
+              <div className="user-handle">@{user.handle}</div>
+            </div>
+          </div>
+          {user.bio ? <p className="user-bio">{user.bio}</p> : self ? <a className="user-bio user-bio-empty" href="/settings">Add a short intro +</a> : null}
+          <div className="user-meta">
+            {user.location ? <span className="user-tag"><PinIcon size={13} /> {user.location}</span> : null}
+            {user.styles.map((t) => <span key={t} className="user-tag">{t}</span>)}
+            <span className="user-joined">Joined {new Date(user.createdAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}</span>
+          </div>
+          <div className="user-bar">
+            <div className="user-stats">
+              <a href={`${base}/follows?list=following`}><strong>{stats.following}</strong> Following</a>
+              <a href={`${base}/follows?list=followers`}><strong><FollowerCount handle={user.handle} initial={stats.followers} /></strong> Followers</a>
+              <span className="stat"><strong>{stats.likesAndSaves}</strong> Likes &amp; saves</span>
+            </div>
+            <div className="user-actions">
+              {self ? (
+                <>
+                  <a className="btn btn-glass btn-sm" href="/settings">Edit profile</a>
+                  <a className="btn btn-glass btn-sm" href="/reviews/new">Review a salon</a>
+                </>
+              ) : (
+                <FollowButton handle={user.handle} following={stats.iFollow} signedIn={!!me} small />
+              )}
+            </div>
+          </div>
+        </div>
+      </header>
+      <main className="main user-body">
         {searchParams.saved ? <p className="notice" role="status">Profile saved.</p> : null}
         {searchParams.reviewed ? <p className="notice" role="status">Thanks! Your review is live.</p> : null}
-        <header className="user-head">
-          <span className="avatar" aria-hidden="true">{name.slice(0, 1).toUpperCase()}</span>
-          <div className="user-id">
-            <h1 className="h1 user-name">{name}</h1>
-            <div className="muted">@{user.handle}</div>
-          </div>
-        </header>
-        {user.bio ? <p className="user-bio">{user.bio}</p> : null}
-        <div className="user-stats">
-          <a href={`${base}/follows?list=following`}><strong>{stats.following}</strong> Following</a>
-          <a href={`${base}/follows?list=followers`}><strong><FollowerCount handle={user.handle} initial={stats.followers} /></strong> Followers</a>
-          <span className="stat"><strong>{stats.likesAndSaves}</strong> Likes &amp; saves</span>
-        </div>
-        <div className="user-actions">
-          {self ? (
-            <>
-              <a className="btn btn-sm" href="/settings">Edit profile</a>
-              <a className="btn btn-sm" href="/reviews/new">Review a salon</a>
-              <a className="btn btn-primary btn-sm" href="/community/new">Share your nails</a>
-            </>
-          ) : (
-            <FollowButton handle={user.handle} following={stats.iFollow} signedIn={!!me} />
-          )}
-        </div>
-
+        {self ? <a className="btn btn-primary user-share" href="/community/new">Share your nails</a> : null}
         <nav className="chips" aria-label="Sections">
           {tabs.map((t) => (
             <a key={t.value} className="chip" aria-pressed={t.value === tab} href={t.value === "posts" ? base : `${base}?tab=${t.value}`}>

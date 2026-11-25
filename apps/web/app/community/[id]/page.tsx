@@ -7,6 +7,7 @@ import { PostTile } from "@/components/PostTile";
 import { TrackPostView } from "@/components/Track";
 import { Comments } from "@/components/Comments";
 import { FollowButton } from "@/components/FollowButton";
+import { Avatar } from "@/components/Avatar";
 import { sessionUid } from "@/lib/auth";
 import { getUser, listComments, profileStats } from "@/lib/store/social";
 import { buildProfile, rankForYou, similarLooks } from "@/lib/engine";
@@ -70,7 +71,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
             <div className="post-author">
               {post.handle ? (
                 <a href={`/u/${post.handle}`} className="post-author-link">
-                  <span className="avatar avatar-sm" aria-hidden="true">{post.nickname.slice(0, 1).toUpperCase()}</span>
+                  <Avatar name={post.nickname} url={post.avatarUrl} size="sm" />
                   <span><strong>{post.nickname}</strong> <span className="muted">@{post.handle} · {posted}</span></span>
                 </a>
               ) : <span><strong>{post.nickname}</strong> <span className="muted">· {posted}</span></span>}

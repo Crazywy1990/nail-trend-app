@@ -158,3 +158,15 @@ export async function checkText(text: string): Promise<"ok" | "flagged" | "unche
     return "unchecked";
   }
 }
+
+/** Image-only moderation for profile photos and covers (free endpoint). */
+export async function checkImage(small: Buffer): Promise<"ok" | "flagged" | "unchecked"> {
+  if (!KEY()) return "unchecked";
+  try {
+    const r = await moderate(`data:image/jpeg;base64,${small.toString("base64")}`, "");
+    return r.flagged ? "flagged" : "ok";
+  } catch (e) {
+    console.error("[allten] image moderation failed", e);
+    return "unchecked";
+  }
+}

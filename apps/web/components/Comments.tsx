@@ -48,6 +48,10 @@ export function Comments({ postId, initial, canComment, needsHandle, isPostAutho
   const one = (c: Comment, isReply = false) => (
     <li key={c.id} className={isReply ? "comment comment-reply" : "comment"}>
       <div className="comment-head">
+        {c.avatarUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="avatar avatar-xs avatar-img" src={c.avatarUrl} alt="" loading="lazy" />
+        ) : <span className="avatar avatar-xs" aria-hidden="true">{c.nickname.slice(0, 1).toUpperCase()}</span>}
         {c.handle ? <a href={`/u/${c.handle}`} className="comment-who">{c.nickname}</a> : <span className="comment-who">{c.nickname}</span>}
         <span className="muted">{ago(c.createdAt)}</span>
       </div>

@@ -24,6 +24,7 @@ export type Post = {
   disliked: boolean; hidden: boolean;
   /** Author's @handle when she has an account (links to /u/handle). */
   handle: string | null;
+  avatarUrl: string | null;
 };
 export type ReactKind = "like" | "save" | "report" | "dislike" | "hide";
 
@@ -33,7 +34,7 @@ export const REPORTS_TO_HIDE = 3;
 export const DAILY_UPLOADS = 5;
 
 // ---------------------------------------------------------------- memory fallback (no database: local dev)
-type MemPost = Omit<Post, "likes" | "saves" | "reports" | "liked" | "saved" | "disliked" | "hidden" | "handle">;
+type MemPost = Omit<Post, "likes" | "saves" | "reports" | "liked" | "saved" | "disliked" | "hidden" | "handle" | "avatarUrl">;
 type Mem = { posts: MemPost[]; reacts: Map<string, number>; images: Map<string, { data: Buffer; type: string }> };
 const g = globalThis as unknown as { __alltenCommunity?: Mem };
 const mem = (): Mem => (g.__alltenCommunity ??= { posts: [] as MemPost[], reacts: new Map(), images: new Map() });
@@ -46,7 +47,7 @@ function memDecorate(p: MemPost, uid: string | null): Post {
     saved: !!uid && mem().reacts.has(rkey(uid, p.id, "save")),
     disliked: !!uid && mem().reacts.has(rkey(uid, p.id, "dislike")),
     hidden: !!uid && mem().reacts.has(rkey(uid, p.id, "hide")),
-    handle: null,
+    handle: null, avatarUrl: null,
   };
 }
 
@@ -61,7 +62,7 @@ function fromRow(r: Row): Post {
     tags: { colorFamily: null, finish: null, shape: null, length: null, words: [], ...(r.tags as Partial<PostTags>) },
     ai: (r.ai as AiCheck) ?? null, status: r.status as PostStatus, createdAt: r.created_at as string,
     likes: Number(r.likes) || 0, saves: Number(r.saves) || 0, reports: Number(r.reports) || 0,
-    liked: !!r.liked, saved: !!r.saved, disliked: !!r.disliked, hidden: !!r.hidden, handle: (r.handle as string) ?? null,
+    liked: !!r.liked, saved: !!r.saved, disliked: !!r.disliked, hidden: !!r.hidden, handle: (r.handle as string) ?? null, avatarUrl: (r.avatar_url as string) ?? null,
   };
 }
 
@@ -148,7 +149,7 @@ export async function listPosts(o: ListOpts = {}): Promise<Post[]> {
     try {
       await ensureCommunity();
       const rows = await sql`
-        SELECT p.*, p.created_at::text AS created_at, u.handle, COALESCE(u.nickname, p.nickname) AS nickname,
+        SELECT p.*, p.created_at::text AS created_at, u.handle, u.avatar_url, COALESCE(u.nickname, p.nickname) AS nickname,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'like')::int AS likes,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'save')::int AS saves,
           (SELECT count(*) FROM post_reacts r WHERE r.post_id = p.id AND r.kind = 'report')::int AS reports,

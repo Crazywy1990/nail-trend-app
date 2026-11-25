@@ -7,6 +7,7 @@ import { listPosts } from "@/lib/store/community";
 import { isDarkTint, tintFor, wmLabel } from "@/lib/format";
 import { Watermark } from "@/components/Watermark";
 import { currentUser } from "@/lib/auth";
+import { Avatar } from "@/components/Avatar";
 
 export const metadata = { title: "Profile" };
 export const dynamic = "force-dynamic";
@@ -17,7 +18,7 @@ function Account({ user, signedOut }: { user: Awaited<ReturnType<typeof currentU
   if (user?.handle) {
     return (
       <a className="account-card" href={`/u/${user.handle}`}>
-        <span className="avatar" aria-hidden="true">{(user.nickname || user.handle).slice(0, 1).toUpperCase()}</span>
+        <Avatar name={user.nickname || user.handle} url={user.avatarUrl} />
         <span><strong>{user.nickname || user.handle}</strong><br /><span className="muted">@{user.handle} · My page →</span></span>
       </a>
     );

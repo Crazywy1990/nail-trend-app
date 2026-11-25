@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { FollowButton } from "@/components/FollowButton";
+import { Avatar } from "@/components/Avatar";
 import { ArrowLeft } from "@/components/Icons";
 import { sessionUid } from "@/lib/auth";
 import { followList, userByHandle } from "@/lib/store/social";
@@ -28,7 +29,7 @@ export default async function Follows({ params, searchParams }: { params: { hand
             {people.map((p) => (
               <li key={p.uid} className="person">
                 <a href={`/u/${p.handle}`} className="person-link">
-                  <span className="avatar avatar-sm" aria-hidden="true">{p.nickname.slice(0, 1).toUpperCase()}</span>
+                  <Avatar name={p.nickname} url={p.avatarUrl} size="sm" />
                   <span><strong>{p.nickname}</strong><br /><span className="muted">@{p.handle}</span></span>
                 </a>
                 {me && me !== p.uid ? <FollowButton handle={p.handle} following={p.iFollow} signedIn small /> : null}
